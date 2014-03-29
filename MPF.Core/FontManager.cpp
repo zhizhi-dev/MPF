@@ -143,9 +143,9 @@ std::shared_ptr<FontFace> FontManager::LookupFontFace(std::shared_ptr<String> fi
 {
 	//fvck cl
 	//²»ÄÜÓÃ£º
-	auto it(fonts.find(FontFaceKey{ fileName, faceIndex }));
-	//FontFaceKey key{ fileName, faceIndex };
-	//auto it(fonts.find(key));
+	//auto it(fonts.find(FontFaceKey{ fileName, faceIndex }));
+	FontFaceKey key{ fileName, faceIndex };
+	auto it(fonts.find(key));
 	if (it != fonts.end())
 	{
 		if (it->second.expired())

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Visual">
+      <UniqueIdentifier>{5b75902b-daea-4b68-89fd-233ddaf12e29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\GDI">
+      <UniqueIdentifier>{8b635565-baef-4dab-b10d-d34518a2dfd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\UI">
+      <UniqueIdentifier>{a5a5a4b1-212b-4649-b842-85db0813614d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\datatypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\core.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MPF.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Application.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Delegate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\UncaughtExceptionEventHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Process.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\NativeWindow.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\RenderCoreProvider.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="GDI\GDIRenderCoreProvider.h">
+      <Filter>头文件\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="GDI\DeviceContext.h">
+      <Filter>头文件\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Brush.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\SolidColorBrush.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\BitmapData.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="gdi\Bitmap.h">
+      <Filter>头文件\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RAII.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Enumerable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Geometry.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\GraphicAlgorithms.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Line.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Point.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Triangle.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="MLAA.hxx">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Rectangle.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\LinearGradientBrush.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\Window.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\any.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DependencyObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DependencyProperty.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\UIElement.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\Visibility.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\ContentElement.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Font.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFace.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFaceKeys.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\TextBlock.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MPF.Core.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Type.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UncaughtExceptionEventHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderCoreProvider.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIRenderCoreProvider.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GDI.DeviceContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Brush.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidColorBrush.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicAlgorithms.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearGradientBrush.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DependencyProperty.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentElement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FontFace.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBlock.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

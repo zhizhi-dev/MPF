@@ -8,6 +8,7 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(NativeWindow, MPF::Visual::NativeWindow)
 const wchar_t MPFWindowClassName[] = L"MPF_Window_Wrapper";
+const wchar_t MPFWindowHandlePropName[] = L"MPF_Window_Handle";
 
 NativeWindow::NativeWindow()
 {
@@ -42,22 +43,24 @@ void NativeWindow::CreateWindowClass()
 	massert(isSucceed);
 }
 
-LRESULT WINAPI NativeWindow::WindowProcWrapper(handle_t hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT WINAPI NativeWindow::WindowProcWrapper(handle_t handle, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	static NativeWindow* window = nullptr;
+	HWND hWnd = (HWND)handle;
+	auto window = (NativeWindow*)GetProp(hWnd, MPFWindowHandlePropName);
 
 	if (msg == WM_CREATE)
 	{
 		//»ñÈ¡ this
 		auto createParam = (LPCREATESTRUCT)lParam;
 		window = (NativeWindow*)createParam->lpCreateParams;
+		SetProp(hWnd, MPFWindowHandlePropName, window);
 	}
 
 	if (window)
 	{
 		return window->WindowProc(hWnd, msg, wParam, lParam);
 	}
-	return DefWindowProc((HWND)hWnd, msg, wParam, lParam);
+	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 LRESULT WINAPI NativeWindow::WindowProc(handle_t hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

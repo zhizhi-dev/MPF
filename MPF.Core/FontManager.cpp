@@ -178,7 +178,7 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(std::shared_ptr<String> famil
 
 void FontManager::SetFontFaceSize(FT_Face face, float size) const
 {
-	SetFontFaceSize(face, size * 64);
+	SetFontFaceSize(face, (uint)(size * 64));
 }
 
 void FontManager::SetFontFaceSize(FT_Face face, uint size26Dot6) const

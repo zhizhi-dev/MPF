@@ -56,7 +56,7 @@ public:
 	MPF_API DECLARE_GETTYPE(NativeWindow)
 protected:
 	//´°¿Ú¹ý³Ì
-	MPF_API long _w64 _stdcall WindowProc(handle_t hWnd, uint msg, uint _w64 wParam, long _w64 lParam);
+	MPF_API long _w64 _stdcall WindowProc(handle_t handle, uint msg, uint _w64 wParam, long _w64 lParam);
 private:
 	static void CreateWindowClass();
 	static long _w64 _stdcall WindowProcWrapper(handle_t hWnd, uint msg, uint _w64 wParam, long _w64 lParam);

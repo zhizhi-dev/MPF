@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "GDI/Bitmap.h"
+#include "../include/visual/GraphicAlgorithms.h"
 
 using namespace MPF;
 using namespace MPF::GDI;
+using namespace MPF::Visual;
 
 DEFINE_TYPE(Bitmap, MPF::GDI::Bitmap)
 
@@ -56,4 +58,17 @@ Bitmap::~Bitmap()
 HBITMAP Bitmap::GetNativeHandle() const mnoexcept
 {
 	return hBitmap;
+}
+
+void Bitmap::AlphaBlend(argb_color color)
+{
+	auto ptr = (argb_color*)data;
+	for (size_t y = 0; y < height; y++)
+	{
+		for (size_t x = 0; x < width; x++)
+		{
+			ptr[x] = GraphicAlgorithms::MixColor(ptr[x], color, ptr[x].alpha / 255.0);
+		}
+		ptr += width;
+	}
 }

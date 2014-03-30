@@ -27,6 +27,9 @@ public:
 	//显示
 	MPF_API void Show();
 
+	//绘制帧
+	MPF_API void DoFrame();
+
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Window)
 	MPF_API DECLARE_GETINSTANTTYPE(Window)

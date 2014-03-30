@@ -72,5 +72,10 @@ void UIElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer)
 
 void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
 {
+	UpdateCore(renderer, elapsedTime);
+}
+
+void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+{
 
 }

@@ -52,17 +52,6 @@ inline double rfpart(double x)
 	return 1.0 - fpart(x);
 }
 
-inline argb_color mixColor(argb_color col1, argb_color col2, double p)
-{
-	argb_color color;
-
-	color.red = col1.red * p + col2.red * (1 - p);
-	color.green = col1.green * p + col2.green * (1 - p);
-	color.blue = col1.blue * p + col2.blue * (1 - p);
-
-	return color;
-}
-
 void GraphicAlgorithms::DrawLine_WuXiaolin(color_t* data, uint stride,
 	uint x1, uint y1, uint x2, uint y2, color_t color)
 {
@@ -87,7 +76,7 @@ void GraphicAlgorithms::DrawLine_WuXiaolin(color_t* data, uint stride,
 			argb_color col1;
 			col1.col = data[y * stride + x];
 
-			data[y * stride + x] = mixColor(col, col1, p).col;
+			data[y * stride + x] = MixColor(col, col1, p).col;
 		};
 	}
 	else
@@ -97,7 +86,7 @@ void GraphicAlgorithms::DrawLine_WuXiaolin(color_t* data, uint stride,
 			argb_color col1;
 			col1.col = data[y * stride + x];
 
-			data[y * stride + x] = mixColor(col, col1, p).col;
+			data[y * stride + x] = MixColor(col, col1, p).col;
 		};
 	}
 
@@ -160,7 +149,7 @@ void GraphicAlgorithms::DrawLine_WuXiaolin(color_t* data, uint stride, uint x1, 
 			col1.col = data[y * stride + x];
 			col.col = brush.TakeSample(u, v);
 
-			data[y * stride + x] = mixColor(col, col1, p).col;
+			data[y * stride + x] = MixColor(col, col1, p).col;
 		};
 	}
 	else
@@ -171,7 +160,7 @@ void GraphicAlgorithms::DrawLine_WuXiaolin(color_t* data, uint stride, uint x1, 
 			col1.col = data[y * stride + x];
 			col.col = brush.TakeSample(u, v);
 
-			data[y * stride + x] = mixColor(col, col1, p).col;
+			data[y * stride + x] = MixColor(col, col1, p).col;
 		};
 	}
 
@@ -564,4 +553,12 @@ bool GraphicAlgorithms::DrawSpecialLine(color_t* data, uint stride, int x1, int 
 		return false;
 	}
 	return true;
+}
+
+void GraphicAlgorithms::FillQuad(color_t* data, uint stride, uint x1, uint y1, uint x2, uint y2,
+	uint x3, uint y3, uint x4, uint y4, float u1, float v1, float u2, float v2,
+	float u3, float v3, float u4, float v4, const Brush& brush)
+{
+	FillTriangle(data, stride, x1, y1, x2, y2, x3, y3, u1, v1, u2, v2, u3, v3, brush);
+	FillTriangle(data, stride, x3, y3, x4, y4, x1, y1, u3, v3, u4, v4, u1, v1, brush);
 }

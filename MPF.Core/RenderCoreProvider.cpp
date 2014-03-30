@@ -120,3 +120,18 @@ std::pair<uint, uint> RenderCoreProvider::LogicalPointToDevicePoint(const Point&
 
 	return std::make_pair(x, y);
 }
+
+void RenderCoreProvider::FillQuad(const MPF::Visual::Quad& quad, const Brush& brush)
+{
+	auto points = quad.GetPoints();
+	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
+	{
+		return LogicalPointToDevicePoint(pt);
+	});
+
+	FillQuad(transPoints[0].first, transPoints[0].second, transPoints[1].first,
+		transPoints[1].second, transPoints[2].first, transPoints[2].second,
+		transPoints[3].first, transPoints[3].second,
+		points[0].GetU(), points[0].GetV(), points[1].GetU(), points[1].GetV(),
+		points[2].GetU(), points[2].GetV(), points[3].GetU(), points[3].GetV(), brush);
+}

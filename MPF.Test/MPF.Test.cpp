@@ -24,13 +24,14 @@ void _stdcall MPFMain()
 	win->Height = 600;
 	win->Initialize();
 
-	auto font = std::make_shared<Font>(std::make_shared<String>(L"Simplified Arabic"), 20);
+	auto font = std::make_shared<Font>(std::make_shared<String>(L"Microsoft YaHei"), 40.f);
 	auto size = font->MeasureText(L"Hello Everyone!");
 	auto textBlock = std::make_shared<TextBlock>();
 	textBlock->Font = font;
-	textBlock->Text = std::make_shared<String>(L"Hello MPF TextBlock");
-	win->Content = win;
+	textBlock->Text = std::make_shared<String>(L"吸白とchuは云輝にばかです。");
+	win->Content = textBlock;
 	win->Show();
+	win->DoFrame();
 	//textBlock->Update()
 
 	app->Run();

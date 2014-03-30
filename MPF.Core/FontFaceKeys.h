@@ -1,5 +1,6 @@
 #pragma once
 #include "../include/String.h"
+#include "../include/visual/BitmapData.h"
 
 NS_MPF
 NS_VSL
@@ -18,12 +19,20 @@ struct FontFaceKey
 struct FontFaceCacheKey
 {
 	wchar_t Char;
-	uint Size;
+	uint XInPixels;
+	uint YInPixels;
 
 	bool operator==(const FontFaceCacheKey& key) const mnoexcept
 	{
-		return Char == key.Char && Size == key.Size;
+		return Char == key.Char && XInPixels == key.XInPixels && YInPixels == key.YInPixels;
 	}
+};
+
+struct FontGlyph
+{
+	std::shared_ptr<BitmapData<byte>> Glyph;
+	uint Left;
+	uint Top;
 };
 
 NS_ED
@@ -47,7 +56,7 @@ namespace std
 	public:
 		size_t operator()(const MPF::Visual::FontFaceCacheKey& key) const
 		{
-			return key.Char ^ key.Size;
+			return key.Char ^ key.XInPixels ^ key.YInPixels;
 		}
 	};
 }

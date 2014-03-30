@@ -9,7 +9,7 @@ std::shared_ptr<FontManager> FontManager::current;
 
 FontManager::FontManager()
 {
-	InitializeDPI();
+	InitializeDPIScale();
 	auto error = FT_Init_FreeType(&freeType);
 	massert(error == 0);
 }
@@ -130,12 +130,12 @@ std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(std::shared_ptr<MPF:
 	return value;
 }
 
-void FontManager::InitializeDPI()
+void FontManager::InitializeDPIScale()
 {
 	HDC hdc = GetDC(NULL);
 
-	logicalPixelsInX = GetDeviceCaps(hdc, LOGPIXELSX) * 3 / 4;
-	logicalPixelsInY = GetDeviceCaps(hdc, LOGPIXELSY) * 3 / 4;
+	dpiScaleX = GetDeviceCaps(hdc, LOGPIXELSX) / 96.f;
+	dpiScaleY = GetDeviceCaps(hdc, LOGPIXELSY) / 96.f;
 }
 
 std::shared_ptr<FontFace> FontManager::LookupFontFace(std::shared_ptr<String> fileName,
@@ -178,13 +178,20 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(std::shared_ptr<String> famil
 
 void FontManager::SetFontFaceSize(FT_Face face, float size) const
 {
-	SetFontFaceSize(face, (uint)(size * 64));
+	auto pair(LogicalPointToDevicePoint(size, size));
+
+	SetFontFaceSize(face, pair.first, pair.second);
 }
 
-void FontManager::SetFontFaceSize(FT_Face face, uint size26Dot6) const
+void FontManager::SetFontFaceSize(FT_Face face, uint xInPixels, uint yInPixels) const
 {
 	massert(face != nullptr);
 
-	auto error = FT_Set_Char_Size(face, 0, size26Dot6, logicalPixelsInX, logicalPixelsInY);
+	auto error = FT_Set_Pixel_Sizes(face, xInPixels, yInPixels);
 	massert(error == 0);
+}
+
+std::pair<uint, uint> FontManager::LogicalPointToDevicePoint(float x, float y) const
+{
+	return std::make_pair<uint, uint>(x * dpiScaleX, y * dpiScaleY);
 }

@@ -28,7 +28,6 @@ public:
 	//获取或设置字体
 	mproperty(std::shared_ptr<MPF::Visual::Font>, Font);
 
-	MPF_API virtual void Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
 	//获取类型
 	MPF_API DECLARE_GETTYPE(TextBlock);
 	MPF_API DECLARE_GETINSTANTTYPE(TextBlock);
@@ -38,6 +37,9 @@ public:
 	//字体
 	MPF_API static DependencyProperty<std::shared_ptr<MPF::Visual::Font>> FontProperty;
 protected:
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer);
+
 	DECLARE_UI_FUNCS
 private:
 	void AddPropertyHandlers();

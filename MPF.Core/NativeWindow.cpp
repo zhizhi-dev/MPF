@@ -48,7 +48,7 @@ LRESULT WINAPI NativeWindow::WindowProcWrapper(handle_t handle, UINT msg, WPARAM
 	HWND hWnd = (HWND)handle;
 	auto window = (NativeWindow*)GetProp(hWnd, MPFWindowHandlePropName);
 
-	if (msg == WM_CREATE)
+	if (msg == WM_NCCREATE)
 	{
 		//ªÒ»° this
 		auto createParam = (LPCREATESTRUCT)lParam;
@@ -65,6 +65,14 @@ LRESULT WINAPI NativeWindow::WindowProcWrapper(handle_t handle, UINT msg, WPARAM
 
 LRESULT WINAPI NativeWindow::WindowProc(handle_t hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	switch (msg)
+	{
+	case WM_PAINT:
+		OnPaint();
+		break;
+	default:
+		break;
+	}
 	return DefWindowProc((HWND)hWnd, msg, wParam, lParam);
 }
 
@@ -160,4 +168,12 @@ uint NativeWindow::GetClientHeight() const
 
 	GetClientRect((HWND)handle, &rect);
 	return rect.bottom - rect.top;
+}
+
+void NativeWindow::OnPaint() const
+{
+	Paint([&](PaintEventHandler handler)
+	{
+		handler();
+	});
 }

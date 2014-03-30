@@ -40,6 +40,10 @@ protected:
 	//填充三角形
 	virtual void FillTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3,
 		float u1, float v1, float u2, float v2, float u3, float v3, const MPF::Visual::Brush& brush);
+	//填充四边形
+	virtual void FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
+		float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, 
+		const MPF::Visual::Brush& brush);
 private:
 	//初始化 GDI
 	void InitializeGDI();

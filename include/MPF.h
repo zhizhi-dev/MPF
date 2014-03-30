@@ -24,12 +24,14 @@
 #include "visual/SolidColorBrush.h"
 #include "visual/LinearGradientBrush.h"
 #include "visual/ImageBrush.h"
+#include "visual/AlphaBlendBrush.h"
 #include "visual/NativeWindow.h"
 #include "visual/RenderCoreProvider.h"
 #include "visual/Point.h"
 #include "visual/geometry.h"
 #include "visual/line.h"
 #include "visual/Triangle.h"
+#include "visual/Quad.h"
 #include "visual/Font.h"
 
 //UI

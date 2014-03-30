@@ -26,6 +26,7 @@ public:
 	MPF_API static DependencyProperty<std::weak_ptr<UIElement>> ContentPropery;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
 protected:
 	DECLARE_UI_FUNCS
 private:

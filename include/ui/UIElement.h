@@ -38,7 +38,7 @@ public:
 	mproperty(Visibility, Visibility);
 
 	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer);
-	MPF_API virtual void Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(UIElement)
@@ -52,6 +52,7 @@ public:
 	MPF_API static DependencyProperty<MPF::UI::Visibility> VisibilityPropery;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
 protected:
 	DECLARE_UI_FUNCS
 private:

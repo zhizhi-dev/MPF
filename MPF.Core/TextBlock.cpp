@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "../include/ui/TextBlock.h"
+#include "../include/visual/LinearGradientBrush.h"
+#include "../include/visual/AlphaBlendBrush.h"
 
 using namespace MPF;
 using namespace MPF::Visual;
@@ -52,7 +54,7 @@ void TextBlock::AddPropertyHandlers()
 	});
 }
 
-void TextBlock::Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
 {
 	if (Visibility == Visibility::Visible)
 	{
@@ -82,4 +84,16 @@ std::shared_ptr<MPF::Visual::Font> TextBlock::GetFont() const
 void TextBlock::SetFont(std::shared_ptr<MPF::Visual::Font> value)
 {
 	SetValue(FontProperty, value);
+}
+
+void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer)
+{
+	auto width = textGlyphs->GetWidth();
+	auto height = textGlyphs->GetHeight();
+	auto linearBrush = std::make_shared<LinearGradientBrush>(0xFF00FF00, 0xFFFF00FF);
+	AlphaBlendBrush blendBrush(textGlyphs, linearBrush);
+
+	renderer.FillQuad(Quad(Point(50, 50), Point(50 + width, 50, 1.f, 0.f),
+		Point(50 + width, 50 + height, 1.f, 1.f), Point(50, 50 + height, 0.f, 1.f)), blendBrush);
+	UIElement::RenderCore(renderer);
 }

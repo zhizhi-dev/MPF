@@ -28,6 +28,8 @@ public:
 	//创建设备无关位图
 	static std::shared_ptr<Bitmap> CreateDIBSection(HDC hDC, uint width, uint height);
 
+	void AlphaBlend(argb_color color);
+
 	//获取类型
 	DECLARE_GETTYPE(Bitmap)
 private:

@@ -123,9 +123,6 @@
     <ClInclude Include="MLAA.hxx">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\visual\Rectangle.h">
-      <Filter>头文件\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\visual\LinearGradientBrush.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
@@ -164,6 +161,15 @@
     </ClInclude>
     <ClInclude Include="..\include\ui\TextBlock.h">
       <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\PaintEventHandler.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\AlphaBlendBrush.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Quad.h">
+      <Filter>头文件\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +251,6 @@
     <ClCompile Include="Image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -270,6 +273,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TextBlock.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PaintEventHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaBlendBrush.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

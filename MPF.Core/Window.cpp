@@ -53,3 +53,16 @@ void Window::Show()
 		nativeWindow->Show();
 	}
 }
+
+void Window::DoFrame()
+{
+	auto& renderRef = *renderer;
+
+	Update(renderRef, 1.0);
+
+	renderRef.BeginDraw();
+	Render(renderRef);
+	renderRef.EndDraw();
+
+	renderRef.Present();
+}

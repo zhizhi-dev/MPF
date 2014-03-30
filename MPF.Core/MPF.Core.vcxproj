@@ -80,11 +80,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlphaBlendBrush.cpp" />
     <ClCompile Include="ContentElement.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="PaintEventHandler.cpp" />
     <ClCompile Include="TextBlock.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -112,6 +114,7 @@
     <ClInclude Include="..\include\ui\Visibility.h" />
     <ClInclude Include="..\include\ui\Window.h" />
     <ClInclude Include="..\include\UncaughtExceptionEventHandler.h" />
+    <ClInclude Include="..\include\visual\AlphaBlendBrush.h" />
     <ClInclude Include="..\include\visual\BitmapData.h" />
     <ClInclude Include="..\include\visual\Brush.h" />
     <ClInclude Include="..\include\visual\Font.h" />
@@ -120,8 +123,9 @@
     <ClInclude Include="..\include\visual\Line.h" />
     <ClInclude Include="..\include\visual\LinearGradientBrush.h" />
     <ClInclude Include="..\include\visual\NativeWindow.h" />
+    <ClInclude Include="..\include\visual\PaintEventHandler.h" />
     <ClInclude Include="..\include\visual\Point.h" />
-    <ClInclude Include="..\include\visual\Rectangle.h" />
+    <ClInclude Include="..\include\visual\Quad.h" />
     <ClInclude Include="..\include\visual\RenderCoreProvider.h" />
     <ClInclude Include="..\include\visual\SolidColorBrush.h" />
     <ClInclude Include="..\include\visual\Triangle.h" />
@@ -136,7 +140,7 @@
     <ClInclude Include="targetver.h" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LinearGradientBrush.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>

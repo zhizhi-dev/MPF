@@ -29,12 +29,13 @@ public:
 	FT_Face GetFace() const mnoexcept;
 	operator FT_Face() const mnoexcept;
 private:
-	const BitmapData<byte>& GetGlyphCache(const FontFaceCacheKey& key);
-	const BitmapData<byte>& LoadGlyphCache(const FontFaceCacheKey& key);
+	const FontGlyph& GetGlyphCache(const FontFaceCacheKey& key);
+	const FontGlyph& GetGlyphCache(wchar_t chr, float size);
+	const FontGlyph& LoadGlyphCache(const FontFaceCacheKey& key);
 private:
 	FT_Face face;
 	std::shared_ptr<FontManager> fontMgr;
-	std::unordered_map<FontFaceCacheKey, BitmapData<byte>> cache;
+	std::unordered_map<FontFaceCacheKey, FontGlyph> cache;
 };
 
 NS_ED

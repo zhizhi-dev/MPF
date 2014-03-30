@@ -40,3 +40,14 @@ void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer)
 
 	UIElement::RenderCore(renderer);
 }
+
+void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+{
+	auto content = Content.lock();
+	if (content)
+	{
+		content->Update(renderer, elapsedTime);
+	}
+
+	UIElement::UpdateCore(renderer, elapsedTime);
+}

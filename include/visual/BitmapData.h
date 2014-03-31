@@ -93,20 +93,18 @@ public:
 	{
 		massert(destLeft <= width);
 		massert(destTop <= height);
-		size_t maxX(min(width, source.width));
-		size_t maxY(min(height, source.height));
-		auto ptr(data + destTop * pitch + destLeft);
-		auto srcPtr(source.data);
+		size_t maxX = min(width - destLeft, source.width - srcLeft);
+		size_t maxY = min(height - destTop, source.height - srcTop);
 		size_t srcPitch(source.pitch);
-		size_t start(srcTop * srcPitch);
-		for (size_t y = srcTop; y < maxY; y++)
+		auto ptr = data + destTop * pitch + destLeft;
+		auto srcPtr = source.data + srcTop * srcPitch + srcLeft;
+		for (size_t y = 0; y < maxY; y++)
 		{
-			auto xPtr(ptr);
-			for (size_t x = srcLeft; x < maxX; x++)
+			for (size_t x = 0; x < maxX; x++)
 			{
-				*(xPtr++) = srcPtr[start + x];
+				ptr[x] = srcPtr[x];
 			}
-			start += srcPitch;
+			srcPtr += srcPitch;
 			ptr += pitch;
 		}
 	}

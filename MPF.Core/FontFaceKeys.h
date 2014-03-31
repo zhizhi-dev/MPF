@@ -33,6 +33,7 @@ struct FontGlyph
 	std::shared_ptr<BitmapData<byte>> Glyph;
 	uint Left;
 	uint Top;
+	std::pair<uint, uint> Advance;
 };
 
 NS_ED

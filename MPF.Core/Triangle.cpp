@@ -18,3 +18,10 @@ std::vector<Point> Triangle::GetPoints() const
 
 	return data;
 }
+
+void Triangle::Transform(std::function<void(Point&)> func)
+{
+	func(pointA);
+	func(pointB);
+	func(pointC);
+}

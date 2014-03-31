@@ -47,6 +47,12 @@ public:
 	{
 		return *value;
 	}
+
+	//ªÒ»°÷µ
+	TValue& GetValue()
+	{
+		return *value;
+	}
 private:
 	std::shared_ptr<String> name;
 	std::shared_ptr<TValue> value;

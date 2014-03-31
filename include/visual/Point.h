@@ -63,6 +63,11 @@ public:
 		this->v = v;
 	}
 
+	mproperty(float, X);
+	mproperty(float, Y);
+	mproperty(float, U);
+	mproperty(float, V);
+
 	//获取类型
 	DECLARE_GETTYPE(Point)
 private:

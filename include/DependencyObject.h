@@ -49,6 +49,33 @@ public:
 		return GetCommonValue(property);
 	}
 
+	//获取当前值
+	template<typename T>
+	T& GetValue(DependencyProperty<T>& property)
+	{
+		auto& name = *property.GetName();
+		//检测动画值
+		auto it = animationValues.find(name);
+		if (it != animationValues.end())
+		{
+			return it->second;
+		}
+		//检测本地值
+		it = localValues.find(name);
+		if (it != localValues.end())
+		{
+			return it->second;
+		}
+		//检测样式值
+		it = styleValues.find(name);
+		if (it != styleValues.end())
+		{
+			return it->second;
+		}
+		//检测通用值
+		return GetCommonValue(property);
+	}
+
 	//设置本地值
 	template<typename T>
 	void SetValue(const DependencyProperty<T>& property, const T& value)
@@ -110,6 +137,17 @@ protected:
 		return val;
 	}
 
+	template<typename T>
+	T& GetCommonValue(DependencyProperty<T>& property)
+	{
+		auto val = FindParentCommonValue(*property.GetName());
+		if (val.empty())
+		{
+			return property.GetValue();
+		}
+		return val;
+	}
+
 	void OnValueChange(const String& name) const
 	{
 		auto it(observers.find(name));
@@ -120,6 +158,11 @@ protected:
 	}
 protected:
 	virtual any FindParentCommonValue(const String& name) const
+	{
+		return any();
+	}
+
+	virtual any FindParentCommonValue(const String& name)
 	{
 		return any();
 	}
@@ -139,10 +182,25 @@ private:
 	std::unordered_map<String, any> CLASS::commonStyleValues;
 
 #define DECLARE_UI_FUNCS \
-	virtual any FindParentCommonValue(const String& name) const;
+	virtual any FindParentCommonValue(const String& name) const; \
+	virtual any FindParentCommonValue(const String& name);
 
 #define DEFINE_UI_FUNCS(CLASS, BASE) \
 	any CLASS::FindParentCommonValue(const String& name) const  \
+	{															\
+		auto it = CLASS::commonAnimationValues.find(name); 		\
+		if (it != CLASS::commonAnimationValues.end()) 			\
+		{														\
+			return it->second;									\
+		}														\
+		it = CLASS::commonStyleValues.find(name);				\
+		if (it != CLASS::commonStyleValues.end())				\
+		{														\
+			return it->second;									\
+		}														\
+		return BASE::FindParentCommonValue(name);				\
+	}															\
+	any CLASS::FindParentCommonValue(const String& name)		\
 	{															\
 		auto it = CLASS::commonAnimationValues.find(name); 		\
 		if (it != CLASS::commonAnimationValues.end()) 			\

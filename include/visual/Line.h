@@ -20,9 +20,11 @@ public:
 	const Point& GetEndPoint() const mnoexcept { return endPoint; }
 
 	//通过Y求直线上的X
-	uint GetX(uint y) const mnoexcept;
+	float GetX(float y) const mnoexcept;
 	//通过Y求直线上的UV
 	std::pair<float, float> GetUV(uint y) const mnoexcept;
+
+	MPF_API virtual void Transform(std::function<void(Point&)> func);
 
 	//获取类型
 	DECLARE_GETTYPE(Line)

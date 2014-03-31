@@ -171,6 +171,18 @@
     <ClInclude Include="..\include\visual\Quad.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ui\Canvas.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\Panel.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\RenderArgs.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Visual\Thickness.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -282,6 +294,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Quad.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

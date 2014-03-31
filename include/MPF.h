@@ -18,6 +18,7 @@
 
 //Visual
 #include "visual/Visual.h"
+#include "visual/Thickness.h"
 #include "visual/Image.h"
 #include "visual/BitmapData.h"
 #include "visual/Brush.h"
@@ -40,5 +41,7 @@
 #include "ui/ContentElement.h"
 #include "ui/TextBlock.h"
 #include "ui/Window.h"
+#include "ui/Panel.h"
+#include "ui/Canvas.h"
 
 void _stdcall MPFMain();

@@ -347,8 +347,8 @@ void GraphicAlgorithms::FillTriangle(color_t* data, uint stride, uint x1, uint y
 	auto start = y1 * stride;
 	for (uint y = y1; y < y2; y++)
 	{
-		uint minX = lines[0].GetX(y);
-		uint maxX = lines[1].GetX(y);
+		auto minX = lines[0].GetX(y);
+		auto maxX = lines[1].GetX(y);
 		auto minUV = lines[0].GetUV(y);
 		auto maxUV = lines[1].GetUV(y);
 		//
@@ -357,21 +357,23 @@ void GraphicAlgorithms::FillTriangle(color_t* data, uint stride, uint x1, uint y
 			std::swap(minX, maxX);
 			std::swap(minUV, maxUV);
 		}
+		auto iminX = std::roundf(minX);
+		auto imaxX = std::roundf(maxX);
 		const auto gradU = (maxX - minX) ? (maxUV.first - minUV.first) / (maxX - minX) : 0.f;
 		const auto gradV = (maxX - minX) ? (maxUV.second - minUV.second) / (maxX - minX) : 0.f;
-		for (uint x = minX; x < maxX; x++)
+		for (uint x = iminX, i = 0; x < imaxX; x++, i++)
 		{
-			data[start + x] = brush.TakeSample(minUV.first, minUV.second);
-			minUV.first += gradU;
-			minUV.second += gradV;
+			auto u = gradU * i + minUV.first;
+			auto v = gradV * i + minUV.second;
+			data[start + x] = brush.TakeSample(u, v);
 		}
 		start += stride;
 	}
 
 	for (uint y = y2; y < y3; y++)
 	{
-		uint minX = lines[2].GetX(y);
-		uint maxX = lines[1].GetX(y);
+		auto minX = lines[2].GetX(y);
+		auto maxX = lines[1].GetX(y);
 		auto minUV = lines[2].GetUV(y);
 		auto maxUV = lines[1].GetUV(y);
 		//
@@ -380,13 +382,15 @@ void GraphicAlgorithms::FillTriangle(color_t* data, uint stride, uint x1, uint y
 			std::swap(minX, maxX);
 			std::swap(minUV, maxUV);
 		}
+		auto iminX = std::roundf(minX);
+		auto imaxX = std::roundf(maxX);
 		const auto gradU = (maxX - minX) ? (maxUV.first - minUV.first) / (maxX - minX) : 0.f;
 		const auto gradV = (maxX - minX) ? (maxUV.second - minUV.second) / (maxX - minX) : 0.f;
-		for (uint x = minX; x < maxX; x++)
+		for (uint x = iminX, i = 0; x < imaxX; x++, i++)
 		{
-			data[start + x] = brush.TakeSample(minUV.first, minUV.second);
-			minUV.first += gradU;
-			minUV.second += gradV;
+			auto u = gradU * i + minUV.first;
+			auto v = gradV * i + minUV.second;
+			data[start + x] = brush.TakeSample(u, v);
 		}
 		start += stride;
 	}

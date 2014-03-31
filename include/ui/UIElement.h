@@ -3,6 +3,8 @@
 #include "../DependencyObject.h"
 #include "Visibility.h"
 #include "../visual/RenderCoreProvider.h"
+#include "RenderArgs.h"
+#include "../visual/Thickness.h"
 
 NS_MPF
 NS_UI
@@ -37,22 +39,35 @@ public:
 	//获取或设置可见性
 	mproperty(Visibility, Visibility);
 
-	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer);
+	//获取边距
+	MPF_API MPF::Visual::Thickness GetMargin() const;
+	//设置边距
+	MPF_API void SetMargin(MPF::Visual::Thickness value);
+	//获取或设置边距
+	mproperty(MPF::Visual::Thickness, Margin);
+
+	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	//计算包围四边形
+	MPF_API virtual MPF::Visual::Quad MeasureBound();
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(UIElement)
 	MPF_API DECLARE_GETINSTANTTYPE(UIElement)
 public:
 	//宽度
-	MPF_API static DependencyProperty<float> WidthPropery;
+	MPF_API static DependencyProperty<float> WidthProperty;
 	//高度
-	MPF_API static DependencyProperty<float> HeightPropery;
+	MPF_API static DependencyProperty<float> HeightProperty;
 	//可见性
-	MPF_API static DependencyProperty<MPF::UI::Visibility> VisibilityPropery;
+	MPF_API static DependencyProperty<MPF::UI::Visibility> VisibilityProperty;
+	//边距
+	MPF_API static DependencyProperty<MPF::Visual::Thickness> MarginProperty;
 protected:
-	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer);
+	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	//计算大小
+	MPF_API virtual MPF::Visual::Quad MeasureSize();
 protected:
 	DECLARE_UI_FUNCS
 private:

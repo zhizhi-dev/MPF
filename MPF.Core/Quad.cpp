@@ -16,3 +16,11 @@ std::vector<Point> Quad::GetPoints() const
 {
 	return{ pointA, pointB, pointC, pointD, pointA };
 }
+
+void Quad::Transform(std::function<void(Point&)> func)
+{
+	func(pointA);
+	func(pointB);
+	func(pointC);
+	func(pointD);
+}

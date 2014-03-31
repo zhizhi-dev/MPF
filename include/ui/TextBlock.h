@@ -38,7 +38,9 @@ public:
 	MPF_API static DependencyProperty<std::shared_ptr<MPF::Visual::Font>> FontProperty;
 protected:
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
-	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer);
+	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
+	//º∆À„¥Û–°
+	MPF_API virtual MPF::Visual::Quad MeasureSize();
 
 	DECLARE_UI_FUNCS
 private:

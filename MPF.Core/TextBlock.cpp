@@ -86,14 +86,20 @@ void TextBlock::SetFont(std::shared_ptr<MPF::Visual::Font> value)
 	SetValue(FontProperty, value);
 }
 
-void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer)
+void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	auto width = textGlyphs->GetWidth();
-	auto height = textGlyphs->GetHeight();
 	auto linearBrush = std::make_shared<LinearGradientBrush>(0xFF00FF00, 0xFFFF00FF);
 	AlphaBlendBrush blendBrush(textGlyphs, linearBrush);
 
-	renderer.FillQuad(Quad(Point(50, 50), Point(50 + width, 50, 1.f, 0.f),
-		Point(50 + width, 50 + height, 1.f, 1.f), Point(50, 50 + height, 0.f, 1.f)), blendBrush);
-	UIElement::RenderCore(renderer);
+	renderer.FillQuad(args.RenderQuad, blendBrush);
+	UIElement::RenderCore(renderer, std::move(args));
+}
+
+MPF::Visual::Quad TextBlock::MeasureSize()
+{
+	auto width = textGlyphs->GetWidth();
+	auto height = textGlyphs->GetHeight();
+
+	return Quad(Point(), Point(width, 0.f, 1.f, 0.f),
+		Point(width, height, 1.f, 1.f), Point(0.f, height, 0.f, 1.f));
 }

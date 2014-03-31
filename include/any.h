@@ -61,6 +61,12 @@ public:
 	}
 
 	template<typename T>
+	T& get()
+	{
+		return reinterpret_cast<holder<T>*>(value.get())->value;
+	}
+
+	template<typename T>
 	void set(const T& value)
 	{
 		if (this->value != nullptr)
@@ -75,6 +81,12 @@ public:
 
 	template<typename T>
 	operator const T&() const
+	{
+		return get<T>();
+	}
+
+	template<typename T>
+	operator T&()
 	{
 		return get<T>();
 	}

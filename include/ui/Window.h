@@ -35,7 +35,7 @@ public:
 	MPF_API DECLARE_GETINSTANTTYPE(Window)
 public:
 	//БъЬт
-	MPF_API static DependencyProperty<std::shared_ptr<MPF::String>> TitlePropery;
+	MPF_API static DependencyProperty<std::shared_ptr<MPF::String>> TitleProperty;
 protected:
 	DECLARE_UI_FUNCS
 private:

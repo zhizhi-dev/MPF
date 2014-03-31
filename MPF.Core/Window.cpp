@@ -10,7 +10,7 @@ DEFINE_TYPE(Window, MPF::UI::Window)
 DEFINE_UI_VALUES(Window)
 DEFINE_UI_FUNCS(Window, ContentElement)
 
-DependencyProperty<std::shared_ptr<MPF::String>> Window::TitlePropery(std::make_shared<String>(L"Title"), String::GetEmpty());
+DependencyProperty<std::shared_ptr<MPF::String>> Window::TitleProperty(std::make_shared<String>(L"Title"), String::GetEmpty());
 
 Window::Window()
 {
@@ -38,12 +38,12 @@ void Window::Initialize(RenderCoreProviders provider)
 
 std::shared_ptr<MPF::String> Window::GetTitle() const
 {
-	return GetValue(TitlePropery);
+	return GetValue(TitleProperty);
 }
 
 void Window::SetTitle(std::shared_ptr<MPF::String> value)
 {
-	SetValue(TitlePropery, value);
+	SetValue(TitleProperty, value);
 }
 
 void Window::Show()
@@ -61,7 +61,7 @@ void Window::DoFrame()
 	Update(renderRef, 1.0);
 
 	renderRef.BeginDraw();
-	Render(renderRef);
+	Render(renderRef, RenderArgs{ MeasureBound() });
 	renderRef.EndDraw();
 
 	renderRef.Present();

@@ -14,6 +14,8 @@ public:
 	//获取顶点数据
 	MPF_API virtual std::vector<Point> GetPoints() const;
 
+	MPF_API virtual void Transform(std::function<void(Point&)> func);
+
 	//获取类型
 	DECLARE_GETTYPE(Triangle)
 private:

@@ -56,6 +56,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,12 +82,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlphaBlendBrush.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ContentElement.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="PaintEventHandler.cpp" />
+    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="TextBlock.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -108,7 +111,10 @@
     <ClInclude Include="..\include\String.h" />
     <ClInclude Include="..\include\Thread.h" />
     <ClInclude Include="..\include\Type.h" />
+    <ClInclude Include="..\include\ui\Canvas.h" />
     <ClInclude Include="..\include\ui\ContentElement.h" />
+    <ClInclude Include="..\include\ui\Panel.h" />
+    <ClInclude Include="..\include\ui\RenderArgs.h" />
     <ClInclude Include="..\include\ui\TextBlock.h" />
     <ClInclude Include="..\include\ui\UIElement.h" />
     <ClInclude Include="..\include\ui\Visibility.h" />
@@ -128,6 +134,7 @@
     <ClInclude Include="..\include\visual\Quad.h" />
     <ClInclude Include="..\include\visual\RenderCoreProvider.h" />
     <ClInclude Include="..\include\visual\SolidColorBrush.h" />
+    <ClInclude Include="..\include\Visual\Thickness.h" />
     <ClInclude Include="..\include\visual\Triangle.h" />
     <ClInclude Include="FontFace.h" />
     <ClInclude Include="FontFaceKeys.h" />

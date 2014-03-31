@@ -67,7 +67,8 @@ void Bitmap::AlphaBlend(argb_color color)
 	{
 		for (size_t x = 0; x < width; x++)
 		{
-			ptr[x] = GraphicAlgorithms::MixColor(ptr[x], color, ptr[x].alpha / 255.0);
+			auto orgColor = ptr[x];
+			ptr[x] = GraphicAlgorithms::MixColor(orgColor, color, orgColor.alpha / 255.0);
 		}
 		ptr += width;
 	}

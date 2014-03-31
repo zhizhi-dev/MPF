@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FontFace.h"
 #include "FontManager.h"
+#include <fstream>
 
 using namespace MPF;
 using namespace MPF::Visual;
@@ -36,7 +37,7 @@ std::pair<uint, uint> FontFace::DrawChar(BitmapData<byte>& bitmap, uint left, ui
 	auto& glyph = GetGlyphCache(chr, size);
 
 	bitmap.CopyFrom(*glyph.Glyph, 0, 0, left + glyph.Left, top + glyph.Top);
-	return std::make_pair(glyph.Glyph->GetWidth() + glyph.Left, glyph.Glyph->GetHeight() + glyph.Top);
+	return std::make_pair(glyph.Advance.first, glyph.Glyph->GetHeight() + glyph.Top);
 }
 
 const FontGlyph& FontFace::GetGlyphCache(const FontFaceCacheKey& key)
@@ -75,14 +76,15 @@ const FontGlyph& FontFace::LoadGlyphCache(const FontFaceCacheKey& key)
 	auto left(face->glyph->bitmap_left);
 	auto top(ascender - face->glyph->bitmap_top);
 	auto height(((face->size->metrics.height >> 6) + ascender + descender) / 2);
-	auto width(face->glyph->advance.x >> 6);
+	auto width(face->glyph->bitmap.width);
+	std::pair<uint, uint> advance = { face->glyph->advance.x >> 6, face->glyph->advance.y };
 
 	auto& srcBitmap(face->glyph->bitmap);
 	auto bitmap = std::make_shared<BitmapData<byte>>(width, height);
 	bitmap->CopyFrom(BitmapData<byte>(srcBitmap.buffer, srcBitmap.width,
 		srcBitmap.rows, srcBitmap.pitch), 0, 0);
 
-	return cache.emplace(key, FontGlyph{ bitmap, left, top }).first->second;
+	return cache.emplace(key, FontGlyph{ bitmap, left, top, advance }).first->second;
 }
 
 std::pair<uint, uint> FontFace::MeasureText(const MPF::String& text, float size)
@@ -95,7 +97,7 @@ std::pair<uint, uint> FontFace::MeasureText(const MPF::String& text, float size)
 	for (size_t i = 0; i < length; i++)
 	{
 		auto& glyph = GetGlyphCache(FontFaceCacheKey{ text[i], sizeInPixels.first, sizeInPixels.second });
-		pair.first += glyph.Glyph->GetWidth() + glyph.Left;
+		pair.first += glyph.Advance.first;
 		pair.second = max(pair.second, glyph.Glyph->GetHeight() + glyph.Top);
 	}
 

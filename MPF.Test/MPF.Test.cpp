@@ -25,34 +25,24 @@ void _stdcall MPFMain()
 	win->Initialize();
 
 	auto font = std::make_shared<Font>(std::make_shared<String>(L"Microsoft YaHei"), 40.f);
-	auto size = font->MeasureText(L"Hello Everyone!");
-	auto textBlock = std::make_shared<TextBlock>();
-	textBlock->Font = font;
-	textBlock->Text = std::make_shared<String>(L"吸白とchuは云輝にばかです。");
-	win->Content = textBlock;
+	auto textBlock1 = std::make_shared<TextBlock>();
+	textBlock1->Font = font;
+	textBlock1->Text = std::make_shared<String>(L"吸白とchuは云輝にばかです");
+	textBlock1->SetValue(Canvas::LeftProperty, 50.f);
+	textBlock1->SetValue(Canvas::TopProperty, 50.f);
+
+	auto textBlock2 = std::make_shared<TextBlock>();
+	textBlock2->Font = font;
+	textBlock2->Text = std::make_shared<String>(L"The quick fox jumps");
+	textBlock2->SetValue(Canvas::LeftProperty, 50.f);
+	textBlock2->SetValue(Canvas::TopProperty, 150.f);
+
+	auto canvas = std::make_shared<Canvas>();
+	canvas->GetChildren().push_back(textBlock1);
+	canvas->GetChildren().push_back(textBlock2);
+	win->Content = canvas;
 	win->Show();
 	win->DoFrame();
-	//textBlock->Update()
 
 	app->Run();
-	
-	/*auto window = std::make_shared<NativeWindow>();
-	window->Create();
-	window->SetTitle(std::make_shared<String>(L"Hello MPF Window."));
-	window->SetWidth(800);
-	window->SetHeight(600);
-	window->Show();
-
-	auto render = window->CreateRenderCoreProvider(RenderCoreProviders::GDI);
-	SolidColorBrush solidBrush(0xFF00FF00);
-	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF00FF);
-
-	render->BeginDraw();
-	render->FillTriangle(Triangle(Point(100, 100), Point(50, 300, .5f, .5f),
-		Point(300, 50, 1.f, 1.f)), linearBrush);
-	render->DrawTriangle(Triangle(Point(100, 100), Point(50, 300, .5f, .5f), 
-		Point(300, 50, 1.f, 1.f)), linearBrush);
-	render->EndDraw();
-	render->Present();*/
-
 }

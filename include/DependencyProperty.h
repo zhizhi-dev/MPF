@@ -10,27 +10,20 @@ class DependencyProperty
 public:
 	//创建 DependencyProperty 的新实例
 	DependencyProperty(const String& name)
-		:name(name), value(std::make_shared<TValue>())
+		:name(name), value()
 	{
 
 	}
 
 	//创建 DependencyProperty 的新实例
 	DependencyProperty(const String& name, const TValue& value)
-		:name(name), value(std::make_shared<TValue>(value))
+		:name(name), value(value)
 	{
 
 	}
 
 	//创建 DependencyProperty 的新实例
 	DependencyProperty(const String& name, TValue&& value)
-		:name(name), value(std::make_shared<TValue>(value))
-	{
-
-	}
-
-	//创建 DependencyProperty 的新实例
-	DependencyProperty(const String& name, std::shared_ptr<TValue> value)
 		:name(name), value(value)
 	{
 
@@ -45,17 +38,23 @@ public:
 	//获取值
 	const TValue& GetValue() const
 	{
-		return *value;
+		return value;
 	}
 
 	//获取值
 	TValue& GetValue()
 	{
-		return *value;
+		return value;
+	}
+
+	//设置值
+	void SetValue(const TValue& value)
+	{
+		this->value = value;
 	}
 private:
 	String name;
-	std::shared_ptr<TValue> value;
+	TValue value;
 };
 
 NS_ED

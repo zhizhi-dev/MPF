@@ -14,7 +14,7 @@ class RenderCoreProvider : public Object
 {
 public:
 	//创建 RenderCoreProvider 的新实例
-	MPF_API RenderCoreProvider(std::shared_ptr<NativeWindow> window);
+	MPF_API RenderCoreProvider(NativeWindow& window);
 	MPF_API virtual ~RenderCoreProvider(){}
 
 	//开始绘制
@@ -59,7 +59,7 @@ protected:
 	MPF_API virtual void FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
 		float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, const Brush& brush) = 0;
 
-	std::shared_ptr<NativeWindow> window;
+	NativeWindow& window;
 private:
 	void InitializeDPIScale();
 	std::pair<uint, uint> LogicalPointToDevicePoint(const Point& point) const;

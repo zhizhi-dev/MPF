@@ -19,9 +19,9 @@ public:
 	//设置颜色
 
 	//从窗口客户端获取
-	static std::shared_ptr<DeviceContext> FromWindowClient(HWND hWnd);
+	static std::unique_ptr<DeviceContext> FromWindowClient(HWND hWnd);
 	//创建兼容设备上下文
-	static std::shared_ptr<DeviceContext> CreateCompatible(HDC hDC);
+	static std::unique_ptr<DeviceContext> CreateCompatible(HDC hDC);
 
 	//获取类型
 	DECLARE_GETTYPE(DeviceContext)

@@ -7,19 +7,20 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(Font, MPF::Visual::Font)
 
-Font::Font(std::shared_ptr<MPF::String> faceName, float size)
+Font::Font(const MPF::String& faceName, float size)
 :size(size)
 {
 	face = FontManager::GetCurrent()->GetFontFace(faceName);
 }
 
-Font::Font(std::shared_ptr<MPF::String> fileName, uint faceIndex, float size)
-:size(size)
+Font::Font(const MPF::String& fileName, uint faceIndex, float size)
+: size(size)
 {
 	face = FontManager::GetCurrent()->GetFontFace(fileName, faceIndex);
 }
 
 Font::Font(const Font& font)
+: size(font.size)
 {
 	face = font.face;
 }
@@ -44,4 +45,10 @@ void Font::DrawText(BitmapData<byte>& bitmap, uint left, uint top, const MPF::St
 std::pair<uint, uint> Font::MeasureText(const MPF::String& text)
 {
 	return face->MeasureText(text, size);
+}
+
+bool Font::operator != (const Font& font)const mnoexcept
+{
+	return face.get() == font.face.get() &&
+	size == font.size;
 }

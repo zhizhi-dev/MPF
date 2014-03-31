@@ -6,15 +6,17 @@
 using namespace MPF;
 
 DEFINE_TYPE(String, MPF::String)
-std::shared_ptr<String> String::empty = std::make_shared<String>(L"");
+String String::empty;
 
 String::String() mnoexcept
+:chars(L""), length(0)
 {
 }
 
 String::String(const wchar_t chars[], uint length) mnoexcept
 :chars(chars), length(length)
 {
+	massert(chars);
 }
 
 uint String::GetLength() const mnoexcept
@@ -32,7 +34,8 @@ const wchar_t* String::GetDataPointer() const mnoexcept
 
 uint String::GetHashCode() const mnoexcept
 {
-	return (uint)chars;
+	massert(chars);
+	return std::hash<std::wstring>()(chars);
 }
 
 String::String(const wchar_t* chars, bool isOwner)
@@ -45,10 +48,12 @@ String::String(const wchar_t* chars, bool isOwner)
 	}
 	else
 	{
+		massert(chars);
 		auto str = new wchar_t[length + 1];
 		wcscpy_s(str, length + 1, chars);
 
 		this->chars = str;
+		this->isOwner = true;
 	}
 }
 
@@ -68,15 +73,21 @@ void String::Dispose()
 
 bool String::operator == (const String& str) const mnoexcept
 {
-	return this->GetHashCode() == str.GetHashCode();
+	return std::wcscmp(chars, str.chars) == 0;
 }
 
-std::shared_ptr<String> String::GetEmpty()
+bool String::operator != (const String& str) const mnoexcept
 {
-	if (!empty)
+	return std::wcscmp(chars, str.chars) != 0;
+}
+
+const String& String::GetEmpty()
+{
+	if (!empty.chars)
 	{
-		empty = std::make_shared<String>(L"");
+		empty.chars = L"";
 	}
+	massert(empty.chars);
 	return empty;
 }
 
@@ -99,9 +110,10 @@ String::String(const String& str)
 	}
 }
 
-String::String(String&& str)
+String::String(String&& str) mnoexcept
 :chars(str.chars), isOwner(str.isOwner), length(str.length)
 {
+	massert(chars);
 	str.chars = nullptr;
 	str.length = 0;
 	str.isOwner = false;
@@ -114,6 +126,7 @@ const String& String::operator = (const String& str)
 	length = str.length;
 	isOwner = str.isOwner;
 
+	massert(chars);
 	if (isOwner && chars)
 	{
 		auto newChars = new wchar_t[length + 1];
@@ -123,15 +136,21 @@ const String& String::operator = (const String& str)
 	return *this;
 }
 
-const String& String::operator = (String&& str)
+const String& String::operator = (String&& str) mnoexcept
 {
 	Dispose();
 	chars = str.chars;
 	length = str.length;
 	isOwner = str.isOwner;
+	massert(chars);
 	str.chars = nullptr;
 	str.length = 0;
 	str.isOwner = false;
 
 	return *this;
+}
+
+bool String::IsEmpty() const mnoexcept
+{
+	return length == 0;
 }

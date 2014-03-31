@@ -26,7 +26,7 @@ public:
 	template<typename T>
 	const T& GetValue(const DependencyProperty<T>& property) const
 	{
-		auto& name = *property.GetName();
+		auto& name = property.GetName();
 		//检测动画值
 		auto it = animationValues.find(name);
 		if (it != animationValues.end())
@@ -53,7 +53,7 @@ public:
 	template<typename T>
 	T& GetValue(DependencyProperty<T>& property)
 	{
-		auto& name = *property.GetName();
+		auto& name = property.GetName();
 		//检测动画值
 		auto it = animationValues.find(name);
 		if (it != animationValues.end())
@@ -80,12 +80,12 @@ public:
 	template<typename T>
 	void SetValue(const DependencyProperty<T>& property, const T& value)
 	{
-		auto& name = *property.GetName();
+		auto& name = property.GetName();
 		//检测本地值
 		auto it = localValues.find(name);
 		if (it != localValues.end())
 		{
-			if ((const T)(it->second) != value)
+			if ((const T&)(it->second) != value)
 			{
 				it->second = value;
 				OnValueChange(name);
@@ -101,7 +101,7 @@ protected:
 	template<typename T>
 	void SetPropertyChangedHandler(const DependencyProperty<T>& property, std::function<void()> handler)
 	{
-		auto& name = *property.GetName();
+		auto& name = property.GetName();
 		auto it(observers.find(name));
 
 		if (it != observers.end())
@@ -117,7 +117,7 @@ protected:
 	template<typename T>
 	void ClearPropertyChangedHandler(const DependencyProperty<T>& property)
 	{
-		auto& name = *property.GetName();
+		auto& name = property.GetName();
 		auto it(observers.find(name));
 
 		if (it != observers.end())
@@ -129,7 +129,7 @@ protected:
 	template<typename T>
 	const T& GetCommonValue(const DependencyProperty<T>& property) const
 	{
-		auto val = FindParentCommonValue(*property.GetName());
+		auto val = FindParentCommonValue(property.GetName());
 		if (val.empty())
 		{
 			return property.GetValue();
@@ -140,7 +140,7 @@ protected:
 	template<typename T>
 	T& GetCommonValue(DependencyProperty<T>& property)
 	{
-		auto val = FindParentCommonValue(*property.GetName());
+		auto val = FindParentCommonValue(property.GetName());
 		if (val.empty())
 		{
 			return property.GetValue();

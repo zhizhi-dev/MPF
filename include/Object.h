@@ -6,10 +6,10 @@ NS_MPF
 class Type;
 class String;
 
-#define DECLARE_GETINSTANTTYPE(typeName) virtual std::shared_ptr<Type> GetInstantType()const mnoexcept{ return typeName ## Type; }
-#define DECLARE_GETTYPE(typeName) static std::shared_ptr<Type> GetType() mnoexcept{ return typeName ## Type; }
-#define DECLARE_TYPE(typeName) static std::shared_ptr<Type> typeName ## Type;
-#define DEFINE_TYPE(typeName, fullName) std::shared_ptr<Type> typeName::typeName ## Type = std::make_shared<Type>(Type(std::make_shared<String>(L#fullName)));
+#define DECLARE_GETINSTANTTYPE(typeName) virtual const Type& GetInstantType()const mnoexcept{ return typeName ## Type; }
+#define DECLARE_GETTYPE(typeName) static const Type& GetType() mnoexcept{ return typeName ## Type; }
+#define DECLARE_TYPE(typeName) static Type typeName ## Type;
+#define DEFINE_TYPE(typeName, fullName) Type typeName::typeName ## Type(L#fullName);
 
 //MPF 中所有对象的基类
 class Object

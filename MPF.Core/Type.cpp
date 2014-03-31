@@ -5,13 +5,13 @@ using namespace MPF;
 
 DEFINE_TYPE(Type, MPF::Type)
 
-Type::Type(const std::shared_ptr<String> typeName)
+Type::Type(const String& typeName)
 :typeName(typeName)
 {
 
 }
 
-bool Type::Equals(const std::shared_ptr<Type> type) const
+bool Type::Equals(const Type& type) const
 {
-	return this->typeName->GetDataPointer() == type->typeName->GetDataPointer();
+	return this->typeName== type.typeName;
 }

@@ -8,14 +8,18 @@ class Type : public Object
 {
 public:
 	//创建 Type 的新实例
-	MPF_API Type(const std::shared_ptr<String> typeName);
+	MPF_API Type(const String& typeName);
 
-	MPF_API bool Equals(const std::shared_ptr<Type> type) const;
+	MPF_API bool Equals(const Type& type) const;
+	bool operator==(const Type& type) const
+	{
+		return Equals(type);
+	}
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Type)
 private:
-	const std::shared_ptr<String> typeName;
+	String typeName;
 	DECLARE_TYPE(Type)
 };
 

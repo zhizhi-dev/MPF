@@ -41,8 +41,8 @@ std::shared_ptr<FontManager> FontManager::GetCurrent()
 	return current;
 }
 
-std::shared_ptr<String> FontManager::GetFileNameFromFamilyName(
-	std::shared_ptr<MPF::String> faceName, uint& faceIndex)
+String FontManager::GetFileNameFromFamilyName(
+	const MPF::String& faceName, uint& faceIndex)
 {
 	static const LPWSTR fontRegistryPath = L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
 	HKEY hKey;
@@ -64,7 +64,7 @@ std::shared_ptr<String> FontManager::GetFileNameFromFamilyName(
 	std::vector<wchar_t> valueName(maxValueDataSize);
 	std::vector<BYTE> valueData(maxValueDataSize);
 	DWORD valueNameSize, valueDataSize, valueType;
-	std::shared_ptr<String> fileName;
+	wchar_t* fileName = nullptr;
 
 	// Look for a matching font name
 	do
@@ -83,9 +83,9 @@ std::shared_ptr<String> FontManager::GetFileNameFromFamilyName(
 		}
 
 		// Found a match
-		if (_wcsnicmp(faceName->GetDataPointer(), valueName.data(), faceName->GetLength()) == 0)
+		if (_wcsnicmp(faceName.GetDataPointer(), valueName.data(), faceName.GetLength()) == 0)
 		{
-			fileName = std::make_shared<String>((const wchar_t*)valueData.data());
+			fileName = (wchar_t*)valueData.data();
 			faceIndex = 0;
 			break;
 		}
@@ -97,27 +97,27 @@ std::shared_ptr<String> FontManager::GetFileNameFromFamilyName(
 	WCHAR winDir[MAX_PATH];
 	GetWindowsDirectory(winDir, MAX_PATH);
 
-	if (fileName)
+	if (fileName != nullptr)
 	{
 		std::wstringstream ss;
-		ss << winDir << L"\\Fonts\\" << fileName->GetDataPointer();
+		ss << winDir << L"\\Fonts\\" << fileName;
 		auto str = ss.str();
-		fileName = std::make_shared<String>(str.c_str());
+		return str.c_str();
 	}
 
-	return fileName;
+	return String::GetEmpty();
 }
 
-std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(std::shared_ptr<MPF::String> fileName,
+std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(const MPF::String& fileName,
 	uint faceIndex)
 {
-	massert(fileName != nullptr);
+	massert(!fileName.IsEmpty());
 
 	size_t length = 0;
-	wcstombs_s(&length, nullptr, 0, fileName->GetDataPointer(), 0);
+	wcstombs_s(&length, nullptr, 0, fileName.GetDataPointer(), 0);
 	length += 1;
 	std::vector<char> cFileName(length);
-	wcstombs_s(&length, cFileName.data(), length, fileName->GetDataPointer(), length);
+	wcstombs_s(&length, cFileName.data(), length, fileName.GetDataPointer(), length);
 
 	FT_Face face = nullptr;
 	auto error = FT_New_Face(freeType, cFileName.data(), faceIndex, &face);
@@ -138,7 +138,7 @@ void FontManager::InitializeDPIScale()
 	dpiScaleY = GetDeviceCaps(hdc, LOGPIXELSY) / 96.f;
 }
 
-std::shared_ptr<FontFace> FontManager::LookupFontFace(std::shared_ptr<String> fileName,
+std::shared_ptr<FontFace> FontManager::LookupFontFace(const MPF::String& fileName,
 	uint faceIndex)
 {
 	//fvck cl
@@ -157,7 +157,7 @@ std::shared_ptr<FontFace> FontManager::LookupFontFace(std::shared_ptr<String> fi
 	return nullptr;
 }
 
-std::shared_ptr<FontFace> FontManager::GetFontFace(std::shared_ptr<String> fileName,
+std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& fileName,
 	uint faceIndex)
 {
 	auto face = LookupFontFace(fileName, faceIndex);
@@ -168,7 +168,7 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(std::shared_ptr<String> fileN
 	return LoadFontFromFileName(fileName, faceIndex);
 }
 
-std::shared_ptr<FontFace> FontManager::GetFontFace(std::shared_ptr<String> familyName)
+std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& familyName)
 {
 	uint faceIndex = 0;
 	auto fileName = GetFileNameFromFamilyName(familyName, faceIndex);

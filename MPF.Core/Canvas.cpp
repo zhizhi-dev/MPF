@@ -9,8 +9,8 @@ DEFINE_TYPE(Canvas, MPF::UI::Canvas)
 DEFINE_UI_VALUES(Canvas)
 DEFINE_UI_FUNCS(Canvas, Panel)
 
-DependencyProperty<float> Canvas::LeftProperty(std::make_shared<String>(L"Left"));
-DependencyProperty<float> Canvas::TopProperty(std::make_shared<String>(L"Top"));
+DependencyProperty<float> Canvas::LeftProperty(L"Left");
+DependencyProperty<float> Canvas::TopProperty(L"Top");
 
 Canvas::Canvas()
 {
@@ -27,21 +27,17 @@ void Canvas::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& 
 	auto children = GetChildren();
 	for (auto child : children)
 	{
-		auto content = child.lock();
-		if (content)
-		{
-			auto& childRef = *content;
+		massert(child != nullptr);
 
-			auto bound = childRef.MeasureBound();
-			auto left = childRef.GetValue(LeftProperty);
-			auto top = childRef.GetValue(TopProperty);
-			bound.Transform([&](Point& pt)
-			{
-				pt.X += left;
-				pt.Y += top;
-			});
-			childRef.Render(renderer, RenderArgs{ bound });
-		}
+		auto bound = child->MeasureBound();
+		auto left = child->GetValue(LeftProperty);
+		auto top = child->GetValue(TopProperty);
+		bound.Transform([&](Point& pt)
+		{
+			pt.X += left;
+			pt.Y += top;
+		});
+		child->Render(renderer, RenderArgs{ bound });
 	}
 
 	UIElement::RenderCore(renderer, std::move(args));

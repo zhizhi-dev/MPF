@@ -10,10 +10,10 @@ DEFINE_TYPE(UIElement, MPF::UI::UIElement)
 DEFINE_UI_VALUES(UIElement)
 DEFINE_UI_FUNCS(UIElement, DependencyObject)
 
-DependencyProperty<float> UIElement::WidthProperty(std::make_shared<String>(L"Width"));
-DependencyProperty<float> UIElement::HeightProperty(std::make_shared<String>(L"Height"));
-DependencyProperty<Visibility> UIElement::VisibilityProperty(std::make_shared<String>(L"Visibility"), Visibility::Visible);
-DependencyProperty<Thickness> UIElement::MarginProperty(std::make_shared<String>(L"Margin"));
+DependencyProperty<float> UIElement::WidthProperty(L"Width");
+DependencyProperty<float> UIElement::HeightProperty(L"Height");
+DependencyProperty<Visibility> UIElement::VisibilityProperty(L"Visibility", Visibility::Visible);
+DependencyProperty<Thickness> UIElement::MarginProperty(L"Margin");
 
 UIElement::UIElement()
 {

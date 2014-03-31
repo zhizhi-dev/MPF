@@ -7,7 +7,7 @@ NS_VSL
 
 struct FontFaceKey
 {
-	std::shared_ptr<MPF::String> FileName;
+	MPF::String FileName;
 	uint FaceIndex;
 
 	bool operator==(const FontFaceKey& key) const mnoexcept
@@ -47,7 +47,7 @@ namespace std
 	public:
 		size_t operator()(const MPF::Visual::FontFaceKey& key) const
 		{
-			return key.FileName->GetHashCode() ^ key.FaceIndex;
+			return key.FileName.GetHashCode() ^ key.FaceIndex;
 		}
 	};
 

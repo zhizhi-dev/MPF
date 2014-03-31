@@ -14,12 +14,12 @@ Bitmap::Bitmap()
 
 }
 
-std::shared_ptr<Bitmap> Bitmap::CreateDIBSection(HDC hDC, uint width, uint height)
+std::unique_ptr<Bitmap> Bitmap::CreateDIBSection(HDC hDC, uint width, uint height)
 {
 	width &= ~(4 - 1);
 	height &= ~(4 - 1);
 
-	auto bitmap = std::make_shared<Bitmap>();
+	auto bitmap = std::make_unique<Bitmap>();
 	
 	BITMAPINFO bmpInfo;
 	bmpInfo.bmiHeader.biSize = sizeof(bmpInfo);

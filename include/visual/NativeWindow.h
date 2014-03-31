@@ -15,7 +15,7 @@ enum class RenderCoreProviders
 };
 
 //系统窗口
-class NativeWindow : public Object, public std::enable_shared_from_this<NativeWindow>
+class NativeWindow : public Object
 {
 public:
 	//创建 NativeWindow 的新实例
@@ -28,9 +28,9 @@ public:
 	MPF_API void Show() const;
 
 	//获取标题
-	MPF_API std::shared_ptr<String> GetTitle() const;
+	MPF_API const String& GetTitle() const;
 	//设置标题
-	MPF_API void SetTitle(std::shared_ptr<String> title);
+	MPF_API void SetTitle(const String& title);
 
 	//获取宽度
 	MPF_API uint GetWidth() const;
@@ -52,7 +52,7 @@ public:
 	MPF_API handle_t GetNativeHandle() const;
 
 	//创建 RenderCoreProvider
-	MPF_API std::shared_ptr<RenderCoreProvider> CreateRenderCoreProvider(RenderCoreProviders provider);
+	MPF_API std::unique_ptr<RenderCoreProvider> CreateRenderCoreProvider(RenderCoreProviders provider);
 
 	//绘制事件
 	Event<PaintEventHandler> Paint;

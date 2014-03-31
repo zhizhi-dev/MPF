@@ -11,15 +11,15 @@ DEFINE_TYPE(TextBlock, MPF::UI::TextBlock)
 DEFINE_UI_VALUES(TextBlock)
 DEFINE_UI_FUNCS(TextBlock, UIElement)
 
-DependencyProperty<std::shared_ptr<MPF::String>> TextBlock::TextProperty(std::make_shared<String>(L"Text"), String::GetEmpty());
-DependencyProperty<std::shared_ptr<MPF::Visual::Font>> TextBlock::FontProperty(std::make_shared<String>(L"Font"));
+DependencyProperty<MPF::String> TextBlock::TextProperty(L"Text", String::GetEmpty());
+DependencyProperty<MPF::Visual::Font> TextBlock::FontProperty(L"Font", MPF::Visual::Font(L"Microsoft YaHei", 15.f));
 
 TextBlock::TextBlock()
 {
 	AddPropertyHandlers();
 }
 
-TextBlock::TextBlock(std::shared_ptr<MPF::String> text)
+TextBlock::TextBlock(const MPF::String& text)
 :TextBlock()
 {
 	Text = text;
@@ -30,12 +30,12 @@ TextBlock::~TextBlock()
 
 }
 
-std::shared_ptr<MPF::String> TextBlock::GetText() const
+const MPF::String& TextBlock::GetText() const
 {
 	return GetValue(TextProperty);
 }
 
-void TextBlock::SetText(std::shared_ptr<MPF::String> value)
+void TextBlock::SetText(const MPF::String& value)
 {
 	SetValue(TextProperty, value);
 }
@@ -68,20 +68,19 @@ void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elap
 void TextBlock::UpdateTextGlyphs()
 {
 	auto font(Font);
-	auto& text(*Text);
-	massert(font != nullptr);
+	auto& text(Text);
 
-	auto size(font->MeasureText(text));
+	auto size(font.MeasureText(text));
 	textGlyphs = std::make_shared<BitmapData<byte>>(size.first, size.second);
-	font->DrawText(*textGlyphs, 0, 0, text);
+	font.DrawText(*textGlyphs, 0, 0, text);
 }
 
-std::shared_ptr<MPF::Visual::Font> TextBlock::GetFont() const
+const MPF::Visual::Font& TextBlock::GetFont() const
 {
 	return GetValue(FontProperty);
 }
 
-void TextBlock::SetFont(std::shared_ptr<MPF::Visual::Font> value)
+void TextBlock::SetFont(const MPF::Visual::Font& value)
 {
 	SetValue(FontProperty, value);
 }

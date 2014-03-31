@@ -12,18 +12,18 @@ public:
 	MPF_API virtual ~ContentElement();
 
 	//获取内容
-	MPF_API std::weak_ptr<UIElement> GetContent() const;
+	MPF_API UIElement* GetContent() const;
 	//设置内容
-	MPF_API void SetContent(std::weak_ptr<UIElement> value);
+	MPF_API void SetContent(UIElement* value);
 	//获取或设置内容
-	mproperty(std::weak_ptr<UIElement>, Content);
+	mproperty(UIElement*, Content);
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(ContentElement)
 	MPF_API DECLARE_GETINSTANTTYPE(ContentElement)
 public:
 	//内容
-	MPF_API static DependencyProperty<std::weak_ptr<UIElement>> ContentProperty;
+	MPF_API static DependencyProperty<UIElement*> ContentProperty;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);

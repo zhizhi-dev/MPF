@@ -11,31 +11,31 @@ class TextBlock : public UIElement
 {
 public:
 	MPF_API TextBlock();
-	MPF_API TextBlock(std::shared_ptr<MPF::String> text);
+	MPF_API TextBlock(const MPF::String& text);
 	MPF_API virtual ~TextBlock();
 
 	//获取文字
-	MPF_API std::shared_ptr<MPF::String> GetText() const;
+	MPF_API const MPF::String& GetText() const;
 	//设置文字
-	MPF_API void SetText(std::shared_ptr<MPF::String> value);
+	MPF_API void SetText(const MPF::String& value);
 	//获取或设置文字
-	mproperty(std::shared_ptr<MPF::String>, Text);
+	mproperty(MPF::String, Text);
 
 	//获取字体
-	MPF_API std::shared_ptr<MPF::Visual::Font> GetFont() const;
+	MPF_API const MPF::Visual::Font& GetFont() const;
 	//设置字体
-	MPF_API void SetFont(std::shared_ptr<MPF::Visual::Font> value);
+	MPF_API void SetFont(const MPF::Visual::Font& value);
 	//获取或设置字体
-	mproperty(std::shared_ptr<MPF::Visual::Font>, Font);
+	mproperty(MPF::Visual::Font, Font);
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(TextBlock);
 	MPF_API DECLARE_GETINSTANTTYPE(TextBlock);
 public:
 	//文字
-	MPF_API static DependencyProperty<std::shared_ptr<MPF::String>> TextProperty;
+	MPF_API static DependencyProperty<MPF::String> TextProperty;
 	//字体
-	MPF_API static DependencyProperty<std::shared_ptr<MPF::Visual::Font>> FontProperty;
+	MPF_API static DependencyProperty<MPF::Visual::Font> FontProperty;
 protected:
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);

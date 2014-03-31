@@ -18,11 +18,11 @@ public:
 		MPF::Visual::RenderCoreProviders::GDI);
 
 	//获取标题
-	MPF_API std::shared_ptr<MPF::String> GetTitle() const;
+	MPF_API const MPF::String& GetTitle() const;
 	//设置标题
-	MPF_API void SetTitle(std::shared_ptr<MPF::String> value);
+	MPF_API void SetTitle(const MPF::String& value);
 	//获取或设置标题
-	mproperty(std::shared_ptr<MPF::String>, Title);
+	mproperty(MPF::String, Title);
 
 	//显示
 	MPF_API void Show();
@@ -35,7 +35,7 @@ public:
 	MPF_API DECLARE_GETINSTANTTYPE(Window)
 public:
 	//标题
-	MPF_API static DependencyProperty<std::shared_ptr<MPF::String>> TitleProperty;
+	MPF_API static DependencyProperty<MPF::String> TitleProperty;
 protected:
 	DECLARE_UI_FUNCS
 private:

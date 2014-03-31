@@ -78,7 +78,7 @@ LRESULT WINAPI NativeWindow::WindowProc(handle_t hWnd, UINT msg, WPARAM wParam, 
 
 void NativeWindow::Create()
 {
-	handle = CreateWindowEx(0, MPFWindowClassName, String::GetEmpty()->GetDataPointer(),
+	handle = CreateWindowEx(0, MPFWindowClassName, String::GetEmpty().GetDataPointer(),
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
 		nullptr, nullptr, (HINSTANCE)Application::GetCurrent()->GetNativeHandle(), this);
 
@@ -90,18 +90,18 @@ void NativeWindow::Show() const
 	ShowWindow((HWND)handle, SW_SHOW);
 }
 
-std::shared_ptr<String> NativeWindow::GetTitle() const
+const String& NativeWindow::GetTitle() const
 {
 	auto len = GetWindowTextLength((HWND)handle);
 	auto text = new wchar_t[len + 1];
 	GetWindowText((HWND)handle, text, len);
 
-	return std::make_shared<String>(text, true);
+	return String(text, true);
 }
 
-void NativeWindow::SetTitle(std::shared_ptr<String> title)
+void NativeWindow::SetTitle(const String& title)
 {
-	SetWindowText((HWND)handle, title->GetDataPointer());
+	SetWindowText((HWND)handle, title.GetDataPointer());
 }
 
 uint NativeWindow::GetWidth() const
@@ -139,14 +139,14 @@ handle_t NativeWindow::GetNativeHandle() const
 	return handle;
 }
 
-std::shared_ptr<RenderCoreProvider> NativeWindow::CreateRenderCoreProvider(RenderCoreProviders provider)
+std::unique_ptr<RenderCoreProvider> NativeWindow::CreateRenderCoreProvider(RenderCoreProviders provider)
 {
-	std::shared_ptr<RenderCoreProvider> render = nullptr;
+	std::unique_ptr<RenderCoreProvider> render = nullptr;
 
 	switch (provider)
 	{
 	case MPF::Visual::RenderCoreProviders::GDI:
-		render = std::make_shared<GDI::GDIRenderCoreProvider>(shared_from_this());
+		render = std::make_unique<GDI::GDIRenderCoreProvider>(*this);
 		break;
 	default:
 		break;

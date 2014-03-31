@@ -26,7 +26,7 @@ public:
 	uint GetHeight() const mnoexcept { return height; }
 
 	//创建设备无关位图
-	static std::shared_ptr<Bitmap> CreateDIBSection(HDC hDC, uint width, uint height);
+	static std::unique_ptr<Bitmap> CreateDIBSection(HDC hDC, uint width, uint height);
 
 	void AlphaBlend(argb_color color);
 

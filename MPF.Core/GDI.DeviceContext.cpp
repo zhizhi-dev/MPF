@@ -21,10 +21,10 @@ DeviceContext::~DeviceContext()
 	isOwner = false;
 }
 
-std::shared_ptr<DeviceContext> DeviceContext::FromWindowClient(HWND hWnd)
+std::unique_ptr<DeviceContext> DeviceContext::FromWindowClient(HWND hWnd)
 {
 	massert(hWnd);
-	auto dc = std::make_shared<DeviceContext>();
+	auto dc = std::make_unique<DeviceContext>();
 
 	dc->hWnd = hWnd;
 	//获取客户端 HDC
@@ -38,10 +38,10 @@ HDC DeviceContext::GetNativeHandle() const mnoexcept
 	return hDC;
 }
 
-std::shared_ptr<DeviceContext> DeviceContext::CreateCompatible(HDC hDC)
+std::unique_ptr<DeviceContext> DeviceContext::CreateCompatible(HDC hDC)
 {
 	massert(hDC);
-	auto dc = std::make_shared<DeviceContext>();
+	auto dc = std::make_unique<DeviceContext>();
 
 	dc->hDC = CreateCompatibleDC(hDC);
 	dc->isOwner = true;

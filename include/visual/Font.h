@@ -16,10 +16,10 @@ class Font : public MPF::Object
 {
 public:
 	//从字体名称和大小创建字体
-	MPF_API Font(std::shared_ptr<MPF::String> faceName, float size);
+	MPF_API Font(const MPF::String& faceName, float size);
 
 	//从字体文件、字体序号和大小创建字体
-	MPF_API Font(std::shared_ptr<MPF::String> fileName, uint faceIndex, float size);
+	MPF_API Font(const MPF::String& fileName, uint faceIndex, float size);
 
 	MPF_API Font(const Font& font);
 
@@ -31,6 +31,8 @@ public:
 
 	//计算文本要占用的像素大小
 	MPF_API std::pair<uint, uint> MeasureText(const MPF::String& text);
+
+	MPF_API bool operator!=(const Font& font)const mnoexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Font)

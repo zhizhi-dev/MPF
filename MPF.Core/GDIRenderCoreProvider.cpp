@@ -8,7 +8,7 @@ using namespace MPF::GDI;
 
 DEFINE_TYPE(GDIRenderCoreProvider, MPF::GDI::GDIRenderCoreProvider)
 
-GDIRenderCoreProvider::GDIRenderCoreProvider(std::shared_ptr<NativeWindow> window)
+GDIRenderCoreProvider::GDIRenderCoreProvider(NativeWindow& window)
 :RenderCoreProvider(window)
 {
 	InitializeGDI();
@@ -22,11 +22,11 @@ GDIRenderCoreProvider::~GDIRenderCoreProvider()
 void GDIRenderCoreProvider::InitializeGDI()
 {
 	//获取主缓冲
-	frontBuffer = DeviceContext::FromWindowClient((HWND)window->GetNativeHandle());
+	frontBuffer = DeviceContext::FromWindowClient((HWND)window.GetNativeHandle());
 	massert(frontBuffer != nullptr);
 	//创建后背缓冲
 	backBufferSurface = Bitmap::CreateDIBSection(frontBuffer->GetNativeHandle(),
-		window->GetClientWidth(), window->GetClientHeight());
+		window.GetClientWidth(), window.GetClientHeight());
 	backBuffer = DeviceContext::CreateCompatible(frontBuffer->GetNativeHandle());
 }
 
@@ -96,8 +96,8 @@ void GDIRenderCoreProvider::Present()
 
 	backBufferSurface->AlphaBlend(0xFFFFFFFF);
 	//绘制
-	BitBlt(frontBuffer->GetNativeHandle(), 0, 0, window->GetClientWidth(),
-		window->GetClientHeight(), backBuffer->GetNativeHandle(), 0, 0, SRCCOPY);
+	BitBlt(frontBuffer->GetNativeHandle(), 0, 0, window.GetClientWidth(),
+		window.GetClientHeight(), backBuffer->GetNativeHandle(), 0, 0, SRCCOPY);
 }
 
 void GDIRenderCoreProvider::BeginDraw()

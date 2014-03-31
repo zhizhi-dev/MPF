@@ -8,7 +8,7 @@ DEFINE_TYPE(ContentElement, MPF::UI::ContentElement)
 DEFINE_UI_VALUES(ContentElement)
 DEFINE_UI_FUNCS(ContentElement, UIElement)
 
-DependencyProperty<std::weak_ptr<UIElement>> ContentElement::ContentProperty(std::make_shared<String>(L"Content"));
+DependencyProperty<UIElement*> ContentElement::ContentProperty(L"Content");
 
 ContentElement::ContentElement()
 {
@@ -20,19 +20,19 @@ ContentElement::~ContentElement()
 
 }
 
-std::weak_ptr<UIElement> ContentElement::GetContent() const
+UIElement* ContentElement::GetContent() const
 {
 	return GetValue(ContentProperty);
 }
 
-void ContentElement::SetContent(std::weak_ptr<UIElement> value)
+void ContentElement::SetContent(UIElement* value)
 {
 	SetValue(ContentProperty, value);
 }
 
 void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	auto content = Content.lock();
+	auto content = Content;
 	if (content)
 	{
 		content->Render(renderer, RenderArgs{ content->MeasureBound() });
@@ -43,7 +43,7 @@ void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, Rende
 
 void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
 {
-	auto content = Content.lock();
+	auto content = Content;
 	if (content)
 	{
 		content->Update(renderer, elapsedTime);

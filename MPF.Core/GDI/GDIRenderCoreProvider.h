@@ -11,7 +11,7 @@ class GDIRenderCoreProvider : public MPF::Visual::RenderCoreProvider
 {
 public:
 	//创建 GDIRenderCoreProvider 的新实例
-	GDIRenderCoreProvider(std::shared_ptr<MPF::Visual::NativeWindow> window);
+	GDIRenderCoreProvider(MPF::Visual::NativeWindow& window);
 	virtual ~GDIRenderCoreProvider();
 
 	//开始绘制
@@ -49,11 +49,11 @@ private:
 	void InitializeGDI();
 private:
 	//主缓冲
-	std::shared_ptr<DeviceContext> frontBuffer;
+	std::unique_ptr<DeviceContext> frontBuffer;
 	//后背缓冲表面
-	std::shared_ptr<Bitmap> backBufferSurface;
+	std::unique_ptr<Bitmap> backBufferSurface;
 	//后背缓冲
-	std::shared_ptr<DeviceContext> backBuffer;
+	std::unique_ptr<DeviceContext> backBuffer;
 
 	DECLARE_TYPE(GDIRenderCoreProvider)
 };

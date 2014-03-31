@@ -18,31 +18,31 @@ void _stdcall MPFMain()
 		system("Pause");
 	});
 
-	auto win = std::make_shared<MPF::UI::Window>();
-	win->Title = std::make_shared<String>(L"Hello MPF Window.");
-	win->Width = 800;
-	win->Height = 600;
-	win->Initialize();
+	Window win;
+	win.Title = L"Hello MPF Window.";
+	win.Width = 800;
+	win.Height = 600;
+	win.Initialize();
 
-	auto font = std::make_shared<Font>(std::make_shared<String>(L"Microsoft YaHei"), 40.f);
-	auto textBlock1 = std::make_shared<TextBlock>();
-	textBlock1->Font = font;
-	textBlock1->Text = std::make_shared<String>(L"吸白とchuは云輝にばかです");
-	textBlock1->SetValue(Canvas::LeftProperty, 50.f);
-	textBlock1->SetValue(Canvas::TopProperty, 50.f);
+	Font font(L"Microsoft YaHei", 40.f);
+	TextBlock textBlock1;
+	textBlock1.Font = font;
+	textBlock1.Text = L"吸白とchuは云輝にばかです。";
+	textBlock1.SetValue(Canvas::LeftProperty, 50.f);
+	textBlock1.SetValue(Canvas::TopProperty, 50.f);
 
-	auto textBlock2 = std::make_shared<TextBlock>();
-	textBlock2->Font = font;
-	textBlock2->Text = std::make_shared<String>(L"The quick fox jumps");
-	textBlock2->SetValue(Canvas::LeftProperty, 50.f);
-	textBlock2->SetValue(Canvas::TopProperty, 150.f);
+	TextBlock textBlock2;
+	textBlock2.Font = font;
+	textBlock2.Text = L"The quick fox jumps";
+	textBlock2.SetValue(Canvas::LeftProperty, 50.f);
+	textBlock2.SetValue(Canvas::TopProperty, 150.f);
 
-	auto canvas = std::make_shared<Canvas>();
-	canvas->GetChildren().push_back(textBlock1);
-	canvas->GetChildren().push_back(textBlock2);
-	win->Content = canvas;
-	win->Show();
-	win->DoFrame();
+	Canvas canvas;
+	canvas.GetChildren().push_back(&textBlock1);
+	canvas.GetChildren().push_back(&textBlock2);
+	win.Content = &canvas;
+	win.Show();
+	win.DoFrame();
 
 	app->Run();
 }

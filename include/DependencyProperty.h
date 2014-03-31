@@ -9,35 +9,35 @@ class DependencyProperty
 {
 public:
 	//创建 DependencyProperty 的新实例
-	DependencyProperty(std::shared_ptr<String> name)
+	DependencyProperty(const String& name)
 		:name(name), value(std::make_shared<TValue>())
 	{
 
 	}
 
 	//创建 DependencyProperty 的新实例
-	DependencyProperty(std::shared_ptr<String> name, const TValue& value)
+	DependencyProperty(const String& name, const TValue& value)
 		:name(name), value(std::make_shared<TValue>(value))
 	{
 
 	}
 
 	//创建 DependencyProperty 的新实例
-	DependencyProperty(std::shared_ptr<String> name, TValue&& value)
+	DependencyProperty(const String& name, TValue&& value)
 		:name(name), value(std::make_shared<TValue>(value))
 	{
 
 	}
 
 	//创建 DependencyProperty 的新实例
-	DependencyProperty(std::shared_ptr<String> name, std::shared_ptr<TValue> value)
+	DependencyProperty(const String& name, std::shared_ptr<TValue> value)
 		:name(name), value(value)
 	{
 
 	}
 
 	//获取属性名称
-	std::shared_ptr<String> GetName() const
+	const String& GetName() const
 	{
 		return name;
 	}
@@ -54,7 +54,7 @@ public:
 		return *value;
 	}
 private:
-	std::shared_ptr<String> name;
+	String name;
 	std::shared_ptr<TValue> value;
 };
 

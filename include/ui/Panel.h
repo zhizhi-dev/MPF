@@ -12,16 +12,16 @@ public:
 	MPF_API virtual ~Panel();
 
 	//获取子元素
-	MPF_API const std::vector<std::weak_ptr<UIElement>>& GetChildren() const;
+	MPF_API const std::vector<UIElement*>& GetChildren() const;
 	//获取子元素
-	MPF_API std::vector<std::weak_ptr<UIElement>>& GetChildren();
+	MPF_API std::vector<UIElement*>& GetChildren();
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Panel);
 	MPF_API DECLARE_GETINSTANTTYPE(Panel);
 public:
 	//内容
-	MPF_API static DependencyProperty<std::vector<std::weak_ptr<UIElement>>> ChildrenProperty;
+	MPF_API static DependencyProperty<std::vector<UIElement*>> ChildrenProperty;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);

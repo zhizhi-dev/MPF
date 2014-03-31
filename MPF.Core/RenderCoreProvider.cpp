@@ -8,7 +8,7 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(RenderCoreProvider, MPF::Visual::RenderCoreProvider)
 
-RenderCoreProvider::RenderCoreProvider(std::shared_ptr<NativeWindow> window)
+RenderCoreProvider::RenderCoreProvider(NativeWindow& window)
 :window(window)
 {
 	InitializeDPIScale();
@@ -104,7 +104,7 @@ void RenderCoreProvider::FillTriangle(const Triangle& triangle, const Brush& bru
 
 void RenderCoreProvider::InitializeDPIScale()
 {
-	HWND hWnd = (HWND)window->GetNativeHandle(); 
+	HWND hWnd = (HWND)window.GetNativeHandle(); 
 	HDC hdc = GetDC(hWnd);
 
 	dpiScaleX = GetDeviceCaps(hdc, LOGPIXELSX) / 96.0f;

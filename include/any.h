@@ -42,14 +42,14 @@ public:
 
 	template<typename T>
 	any(const T& value)
-		:value(std::make_shared<holder<T>>(value))
+		:value(std::make_unique<holder<T>>(value))
 	{
 
 	}
 
 	template<typename T>
 	any(T&& value)
-		: value(std::make_shared<holder<T>>(value))
+		: value(std::make_unique<holder<T>>(value))
 	{
 
 	}
@@ -75,7 +75,7 @@ public:
 		}
 		else
 		{
-			this->value = std::make_shared<holder<T>>(value);
+			this->value = std::make_unique<holder<T>>(value);
 		}
 	}
 
@@ -102,7 +102,7 @@ public:
 		return value == nullptr;
 	}
 private:
-	std::shared_ptr<placeholder> value;
+	std::unique_ptr<placeholder> value;
 };
 
 NS_ED

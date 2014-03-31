@@ -32,7 +32,7 @@ void NativeWindow::CreateWindowClass()
 		WNDCLASSEX wndCls = { 0 };
 
 		wndCls.cbSize = sizeof(wndCls);
-		wndCls.hInstance = (HINSTANCE)Application::GetCurrent()->GetNativeHandle();
+		wndCls.hInstance = (HINSTANCE)Application::GetCurrent().GetNativeHandle();
 		wndCls.style = CS_HREDRAW | CS_VREDRAW;
 		wndCls.hCursor = LoadCursor(nullptr, IDC_ARROW);
 		wndCls.lpszClassName = MPFWindowClassName;
@@ -80,7 +80,7 @@ void NativeWindow::Create()
 {
 	handle = CreateWindowEx(0, MPFWindowClassName, String::GetEmpty().GetDataPointer(),
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
-		nullptr, nullptr, (HINSTANCE)Application::GetCurrent()->GetNativeHandle(), this);
+		nullptr, nullptr, (HINSTANCE)Application::GetCurrent().GetNativeHandle(), this);
 
 	massert(handle != nullptr);
 }

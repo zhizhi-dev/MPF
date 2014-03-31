@@ -48,7 +48,7 @@ private:
 	void OnTextChanged();
 	void UpdateTextGlyphs();
 private:
-	std::shared_ptr<MPF::Visual::BitmapData<byte>> textGlyphs;
+	std::unique_ptr<MPF::Visual::BitmapData<byte>> textGlyphs;
 
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(TextBlock)

@@ -42,3 +42,34 @@ void Canvas::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& 
 
 	UIElement::RenderCore(renderer, std::move(args));
 }
+
+float Canvas::GetLeft(const UIElement& elem)
+{
+	return elem.GetValue(LeftProperty);
+}
+
+void Canvas::SetLeft(UIElement& elem, float value)
+{
+	elem.SetValue(LeftProperty, value);
+}
+
+float Canvas::GetTop(const UIElement& elem)
+{
+	return elem.GetValue(TopProperty);
+}
+
+void Canvas::SetTop(UIElement& elem, float value)
+{
+	elem.SetValue(TopProperty, value);
+}
+
+std::pair<float, float> Canvas::GetPosition(const UIElement& elem)
+{
+	return std::make_pair(GetLeft(elem), GetTop(elem));
+}
+
+void Canvas::SetPosition(UIElement& elem, const std::pair<float, float>& position)
+{
+	SetLeft(elem, position.first);
+	SetTop(elem, position.second);
+}

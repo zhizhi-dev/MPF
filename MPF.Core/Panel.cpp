@@ -9,8 +9,6 @@ DEFINE_TYPE(Panel, MPF::UI::Panel)
 DEFINE_UI_VALUES(Panel)
 DEFINE_UI_FUNCS(Panel, UIElement)
 
-DependencyProperty<std::vector<UIElement*>> Panel::ChildrenProperty(L"Children", std::vector<UIElement*>());
-
 Panel::Panel()
 {
 
@@ -23,17 +21,16 @@ Panel::~Panel()
 
 const std::vector<UIElement*>& Panel::GetChildren() const
 {
-	return GetValue(ChildrenProperty);
+	return children;
 }
 
 std::vector<UIElement*>& Panel::GetChildren()
 {
-	return GetValue(ChildrenProperty);
+	return children;
 }
 
 void Panel::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	auto children = GetChildren();
 	for (auto child : children)
 	{
 		massert(child != nullptr);
@@ -45,7 +42,6 @@ void Panel::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& a
 
 void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
 {
-	auto children = GetChildren();
 	for (auto child : children)
 	{
 		massert(child != nullptr);
@@ -53,4 +49,9 @@ void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedT
 	}
 
 	UIElement::UpdateCore(renderer, elapsedTime);
+}
+
+void Panel::AddChild(UIElement& elem)
+{
+	children.push_back(&elem);
 }

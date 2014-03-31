@@ -71,7 +71,7 @@ void TextBlock::UpdateTextGlyphs()
 	auto& text(Text);
 
 	auto size(font.MeasureText(text));
-	textGlyphs = std::make_shared<BitmapData<byte>>(size.first, size.second);
+	textGlyphs = std::make_unique<BitmapData<byte>>(size.first, size.second);
 	font.DrawText(*textGlyphs, 0, 0, text);
 }
 
@@ -87,8 +87,8 @@ void TextBlock::SetFont(const MPF::Visual::Font& value)
 
 void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	auto linearBrush = std::make_shared<LinearGradientBrush>(0xFF00FF00, 0xFFFF00FF);
-	AlphaBlendBrush blendBrush(textGlyphs, linearBrush);
+	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF00FF);
+	AlphaBlendBrush blendBrush(*textGlyphs, linearBrush);
 
 	renderer.FillQuad(args.RenderQuad, blendBrush);
 	UIElement::RenderCore(renderer, std::move(args));

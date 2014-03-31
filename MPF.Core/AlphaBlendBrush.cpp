@@ -6,34 +6,30 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(AlphaBlendBrush, MPF::Visual::AlphaBlendBrush)
 
-AlphaBlendBrush::AlphaBlendBrush(std::shared_ptr<BitmapData<byte>> alpha,
-std::shared_ptr<Brush> secondBrush) mnoexcept
-:alpha(alpha), secondBrush(secondBrush)
+AlphaBlendBrush::AlphaBlendBrush(const BitmapData<byte>& alpha,
+const Brush& secondBrush) mnoexcept
+:alpha(&alpha), secondBrush(&secondBrush)
 {
-	massert(alpha != nullptr);
-	massert(secondBrush != nullptr);
 }
 
-std::shared_ptr<BitmapData<byte>> AlphaBlendBrush::GetAlpha() const mnoexcept
+const BitmapData<byte>& AlphaBlendBrush::GetAlpha() const mnoexcept
 {
-	return alpha;
+	return *alpha;
 }
 
-void AlphaBlendBrush::SetAlpha(std::shared_ptr<BitmapData<byte>> value) mnoexcept
+void AlphaBlendBrush::SetAlpha(const BitmapData<byte>& value) mnoexcept
 {
-	massert(value != nullptr);
-	alpha = value;
+	alpha = &value;
 }
 
-std::shared_ptr<Brush> AlphaBlendBrush::GetSecondBrush() const mnoexcept
+const Brush& AlphaBlendBrush::GetSecondBrush() const mnoexcept
 {
-	return secondBrush;
+	return *secondBrush;
 }
 
-void AlphaBlendBrush::SetSecondBrush(std::shared_ptr<Brush> value) mnoexcept
+void AlphaBlendBrush::SetSecondBrush(const Brush& value) mnoexcept
 {
-	massert(value != nullptr);
-	secondBrush = value;
+	secondBrush = &value;
 }
 
 color_t AlphaBlendBrush::TakeSample(float u, float v) const

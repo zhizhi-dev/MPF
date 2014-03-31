@@ -11,6 +11,19 @@ public:
 	MPF_API Canvas();
 	MPF_API virtual ~Canvas();
 
+	//获取横坐标
+	MPF_API static float GetLeft(const UIElement& elem);
+	//设置横坐标
+	MPF_API static void SetLeft(UIElement& elem, float value);
+	//获取纵坐标
+	MPF_API static float GetTop(const UIElement& elem);
+	//设置纵坐标
+	MPF_API static void SetTop(UIElement& elem, float value);
+	//获取坐标
+	MPF_API static std::pair<float, float> GetPosition(const UIElement& elem);
+	//设置坐标
+	MPF_API static void SetPosition(UIElement& elem, const std::pair<float, float>& position);
+
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Canvas);
 	MPF_API DECLARE_GETINSTANTTYPE(Canvas);

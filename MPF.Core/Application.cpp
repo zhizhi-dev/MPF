@@ -6,16 +6,14 @@ using namespace MPF;
 
 DEFINE_TYPE(Application, MPF::Application)
 //µ±Ç° Application
-std::shared_ptr<Application> currentApp = nullptr;
+Application currentApp;
 
 Application::Application()
 {
 }
 
-std::shared_ptr<Application> Application::GetCurrent() mnoexcept
+Application& Application::GetCurrent() mnoexcept
 {
-	massert(currentApp != nullptr);
-
 	return currentApp;
 }
 
@@ -52,9 +50,9 @@ void Application::Run(MPFMainHandler handler) const
 	}
 }
 
-std::shared_ptr<String> Application::GetCommandLines() const
+String Application::GetCommandLines() const
 {
-	return std::make_shared<String>(GetCommandLine());
+	return GetCommandLine();
 }
 
 void Application::Run() const
@@ -70,13 +68,12 @@ void Application::Run() const
 
 void CreateApplication()
 {
-	currentApp = std::make_shared<Application>();
 }
 
 int _stdcall MPFStartup(MPFMainHandler handler)
 {
 	CreateApplication();
-	currentApp->Run(handler);
+	currentApp.Run(handler);
 	return 0;
 }
 
@@ -84,6 +81,6 @@ int _stdcall MPFConsoleStartup(MPFMainHandler handler)
 {
 	std::locale::global(std::locale(""));
 	CreateApplication();
-	currentApp->Run(handler);
+	currentApp.Run(handler);
 	return 0;
 }

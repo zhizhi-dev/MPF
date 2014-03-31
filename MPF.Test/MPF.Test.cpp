@@ -10,8 +10,8 @@ using namespace MPF::UI;
 
 void _stdcall MPFMain()
 {
-	auto app = Application::GetCurrent();
-	app->UncaughtException += UncaughtExceptionEventHandler([&](bool& isHandled)
+	auto& app = Application::GetCurrent();
+	app.UncaughtException += UncaughtExceptionEventHandler([&](bool& isHandled)
 	{
 		std::wcout << L"发生异常！" << std::endl;
 
@@ -28,21 +28,21 @@ void _stdcall MPFMain()
 	TextBlock textBlock1;
 	textBlock1.Font = font;
 	textBlock1.Text = L"帝球とchuは本当にばかです。";
-	textBlock1.SetValue(Canvas::LeftProperty, 50.f);
-	textBlock1.SetValue(Canvas::TopProperty, 50.f);
+	Canvas::SetLeft(textBlock1, 50.f);
+	Canvas::SetTop(textBlock1, 50.f);
 
 	TextBlock textBlock2;
 	textBlock2.Font = font;
 	textBlock2.Text = L"The quick fox jumps";
-	textBlock2.SetValue(Canvas::LeftProperty, 50.f);
-	textBlock2.SetValue(Canvas::TopProperty, 150.f);
+	Canvas::SetLeft(textBlock2, 50.f);
+	Canvas::SetTop(textBlock2, 150.f);
 
 	Canvas canvas;
-	canvas.GetChildren().push_back(&textBlock1);
-	canvas.GetChildren().push_back(&textBlock2);
+	canvas.AddChild(textBlock1);
+	canvas.AddChild(textBlock2);
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();
 
-	app->Run();
+	app.Run();
 }

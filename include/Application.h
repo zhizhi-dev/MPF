@@ -15,6 +15,8 @@ class Application : Object
 public:
 	//创建 Application 的新实例
 	MPF_API Application();
+	Application(const Application& app) = delete;
+	const Application& operator=(const Application& app) = delete;
 
 	//运行
 	MPF_API void Run(MPFMainHandler handler) const;
@@ -26,10 +28,10 @@ public:
 	MPF_API handle_t GetNativeHandle() const;
 
 	//获取命令行
-	MPF_API std::shared_ptr<String> GetCommandLines() const;
+	MPF_API String GetCommandLines() const;
 
 	//获取当前 Application
-	MPF_API static std::shared_ptr<Application> GetCurrent() mnoexcept;
+	MPF_API static Application& GetCurrent() mnoexcept;
 
 	//未捕获异常
 	Event<UncaughtExceptionEventHandler> UncaughtException;

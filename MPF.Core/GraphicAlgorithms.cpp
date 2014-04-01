@@ -52,6 +52,23 @@ inline double rfpart(double x)
 	return 1.0 - fpart(x);
 }
 
+inline void MixColor(argb_color& col1, argb_color col2)
+{
+	auto p = col2.alpha / 255.f;
+
+	col1.alpha = col2.alpha * p + col1.alpha * (1 - p);
+	col1.red = col2.red * p + col1.red * (1 - p);
+	col1.green = col2.green * p + col1.green * (1 - p);
+	col1.blue = col2.blue * p + col1.blue * (1 - p);
+}
+
+inline void MixColor(color_t& col1, argb_color col2)
+{
+	argb_color col = col1;
+	MixColor(col, col2);
+	col1 = col;
+}
+
 void GraphicAlgorithms::DrawLine_WuXiaolin(color_t* data, uint stride,
 	uint x1, uint y1, uint x2, uint y2, color_t color)
 {
@@ -365,7 +382,7 @@ void GraphicAlgorithms::FillTriangle(color_t* data, uint stride, uint x1, uint y
 		{
 			auto u = gradU * i + minUV.first;
 			auto v = gradV * i + minUV.second;
-			data[start + x] = brush.TakeSample(u, v);
+			::MixColor(data[start + x], brush.TakeSample(u, v));
 		}
 		start += stride;
 	}
@@ -390,7 +407,7 @@ void GraphicAlgorithms::FillTriangle(color_t* data, uint stride, uint x1, uint y
 		{
 			auto u = gradU * i + minUV.first;
 			auto v = gradV * i + minUV.second;
-			data[start + x] = brush.TakeSample(u, v);
+			::MixColor(data[start + x], brush.TakeSample(u, v));
 		}
 		start += stride;
 	}

@@ -192,6 +192,9 @@
     <ClInclude Include="..\include\visual\Size.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ui\TextBox.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

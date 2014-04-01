@@ -45,5 +45,6 @@
 #include "ui/Window.h"
 #include "ui/Panel.h"
 #include "ui/Canvas.h"
+#include "ui/ButtonBase.h"
 
 void _stdcall MPFMain();

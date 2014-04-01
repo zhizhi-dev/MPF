@@ -33,7 +33,7 @@ public:
 	MPF_API const MPF::Visual::Brush* GetForeground() const;
 	//设置前景画刷
 	MPF_API void SetForeground(const MPF::Visual::Brush* value);
-	//获取或设置字体
+	//获取或设置前景画刷
 	mproperty(const MPF::Visual::Brush*, Foreground);
 
 	//计算大小

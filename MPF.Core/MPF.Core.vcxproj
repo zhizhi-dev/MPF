@@ -119,6 +119,7 @@
     <ClInclude Include="..\include\ui\Panel.h" />
     <ClInclude Include="..\include\ui\RenderArgs.h" />
     <ClInclude Include="..\include\ui\TextBlock.h" />
+    <ClInclude Include="..\include\ui\TextBox.h" />
     <ClInclude Include="..\include\ui\UIElement.h" />
     <ClInclude Include="..\include\ui\Visibility.h" />
     <ClInclude Include="..\include\ui\Window.h" />

@@ -10,6 +10,7 @@ DEFINE_UI_VALUES(ContentElement)
 DEFINE_UI_FUNCS(ContentElement, UIElement)
 
 DependencyProperty<UIElement*> ContentElement::ContentProperty(L"Content");
+DependencyProperty<const MPF::Visual::Brush*> ContentElement::BackgroundProperty(L"Background");
 
 ContentElement::ContentElement()
 {
@@ -33,6 +34,12 @@ void ContentElement::SetContent(UIElement* value)
 
 void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
+	auto background = Background;
+	if (background)
+	{
+		renderer.FillQuad(args.RenderQuad, *background);
+	}
+
 	auto content = Content;
 	if (content)
 	{
@@ -80,4 +87,14 @@ MPF::Visual::Size ContentElement::MeasureSize()
 	}
 	//没有内容则返回边框大小
 	return size;
+}
+
+const MPF::Visual::Brush* ContentElement::GetBackground() const
+{
+	return GetValue(BackgroundProperty);
+}
+
+void ContentElement::SetBackground(const MPF::Visual::Brush* value)
+{
+	SetValue(BackgroundProperty, value);
 }

@@ -22,6 +22,21 @@ public:
 	void SetPointA(const Point& point) mnoexcept{ pointA = point; }
 	mproperty(Point&, PointA);
 
+	const Point& GetPointB() const mnoexcept{ return pointB; }
+	Point& GetPointB() mnoexcept{ return pointB; }
+	void SetPointB(const Point& point) mnoexcept{ pointB = point; }
+	mproperty(Point&, PointB);
+
+	const Point& GetPointC() const mnoexcept{ return pointC; }
+	Point& GetPointC() mnoexcept{ return pointC; }
+	void SetPointC(const Point& point) mnoexcept{ pointC = point; }
+	mproperty(Point&, PointC);
+
+	const Point& GetPointD() const mnoexcept{ return pointD; }
+	Point& GetPointD() mnoexcept{ return pointD; }
+	void SetPointD(const Point& point) mnoexcept{ pointD = point; }
+	mproperty(Point&, PointD);
+
 	MPF_API virtual void Transform(std::function<void(Point&)> func);
 
 	//获取类型

@@ -183,6 +183,15 @@
     <ClInclude Include="..\include\Visual\Thickness.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ui\ButtonBase.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\Border.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Size.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -300,6 +309,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Canvas.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Border.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

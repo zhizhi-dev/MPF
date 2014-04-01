@@ -25,16 +25,25 @@ void _stdcall MPFMain()
 	win.Initialize();
 
 	TextBlock::FontProperty.SetValue(Font(L"Microsoft YaHei", 40.f));
+	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF0000);
+	TextBlock::ForegroundProperty.SetValue(&linearBrush);
 
 	TextBlock textBlock1(L"吸白とchuは云輝にばかです。");
 	Canvas::SetPosition(textBlock1, { 50.f, 50.f });
 
 	TextBlock textBlock2(L"The quick fox jumps");
-	Canvas::SetPosition(textBlock2, { 50.f, 150.f });
+	SolidColorBrush soldBrush(0xFF00FF77);
+	textBlock2.Foreground = &soldBrush;
+
+	Border border1;
+	border1.BorderBrush = &linearBrush;
+	border1.Content = &textBlock2;
+	border1.Padding = 10.f;
+	Canvas::SetPosition(border1, { 50.f, 150.f });
 
 	Canvas canvas;
 	canvas.AddChild(textBlock1);
-	canvas.AddChild(textBlock2);
+	canvas.AddChild(border1);
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();

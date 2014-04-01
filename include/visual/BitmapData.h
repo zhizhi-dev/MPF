@@ -45,7 +45,7 @@ public:
 		}
 	}
 
-	BitmapData(BitmapData&& bitmap)
+	BitmapData(BitmapData&& bitmap) mnoexcept
 		:data(bitmap.data), width(bitmap.width), height(bitmap.height), pitch(bitmap.width), owner(bitmap.owner)
 	{
 		bitmap.data = nullptr;
@@ -75,7 +75,7 @@ public:
 		return *this;
 	}
 
-	const BitmapData<TColor>& operator=(BitmapData<TColor>&& bitmap)
+	const BitmapData<TColor>& operator=(BitmapData<TColor>&& bitmap) mnoexcept
 	{
 		Dispose();
 		data = bitmap.data;
@@ -118,7 +118,7 @@ public:
 	//»ñÈ¡Pitch£¨ÏñËØ£©
 	uint GetPitch() const mnoexcept{ return pitch; }
 private:
-	void Dispose()
+	void Dispose() mnoexcept
 	{
 		if (owner && data)
 		{

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "../include/ui/TextBlock.h"
-#include "../include/visual/LinearGradientBrush.h"
+#include "../include/visual/SolidColorBrush.h"
 #include "../include/visual/AlphaBlendBrush.h"
 
 using namespace MPF;
@@ -11,8 +11,10 @@ DEFINE_TYPE(TextBlock, MPF::UI::TextBlock)
 DEFINE_UI_VALUES(TextBlock)
 DEFINE_UI_FUNCS(TextBlock, UIElement)
 
+static SolidColorBrush defaultForegroundBrush(0xFF000000);
 DependencyProperty<MPF::String> TextBlock::TextProperty(L"Text", String::GetEmpty());
 DependencyProperty<MPF::Visual::Font> TextBlock::FontProperty(L"Font", MPF::Visual::Font(L"Microsoft YaHei", 15.f));
+DependencyProperty<const MPF::Visual::Brush*> TextBlock::ForegroundProperty(L"Foreground", &defaultForegroundBrush);
 
 TextBlock::TextBlock()
 {
@@ -87,18 +89,38 @@ void TextBlock::SetFont(const MPF::Visual::Font& value)
 
 void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF00FF);
-	AlphaBlendBrush blendBrush(*textGlyphs, linearBrush);
+	auto foreground = Foreground;
+	if (foreground)
+	{
+		auto padding = Padding;
+		auto textQuad = args.RenderQuad;
+		textQuad.Transform([&](Point& pt)
+		{
+			pt.X += padding.Left;
+			pt.Y += padding.Top;
+		});
+		AlphaBlendBrush blendBrush(*textGlyphs, *foreground);
 
-	renderer.FillQuad(args.RenderQuad, blendBrush);
-	UIElement::RenderCore(renderer, std::move(args));
+		renderer.FillQuad(textQuad, blendBrush);
+		UIElement::RenderCore(renderer, std::move(args));
+	}
 }
 
-MPF::Visual::Quad TextBlock::MeasureSize()
+MPF::Visual::Size TextBlock::MeasureSize()
 {
-	auto width = textGlyphs->GetWidth();
-	auto height = textGlyphs->GetHeight();
+	auto size = UIElement::MeasureSize();
+	size.Width += textGlyphs->GetWidth();
+	size.Height += textGlyphs->GetHeight();
 
-	return Quad(Point(), Point(width, 0.f, 1.f, 0.f),
-		Point(width, height, 1.f, 1.f), Point(0.f, height, 0.f, 1.f));
+	return size;
+}
+
+const MPF::Visual::Brush* TextBlock::GetForeground() const
+{
+	return GetValue(ForegroundProperty);
+}
+
+void TextBlock::SetForeground(const MPF::Visual::Brush* value)
+{
+	SetValue(ForegroundProperty, value);
 }

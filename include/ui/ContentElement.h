@@ -17,6 +17,8 @@ public:
 	MPF_API void SetContent(UIElement* value);
 	//获取或设置内容
 	mproperty(UIElement*, Content);
+	//计算大小
+	MPF_API virtual MPF::Visual::Size MeasureSize();
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(ContentElement)
@@ -27,6 +29,7 @@ public:
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	MPF_API virtual MPF::Visual::Quad MeasureContentBound(UIElement& elem);
 protected:
 	DECLARE_UI_FUNCS
 private:

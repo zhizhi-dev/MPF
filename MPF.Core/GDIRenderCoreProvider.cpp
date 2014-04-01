@@ -122,3 +122,15 @@ void GDIRenderCoreProvider::FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3
 	GraphicAlgorithms::FillQuad((color_t*)data, stride, x1, y1, x2, y2, x3, y3, x4, y4,
 		u1, v1, u2, v2, u3, v3, u4, v4, brush);
 }
+
+void GDIRenderCoreProvider::DrawQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
+	float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, const Brush& brush)
+{
+	auto data = backBufferSurface->GetDataPointer();
+	auto stride = backBufferSurface->GetWidth();
+
+	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, stride, x1, y1, x2, y2, u1, v1, u2, v2, brush);
+	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, stride, x2, y2, x3, y3, u2, v2, u3, v3, brush);
+	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, stride, x3, y3, x4, y4, u3, v3, u4, v4, brush);
+	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, stride, x1, y1, x4, y4, u1, v1, u4, v4, brush);
+}

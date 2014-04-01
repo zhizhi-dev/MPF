@@ -18,6 +18,7 @@
 
 //Visual
 #include "visual/Visual.h"
+#include "visual/Size.h"
 #include "visual/Thickness.h"
 #include "visual/Image.h"
 #include "visual/BitmapData.h"
@@ -40,6 +41,7 @@
 #include "ui/UIElement.h"
 #include "ui/ContentElement.h"
 #include "ui/TextBlock.h"
+#include "ui/Border.h"
 #include "ui/Window.h"
 #include "ui/Panel.h"
 #include "ui/Canvas.h"

@@ -75,7 +75,7 @@ const FontGlyph& FontFace::LoadGlyphCache(const FontFaceCacheKey& key)
 	auto descender(face->size->metrics.descender >> 6);
 	auto left(face->glyph->bitmap_left);
 	auto top(ascender - face->glyph->bitmap_top);
-	auto height(((face->size->metrics.height >> 6) + ascender + descender) / 2);
+	auto height(face->glyph->bitmap.rows);
 	auto width(face->glyph->bitmap.width);
 	std::pair<uint, uint> advance = { face->glyph->advance.x >> 6, face->glyph->advance.y };
 

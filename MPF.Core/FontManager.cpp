@@ -16,12 +16,12 @@ FontManager::FontManager()
 
 FontManager::~FontManager()
 {
-	auto unique = std::all_of(fonts.begin(), fonts.end(),
+	auto expired = std::all_of(fonts.begin(), fonts.end(),
 		[&](std::pair<const FontFaceKey, std::weak_ptr<FontFace>>& pair)
 	{
 		return pair.second.expired();
 	});
-	massert(unique);
+	massert(expired);
 	fonts.clear();
 
 	if (freeType)
@@ -122,7 +122,6 @@ std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(const MPF::String& f
 	FT_Face face = nullptr;
 	auto error = FT_New_Face(freeType, cFileName.data(), faceIndex, &face);
 	massert(error == 0);
-	face->family_name;
 	FontFaceKey key{ fileName, faceIndex };
 	auto value(std::make_shared<FontFace>(face));
 	fonts.emplace(key, value);

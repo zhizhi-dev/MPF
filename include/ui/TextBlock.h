@@ -2,6 +2,7 @@
 #include "UIElement.h"
 #include "../visual/BitmapData.h"
 #include "../visual/Font.h"
+#include "../visual/Brush.h"
 
 NS_MPF
 NS_UI
@@ -28,6 +29,16 @@ public:
 	//获取或设置字体
 	mproperty(MPF::Visual::Font, Font);
 
+	//获取前景画刷
+	MPF_API const MPF::Visual::Brush* GetForeground() const;
+	//设置前景画刷
+	MPF_API void SetForeground(const MPF::Visual::Brush* value);
+	//获取或设置字体
+	mproperty(const MPF::Visual::Brush*, Foreground);
+
+	//计算大小
+	MPF_API virtual MPF::Visual::Size MeasureSize();
+
 	//获取类型
 	MPF_API DECLARE_GETTYPE(TextBlock);
 	MPF_API DECLARE_GETINSTANTTYPE(TextBlock);
@@ -36,11 +47,11 @@ public:
 	MPF_API static DependencyProperty<MPF::String> TextProperty;
 	//字体
 	MPF_API static DependencyProperty<MPF::Visual::Font> FontProperty;
+	//前景画刷
+	MPF_API static DependencyProperty<const MPF::Visual::Brush*> ForegroundProperty;
 protected:
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	//计算大小
-	MPF_API virtual MPF::Visual::Quad MeasureSize();
 
 	DECLARE_UI_FUNCS
 private:

@@ -10,14 +10,15 @@ DEFINE_TYPE(UIElement, MPF::UI::UIElement)
 DEFINE_UI_VALUES(UIElement)
 DEFINE_UI_FUNCS(UIElement, DependencyObject)
 
-DependencyProperty<float> UIElement::WidthProperty(L"Width");
-DependencyProperty<float> UIElement::HeightProperty(L"Height");
+DependencyProperty<float> UIElement::WidthProperty(L"Width", NAN);
+DependencyProperty<float> UIElement::HeightProperty(L"Height", NAN);
 DependencyProperty<Visibility> UIElement::VisibilityProperty(L"Visibility", Visibility::Visible);
 DependencyProperty<Thickness> UIElement::MarginProperty(L"Margin");
+DependencyProperty<Thickness> UIElement::PaddingProperty(L"Padding");
 
 UIElement::UIElement()
 {
-	
+
 }
 
 UIElement::~UIElement()
@@ -65,9 +66,19 @@ Thickness UIElement::GetMargin() const
 	return GetValue(MarginProperty);
 }
 
-void UIElement::SetMargin(Thickness value)
+void UIElement::SetMargin(const Thickness& value)
 {
 	SetValue(MarginProperty, value);
+}
+
+Thickness UIElement::GetPadding() const
+{
+	return GetValue(PaddingProperty);
+}
+
+void UIElement::SetPadding(const Thickness& value)
+{
+	SetValue(PaddingProperty, value);
 }
 
 void UIElement::Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
@@ -96,20 +107,24 @@ void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elap
 MPF::Visual::Quad UIElement::MeasureBound()
 {
 	auto margin = Margin;
-	auto points = MeasureSize().GetPoints();
-	for (auto& pt : points)
-	{
-		pt.X += margin.Left;
-		pt.Y += margin.Top;
-	}
-	
-	return Quad(points[0], points[1], points[2], points[3]);
+	auto size = MeasureSize();
+	auto left = margin.Left;
+	auto top = margin.Top;
+	auto right = left + size.Width;
+	auto bottom = top + size.Height;
+
+	return Quad(Point(left, top), Point(right, top, 1.f), Point(right, bottom, 1.f, 1.f),
+		Point(left, bottom, 0.f, 1.f));
 }
 
-MPF::Visual::Quad UIElement::MeasureSize()
+MPF::Visual::Size UIElement::MeasureSize()
 {
 	auto width = Width;
 	auto height = Height;
+	auto padding = Padding;
 
-	return Quad(Point(), Point(width, 0.f), Point(width, height), Point(0.f, height));
+	if (std::isnan(width))width = padding.Left + padding.Right;
+	if (std::isnan(height))height = padding.Top + padding.Bottom;
+
+	return{ width, height };
 }

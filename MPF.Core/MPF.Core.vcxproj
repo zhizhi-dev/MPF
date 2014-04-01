@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlphaBlendBrush.cpp" />
+    <ClCompile Include="Border.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ContentElement.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
@@ -111,6 +112,8 @@
     <ClInclude Include="..\include\String.h" />
     <ClInclude Include="..\include\Thread.h" />
     <ClInclude Include="..\include\Type.h" />
+    <ClInclude Include="..\include\ui\Border.h" />
+    <ClInclude Include="..\include\ui\ButtonBase.h" />
     <ClInclude Include="..\include\ui\Canvas.h" />
     <ClInclude Include="..\include\ui\ContentElement.h" />
     <ClInclude Include="..\include\ui\Panel.h" />
@@ -133,6 +136,7 @@
     <ClInclude Include="..\include\visual\Point.h" />
     <ClInclude Include="..\include\visual\Quad.h" />
     <ClInclude Include="..\include\visual\RenderCoreProvider.h" />
+    <ClInclude Include="..\include\visual\Size.h" />
     <ClInclude Include="..\include\visual\SolidColorBrush.h" />
     <ClInclude Include="..\include\Visual\Thickness.h" />
     <ClInclude Include="..\include\visual\Triangle.h" />

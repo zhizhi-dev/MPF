@@ -57,10 +57,7 @@ public:
 
 	any(any&& _any) mnoexcept
 	{
-		if (_any.value)
-		{
-			value = std::move(_any.value);
-		}
+		value = std::move(_any.value);
 	}
 
 	template<typename T>
@@ -79,15 +76,15 @@ public:
 	}
 
 	template<typename T>
-	auto get() const->const std::remove_reference_t<std::remove_cv_t<T>>&
+	const std::remove_reference_t<std::remove_cv_t<T>>& get() const
 	{
 		return reinterpret_cast<holder<T>*>(value.get())->value;
 	}
 
 	template<typename T>
-	T& get()
+	std::remove_reference_t<std::remove_cv_t<T>>& get()
 	{
-		return reinterpret_cast<holder<T>*>(value.get())->value;
+		return reinterpret_cast<holder<std::remove_reference_t<std::remove_cv_t<T>>>*>(value.get())->value;
 	}
 
 	template<typename T>
@@ -132,15 +129,33 @@ public:
 	}
 
 	template<typename T>
-	void operator= (const T& value)
+	const T& operator= (const T& value)
 	{
 		set(value);
+
+		return value;
+	}
+
+	const any& operator= (const any& _any)
+	{
+		if (_any.value)
+		{
+			value = _any.value->clone();
+		}
+		return *this;
+	}
+
+	const any& operator= (any&& _any) mnoexcept
+	{
+		value = std::move(_any.value);
+		return *this;
 	}
 
 	template<typename T>
-	void operator= (T&& value)
+	const T& operator= (T&& value)
 	{
 		set(std::forward<T>(value));
+		return *this;
 	}
 
 	bool isEmpty() const mnoexcept

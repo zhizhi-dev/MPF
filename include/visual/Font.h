@@ -24,6 +24,7 @@ public:
 	MPF_API Font(MPF::String&& fileName, uint faceIndex, float size);
 
 	MPF_API Font(const Font& font);
+	MPF_API Font(Font&& font) mnoexcept;
 
 	//绘制单个字符并返回字符的像素大小
 	MPF_API std::pair<uint, uint> DrawChar(BitmapData<byte>& bitmap, uint left, 
@@ -36,6 +37,7 @@ public:
 
 	MPF_API bool operator!=(const Font& font)const mnoexcept;
 	MPF_API const Font& operator=(const Font& font);
+	MPF_API const Font& operator=(Font&& font) mnoexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Font)

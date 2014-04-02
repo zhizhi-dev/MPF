@@ -31,10 +31,24 @@ Font::Font(const Font& font)
 	face = font.face;
 }
 
+Font::Font(Font&& font) mnoexcept
+: size(font.size)
+{
+	face = std::move(font.face);
+}
+
 const Font& Font::operator = (const Font& font)
 {
 	size = font.size;
 	face = font.face;
+
+	return *this;
+}
+
+const Font& Font::operator = (Font&& font) mnoexcept
+{
+	size = font.size;
+	face = std::move(font.face);
 
 	return *this;
 }

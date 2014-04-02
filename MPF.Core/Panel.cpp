@@ -56,12 +56,11 @@ void Panel::AddChild(UIElement& elem)
 	children.emplace_back(&elem);
 }
 
-void Panel::AddChild(std::initializer_list<UIElement*> elems)
+void Panel::AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems)
 {
 	children.reserve(children.size() + elems.size());
 	for (auto elem : elems)
 	{
-		massert(elem);
-		children.emplace_back(elem);
+		AddChild(elem);
 	}
 }

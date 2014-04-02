@@ -11,12 +11,12 @@ using namespace MPF::UI;
 void _stdcall MPFMain()
 {
 	auto& app = Application::GetCurrent();
-	app.UncaughtException += UncaughtExceptionEventHandler([&](bool& isHandled)
+	app.UncaughtException += [&](bool& isHandled)
 	{
 		std::wcout << L"·¢ÉúÒì³££¡" << std::endl;
 
 		system("Pause");
-	});
+	};
 
 	Window win;
 	win.Title = L"Hello MPF Window.";
@@ -44,7 +44,7 @@ void _stdcall MPFMain()
 	Canvas::SetPosition(border1, { 50.f, 80.f });
 
 	Canvas canvas;
-	canvas.AddChild({ &textBlock1, &border1 });
+	canvas.AddChildren({ textBlock1, border1 });
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();

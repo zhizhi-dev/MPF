@@ -18,7 +18,7 @@ public:
 	//添加子元素
 	MPF_API void AddChild(UIElement& elem);
 	//添加子元素
-	MPF_API void AddChild(std::initializer_list<UIElement*> elems);
+	MPF_API void AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems);
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Panel);

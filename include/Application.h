@@ -2,7 +2,6 @@
 #include "Type.h"
 #include "String.h"
 #include "Event.h"
-#include "UncaughtExceptionEventHandler.h"
 
 NS_MPF
 

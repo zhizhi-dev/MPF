@@ -81,6 +81,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\EventHandlers.h" />
     <ClCompile Include="AlphaBlendBrush.cpp" />
     <ClCompile Include="any.cpp" />
     <ClCompile Include="Border.cpp" />
@@ -124,7 +125,6 @@
     <ClInclude Include="..\include\ui\UIElement.h" />
     <ClInclude Include="..\include\ui\Visibility.h" />
     <ClInclude Include="..\include\ui\Window.h" />
-    <ClInclude Include="..\include\UncaughtExceptionEventHandler.h" />
     <ClInclude Include="..\include\visual\AlphaBlendBrush.h" />
     <ClInclude Include="..\include\visual\BitmapData.h" />
     <ClInclude Include="..\include\visual\Brush.h" />
@@ -188,7 +188,6 @@
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Thread.cpp" />
     <ClCompile Include="Type.cpp" />
-    <ClCompile Include="UncaughtExceptionEventHandler.cpp" />
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

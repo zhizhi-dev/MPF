@@ -65,6 +65,7 @@ private:
 	const wchar_t* chars = L"";
 	bool isOwner = false;
 	uint length = 0;
+	mutable uint hashCode = 0;
 };
 
 NS_ED

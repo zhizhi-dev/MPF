@@ -14,7 +14,7 @@ String::String() mnoexcept
 }
 
 String::String(const wchar_t chars[], uint length) mnoexcept
-:chars(chars), length(length)
+: chars(chars), length(length)
 {
 	massert(chars);
 }
@@ -35,7 +35,11 @@ const wchar_t* String::GetDataPointer() const mnoexcept
 uint String::GetHashCode() const mnoexcept
 {
 	massert(chars);
-	return std::hash<std::wstring>()(chars);
+	if (hashCode == 0)
+	{
+		hashCode = std::hash<std::wstring>()(chars);
+	}
+	return hashCode;
 }
 
 String::String(const wchar_t* chars, bool isOwner)
@@ -74,11 +78,17 @@ void String::Dispose()
 
 bool String::operator == (const String& str) const mnoexcept
 {
+	massert(chars);
+	massert(str.chars);
+
 	return std::wcscmp(chars, str.chars) == 0;
 }
 
 bool String::operator != (const String& str) const mnoexcept
 {
+	massert(chars);
+	massert(str.chars);
+
 	return std::wcscmp(chars, str.chars) != 0;
 }
 
@@ -88,7 +98,6 @@ const String& String::GetEmpty()
 	{
 		empty.chars = L"";
 	}
-	massert(empty.chars);
 	return empty;
 }
 
@@ -103,7 +112,8 @@ wchar_t String::operator[](size_t index) const
 String::String(const String& str)
 :chars(str.chars), isOwner(str.isOwner), length(str.length)
 {
-	if (isOwner && chars)
+	massert(chars);
+	if (isOwner)
 	{
 		auto newChars = new wchar_t[length + 1];
 		wcscpy_s(newChars, length + 1, str.chars);

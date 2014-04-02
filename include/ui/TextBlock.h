@@ -13,12 +13,15 @@ class TextBlock : public UIElement
 public:
 	MPF_API TextBlock();
 	MPF_API TextBlock(const MPF::String& text);
+	MPF_API TextBlock(MPF::String&& text);
 	MPF_API virtual ~TextBlock();
 
 	//获取文字
 	MPF_API const MPF::String& GetText() const;
 	//设置文字
 	MPF_API void SetText(const MPF::String& value);
+	//设置文字
+	MPF_API void SetText(MPF::String&& value);
 	//获取或设置文字
 	mproperty(MPF::String, Text);
 
@@ -26,6 +29,8 @@ public:
 	MPF_API const MPF::Visual::Font& GetFont() const;
 	//设置字体
 	MPF_API void SetFont(const MPF::Visual::Font& value);
+	//设置字体
+	MPF_API void SetFont(MPF::Visual::Font&& value);
 	//获取或设置字体
 	mproperty(MPF::Visual::Font, Font);
 

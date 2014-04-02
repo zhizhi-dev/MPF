@@ -41,16 +41,20 @@ public:
 	mproperty(Visibility, Visibility);
 
 	//获取边距
-	MPF_API MPF::Visual::Thickness GetMargin() const;
+	MPF_API const MPF::Visual::Thickness& GetMargin() const;
 	//设置边距
 	MPF_API void SetMargin(const MPF::Visual::Thickness& value);
+	//设置边距
+	MPF_API void SetMargin(MPF::Visual::Thickness&& value);
 	//获取或设置边距
 	mproperty(MPF::Visual::Thickness, Margin);
 
 	//获取留白
-	MPF_API MPF::Visual::Thickness GetPadding() const;
+	MPF_API const MPF::Visual::Thickness& GetPadding() const;
 	//设置留白
 	MPF_API void SetPadding(const MPF::Visual::Thickness& value);
+	//设置留白
+	MPF_API void SetPadding(MPF::Visual::Thickness&& value);
 	//获取或设置留白
 	mproperty(MPF::Visual::Thickness, Padding);
 

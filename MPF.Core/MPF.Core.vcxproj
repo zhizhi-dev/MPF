@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlphaBlendBrush.cpp" />
+    <ClCompile Include="any.cpp" />
     <ClCompile Include="Border.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ContentElement.cpp" />

@@ -21,6 +21,8 @@ public:
 	MPF_API const MPF::String& GetTitle() const;
 	//设置标题
 	MPF_API void SetTitle(const MPF::String& value);
+	//设置标题
+	MPF_API void SetTitle(MPF::String&& value);
 	//获取或设置标题
 	mproperty(MPF::String, Title);
 

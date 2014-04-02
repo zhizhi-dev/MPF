@@ -13,6 +13,12 @@ Font::Font(const MPF::String& faceName, float size)
 	face = FontManager::GetCurrent()->GetFontFace(faceName);
 }
 
+Font::Font(MPF::String&& fileName, uint faceIndex, float size)
+: size(size)
+{
+	face = FontManager::GetCurrent()->GetFontFace(std::move(fileName), faceIndex);
+}
+
 Font::Font(const MPF::String& fileName, uint faceIndex, float size)
 : size(size)
 {
@@ -23,6 +29,14 @@ Font::Font(const Font& font)
 : size(font.size)
 {
 	face = font.face;
+}
+
+const Font& Font::operator = (const Font& font)
+{
+	size = font.size;
+	face = font.face;
+
+	return *this;
 }
 
 std::pair<uint, uint> Font::DrawChar(BitmapData<byte>& bitmap, uint left, uint top, wchar_t chr)

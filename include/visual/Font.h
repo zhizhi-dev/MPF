@@ -20,6 +20,8 @@ public:
 
 	//从字体文件、字体序号和大小创建字体
 	MPF_API Font(const MPF::String& fileName, uint faceIndex, float size);
+	//从字体文件、字体序号和大小创建字体
+	MPF_API Font(MPF::String&& fileName, uint faceIndex, float size);
 
 	MPF_API Font(const Font& font);
 
@@ -33,6 +35,7 @@ public:
 	MPF_API std::pair<uint, uint> MeasureText(const MPF::String& text);
 
 	MPF_API bool operator!=(const Font& font)const mnoexcept;
+	MPF_API const Font& operator=(const Font& font);
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Font)

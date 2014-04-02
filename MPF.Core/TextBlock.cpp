@@ -24,7 +24,13 @@ TextBlock::TextBlock()
 TextBlock::TextBlock(const MPF::String& text)
 :TextBlock()
 {
-	Text = text;
+	SetText(text);
+}
+
+TextBlock::TextBlock(MPF::String&& text)
+: TextBlock()
+{
+	SetText(std::move(text));
 }
 
 TextBlock::~TextBlock()
@@ -40,6 +46,11 @@ const MPF::String& TextBlock::GetText() const
 void TextBlock::SetText(const MPF::String& value)
 {
 	SetValue(TextProperty, value);
+}
+
+void TextBlock::SetText(MPF::String&& value)
+{
+	SetValue(TextProperty, std::move(value));
 }
 
 void TextBlock::OnTextChanged()

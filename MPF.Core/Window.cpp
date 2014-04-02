@@ -46,6 +46,11 @@ void Window::SetTitle(const MPF::String& value)
 	SetValue(TitleProperty, value);
 }
 
+void Window::SetTitle(MPF::String&& value)
+{
+	SetValue(TitleProperty, std::move(value));
+}
+
 void Window::Show()
 {
 	if (nativeWindow)

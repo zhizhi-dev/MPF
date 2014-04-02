@@ -129,6 +129,27 @@ std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(const MPF::String& f
 	return value;
 }
 
+std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(MPF::String&& fileName,
+	uint faceIndex)
+{
+	massert(!fileName.IsEmpty());
+
+	size_t length = 0;
+	wcstombs_s(&length, nullptr, 0, fileName.GetDataPointer(), 0);
+	length += 1;
+	std::vector<char> cFileName(length);
+	wcstombs_s(&length, cFileName.data(), length, fileName.GetDataPointer(), length);
+
+	FT_Face face = nullptr;
+	auto error = FT_New_Face(freeType, cFileName.data(), faceIndex, &face);
+	massert(error == 0);
+	FontFaceKey key{ std::move(fileName), faceIndex };
+	auto value(std::make_shared<FontFace>(face));
+	fonts.emplace(key, value);
+
+	return value;
+}
+
 void FontManager::InitializeDPIScale()
 {
 	HDC hdc = GetDC(NULL);
@@ -165,6 +186,16 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& fileName,
 		return face;
 	}
 	return LoadFontFromFileName(fileName, faceIndex);
+}
+
+std::shared_ptr<FontFace> FontManager::GetFontFace(MPF::String&& fileName, uint faceIndex)
+{
+	auto face = LookupFontFace(fileName, faceIndex);
+	if (face)
+	{
+		return face;
+	}
+	return LoadFontFromFileName(std::move(fileName), faceIndex);
 }
 
 std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& familyName)

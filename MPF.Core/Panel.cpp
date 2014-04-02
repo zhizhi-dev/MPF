@@ -53,7 +53,7 @@ void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedT
 
 void Panel::AddChild(UIElement& elem)
 {
-	children.push_back(&elem);
+	children.emplace_back(&elem);
 }
 
 void Panel::AddChild(std::initializer_list<UIElement*> elems)
@@ -62,6 +62,6 @@ void Panel::AddChild(std::initializer_list<UIElement*> elems)
 	for (auto elem : elems)
 	{
 		massert(elem);
-		children.push_back(elem);
+		children.emplace_back(elem);
 	}
 }

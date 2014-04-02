@@ -13,6 +13,7 @@ public:
 	~FontManager();
 
 	std::shared_ptr<FontFace> GetFontFace(const MPF::String& fileName, uint faceIndex);
+	std::shared_ptr<FontFace> GetFontFace(MPF::String&& fileName, uint faceIndex);
 	std::shared_ptr<FontFace> GetFontFace(const MPF::String& familyName);
 
 	void SetFontFaceSize(FT_Face face, float size) const;
@@ -25,6 +26,10 @@ private:
 	///<summary>通过字体文件加载字体</summary>
 	///<param name = "fileName">字体文件路径</param>
 	std::shared_ptr<FontFace> LoadFontFromFileName(const MPF::String& fileName, uint faceIndex);
+
+	///<summary>通过字体文件加载字体</summary>
+	///<param name = "fileName">字体文件路径</param>
+	std::shared_ptr<FontFace> LoadFontFromFileName(MPF::String&& fileName, uint faceIndex);
 
 	static String GetFileNameFromFamilyName(const MPF::String& familyName,
 		uint& faceIndex);

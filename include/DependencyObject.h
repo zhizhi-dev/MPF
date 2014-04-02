@@ -78,6 +78,27 @@ public:
 
 	//设置本地值
 	template<typename T>
+	void SetValue(const DependencyProperty<T>& property, T&& value)
+	{
+		auto& name = property.GetName();
+		//检测本地值
+		auto it = localValues.find(name);
+		if (it != localValues.end())
+		{
+			if ((const T&)(it->second) != value)
+			{
+				it->second = value;
+				OnValueChange(name);
+			}
+		}
+		else
+		{
+			localValues.emplace(name, std::move(value));
+		}
+	}
+
+	//设置本地值
+	template<typename T>
 	void SetValue(const DependencyProperty<T>& property, const T& value)
 	{
 		auto& name = property.GetName();
@@ -129,8 +150,8 @@ protected:
 	template<typename T>
 	const T& GetCommonValue(const DependencyProperty<T>& property) const
 	{
-		auto val = FindParentCommonValue(property.GetName());
-		if (val.empty())
+		auto& val = FindParentCommonValue(property.GetName());
+		if (val.isEmpty())
 		{
 			return property.GetValue();
 		}
@@ -140,8 +161,8 @@ protected:
 	template<typename T>
 	T& GetCommonValue(DependencyProperty<T>& property)
 	{
-		auto val = FindParentCommonValue(property.GetName());
-		if (val.empty())
+		auto& val = FindParentCommonValue(property.GetName());
+		if (val.isEmpty())
 		{
 			return property.GetValue();
 		}
@@ -157,14 +178,14 @@ protected:
 		}
 	}
 protected:
-	virtual any FindParentCommonValue(const String& name) const
+	virtual any& FindParentCommonValue(const String& name) const
 	{
-		return any();
+		return any::empty;
 	}
 
-	virtual any FindParentCommonValue(const String& name)
+	virtual any& FindParentCommonValue(const String& name)
 	{
-		return any();
+		return any::empty;
 	}
 private:
 	std::unordered_map<String, any> localValues;
@@ -182,11 +203,11 @@ private:
 	std::unordered_map<String, any> CLASS::commonStyleValues;
 
 #define DECLARE_UI_FUNCS \
-	virtual any FindParentCommonValue(const String& name) const; \
-	virtual any FindParentCommonValue(const String& name);
+	virtual any& FindParentCommonValue(const String& name) const; \
+	virtual any& FindParentCommonValue(const String& name);
 
 #define DEFINE_UI_FUNCS(CLASS, BASE) \
-	any CLASS::FindParentCommonValue(const String& name) const  \
+	any& CLASS::FindParentCommonValue(const String& name) const \
 	{															\
 		auto it = CLASS::commonAnimationValues.find(name); 		\
 		if (it != CLASS::commonAnimationValues.end()) 			\
@@ -200,7 +221,7 @@ private:
 		}														\
 		return BASE::FindParentCommonValue(name);				\
 	}															\
-	any CLASS::FindParentCommonValue(const String& name)		\
+	any& CLASS::FindParentCommonValue(const String& name)		\
 	{															\
 		auto it = CLASS::commonAnimationValues.find(name); 		\
 		if (it != CLASS::commonAnimationValues.end()) 			\

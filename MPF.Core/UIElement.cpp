@@ -61,7 +61,7 @@ void UIElement::SetVisibility(MPF::UI::Visibility value)
 	SetValue(VisibilityProperty, value);
 }
 
-Thickness UIElement::GetMargin() const
+const Thickness& UIElement::GetMargin() const
 {
 	return GetValue(MarginProperty);
 }
@@ -71,7 +71,12 @@ void UIElement::SetMargin(const Thickness& value)
 	SetValue(MarginProperty, value);
 }
 
-Thickness UIElement::GetPadding() const
+void UIElement::SetMargin(Thickness&& value)
+{
+	SetValue(MarginProperty, std::move(value));
+}
+
+const Thickness& UIElement::GetPadding() const
 {
 	return GetValue(PaddingProperty);
 }
@@ -79,6 +84,11 @@ Thickness UIElement::GetPadding() const
 void UIElement::SetPadding(const Thickness& value)
 {
 	SetValue(PaddingProperty, value);
+}
+
+void UIElement::SetPadding(Thickness&& value)
+{
+	SetValue(PaddingProperty, std::move(value));
 }
 
 void UIElement::Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)

@@ -33,7 +33,7 @@ public:
 		uint x3, uint y3, uint x4, uint y4, float u1, float v1, float u2, float v2, 
 		float u3, float v3, float u4, float v4, const Brush& brush);
 
-	static inline argb_color MixColor(argb_color col1, argb_color col2, double p)
+	static inline argb_color MixColor(argb_color col1, argb_color col2, float p)
 	{
 		argb_color color;
 

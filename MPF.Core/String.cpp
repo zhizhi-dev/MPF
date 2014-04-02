@@ -59,6 +59,7 @@ String::String(const wchar_t* chars, bool isOwner)
 
 String::~String()
 {
+	Dispose();
 }
 
 void String::Dispose()

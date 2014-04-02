@@ -17,7 +17,7 @@ public:
 	//Ìí¼ÓÕìÌıÆ÷
 	void operator += (TDelegate handler)
 	{
-		handlers.push_back(handler);
+		handlers.emplace_back(handler);
 	}
 
 	//É¾³ıÕìÌıÆ÷

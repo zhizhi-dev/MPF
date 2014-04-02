@@ -44,8 +44,7 @@ void _stdcall MPFMain()
 	Canvas::SetPosition(border1, { 50.f, 80.f });
 
 	Canvas canvas;
-	canvas.AddChild(textBlock1);
-	canvas.AddChild(border1);
+	canvas.AddChild({ &textBlock1, &border1 });
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();

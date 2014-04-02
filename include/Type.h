@@ -9,6 +9,8 @@ class Type : public Object
 public:
 	//创建 Type 的新实例
 	MPF_API Type(const String& typeName);
+	//创建 Type 的新实例
+	MPF_API Type(String&& typeName);
 
 	MPF_API bool Equals(const Type& type) const;
 	bool operator==(const Type& type) const

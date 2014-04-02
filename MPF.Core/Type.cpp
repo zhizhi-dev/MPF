@@ -11,7 +11,13 @@ Type::Type(const String& typeName)
 
 }
 
+Type::Type(String&& typeName)
+: typeName(std::move(typeName))
+{
+
+}
+
 bool Type::Equals(const Type& type) const
 {
-	return this->typeName== type.typeName;
+	return this->typeName == type.typeName;
 }

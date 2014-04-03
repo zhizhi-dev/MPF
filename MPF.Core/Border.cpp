@@ -51,7 +51,7 @@ MPF::Visual::Size Border::MeasureSize()
 
 void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	auto bound = args.RenderQuad -= BorderThickness;
+	auto bound = args.RenderQuad - BorderThickness;
 	ContentElement::RenderCore(renderer, { bound });
 	auto borderBrush = BorderBrush;
 	if (borderBrush)

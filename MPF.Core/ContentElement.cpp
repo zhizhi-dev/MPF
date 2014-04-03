@@ -7,7 +7,7 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(ContentElement, MPF::UI::ContentElement)
 DEFINE_UI_VALUES(ContentElement)
-DEFINE_UI_FUNCS(ContentElement, UIElement)
+DEFINE_UI_FUNCS(ContentElement, TextBlock)
 
 DependencyProperty<UIElement*> ContentElement::ContentProperty(L"Content");
 DependencyProperty<const MPF::Visual::Brush*> ContentElement::BackgroundProperty(L"Background");
@@ -45,16 +45,15 @@ void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, Rende
 	{
 		auto padding = Padding;
 		auto bound = MeasureContentBound(*content);
-		bound.Transform([&](Point& pt)
-		{
-			pt.X += padding.Left + args.RenderQuad.PointA.X;
-			pt.Y += padding.Top + args.RenderQuad.PointA.Y;
-		});
-
+		bound.Transpose({ padding.Left + args.RenderQuad.PointA.X, padding.Top + args.RenderQuad.PointA.Y });
 		content->Render(renderer, RenderArgs{ bound });
-	}
 
-	UIElement::RenderCore(renderer, std::move(args));
+		UIElement::RenderCore(renderer, std::move(args));
+	}
+	else
+	{
+		TextBlock::RenderCore(renderer, std::move(args));
+	}
 }
 
 void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
@@ -63,9 +62,12 @@ void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float
 	if (content)
 	{
 		content->Update(renderer, elapsedTime);
+		UIElement::UpdateCore(renderer, elapsedTime);
 	}
-
-	UIElement::UpdateCore(renderer, elapsedTime);
+	else
+	{
+		TextBlock::UpdateCore(renderer, elapsedTime);
+	}
 }
 
 MPF::Visual::Quad ContentElement::MeasureContentBound(UIElement& elem)
@@ -75,18 +77,23 @@ MPF::Visual::Quad ContentElement::MeasureContentBound(UIElement& elem)
 
 MPF::Visual::Size ContentElement::MeasureSize()
 {
-	auto size = UIElement::MeasureSize();
-
 	//根据内容计算大小
 	auto content = Content;
 	if (content)
 	{
+		auto size = UIElement::MeasureSize();
+
 		auto quad = content->MeasureSize();
 		size.Width += quad.Width;
 		size.Height += quad.Height;
+
+		//没有内容则返回边框大小
+		return size;
 	}
-	//没有内容则返回边框大小
-	return size;
+	else
+	{
+		return TextBlock::MeasureSize();
+	}
 }
 
 const MPF::Visual::Brush* ContentElement::GetBackground() const

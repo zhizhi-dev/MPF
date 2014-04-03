@@ -32,11 +32,7 @@ void Canvas::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& 
 		auto bound = child->MeasureBound();
 		auto left = child->GetValue(LeftProperty);
 		auto top = child->GetValue(TopProperty);
-		bound.Transform([&](Point& pt)
-		{
-			pt.X += left;
-			pt.Y += top;
-		});
+		bound.Transpose({ left, top });
 		child->Render(renderer, RenderArgs{ bound });
 	}
 

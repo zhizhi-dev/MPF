@@ -1,5 +1,6 @@
 #pragma once
 #include "Geometry.h"
+#include "Thickness.h"
 
 NS_MPF
 NS_VSL
@@ -8,6 +9,9 @@ NS_VSL
 class Quad : public Geometry
 {
 public:
+	//创建一个空四边形
+	MPF_API Quad();
+
 	//创建一个四边形
 	MPF_API explicit Quad(const Point& pointA, const Point& pointB,
 		const Point& pointC, const Point& pointD);
@@ -38,6 +42,10 @@ public:
 	mproperty(Point&, PointD);
 
 	MPF_API virtual void Transform(std::function<void(Point&)> func);
+	MPF_API void Transpose(const Point& point) mnoexcept;
+	MPF_API const Quad& operator-=(const Thickness& thick) mnoexcept;
+	MPF_API Quad operator-(const Thickness& thick) const mnoexcept;
+	MPF_API Quad operator+(const Thickness& thick) const mnoexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Quad);

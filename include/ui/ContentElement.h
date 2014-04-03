@@ -1,12 +1,11 @@
 #pragma once
-#include "UIElement.h"
-#include "../visual/Brush.h"
+#include "TextBlock.h"
 
 NS_MPF
 NS_UI
 
 //ÄÚÈÝUIÔªËØ
-class ContentElement : public UIElement
+class ContentElement : public TextBlock
 {
 public:
 	MPF_API ContentElement();

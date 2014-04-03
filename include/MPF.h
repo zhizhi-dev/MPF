@@ -39,12 +39,14 @@
 //UI
 #include "ui/Visibility.h"
 #include "ui/UIElement.h"
-#include "ui/ContentElement.h"
+#include "ui/ControlTemplate.h"
 #include "ui/TextBlock.h"
+#include "ui/ContentElement.h"
 #include "ui/Border.h"
 #include "ui/Window.h"
 #include "ui/Panel.h"
 #include "ui/Canvas.h"
 #include "ui/ButtonBase.h"
+#include "ui/Button.h"
 
 void _stdcall MPFMain();

@@ -85,8 +85,11 @@
     <ClCompile Include="AlphaBlendBrush.cpp" />
     <ClCompile Include="any.cpp" />
     <ClCompile Include="Border.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonBase.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ContentElement.cpp" />
+    <ClCompile Include="ControlTemplate.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
@@ -115,9 +118,11 @@
     <ClInclude Include="..\include\Thread.h" />
     <ClInclude Include="..\include\Type.h" />
     <ClInclude Include="..\include\ui\Border.h" />
+    <ClInclude Include="..\include\ui\Button.h" />
     <ClInclude Include="..\include\ui\ButtonBase.h" />
     <ClInclude Include="..\include\ui\Canvas.h" />
     <ClInclude Include="..\include\ui\ContentElement.h" />
+    <ClInclude Include="..\include\ui\ControlTemplate.h" />
     <ClInclude Include="..\include\ui\Panel.h" />
     <ClInclude Include="..\include\ui\RenderArgs.h" />
     <ClInclude Include="..\include\ui\TextBlock.h" />

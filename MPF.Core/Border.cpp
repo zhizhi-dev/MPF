@@ -9,9 +9,6 @@ DEFINE_TYPE(Border, MPF::UI::Border)
 DEFINE_UI_VALUES(Border)
 DEFINE_UI_FUNCS(Border, ContentElement)
 
-DependencyProperty<const MPF::Visual::Brush*> Border::BorderBrushProperty(L"BorderBrush");
-DependencyProperty<MPF::Visual::Thickness> Border::BorderThicknessProperty(L"BorderThickness");
-
 Border::Border()
 {
 
@@ -54,7 +51,8 @@ MPF::Visual::Size Border::MeasureSize()
 
 void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	ContentElement::RenderCore(renderer, std::move(args));
+	auto bound = args.RenderQuad -= BorderThickness;
+	ContentElement::RenderCore(renderer, { bound });
 	auto borderBrush = BorderBrush;
 	if (borderBrush)
 	{
@@ -64,13 +62,8 @@ void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& 
 
 MPF::Visual::Quad Border::MeasureContentBound(UIElement& elem)
 {
-	auto border = BorderThickness;
-	auto bound(elem.MeasureBound());
-	bound.Transform([&](Point& pt)
-	{
-		pt.X += border.Left;
-		pt.Y += border.Top;
-	});
-
+	auto borderThick = BorderThickness;
+	auto bound = ContentElement::MeasureContentBound(elem);
+	bound.Transpose({ borderThick.Left, borderThick.Top });
 	return bound;
 }

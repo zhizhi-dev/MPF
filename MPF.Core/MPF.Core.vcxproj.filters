@@ -195,6 +195,12 @@
     <ClInclude Include="..\include\EventHandlers.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ui\Button.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\ControlTemplate.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -315,6 +321,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="any.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlTemplate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonBase.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

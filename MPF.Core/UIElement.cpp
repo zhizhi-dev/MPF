@@ -106,15 +106,18 @@ void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elap
 
 MPF::Visual::Quad UIElement::MeasureBound()
 {
-	auto margin = Margin;
-	auto size = MeasureSize();
-	auto left = margin.Left;
-	auto top = margin.Top;
-	auto right = left + size.Width;
-	auto bottom = top + size.Height;
+	if (Visibility != Visibility::Collapsed)
+	{
+		auto margin = Margin;
+		auto size = MeasureSize();
+		auto left = margin.Left;
+		auto top = margin.Top;
+		auto right = left + size.Width;
+		auto bottom = top + size.Height;
 
-	return Quad(Point(left, top), Point(right, top, 1.f), Point(right, bottom, 1.f, 1.f),
-		Point(left, bottom, 0.f, 1.f));
+		return Quad(Point(left, top), Point(right, bottom, 1.f, 1.f));
+	}
+	return Quad();
 }
 
 MPF::Visual::Size UIElement::MeasureSize()

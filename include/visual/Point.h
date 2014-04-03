@@ -9,7 +9,7 @@ class Point : public Object
 {
 public:
 	//创建 Point 的新实例
-	explicit Point(float x = 0.f, float y = 0.f, float u = 0.f, float v = 0.f)
+	Point(float x = 0.f, float y = 0.f, float u = 0.f, float v = 0.f)
 		:x(x), y(y), u(u), v(v)
 	{
 
@@ -67,6 +67,16 @@ public:
 	mproperty(float, Y);
 	mproperty(float, U);
 	mproperty(float, V);
+
+	const Point& operator+=(const Point& point) mnoexcept
+	{
+		x += point.x;
+		y += point.y;
+		u += point.u;
+		v += point.v;
+
+		return *this;
+	}
 
 	//获取类型
 	DECLARE_GETTYPE(Point)

@@ -1,11 +1,11 @@
 #pragma once
-#include "Border.h"
+#include "ContentElement.h"
 
 NS_MPF
 NS_UI
 
 //所有 Button 的基类
-class ButtonBase : public Border
+class ButtonBase : public ContentElement
 {
 public:
 	MPF_API ButtonBase();

@@ -103,13 +103,7 @@ void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 	auto foreground = Foreground;
 	if (foreground)
 	{
-		auto padding = Padding;
-		auto textQuad = args.RenderQuad;
-		textQuad.Transform([&](Point& pt)
-		{
-			pt.X += padding.Left;
-			pt.Y += padding.Top;
-		});
+		auto textQuad = args.RenderQuad - Padding;
 		AlphaBlendBrush blendBrush(*textGlyphs, *foreground);
 
 		renderer.FillQuad(textQuad, blendBrush);

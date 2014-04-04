@@ -39,14 +39,14 @@ void Border::SetBorderThickness(const MPF::Visual::Thickness& value)
 	SetValue(BorderThicknessProperty, value);
 }
 
-void Border::UpdateSize() mnoexcept
+MPF::Visual::Size Border::AutoMeasureSize() mnoexcept
 {
-	ContentElement::UpdateSize();
+	auto size = ContentElement::AutoMeasureSize();
 
-	auto& size = this->size.second;
 	auto border = BorderThickness;
 	size.Width += border.Left + border.Right;
 	size.Height += border.Top + border.Bottom;
+	return size;
 }
 
 void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)

@@ -28,7 +28,7 @@ public:
 	MPF_API void Show() const;
 
 	//获取标题
-	MPF_API const String& GetTitle() const;
+	MPF_API String GetTitle() const;
 	//设置标题
 	MPF_API void SetTitle(const String& title);
 

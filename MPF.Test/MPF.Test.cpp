@@ -55,6 +55,7 @@ void _stdcall MPFMain()
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();
+	auto hit = win.HitTest(Point());
 
 	app.Run();
 }

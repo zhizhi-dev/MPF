@@ -46,6 +46,7 @@ public:
 	MPF_API const Quad& operator-=(const Thickness& thick) mnoexcept;
 	MPF_API Quad operator-(const Thickness& thick) const mnoexcept;
 	MPF_API Quad operator+(const Thickness& thick) const mnoexcept;
+	MPF_API bool Contains(const Point& point) const mnoexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Quad);

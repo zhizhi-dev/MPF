@@ -29,6 +29,16 @@ float Line::GetX(float y) const mnoexcept
 	return (y - y1) * dx / dy + x1;
 }
 
+std::pair<bool, float> Line::GetXInSegment(float y) const mnoexcept
+{
+	auto minMax = std::minmax(startPoint.Y, endPoint.Y);
+	if (y >= minMax.first&&y <= minMax.second)
+	{
+		return{ true, GetX(y) };
+	}
+	return{ false, 0.f };
+}
+
 std::pair<float, float> Line::GetUV(uint y) const mnoexcept
 {
 	const int x1 = startPoint.GetX(), y1 = startPoint.GetY(),

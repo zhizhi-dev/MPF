@@ -25,6 +25,9 @@ public:
 	//获取或设置背景画刷
 	mproperty(const MPF::Visual::Brush*, Background);
 
+	using TextBlock::HitTest;
+	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
+
 	//获取类型
 	MPF_API DECLARE_GETTYPE(ContentElement)
 	MPF_API DECLARE_GETINSTANTTYPE(ContentElement)
@@ -37,8 +40,8 @@ protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 	MPF_API virtual MPF::Visual::Point MakeContentOffset(UIElement& elem);
-	//更新大小
-	MPF_API virtual void UpdateSize() mnoexcept;
+	//自动计算大小
+	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
 protected:
 	DECLARE_UI_FUNCS
 private:

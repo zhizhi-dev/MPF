@@ -21,6 +21,9 @@ public:
 
 	//通过Y求直线上的X
 	float GetX(float y) const mnoexcept;
+	///<summary>通过Y求线段上的X</summary>
+	///<return>如果Y值在线段上则返回true,X值，否则返回false,0</return>
+	std::pair<bool, float> GetXInSegment(float y) const mnoexcept;
 	//通过Y求直线上的UV
 	std::pair<float, float> GetUV(uint y) const mnoexcept;
 

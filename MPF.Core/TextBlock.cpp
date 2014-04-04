@@ -69,7 +69,16 @@ void TextBlock::AddPropertyHandlers()
 
 void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
 {
+	EnsureTextGlyphs();
 	UIElement::UpdateCore(renderer, std::move(args));
+}
+
+void TextBlock::EnsureTextGlyphs()
+{
+	if (textGlyphs == nullptr)
+	{
+		UpdateTextGlyphs();
+	}
 }
 
 void TextBlock::UpdateTextGlyphs()
@@ -105,18 +114,15 @@ void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 	}
 }
 
-void TextBlock::UpdateSize() mnoexcept
+MPF::Visual::Size TextBlock::AutoMeasureSize() mnoexcept
 {
-	UIElement::UpdateSize();
+	auto size = UIElement::AutoMeasureSize();
 
-	if (textGlyphs == nullptr)
-	{
-		UpdateTextGlyphs();
-	}
-
-	auto& size = this->size.second;
+	EnsureTextGlyphs();
 	size.Width += textGlyphs->GetWidth();
 	size.Height += textGlyphs->GetHeight();
+
+	return size;
 }
 
 const MPF::Visual::Brush* TextBlock::GetForeground() const

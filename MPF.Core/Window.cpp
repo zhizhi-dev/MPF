@@ -25,7 +25,7 @@ void Window::Initialize(RenderCoreProviders provider)
 {
 	if (nativeWindow == nullptr)
 	{
-		nativeWindow = std::make_shared<NativeWindow>();
+		nativeWindow = std::make_unique<NativeWindow>();
 		nativeWindow->Create();
 		nativeWindow->SetTitle(Title);
 		nativeWindow->SetWidth(Width);

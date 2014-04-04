@@ -41,8 +41,8 @@ public:
 protected:
 	DECLARE_UI_FUNCS
 private:
-	std::shared_ptr<MPF::Visual::NativeWindow> nativeWindow;
-	std::shared_ptr<MPF::Visual::RenderCoreProvider> renderer;
+	std::unique_ptr<MPF::Visual::NativeWindow> nativeWindow;
+	std::unique_ptr<MPF::Visual::RenderCoreProvider> renderer;
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(Window)
 };

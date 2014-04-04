@@ -74,25 +74,6 @@ MPF::Visual::Point ContentElement::MakeContentOffset(UIElement& elem)
 	return Point(padding.Left, padding.Top);
 }
 
-void ContentElement::UpdateSize() mnoexcept
-{
-	//根据内容计算大小
-	auto content = Content;
-	if (content)
-	{
-		UIElement::UpdateSize();
-		auto& contentSize = content->MeasureSize();
-
-		auto& size = this->size.second;
-		size.Width += contentSize.Width;
-		size.Height += contentSize.Height;
-	}
-	else
-	{
-		TextBlock::UpdateSize();
-	}
-}
-
 const MPF::Visual::Brush* ContentElement::GetBackground() const
 {
 	return GetValue(BackgroundProperty);
@@ -101,4 +82,38 @@ const MPF::Visual::Brush* ContentElement::GetBackground() const
 void ContentElement::SetBackground(const MPF::Visual::Brush* value)
 {
 	SetValue(BackgroundProperty, value);
+}
+
+MPF::Visual::Size ContentElement::AutoMeasureSize() mnoexcept
+{
+	//根据内容计算大小
+	auto content = Content;
+	if (content)
+	{
+		auto size = UIElement::AutoMeasureSize();
+		auto& contentSize = content->MeasureSize();
+
+		size.Width += contentSize.Width;
+		size.Height += contentSize.Height;
+		return size;
+	}
+	else
+	{
+		return TextBlock::AutoMeasureSize();
+	}
+}
+
+bool ContentElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept
+{
+	auto hitted = UIElement::HitTest(point, elements);
+
+	if (hitted)
+	{
+		auto content = Content;
+		if (content)
+		{
+			content->HitTest(point, elements);
+		}
+	}
+	return false;
 }

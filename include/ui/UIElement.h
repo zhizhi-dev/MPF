@@ -58,6 +58,10 @@ public:
 	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 
 	MPF_API MPF::Visual::Size MeasureSize() mnoexcept;
+	///<summary>点击测试</summary>
+	///<return>测试成功的UI元素，并按逻辑树上从顶端到底端排列</return>
+	MPF_API std::vector<UIElement*> HitTest(MPF::Visual::Point point) mnoexcept;
+	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(UIElement)
@@ -84,7 +88,8 @@ protected:
 	MPF_API virtual void UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept;
 	//更新大小
 	MPF_API virtual void UpdateSize() mnoexcept;
-	MPF_API virtual UIElement* HitTest(MPF::Visual::Point point);
+	//自动计算大小
+	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
 	DECLARE_UI_FUNCS
 protected:
 	//渲染区域

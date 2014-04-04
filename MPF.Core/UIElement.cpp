@@ -125,12 +125,18 @@ void UIElement::UpdateSize() mnoexcept
 	auto& size = this->size.second;
 	auto width = Width;
 	auto height = Height;
-	auto padding = Padding;
 
-	if (std::isnan(width))width = padding.Left + padding.Right;
-	if (std::isnan(height))height = padding.Top + padding.Bottom;
-	size.Width = width;
-	size.Height = height;
+	if (std::isnan(width) || std::isnan(height))
+	{
+		auto autoSize = AutoMeasureSize();
+		if (std::isnan(width)) size.Width = autoSize.Width;
+		if (std::isnan(height)) size.Height = autoSize.Height;
+	}
+	else
+	{
+		size.Width = width;
+		size.Height = height;
+	}
 	this->size.first = false;
 }
 
@@ -144,13 +150,35 @@ void UIElement::UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept
 	renderBound.first = false;
 }
 
-UIElement* UIElement::HitTest(MPF::Visual::Point point)
+bool UIElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept
 {
-	return nullptr;
+	if (renderBound.second.Contains(point))
+	{
+		elements.emplace_back(this);
+		return true;
+	}
+	return false;
 }
 
 MPF::Visual::Size UIElement::MeasureSize() mnoexcept
 {
 	if (size.first)UpdateSize();
 	return size.second;
+}
+
+MPF::Visual::Size UIElement::AutoMeasureSize() mnoexcept
+{
+	auto padding = Padding;
+	auto width = padding.Left + padding.Right;
+	auto height = padding.Top + padding.Bottom;
+
+	return{ width, height };
+}
+
+std::vector<UIElement*> UIElement::HitTest(MPF::Visual::Point point) mnoexcept
+{
+	std::vector<UIElement*> elements;
+
+	HitTest(point, elements);
+	return elements;
 }

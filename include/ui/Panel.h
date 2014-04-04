@@ -20,6 +20,9 @@ public:
 	//添加子元素
 	MPF_API void AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems);
 
+	using UIElement::HitTest;
+	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
+
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Panel);
 	MPF_API DECLARE_GETINSTANTTYPE(Panel);

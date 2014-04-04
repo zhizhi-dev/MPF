@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../include/visual/Quad.h"
+#include "../include/visual/Triangle.h"
 
 using namespace MPF;
 using namespace MPF::Visual;
@@ -76,4 +77,18 @@ Quad Quad::operator + (const Thickness& thick) const mnoexcept
 	quad.pointC.X += thick.Right; quad.pointC.Y += thick.Bottom;
 	quad.pointD.X -= thick.Left; quad.pointD.Y += thick.Bottom;
 	return quad;
+}
+
+bool Quad::Contains(const Point& point) const mnoexcept
+{
+	std::array<Triangle, 2> tris =
+	{
+		Triangle(pointA, pointB, pointC),
+		Triangle(pointA, pointD, pointC) 
+	};
+
+	return std::any_of(tris.begin(), tris.end(), [&](const Triangle& tri)
+	{
+		return tri.Contains(point);
+	});
 }

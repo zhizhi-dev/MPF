@@ -70,3 +70,20 @@ void Panel::AddChildren(std::initializer_list<std::reference_wrapper<UIElement>>
 		AddChild(elem);
 	}
 }
+
+bool Panel::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept
+{
+	if (UIElement::HitTest(point, elements))
+	{
+		for (auto child : children)
+		{
+			massert(child);
+			if (child->HitTest(point, elements))
+			{
+				break;
+			}
+		}
+		return true;
+	}
+	return false;
+}

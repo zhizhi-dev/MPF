@@ -90,7 +90,7 @@ void NativeWindow::Show() const
 	ShowWindow((HWND)handle, SW_SHOW);
 }
 
-const String& NativeWindow::GetTitle() const
+String NativeWindow::GetTitle() const
 {
 	auto len = GetWindowTextLength((HWND)handle);
 	auto text = new wchar_t[len + 1];

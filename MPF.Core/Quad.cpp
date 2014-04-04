@@ -7,6 +7,7 @@ using namespace MPF::Visual;
 DEFINE_TYPE(Quad, MPF::Visual::Quad)
 
 Quad::Quad()
+:pointA(), pointB(0.f, 0.f, 1.f), pointC(0.f, 0.f, 1.f, 1.f), pointD(0.f, 0.f, 0.f, 1.f)
 {
 
 }
@@ -37,7 +38,7 @@ void Quad::Transform(std::function<void(Point&)> func)
 	func(pointD);
 }
 
-void Quad::Transpose(const Point& point) mnoexcept
+void Quad::Translate(const Point& point) mnoexcept
 {
 	pointA += point;
 	pointB += point;

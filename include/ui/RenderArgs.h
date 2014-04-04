@@ -8,7 +8,13 @@ NS_UI
 //渲染参数
 struct RenderArgs
 {
-	MPF::Visual::Quad RenderQuad;
+	float ElapsedTime;
+};
+
+//更新参数
+struct UpdateArgs
+{
+	MPF::Visual::Point ParentOffset;
 	float ElapsedTime;
 };
 

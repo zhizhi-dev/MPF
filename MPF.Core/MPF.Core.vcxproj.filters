@@ -201,6 +201,9 @@
     <ClInclude Include="..\include\ui\ControlTemplate.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\visual\Matrix.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

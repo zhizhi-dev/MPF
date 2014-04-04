@@ -63,10 +63,10 @@ void Window::DoFrame()
 {
 	auto& renderRef = *renderer;
 
-	Update(renderRef, 1.0);
+	Update(renderRef, UpdateArgs{});
 
 	renderRef.BeginDraw();
-	Render(renderRef, RenderArgs{ MeasureBound() });
+	Render(renderRef, RenderArgs{ 1.f });
 	renderRef.EndDraw();
 
 	renderRef.Present();

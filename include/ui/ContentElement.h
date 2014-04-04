@@ -17,8 +17,6 @@ public:
 	MPF_API void SetContent(UIElement* value);
 	//获取或设置内容
 	mproperty(UIElement*, Content);
-	//计算大小
-	MPF_API virtual MPF::Visual::Size MeasureSize();
 
 	//获取背景画刷
 	MPF_API const MPF::Visual::Brush* GetBackground() const;
@@ -37,8 +35,10 @@ public:
 	MPF_API static DependencyProperty<const MPF::Visual::Brush*> BackgroundProperty;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
-	MPF_API virtual MPF::Visual::Quad MeasureContentBound(UIElement& elem);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
+	MPF_API virtual MPF::Visual::Point MakeContentOffset(UIElement& elem);
+	//更新大小
+	MPF_API virtual void UpdateSize() mnoexcept;
 protected:
 	DECLARE_UI_FUNCS
 private:

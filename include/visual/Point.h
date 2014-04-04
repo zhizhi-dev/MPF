@@ -78,6 +78,17 @@ public:
 		return *this;
 	}
 
+	Point operator+(const Point& point) mnoexcept
+	{
+		Point pt(*this);
+		pt.x += point.x;
+		pt.y += point.y;
+		pt.u += point.u;
+		pt.v += point.v;
+
+		return pt;
+	}
+
 	//获取类型
 	DECLARE_GETTYPE(Point)
 private:

@@ -33,7 +33,7 @@ public:
 	//×Ý×ø±ê
 	MPF_API static DependencyProperty<float> TopProperty;
 protected:
-	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
+	MPF_API virtual MPF::Visual::Point MakeChildOffset(UIElement& elem);
 protected:
 	DECLARE_UI_FUNCS
 private:

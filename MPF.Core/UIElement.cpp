@@ -94,40 +94,63 @@ void UIElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 
 }
 
-void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
 {
-	UpdateCore(renderer, elapsedTime);
+	UpdateCore(renderer, std::move(args));
 }
 
-void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
 {
+	if (relativeOffset.first)
+		UpdateRelativeOffset();
 
+	if (size.first)
+		UpdateSize();
+
+	if (renderBound.first)
+		UpdateRenderBound(args.ParentOffset);
 }
 
-MPF::Visual::Quad UIElement::MeasureBound()
+void UIElement::UpdateRelativeOffset() mnoexcept
 {
-	if (Visibility != Visibility::Collapsed)
-	{
-		auto margin = Margin;
-		auto size = MeasureSize();
-		auto left = margin.Left;
-		auto top = margin.Top;
-		auto right = left + size.Width;
-		auto bottom = top + size.Height;
-
-		return Quad(Point(left, top), Point(right, bottom, 1.f, 1.f));
-	}
-	return Quad();
+	auto margin = Margin;
+	auto& offset = relativeOffset.second;
+	offset.X = margin.Left;
+	offset.Y = margin.Top;
+	relativeOffset.first = false;
 }
 
-MPF::Visual::Size UIElement::MeasureSize()
+void UIElement::UpdateSize() mnoexcept
 {
+	auto& size = this->size.second;
 	auto width = Width;
 	auto height = Height;
 	auto padding = Padding;
 
 	if (std::isnan(width))width = padding.Left + padding.Right;
 	if (std::isnan(height))height = padding.Top + padding.Bottom;
+	size.Width = width;
+	size.Height = height;
+	this->size.first = false;
+}
 
-	return{ width, height };
+void UIElement::UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept
+{
+	auto offset = relativeOffset.second + parentOffset;
+	auto size = this->size.second;
+
+	renderBound.second = Quad(Point(offset.X, offset.Y),
+		Point(offset.X + size.Width, offset.Y + size.Height, 1.f, 1.f));
+	renderBound.first = false;
+}
+
+UIElement* UIElement::HitTest(MPF::Visual::Point point)
+{
+	return nullptr;
+}
+
+MPF::Visual::Size UIElement::MeasureSize() mnoexcept
+{
+	if (size.first)UpdateSize();
+	return size.second;
 }

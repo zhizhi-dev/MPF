@@ -1,32 +1,32 @@
-#pragma once
+ï»¿#pragma once
 #include "ButtonBase.h"
 #include "Border.h"
 
 NS_MPF
 NS_UI
 
-//°´Å¥
+//æŒ‰é’®
 class Button : public ButtonBase
 {
 public:
 	MPF_API Button();
 	MPF_API virtual ~Button();
 
-	//»ñÈ¡±ß¿ò»­Ë¢
+	//è·å–è¾¹æ¡†ç”»åˆ·
 	MPF_API const MPF::Visual::Brush* GetBorderBrush() const;
-	//ÉèÖÃ±ß¿ò»­Ë¢
+	//è®¾ç½®è¾¹æ¡†ç”»åˆ·
 	MPF_API void SetBorderBrush(const MPF::Visual::Brush* value);
-	//»ñÈ¡»òÉèÖÃ±ß¿ò»­Ë¢
+	//è·å–æˆ–è®¾ç½®è¾¹æ¡†ç”»åˆ·
 	mproperty(const MPF::Visual::Brush*, BorderBrush);
 
-	//»ñÈ¡±ß¿òºñ¶È
+	//è·å–è¾¹æ¡†åšåº¦
 	MPF_API MPF::Visual::Thickness GetBorderThickness() const;
-	//ÉèÖÃ±ß¿òºñ¶È
+	//è®¾ç½®è¾¹æ¡†åšåº¦
 	MPF_API void SetBorderThickness(const MPF::Visual::Thickness& value);
-	//»ñÈ¡»òÉèÖÃ±ß¿òºñ¶È
+	//è·å–æˆ–è®¾ç½®è¾¹æ¡†åšåº¦
 	mproperty(MPF::Visual::Thickness, BorderThickness);
 
-	//»ñÈ¡ÀàĞÍ
+	//è·å–ç±»å‹
 	MPF_API DECLARE_GETTYPE(Button);
 	MPF_API DECLARE_GETINSTANTTYPE(Button);
 protected:

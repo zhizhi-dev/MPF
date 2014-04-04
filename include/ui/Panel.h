@@ -26,7 +26,8 @@ public:
 public:
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
+	MPF_API virtual MPF::Visual::Point MakeChildOffset(UIElement& elem);
 protected:
 	std::vector<UIElement*> children;
 

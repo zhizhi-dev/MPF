@@ -67,15 +67,9 @@ void TextBlock::AddPropertyHandlers()
 	});
 }
 
-void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
 {
-	if (Visibility == Visibility::Visible)
-	{
-		if (textGlyphs == nullptr)
-		{
-			UpdateTextGlyphs();
-		}
-	}
+	UIElement::UpdateCore(renderer, std::move(args));
 }
 
 void TextBlock::UpdateTextGlyphs()
@@ -103,7 +97,7 @@ void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 	auto foreground = Foreground;
 	if (foreground)
 	{
-		auto textQuad = args.RenderQuad - Padding;
+		auto textQuad = renderBound.second - Padding;
 		AlphaBlendBrush blendBrush(*textGlyphs, *foreground);
 
 		renderer.FillQuad(textQuad, blendBrush);
@@ -111,13 +105,18 @@ void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 	}
 }
 
-MPF::Visual::Size TextBlock::MeasureSize()
+void TextBlock::UpdateSize() mnoexcept
 {
-	auto size = UIElement::MeasureSize();
+	UIElement::UpdateSize();
+
+	if (textGlyphs == nullptr)
+	{
+		UpdateTextGlyphs();
+	}
+
+	auto& size = this->size.second;
 	size.Width += textGlyphs->GetWidth();
 	size.Height += textGlyphs->GetHeight();
-
-	return size;
 }
 
 const MPF::Visual::Brush* TextBlock::GetForeground() const

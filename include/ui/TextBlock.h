@@ -41,9 +41,6 @@ public:
 	//获取或设置前景画刷
 	mproperty(const MPF::Visual::Brush*, Foreground);
 
-	//计算大小
-	MPF_API virtual MPF::Visual::Size MeasureSize();
-
 	//获取类型
 	MPF_API DECLARE_GETTYPE(TextBlock);
 	MPF_API DECLARE_GETINSTANTTYPE(TextBlock);
@@ -55,8 +52,10 @@ public:
 	//前景画刷
 	MPF_API static DependencyProperty<const MPF::Visual::Brush*> ForegroundProperty;
 protected:
-	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
+	//更新大小
+	MPF_API virtual void UpdateSize() mnoexcept;
 
 	DECLARE_UI_FUNCS
 private:

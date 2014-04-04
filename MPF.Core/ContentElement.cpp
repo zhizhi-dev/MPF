@@ -37,16 +37,13 @@ void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, Rende
 	auto background = Background;
 	if (background)
 	{
-		renderer.FillQuad(args.RenderQuad, *background);
+		renderer.FillQuad(renderBound.second, *background);
 	}
 
 	auto content = Content;
 	if (content)
 	{
-		auto padding = Padding;
-		auto bound = MeasureContentBound(*content);
-		bound.Transpose({ padding.Left + args.RenderQuad.PointA.X, padding.Top + args.RenderQuad.PointA.Y });
-		content->Render(renderer, RenderArgs{ bound });
+		content->Render(renderer, RenderArgs{ args.ElapsedTime });
 
 		UIElement::RenderCore(renderer, std::move(args));
 	}
@@ -56,43 +53,43 @@ void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, Rende
 	}
 }
 
-void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
 {
 	auto content = Content;
 	if (content)
 	{
-		content->Update(renderer, elapsedTime);
-		UIElement::UpdateCore(renderer, elapsedTime);
+		UIElement::UpdateCore(renderer, std::move(args));
+		auto offset = args.ParentOffset + MakeContentOffset(*content) + relativeOffset.second;
+		content->Update(renderer, { offset, args.ElapsedTime });
 	}
 	else
 	{
-		TextBlock::UpdateCore(renderer, elapsedTime);
+		TextBlock::UpdateCore(renderer, std::move(args));
 	}
 }
 
-MPF::Visual::Quad ContentElement::MeasureContentBound(UIElement& elem)
+MPF::Visual::Point ContentElement::MakeContentOffset(UIElement& elem)
 {
-	return elem.MeasureBound();
+	auto padding = Padding;
+	return Point(padding.Left, padding.Top);
 }
 
-MPF::Visual::Size ContentElement::MeasureSize()
+void ContentElement::UpdateSize() mnoexcept
 {
 	//根据内容计算大小
 	auto content = Content;
 	if (content)
 	{
-		auto size = UIElement::MeasureSize();
+		UIElement::UpdateSize();
+		auto& contentSize = content->MeasureSize();
 
-		auto quad = content->MeasureSize();
-		size.Width += quad.Width;
-		size.Height += quad.Height;
-
-		//没有内容则返回边框大小
-		return size;
+		auto& size = this->size.second;
+		size.Width += contentSize.Width;
+		size.Height += contentSize.Height;
 	}
 	else
 	{
-		return TextBlock::MeasureSize();
+		TextBlock::UpdateSize();
 	}
 }
 

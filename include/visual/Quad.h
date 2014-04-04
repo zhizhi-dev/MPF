@@ -42,7 +42,7 @@ public:
 	mproperty(Point&, PointD);
 
 	MPF_API virtual void Transform(std::function<void(Point&)> func);
-	MPF_API void Transpose(const Point& point) mnoexcept;
+	MPF_API void Translate(const Point& point) mnoexcept;
 	MPF_API const Quad& operator-=(const Thickness& thick) mnoexcept;
 	MPF_API Quad operator-(const Thickness& thick) const mnoexcept;
 	MPF_API Quad operator+(const Thickness& thick) const mnoexcept;

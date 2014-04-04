@@ -25,8 +25,6 @@ public:
 	MPF_API void SetBorderThickness(const MPF::Visual::Thickness& value);
 	//获取或设置边框厚度
 	mproperty(MPF::Visual::Thickness, BorderThickness);
-	//计算大小
-	MPF_API virtual MPF::Visual::Size MeasureSize();
 
 	//获取类型
 	DECLARE_GETTYPE(Border);
@@ -38,7 +36,9 @@ public:
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> BorderThicknessProperty;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API virtual MPF::Visual::Quad MeasureContentBound(UIElement& elem);
+	MPF_API virtual MPF::Visual::Point MakeContentOffset(UIElement& elem);
+	//更新大小
+	MPF_API virtual void UpdateSize() mnoexcept;
 
 	DECLARE_UI_FUNCS
 private:

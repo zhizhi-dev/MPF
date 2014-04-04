@@ -34,21 +34,27 @@ void Panel::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& a
 	for (auto child : children)
 	{
 		massert(child != nullptr);
-		child->Render(renderer, RenderArgs{ child->MeasureBound() });
+		child->Render(renderer, RenderArgs{ args.ElapsedTime });
 	}
 
 	UIElement::RenderCore(renderer, std::move(args));
 }
 
-void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime)
+MPF::Visual::Point Panel::MakeChildOffset(UIElement& elem)
 {
+	return Point();
+}
+
+void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
+{
+	UIElement::UpdateCore(renderer, std::move(args));
+
 	for (auto child : children)
 	{
 		massert(child != nullptr);
-		child->Update(renderer, elapsedTime);
+		auto offset = args.ParentOffset + MakeChildOffset(*child) + relativeOffset.second;
+		child->Update(renderer, UpdateArgs{ offset });
 	}
-
-	UIElement::UpdateCore(renderer, elapsedTime);
 }
 
 void Panel::AddChild(UIElement& elem)

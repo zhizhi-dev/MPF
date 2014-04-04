@@ -138,6 +138,7 @@
     <ClInclude Include="..\include\visual\GraphicAlgorithms.h" />
     <ClInclude Include="..\include\visual\Line.h" />
     <ClInclude Include="..\include\visual\LinearGradientBrush.h" />
+    <ClInclude Include="..\include\visual\Matrix.h" />
     <ClInclude Include="..\include\visual\NativeWindow.h" />
     <ClInclude Include="..\include\visual\PaintEventHandler.h" />
     <ClInclude Include="..\include\visual\Point.h" />

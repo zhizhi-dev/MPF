@@ -55,11 +55,9 @@ public:
 	mproperty(MPF::Visual::Thickness, Padding);
 
 	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
-	//计算包围四边形
-	MPF_API virtual MPF::Visual::Quad MeasureBound();
-	//计算大小
-	MPF_API virtual MPF::Visual::Size MeasureSize();
+	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
+
+	MPF_API MPF::Visual::Size MeasureSize() mnoexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(UIElement)
@@ -77,9 +75,24 @@ public:
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> PaddingProperty;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, float elapsedTime);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 protected:
+	//更新相对父节点的偏移
+	MPF_API virtual void UpdateRelativeOffset() mnoexcept;
+	///<summary>更新渲染区域</summary>
+	///<param name="parentOffset">父节点的绝对偏移</param>
+	MPF_API virtual void UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept;
+	//更新大小
+	MPF_API virtual void UpdateSize() mnoexcept;
+	MPF_API virtual UIElement* HitTest(MPF::Visual::Point point);
 	DECLARE_UI_FUNCS
+protected:
+	//渲染区域
+	std::pair<bool, MPF::Visual::Quad> renderBound = { true, MPF::Visual::Quad()};
+	//相对父节点的偏移
+	std::pair<bool, MPF::Visual::Point> relativeOffset = { true, MPF::Visual::Point() };
+	//大小
+	std::pair<bool, MPF::Visual::Size> size = { true, MPF::Visual::Size() };
 private:
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(UIElement)

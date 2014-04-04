@@ -22,21 +22,12 @@ Canvas::~Canvas()
 
 }
 
-void Canvas::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+MPF::Visual::Point Canvas::MakeChildOffset(UIElement& elem)
 {
-	auto children = GetChildren();
-	for (auto child : children)
-	{
-		massert(child != nullptr);
+	auto left = elem.GetValue(LeftProperty);
+	auto top = elem.GetValue(TopProperty);
 
-		auto bound = child->MeasureBound();
-		auto left = child->GetValue(LeftProperty);
-		auto top = child->GetValue(TopProperty);
-		bound.Transpose({ left, top });
-		child->Render(renderer, RenderArgs{ bound });
-	}
-
-	UIElement::RenderCore(renderer, std::move(args));
+	return{ left, top };
 }
 
 float Canvas::GetLeft(const UIElement& elem)

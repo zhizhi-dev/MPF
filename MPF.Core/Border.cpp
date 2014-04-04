@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "../include/ui/Border.h"
 
 using namespace MPF;
@@ -39,31 +39,29 @@ void Border::SetBorderThickness(const MPF::Visual::Thickness& value)
 	SetValue(BorderThicknessProperty, value);
 }
 
-MPF::Visual::Size Border::MeasureSize()
+void Border::UpdateSize() mnoexcept
 {
-	auto size = ContentElement::MeasureSize();
+	ContentElement::UpdateSize();
+
+	auto& size = this->size.second;
 	auto border = BorderThickness;
 	size.Width += border.Left + border.Right;
 	size.Height += border.Top + border.Bottom;
-
-	return size;
 }
 
 void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-	auto bound = args.RenderQuad - BorderThickness;
-	ContentElement::RenderCore(renderer, { bound });
+	ContentElement::RenderCore(renderer, std::move(args));
 	auto borderBrush = BorderBrush;
 	if (borderBrush)
 	{
-		renderer.DrawQuad(args.RenderQuad, *borderBrush);
+		renderer.DrawQuad(renderBound.second, *borderBrush);
 	}
 }
 
-MPF::Visual::Quad Border::MeasureContentBound(UIElement& elem)
+MPF::Visual::Point Border::MakeContentOffset(UIElement& elem)
 {
+	auto offset = ContentElement::MakeContentOffset(elem);
 	auto borderThick = BorderThickness;
-	auto bound = ContentElement::MeasureContentBound(elem);
-	bound.Transpose({ borderThick.Left, borderThick.Top });
-	return bound;
+	return offset + Point(borderThick.Left, borderThick.Top);
 }

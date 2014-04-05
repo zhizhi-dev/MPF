@@ -3,6 +3,8 @@
 #define NS_MPF namespace MPF {
 #define NS_ED }
 
+#define NS_INTERN namespace Internal {
+
 #define NS_VSL namespace Visual {
 #define NS_GDI namespace GDI {
 #define NS_UI namespace UI {

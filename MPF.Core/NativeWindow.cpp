@@ -70,6 +70,7 @@ LRESULT WINAPI NativeWindow::WindowProc(handle_t hWnd, UINT msg, WPARAM wParam, 
 	case WM_PAINT:
 		OnPaint();
 		break;
+	case WM_MBUTTONUP:
 	default:
 		break;
 	}

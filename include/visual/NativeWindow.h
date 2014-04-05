@@ -1,7 +1,6 @@
 #pragma once
 #include "../Type.h"
 #include "../Event.h"
-#include "PaintEventHandler.h"
 
 NS_MPF
 NS_VSL
@@ -56,6 +55,8 @@ public:
 
 	//绘制事件
 	Event<PaintEventHandler> Paint;
+	//鼠标点击事件
+	Event<MouseEventHandler> MouseClick;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(NativeWindow)
@@ -63,6 +64,7 @@ protected:
 	//窗口过程
 	MPF_API long _w64 _stdcall WindowProc(handle_t handle, uint msg, uint _w64 wParam, long _w64 lParam);
 	MPF_API void OnPaint() const;
+	MPF_API void OnMouseClick() const;
 private:
 	static void CreateWindowClass();
 	static long _w64 _stdcall WindowProcWrapper(handle_t hWnd, uint msg, uint _w64 wParam, long _w64 lParam);

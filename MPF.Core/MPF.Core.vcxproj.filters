@@ -159,9 +159,6 @@
     <ClInclude Include="..\include\ui\TextBlock.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\visual\PaintEventHandler.h">
-      <Filter>头文件\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\visual\AlphaBlendBrush.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
@@ -203,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="..\include\visual\Matrix.h">
       <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HashAlgorithms.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -303,9 +303,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TextBlock.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="PaintEventHandler.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AlphaBlendBrush.cpp">

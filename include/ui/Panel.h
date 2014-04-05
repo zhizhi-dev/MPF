@@ -1,29 +1,29 @@
-#pragma once
+ï»¿#pragma once
 #include "UIElement.h"
 
 NS_MPF
 NS_UI
 
-//¾ßÓĞ¶à¸ö×ÓÔªËØµÄ UI ¶ÔÏó
+//å…·æœ‰å¤šä¸ªå­å…ƒç´ çš„ UI å¯¹è±¡
 class Panel : public UIElement
 {
 public:
 	MPF_API Panel();
 	MPF_API virtual ~Panel();
 
-	//»ñÈ¡×ÓÔªËØ
+	//è·å–å­å…ƒç´ 
 	MPF_API const std::vector<UIElement*>& GetChildren() const;
-	//»ñÈ¡×ÓÔªËØ
+	//è·å–å­å…ƒç´ 
 	MPF_API std::vector<UIElement*>& GetChildren();
-	//Ìí¼Ó×ÓÔªËØ
+	//æ·»åŠ å­å…ƒç´ 
 	MPF_API void AddChild(UIElement& elem);
-	//Ìí¼Ó×ÓÔªËØ
+	//æ·»åŠ å­å…ƒç´ 
 	MPF_API void AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems);
 
 	using UIElement::HitTest;
 	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
 
-	//»ñÈ¡ÀàĞÍ
+	//è·å–ç±»å‹
 	MPF_API DECLARE_GETTYPE(Panel);
 	MPF_API DECLARE_GETINSTANTTYPE(Panel);
 public:

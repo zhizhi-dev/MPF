@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "UIElement.h"
 #include "../visual/BitmapData.h"
 #include "../visual/Font.h"
@@ -7,7 +7,7 @@
 NS_MPF
 NS_UI
 
-//ÎÄ±¾¿é
+//æ–‡æœ¬å—
 class TextBlock : public UIElement
 {
 public:
@@ -16,45 +16,45 @@ public:
 	MPF_API TextBlock(MPF::String&& text);
 	MPF_API virtual ~TextBlock();
 
-	//»ñÈ¡ÎÄ×Ö
+	//è·å–æ–‡å­—
 	MPF_API const MPF::String& GetText() const;
-	//ÉèÖÃÎÄ×Ö
+	//è®¾ç½®æ–‡å­—
 	MPF_API void SetText(const MPF::String& value);
-	//ÉèÖÃÎÄ×Ö
+	//è®¾ç½®æ–‡å­—
 	MPF_API void SetText(MPF::String&& value);
-	//»ñÈ¡»òÉèÖÃÎÄ×Ö
+	//è·å–æˆ–è®¾ç½®æ–‡å­—
 	mproperty(MPF::String, Text);
 
-	//»ñÈ¡×ÖÌå
+	//è·å–å­—ä½“
 	MPF_API const MPF::Visual::Font& GetFont() const;
-	//ÉèÖÃ×ÖÌå
+	//è®¾ç½®å­—ä½“
 	MPF_API void SetFont(const MPF::Visual::Font& value);
-	//ÉèÖÃ×ÖÌå
+	//è®¾ç½®å­—ä½“
 	MPF_API void SetFont(MPF::Visual::Font&& value);
-	//»ñÈ¡»òÉèÖÃ×ÖÌå
+	//è·å–æˆ–è®¾ç½®å­—ä½“
 	mproperty(MPF::Visual::Font, Font);
 
-	//»ñÈ¡Ç°¾°»­Ë¢
+	//è·å–å‰æ™¯ç”»åˆ·
 	MPF_API const MPF::Visual::Brush* GetForeground() const;
-	//ÉèÖÃÇ°¾°»­Ë¢
+	//è®¾ç½®å‰æ™¯ç”»åˆ·
 	MPF_API void SetForeground(const MPF::Visual::Brush* value);
-	//»ñÈ¡»òÉèÖÃÇ°¾°»­Ë¢
+	//è·å–æˆ–è®¾ç½®å‰æ™¯ç”»åˆ·
 	mproperty(const MPF::Visual::Brush*, Foreground);
 
-	//»ñÈ¡ÀàĞÍ
+	//è·å–ç±»å‹
 	MPF_API DECLARE_GETTYPE(TextBlock);
 	MPF_API DECLARE_GETINSTANTTYPE(TextBlock);
 public:
-	//ÎÄ×Ö
+	//æ–‡å­—
 	MPF_API static DependencyProperty<MPF::String> TextProperty;
-	//×ÖÌå
+	//å­—ä½“
 	MPF_API static DependencyProperty<MPF::Visual::Font> FontProperty;
-	//Ç°¾°»­Ë¢
+	//å‰æ™¯ç”»åˆ·
 	MPF_API static DependencyProperty<const MPF::Visual::Brush*> ForegroundProperty;
 protected:
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	//×Ô¶¯¼ÆËã´óĞ¡
+	//è‡ªåŠ¨è®¡ç®—å¤§å°
 	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
 
 	DECLARE_UI_FUNCS

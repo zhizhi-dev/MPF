@@ -2,6 +2,7 @@
 #include "../include/String.h"
 #include "../include/Type.h"
 #include <cstring>
+#include "../include/HashAlgorithms.h"
 
 using namespace MPF;
 
@@ -9,7 +10,6 @@ DEFINE_TYPE(String, MPF::String)
 String String::empty;
 
 String::String() mnoexcept
-:chars(L""), length(0)
 {
 }
 
@@ -35,11 +35,14 @@ const wchar_t* String::GetDataPointer() const mnoexcept
 uint String::GetHashCode() const mnoexcept
 {
 	massert(chars);
-	if (hashCode == 0)
+	if (hashCode)
+		return hashCode;
+	else if (length)
 	{
-		hashCode = std::hash<std::wstring>()(chars);
+		hashCode = Internal::Hash::BKDRHash(chars);
+		return hashCode;
 	}
-	return hashCode;
+	return 0;
 }
 
 String::String(const wchar_t* chars, bool isOwner)
@@ -81,15 +84,14 @@ bool String::operator == (const String& str) const mnoexcept
 	massert(chars);
 	massert(str.chars);
 
+	if (GetHashCode() != str.GetHashCode())
+		return false;
 	return std::wcscmp(chars, str.chars) == 0;
 }
 
 bool String::operator != (const String& str) const mnoexcept
 {
-	massert(chars);
-	massert(str.chars);
-
-	return std::wcscmp(chars, str.chars) != 0;
+	return !(*this == str);
 }
 
 const String& String::GetEmpty()
@@ -110,7 +112,7 @@ wchar_t String::operator[](size_t index) const
 }
 
 String::String(const String& str)
-:chars(str.chars), isOwner(str.isOwner), length(str.length)
+	:chars(str.chars), isOwner(str.isOwner), length(str.length), hashCode(str.hashCode)
 {
 	massert(chars);
 	if (isOwner)
@@ -122,12 +124,13 @@ String::String(const String& str)
 }
 
 String::String(String&& str) mnoexcept
-:chars(str.chars), isOwner(str.isOwner), length(str.length)
+	:chars(str.chars), isOwner(str.isOwner), length(str.length), hashCode(str.hashCode)
 {
 	massert(chars);
 	str.chars = nullptr;
 	str.length = 0;
 	str.isOwner = false;
+	str.hashCode = 0;
 }
 
 const String& String::operator = (const String& str)
@@ -136,6 +139,7 @@ const String& String::operator = (const String& str)
 	chars = str.chars;
 	length = str.length;
 	isOwner = str.isOwner;
+	hashCode = str.hashCode;
 
 	massert(chars);
 	if (isOwner && chars)
@@ -153,10 +157,12 @@ const String& String::operator = (String&& str) mnoexcept
 	chars = str.chars;
 	length = str.length;
 	isOwner = str.isOwner;
+	hashCode = str.hashCode;
 	massert(chars);
 	str.chars = nullptr;
 	str.length = 0;
 	str.isOwner = false;
+	str.hashCode = 0;
 
 	return *this;
 }

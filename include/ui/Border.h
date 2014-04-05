@@ -1,43 +1,43 @@
-#pragma once
+ï»¿#pragma once
 #include "ContentElement.h"
 #include "../visual/Brush.h"
 
 NS_MPF
 NS_UI
 
-//±ß¿ò
+//è¾¹æ¡†
 class Border : public ContentElement
 {
 public:
 	MPF_API Border();
 	MPF_API virtual ~Border();
 
-	//»ñÈ¡±ß¿ò»­Ë¢
+	//è·å–è¾¹æ¡†ç”»åˆ·
 	MPF_API const MPF::Visual::Brush* GetBorderBrush() const;
-	//ÉèÖÃ±ß¿ò»­Ë¢
+	//è®¾ç½®è¾¹æ¡†ç”»åˆ·
 	MPF_API void SetBorderBrush(const MPF::Visual::Brush* value);
-	//»ñÈ¡»òÉèÖÃ±ß¿ò»­Ë¢
+	//è·å–æˆ–è®¾ç½®è¾¹æ¡†ç”»åˆ·
 	mproperty(const MPF::Visual::Brush*, BorderBrush);
 
-	//»ñÈ¡±ß¿òºñ¶È
+	//è·å–è¾¹æ¡†åšåº¦
 	MPF_API MPF::Visual::Thickness GetBorderThickness() const;
-	//ÉèÖÃ±ß¿òºñ¶È
+	//è®¾ç½®è¾¹æ¡†åšåº¦
 	MPF_API void SetBorderThickness(const MPF::Visual::Thickness& value);
-	//»ñÈ¡»òÉèÖÃ±ß¿òºñ¶È
+	//è·å–æˆ–è®¾ç½®è¾¹æ¡†åšåº¦
 	mproperty(MPF::Visual::Thickness, BorderThickness);
 
-	//»ñÈ¡ÀàĞÍ
+	//è·å–ç±»å‹
 	DECLARE_GETTYPE(Border);
 	DECLARE_GETINSTANTTYPE(Border);
 public:
-	//±ß¿ò»­Ë¢
+	//è¾¹æ¡†ç”»åˆ·
 	MPF_API static DependencyProperty<const MPF::Visual::Brush*> BorderBrushProperty;
-	//±ß¿òºñ¶È
+	//è¾¹æ¡†åšåº¦
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> BorderThicknessProperty;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual MPF::Visual::Point MakeContentOffset(UIElement& elem);
-	//×Ô¶¯¼ÆËã´óĞ¡
+	//è‡ªåŠ¨è®¡ç®—å¤§å°
 	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
 
 	DECLARE_UI_FUNCS

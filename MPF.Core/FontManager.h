@@ -25,15 +25,11 @@ public:
 private:
 	///<summary>通过字体文件加载字体</summary>
 	///<param name = "fileName">字体文件路径</param>
-	std::shared_ptr<FontFace> LoadFontFromFileName(const MPF::String& fileName, uint faceIndex);
-
-	///<summary>通过字体文件加载字体</summary>
-	///<param name = "fileName">字体文件路径</param>
-	std::shared_ptr<FontFace> LoadFontFromFileName(MPF::String&& fileName, uint faceIndex);
+	std::shared_ptr<FontFace> LoadFontFromFileName(FontFaceKey&& key);
 
 	static String GetFileNameFromFamilyName(const MPF::String& familyName,
 		uint& faceIndex);
-	std::shared_ptr<FontFace> LookupFontFace(const MPF::String& fileName, uint faceIndex);
+	std::shared_ptr<FontFace> LookupFontFace(const FontFaceKey& key);
 
 	void InitializeDPIScale();
 protected:

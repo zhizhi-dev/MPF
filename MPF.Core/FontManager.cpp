@@ -108,44 +108,21 @@ String FontManager::GetFileNameFromFamilyName(
 	return String::GetEmpty();
 }
 
-std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(const MPF::String& fileName,
-	uint faceIndex)
+std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(FontFaceKey&& key)
 {
-	massert(!fileName.IsEmpty());
+	massert(!key.FileName.IsEmpty());
 
 	size_t length = 0;
-	wcstombs_s(&length, nullptr, 0, fileName.GetDataPointer(), 0);
+	wcstombs_s(&length, nullptr, 0, key.FileName.GetDataPointer(), 0);
 	length += 1;
 	std::vector<char> cFileName(length);
-	wcstombs_s(&length, cFileName.data(), length, fileName.GetDataPointer(), length);
+	wcstombs_s(&length, cFileName.data(), length, key.FileName.GetDataPointer(), length);
 
 	FT_Face face = nullptr;
-	auto error = FT_New_Face(freeType, cFileName.data(), faceIndex, &face);
+	auto error = FT_New_Face(freeType, cFileName.data(), key.FaceIndex, &face);
 	massert(error == 0);
-	FontFaceKey key{ fileName, faceIndex };
 	auto value(std::make_shared<FontFace>(face));
-	fonts.emplace(key, value);
-
-	return value;
-}
-
-std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(MPF::String&& fileName,
-	uint faceIndex)
-{
-	massert(!fileName.IsEmpty());
-
-	size_t length = 0;
-	wcstombs_s(&length, nullptr, 0, fileName.GetDataPointer(), 0);
-	length += 1;
-	std::vector<char> cFileName(length);
-	wcstombs_s(&length, cFileName.data(), length, fileName.GetDataPointer(), length);
-
-	FT_Face face = nullptr;
-	auto error = FT_New_Face(freeType, cFileName.data(), faceIndex, &face);
-	massert(error == 0);
-	FontFaceKey key{ std::move(fileName), faceIndex };
-	auto value(std::make_shared<FontFace>(face));
-	fonts.emplace(key, value);
+	fonts.emplace(std::move(key), value);
 
 	return value;
 }
@@ -158,18 +135,14 @@ void FontManager::InitializeDPIScale()
 	dpiScaleY = GetDeviceCaps(hdc, LOGPIXELSY) / 96.f;
 }
 
-std::shared_ptr<FontFace> FontManager::LookupFontFace(const MPF::String& fileName,
-	uint faceIndex)
+std::shared_ptr<FontFace> FontManager::LookupFontFace(const FontFaceKey& key)
 {
-	//fvck cl
-	//²»ÄÜÓÃ£º
-	//auto it(fonts.find(FontFaceKey{ fileName, faceIndex }));
-	FontFaceKey key{ fileName, faceIndex };
 	auto it(fonts.find(key));
 	if (it != fonts.end())
 	{
 		if (it->second.expired())
 		{
+			fonts.erase(it);
 			return nullptr;
 		}
 		return it->second.lock();
@@ -180,22 +153,24 @@ std::shared_ptr<FontFace> FontManager::LookupFontFace(const MPF::String& fileNam
 std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& fileName,
 	uint faceIndex)
 {
-	auto face = LookupFontFace(fileName, faceIndex);
+	FontFaceKey key{ fileName, faceIndex };
+	auto face = LookupFontFace(key);
 	if (face)
 	{
 		return face;
 	}
-	return LoadFontFromFileName(fileName, faceIndex);
+	return LoadFontFromFileName(std::move(key));
 }
 
 std::shared_ptr<FontFace> FontManager::GetFontFace(MPF::String&& fileName, uint faceIndex)
 {
-	auto face = LookupFontFace(fileName, faceIndex);
+	FontFaceKey key{ std::move(fileName), faceIndex };
+	auto face = LookupFontFace(key);
 	if (face)
 	{
 		return face;
 	}
-	return LoadFontFromFileName(std::move(fileName), faceIndex);
+	return LoadFontFromFileName(std::move(key));
 }
 
 std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& familyName)

@@ -94,7 +94,6 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="PaintEventHandler.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="TextBlock.cpp" />
     <ClCompile Include="UIElement.cpp" />
@@ -115,6 +114,7 @@
     <ClInclude Include="..\include\Process.h" />
     <ClInclude Include="..\include\RAII.h" />
     <ClInclude Include="..\include\String.h" />
+    <ClInclude Include="..\include\HashAlgorithms.h" />
     <ClInclude Include="..\include\Thread.h" />
     <ClInclude Include="..\include\Type.h" />
     <ClInclude Include="..\include\ui\Border.h" />
@@ -140,7 +140,6 @@
     <ClInclude Include="..\include\visual\LinearGradientBrush.h" />
     <ClInclude Include="..\include\visual\Matrix.h" />
     <ClInclude Include="..\include\visual\NativeWindow.h" />
-    <ClInclude Include="..\include\visual\PaintEventHandler.h" />
     <ClInclude Include="..\include\visual\Point.h" />
     <ClInclude Include="..\include\visual\Quad.h" />
     <ClInclude Include="..\include\visual\RenderCoreProvider.h" />

@@ -22,6 +22,9 @@
     <Filter Include="头文件\UI">
       <UniqueIdentifier>{a5a5a4b1-212b-4649-b842-85db0813614d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Input">
+      <UniqueIdentifier>{c8d6e7c8-160a-456d-85e0-fca487b94065}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -201,10 +204,22 @@
     <ClInclude Include="..\include\HashAlgorithms.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="NativeWindow.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\visual\RenderCoreProviders.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeWindow.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\input\MouseButtons.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\input\InputEventHandlers.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\input\MouseEventArgs.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\DPIHelper.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
   </ItemGroup>
@@ -333,6 +348,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ButtonBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DPIHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

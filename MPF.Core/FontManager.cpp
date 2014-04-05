@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FontManager.h"
+#include "../include/visual/DPIHelper.h"
 #include <sstream>
 
 using namespace MPF;
@@ -9,7 +10,6 @@ std::shared_ptr<FontManager> FontManager::current;
 
 FontManager::FontManager()
 {
-	InitializeDPIScale();
 	auto error = FT_Init_FreeType(&freeType);
 	massert(error == 0);
 }
@@ -127,14 +127,6 @@ std::shared_ptr<FontFace> FontManager::LoadFontFromFileName(FontFaceKey&& key)
 	return value;
 }
 
-void FontManager::InitializeDPIScale()
-{
-	HDC hdc = GetDC(NULL);
-
-	dpiScaleX = GetDeviceCaps(hdc, LOGPIXELSX) / 96.f;
-	dpiScaleY = GetDeviceCaps(hdc, LOGPIXELSY) / 96.f;
-}
-
 std::shared_ptr<FontFace> FontManager::LookupFontFace(const FontFaceKey& key)
 {
 	auto it(fonts.find(key));
@@ -183,7 +175,7 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& familyName
 
 void FontManager::SetFontFaceSize(FT_Face face, float size) const
 {
-	auto pair(LogicalPointToDevicePoint(size, size));
+	auto pair(DPIHelper::Current.LogicalPointToDevicePoint(size, size));
 
 	SetFontFaceSize(face, pair.first, pair.second);
 }
@@ -194,9 +186,4 @@ void FontManager::SetFontFaceSize(FT_Face face, uint xInPixels, uint yInPixels) 
 
 	auto error = FT_Set_Pixel_Sizes(face, xInPixels, yInPixels);
 	massert(error == 0);
-}
-
-std::pair<uint, uint> FontManager::LogicalPointToDevicePoint(float x, float y) const
-{
-	return std::make_pair<uint, uint>(x * dpiScaleX, y * dpiScaleY);
 }

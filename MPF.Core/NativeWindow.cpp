@@ -5,6 +5,7 @@
 
 using namespace MPF;
 using namespace MPF::Visual;
+using namespace MPF::Input;
 
 const wchar_t MPFWindowClassName[] = L"MPF_Window_Wrapper";
 const wchar_t MPFWindowHandlePropName[] = L"MPF_Window_Handle";
@@ -66,11 +67,9 @@ LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
 	switch (uMsg)
 	{
 	case WM_PAINT:
-		OnPaint();
-		break;
+		return OnPaint();
 	case WM_LBUTTONUP:
-		OnMouseClick();
-		break;
+		return OnMouseLeftButtonUp(wParam, lParam);
 	default:
 		break;
 	}
@@ -171,18 +170,25 @@ uint NativeWindow::GetClientHeight() const
 	return rect.bottom - rect.top;
 }
 
-void NativeWindow::OnPaint() const
+LRESULT NativeWindow::OnPaint() const
 {
+	PAINTSTRUCT paintParam;
+	BeginPaint(hWnd, &paintParam);
+
 	Paint([&](PaintEventHandler handler)
 	{
 		handler();
 	});
+
+	EndPaint(hWnd, &paintParam);
+	return 0;
 }
 
-void NativeWindow::OnMouseClick() const
+LRESULT NativeWindow::OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const
 {
 	MouseClick([&](MouseEventHandler handler)
 	{
 		handler();
 	});
+	return 0;
 }

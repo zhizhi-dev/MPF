@@ -18,7 +18,6 @@ public:
 
 	void SetFontFaceSize(FT_Face face, float size) const;
 	void SetFontFaceSize(FT_Face face, uint xInPixels, uint yInPixels) const;
-	std::pair<uint, uint> LogicalPointToDevicePoint(float x, float y) const;
 
 	///<summary>获取当前字体管理器</summary>
 	static std::shared_ptr<FontManager> GetCurrent();
@@ -30,16 +29,12 @@ private:
 	static String GetFileNameFromFamilyName(const MPF::String& familyName,
 		uint& faceIndex);
 	std::shared_ptr<FontFace> LookupFontFace(const FontFaceKey& key);
-
-	void InitializeDPIScale();
 protected:
 	FontManager();
 
 	friend class std::_Ref_count_obj<FontManager>;
 private:
 	FT_Library freeType;
-	float dpiScaleX;
-	float dpiScaleY;
 	std::unordered_map<FontFaceKey, std::weak_ptr<FontFace>> fonts;
 private:
 	static std::shared_ptr<FontManager> current;

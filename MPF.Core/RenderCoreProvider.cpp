@@ -3,6 +3,7 @@
 #include "../include/Enumerable.h"
 #include "../include/visual/SolidColorBrush.h"
 #include "NativeWindow.h"
+#include "../include/visual/DPIHelper.h"
 
 using namespace MPF;
 using namespace MPF::Visual;
@@ -10,15 +11,13 @@ using namespace MPF::Visual;
 RenderCoreProvider::RenderCoreProvider(NativeWindow& window)
 :window(window)
 {
-	InitializeDPIScale();
 }
 
 void RenderCoreProvider::DrawLine(const Line& line, color_t color)
 {
-	auto startPoint = LogicalPointToDevicePoint(line.GetStartPoint());
-	auto endPoint = LogicalPointToDevicePoint(line.GetEndPoint());
+	auto points = DPIHelper::Current.LogicalGeometryToDevicePoints(line);
 
-	DrawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, color);
+	DrawLine(points[0].first, points[0].second, points[1].first, points[1].second, color);
 }
 
 void RenderCoreProvider::DrawLine(const Line& line, const Brush& brush)
@@ -29,25 +28,19 @@ void RenderCoreProvider::DrawLine(const Line& line, const Brush& brush)
 		return DrawLine(line, reinterpret_cast<const SolidColorBrush*>(&brush)->GetColor());
 	}
 
-	auto orgStartPoint = line.GetStartPoint();
-	auto orgEndPoint = line.GetEndPoint();
-	auto startPoint = LogicalPointToDevicePoint(orgStartPoint);
-	auto endPoint = LogicalPointToDevicePoint(orgEndPoint);
+	auto points = line.GetPoints();
+	auto transPoints = DPIHelper::Current.LogicalGeometryToDevicePoints(line);
 
-	DrawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, 
-		orgStartPoint.GetU(), orgEndPoint.GetV(), orgEndPoint.GetU(), orgEndPoint.GetV(), brush);
+	DrawLine(transPoints[0].first, transPoints[0].second, transPoints[1].first, transPoints[1].second,
+		points[0].GetU(), points[0].GetV(), points[1].GetU(), points[1].GetV(), brush);
 }
 
 void RenderCoreProvider::DrawTriangle(const Triangle& triangle, color_t color)
 {
-	auto points = triangle.GetPoints();
-	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
-	{
-		return LogicalPointToDevicePoint(pt);
-	});
+	auto points = DPIHelper::Current.LogicalGeometryToDevicePoints(triangle);
 
-	DrawTriangle(transPoints[0].first, transPoints[0].second, transPoints[1].first, 
-		transPoints[1].second, transPoints[2].first, transPoints[2].second, color);
+	DrawTriangle(points[0].first, points[0].second, points[1].first,
+		points[1].second, points[2].first, points[2].second, color);
 }
 
 void RenderCoreProvider::DrawTriangle(const Triangle& triangle, const Brush& brush)
@@ -59,10 +52,7 @@ void RenderCoreProvider::DrawTriangle(const Triangle& triangle, const Brush& bru
 	}
 
 	auto points = triangle.GetPoints();
-	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
-	{
-		return LogicalPointToDevicePoint(pt);
-	});
+	auto transPoints = DPIHelper::Current.LogicalGeometryToDevicePoints(triangle);
 
 	DrawTriangle(transPoints[0].first, transPoints[0].second, transPoints[1].first,
 		transPoints[1].second, transPoints[2].first, transPoints[2].second,
@@ -72,11 +62,7 @@ void RenderCoreProvider::DrawTriangle(const Triangle& triangle, const Brush& bru
 
 void RenderCoreProvider::FillTriangle(const Triangle& triangle, color_t color)
 {
-	auto points = triangle.GetPoints();
-	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
-	{
-		return LogicalPointToDevicePoint(pt);
-	});
+	auto transPoints = DPIHelper::Current.LogicalGeometryToDevicePoints(triangle);
 
 	FillTriangle(transPoints[0].first, transPoints[0].second, transPoints[1].first,
 		transPoints[1].second, transPoints[2].first, transPoints[2].second, color);
@@ -90,10 +76,7 @@ void RenderCoreProvider::FillTriangle(const Triangle& triangle, const Brush& bru
 		return FillTriangle(triangle, reinterpret_cast<const SolidColorBrush*>(&brush)->GetColor());
 	}
 	auto points = triangle.GetPoints();
-	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
-	{
-		return LogicalPointToDevicePoint(pt);
-	});
+	auto transPoints = DPIHelper::Current.LogicalGeometryToDevicePoints(triangle);
 
 	FillTriangle(transPoints[0].first, transPoints[0].second, transPoints[1].first,
 		transPoints[1].second, transPoints[2].first, transPoints[2].second,
@@ -101,32 +84,10 @@ void RenderCoreProvider::FillTriangle(const Triangle& triangle, const Brush& bru
 		points[2].GetU(), points[2].GetV(), brush);
 }
 
-void RenderCoreProvider::InitializeDPIScale()
-{
-	HWND hWnd = (HWND)window.GetNativeHandle(); 
-	HDC hdc = GetDC(hWnd);
-
-	dpiScaleX = GetDeviceCaps(hdc, LOGPIXELSX) / 96.0f;
-	dpiScaleY = GetDeviceCaps(hdc, LOGPIXELSY) / 96.0f;
-
-	ReleaseDC(hWnd, hdc);
-}
-
-std::pair<uint, uint> RenderCoreProvider::LogicalPointToDevicePoint(const Point& point) const
-{
-	uint x = static_cast<uint>(point.GetX() * dpiScaleX);
-	uint y = static_cast<uint>(point.GetY() * dpiScaleY);
-
-	return std::make_pair(x, y);
-}
-
 void RenderCoreProvider::FillQuad(const MPF::Visual::Quad& quad, const Brush& brush)
 {
 	auto points = quad.GetPoints();
-	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
-	{
-		return LogicalPointToDevicePoint(pt);
-	});
+	auto transPoints = DPIHelper::Current.LogicalGeometryToDevicePoints(quad);
 
 	FillQuad(transPoints[0].first, transPoints[0].second, transPoints[1].first,
 		transPoints[1].second, transPoints[2].first, transPoints[2].second,
@@ -138,10 +99,7 @@ void RenderCoreProvider::FillQuad(const MPF::Visual::Quad& quad, const Brush& br
 void RenderCoreProvider::DrawQuad(const MPF::Visual::Quad& quad, const Brush& brush)
 {
 	auto points = quad.GetPoints();
-	auto transPoints = Enumerable::ToVector(points, [=](const Point& pt)
-	{
-		return LogicalPointToDevicePoint(pt);
-	});
+	auto transPoints = DPIHelper::Current.LogicalGeometryToDevicePoints(quad);
 
 	DrawQuad(transPoints[0].first, transPoints[0].second, transPoints[1].first,
 		transPoints[1].second, transPoints[2].first, transPoints[2].second,

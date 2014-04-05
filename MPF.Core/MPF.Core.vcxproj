@@ -91,6 +91,7 @@
     <ClCompile Include="ContentElement.cpp" />
     <ClCompile Include="ControlTemplate.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
+    <ClCompile Include="DPIHelper.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="FontManager.cpp" />
@@ -109,6 +110,9 @@
     <ClInclude Include="..\include\DependencyProperty.h" />
     <ClInclude Include="..\include\Enumerable.h" />
     <ClInclude Include="..\include\Event.h" />
+    <ClInclude Include="..\include\input\InputEventHandlers.h" />
+    <ClInclude Include="..\include\input\MouseButtons.h" />
+    <ClInclude Include="..\include\input\MouseEventArgs.h" />
     <ClInclude Include="..\include\MPF.h" />
     <ClInclude Include="..\include\Object.h" />
     <ClInclude Include="..\include\Process.h" />
@@ -133,6 +137,7 @@
     <ClInclude Include="..\include\visual\AlphaBlendBrush.h" />
     <ClInclude Include="..\include\visual\BitmapData.h" />
     <ClInclude Include="..\include\visual\Brush.h" />
+    <ClInclude Include="..\include\visual\DPIHelper.h" />
     <ClInclude Include="..\include\visual\Font.h" />
     <ClInclude Include="..\include\visual\Geometry.h" />
     <ClInclude Include="..\include\visual\GraphicAlgorithms.h" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FontFace.h"
 #include "FontManager.h"
+#include "../include/visual/DPIHelper.h"
 #include <fstream>
 
 using namespace MPF;
@@ -52,7 +53,7 @@ const FontGlyph& FontFace::GetGlyphCache(const FontFaceCacheKey& key)
 
 const FontGlyph& FontFace::GetGlyphCache(wchar_t chr, float size)
 {
-	auto sizeInPixels(fontMgr->LogicalPointToDevicePoint(size, size));
+	auto sizeInPixels(DPIHelper::Current.LogicalPointToDevicePoint(size, size));
 
 	return GetGlyphCache(FontFaceCacheKey{ chr, sizeInPixels.first, sizeInPixels.second });
 }
@@ -92,7 +93,7 @@ std::pair<uint, uint> FontFace::MeasureText(const MPF::String& text, float size)
 	uint realSize(size * 64);
 	auto length(text.GetLength());
 	auto pair(std::make_pair(0u, 0u));
-	auto sizeInPixels(fontMgr->LogicalPointToDevicePoint(size, size));
+	auto sizeInPixels(DPIHelper::Current.LogicalPointToDevicePoint(size, size));
 
 	for (size_t i = 0; i < length; i++)
 	{

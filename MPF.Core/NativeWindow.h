@@ -2,6 +2,7 @@
 #include "../include/Type.h"
 #include "../include/Event.h"
 #include "../include/visual/RenderCoreProviders.h"
+#include "../include/input/InputEventHandlers.h"
 #include <windef.h>
 
 NS_MPF
@@ -52,12 +53,12 @@ public:
 	//绘制事件
 	Event<PaintEventHandler> Paint;
 	//鼠标点击事件
-	Event<MouseEventHandler> MouseClick;
+	Event<MPF::Input::MouseEventHandler> MouseClick;
 private:
 	//窗口过程
 	LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	void OnPaint() const;
-	void OnMouseClick() const;
+	LRESULT OnPaint() const;
+	LRESULT OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const;
 private:
 	static void CreateWindowClass();
 	static LRESULT CALLBACK WindowProcWrapper(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

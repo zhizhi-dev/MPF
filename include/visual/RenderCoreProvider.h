@@ -62,12 +62,6 @@ protected:
 		float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, const Brush& brush) = 0;
 protected:
 	NativeWindow& window;
-private:
-	void InitializeDPIScale();
-	std::pair<uint, uint> LogicalPointToDevicePoint(const Point& point) const;
-private:
-	float dpiScaleX;
-	float dpiScaleY;
 };
 
 NS_ED

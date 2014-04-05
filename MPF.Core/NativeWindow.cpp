@@ -1,12 +1,11 @@
 #include "stdafx.h"
-#include "../include/visual/NativeWindow.h"
+#include "NativeWindow.h"
 #include "../include/Application.h"
 #include "GDI/GDIRenderCoreProvider.h"
 
 using namespace MPF;
 using namespace MPF::Visual;
 
-DEFINE_TYPE(NativeWindow, MPF::Visual::NativeWindow)
 const wchar_t MPFWindowClassName[] = L"MPF_Window_Wrapper";
 const wchar_t MPFWindowHandlePropName[] = L"MPF_Window_Handle";
 
@@ -17,10 +16,10 @@ NativeWindow::NativeWindow()
 
 NativeWindow::~NativeWindow()
 {
-	if (handle)
+	if (hWnd)
 	{
-		DestroyWindow((HWND)handle);
-		handle = nullptr;
+		DestroyWindow(hWnd);
+		hWnd = nullptr;
 	}
 }
 
@@ -43,12 +42,11 @@ void NativeWindow::CreateWindowClass()
 	massert(isSucceed);
 }
 
-LRESULT WINAPI NativeWindow::WindowProcWrapper(handle_t handle, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK NativeWindow::WindowProcWrapper(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	HWND hWnd = (HWND)handle;
 	auto window = (NativeWindow*)GetProp(hWnd, MPFWindowHandlePropName);
 
-	if (msg == WM_NCCREATE)
+	if (uMsg == WM_NCCREATE)
 	{
 		//»ñÈ¡ this
 		auto createParam = (LPCREATESTRUCT)lParam;
@@ -58,57 +56,59 @@ LRESULT WINAPI NativeWindow::WindowProcWrapper(handle_t handle, UINT msg, WPARAM
 
 	if (window)
 	{
-		return window->WindowProc(hWnd, msg, wParam, lParam);
+		return window->WindowProc(hWnd, uMsg, wParam, lParam);
 	}
-	return DefWindowProc(hWnd, msg, wParam, lParam);
+	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WINAPI NativeWindow::WindowProc(handle_t hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	switch (msg)
+	switch (uMsg)
 	{
 	case WM_PAINT:
 		OnPaint();
 		break;
-	case WM_MBUTTONUP:
+	case WM_LBUTTONUP:
+		OnMouseClick();
+		break;
 	default:
 		break;
 	}
-	return DefWindowProc((HWND)hWnd, msg, wParam, lParam);
+	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
 void NativeWindow::Create()
 {
-	handle = CreateWindowEx(0, MPFWindowClassName, String::GetEmpty().GetDataPointer(),
+	hWnd = CreateWindowEx(0, MPFWindowClassName, String::GetEmpty().GetDataPointer(),
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
 		nullptr, nullptr, (HINSTANCE)Application::GetCurrent().GetNativeHandle(), this);
 
-	massert(handle != nullptr);
+	massert(hWnd != nullptr);
 }
 
 void NativeWindow::Show() const
 {
-	ShowWindow((HWND)handle, SW_SHOW);
+	ShowWindow(hWnd, SW_SHOW);
 }
 
 String NativeWindow::GetTitle() const
 {
-	auto len = GetWindowTextLength((HWND)handle);
+	auto len = GetWindowTextLength(hWnd);
 	auto text = new wchar_t[len + 1];
-	GetWindowText((HWND)handle, text, len);
+	GetWindowText(hWnd, text, len);
 
 	return String(text, true);
 }
 
 void NativeWindow::SetTitle(const String& title)
 {
-	SetWindowText((HWND)handle, title.GetDataPointer());
+	SetWindowText(hWnd, title.GetDataPointer());
 }
 
 uint NativeWindow::GetWidth() const
 {
 	RECT rect;
-	GetWindowRect((HWND)handle, &rect);
+	GetWindowRect(hWnd, &rect);
 
 	return rect.right - rect.left;
 }
@@ -116,14 +116,14 @@ uint NativeWindow::GetWidth() const
 void NativeWindow::SetWidth(uint width)
 {
 	RECT rect;
-	GetWindowRect((HWND)handle, &rect);
-	SetWindowPos((HWND)handle, nullptr, rect.left, rect.top, width, rect.bottom - rect.top, NULL);
+	GetWindowRect(hWnd, &rect);
+	SetWindowPos(hWnd, nullptr, rect.left, rect.top, width, rect.bottom - rect.top, NULL);
 }
 
 uint NativeWindow::GetHeight() const
 {
 	RECT rect;
-	GetWindowRect((HWND)handle, &rect);
+	GetWindowRect(hWnd, &rect);
 
 	return rect.bottom - rect.top;
 }
@@ -131,13 +131,13 @@ uint NativeWindow::GetHeight() const
 void NativeWindow::SetHeight(uint height)
 {
 	RECT rect;
-	GetWindowRect((HWND)handle, &rect);
-	SetWindowPos((HWND)handle, nullptr, rect.left, rect.top, rect.right - rect.left, height, NULL);
+	GetWindowRect(hWnd, &rect);
+	SetWindowPos(hWnd, nullptr, rect.left, rect.top, rect.right - rect.left, height, NULL);
 }
 
 handle_t NativeWindow::GetNativeHandle() const
 {
-	return handle;
+	return hWnd;
 }
 
 std::unique_ptr<RenderCoreProvider> NativeWindow::CreateRenderCoreProvider(RenderCoreProviders provider)
@@ -159,7 +159,7 @@ uint NativeWindow::GetClientWidth() const
 {
 	RECT rect;
 
-	GetClientRect((HWND)handle, &rect);
+	GetClientRect(hWnd, &rect);
 	return rect.right - rect.left;
 }
 
@@ -167,13 +167,21 @@ uint NativeWindow::GetClientHeight() const
 {
 	RECT rect;
 
-	GetClientRect((HWND)handle, &rect);
+	GetClientRect(hWnd, &rect);
 	return rect.bottom - rect.top;
 }
 
 void NativeWindow::OnPaint() const
 {
 	Paint([&](PaintEventHandler handler)
+	{
+		handler();
+	});
+}
+
+void NativeWindow::OnMouseClick() const
+{
+	MouseClick([&](MouseEventHandler handler)
 	{
 		handler();
 	});

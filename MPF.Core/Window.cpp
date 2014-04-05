@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../include/ui/Window.h"
 #include "../include/visual/Font.h"
+#include "NativeWindow.h"
 
 using namespace MPF;
 using namespace MPF::UI;

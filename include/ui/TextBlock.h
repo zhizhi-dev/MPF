@@ -64,6 +64,7 @@ private:
 	void UpdateTextGlyphs();
 	void EnsureTextGlyphs();
 private:
+	//字形数据
 	std::unique_ptr<MPF::Visual::BitmapData<byte>> textGlyphs;
 
 	DECLARE_UI_VALUES

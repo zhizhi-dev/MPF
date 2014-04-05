@@ -72,9 +72,6 @@
     <ClInclude Include="..\include\Thread.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\visual\NativeWindow.h">
-      <Filter>头文件\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\visual\RenderCoreProvider.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
@@ -203,6 +200,12 @@
     </ClInclude>
     <ClInclude Include="..\include\HashAlgorithms.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\RenderCoreProviders.h">
+      <Filter>头文件\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

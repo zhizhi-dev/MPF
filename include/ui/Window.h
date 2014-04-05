@@ -1,8 +1,12 @@
 #pragma once
-#include "../visual/NativeWindow.h"
 #include "ContentElement.h"
+#include "../visual/RenderCoreProviders.h"
 
 NS_MPF
+NS_VSL
+class NativeWindow;
+NS_ED
+
 NS_UI
 
 //´°¿Ú

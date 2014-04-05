@@ -139,10 +139,10 @@
     <ClInclude Include="..\include\visual\Line.h" />
     <ClInclude Include="..\include\visual\LinearGradientBrush.h" />
     <ClInclude Include="..\include\visual\Matrix.h" />
-    <ClInclude Include="..\include\visual\NativeWindow.h" />
     <ClInclude Include="..\include\visual\Point.h" />
     <ClInclude Include="..\include\visual\Quad.h" />
     <ClInclude Include="..\include\visual\RenderCoreProvider.h" />
+    <ClInclude Include="..\include\visual\RenderCoreProviders.h" />
     <ClInclude Include="..\include\visual\Size.h" />
     <ClInclude Include="..\include\visual\SolidColorBrush.h" />
     <ClInclude Include="..\include\Visual\Thickness.h" />
@@ -154,6 +154,7 @@
     <ClInclude Include="GDI\DeviceContext.h" />
     <ClInclude Include="GDI\GDIRenderCoreProvider.h" />
     <ClInclude Include="MLAA.hxx" />
+    <ClInclude Include="NativeWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClCompile Include="Image.cpp" />

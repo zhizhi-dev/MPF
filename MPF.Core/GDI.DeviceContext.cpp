@@ -4,8 +4,6 @@
 using namespace MPF;
 using namespace MPF::GDI;
 
-DEFINE_TYPE(DeviceContext, MPF::GDI::DeviceContext)
-
 DeviceContext::DeviceContext()
 {
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GDI/GDIRenderCoreProvider.h"
 #include "../include/visual/GraphicAlgorithms.h"
+#include "NativeWindow.h"
 
 using namespace MPF;
 using namespace MPF::Visual;

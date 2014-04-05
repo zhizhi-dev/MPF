@@ -1,11 +1,11 @@
 #pragma once
-#include "../../include/visual/NativeWindow.h"
+#include <windef.h>
 
 NS_MPF
 NS_GDI
 
 //设备上下文
-class DeviceContext : public Object
+class DeviceContext
 {
 public:
 	//创建 DeviceContext 的新实例
@@ -22,15 +22,11 @@ public:
 	static std::unique_ptr<DeviceContext> FromWindowClient(HWND hWnd);
 	//创建兼容设备上下文
 	static std::unique_ptr<DeviceContext> CreateCompatible(HDC hDC);
-
-	//获取类型
-	DECLARE_GETTYPE(DeviceContext)
 protected:
 private:
 	HDC hDC = nullptr;
 	HWND hWnd = nullptr;
 	bool isOwner = false;
-	DECLARE_TYPE(DeviceContext)
 };
 
 NS_ED

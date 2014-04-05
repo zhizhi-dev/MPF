@@ -2,11 +2,10 @@
 #include "../include/visual/RenderCoreProvider.h"
 #include "../include/Enumerable.h"
 #include "../include/visual/SolidColorBrush.h"
+#include "NativeWindow.h"
 
 using namespace MPF;
 using namespace MPF::Visual;
-
-DEFINE_TYPE(RenderCoreProvider, MPF::Visual::RenderCoreProvider)
 
 RenderCoreProvider::RenderCoreProvider(NativeWindow& window)
 :window(window)

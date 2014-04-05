@@ -1,6 +1,5 @@
 #pragma once
 #include "../Type.h"
-#include "NativeWindow.h"
 #include "Line.h"
 #include "Triangle.h"
 #include "Brush.h"
@@ -9,13 +8,15 @@
 NS_MPF
 NS_VSL
 
+class NativeWindow;
+
 //渲染核心提供程序
-class RenderCoreProvider : public Object
+class RenderCoreProvider
 {
 public:
 	//创建 RenderCoreProvider 的新实例
-	MPF_API RenderCoreProvider(NativeWindow& window);
-	MPF_API virtual ~RenderCoreProvider(){}
+	RenderCoreProvider(NativeWindow& window);
+	virtual ~RenderCoreProvider(){}
 
 	//开始绘制
 	MPF_API virtual void BeginDraw() = 0;
@@ -36,9 +37,6 @@ public:
 
 	//呈现
 	MPF_API virtual void Present() = 0;
-
-	//获取类型
-	MPF_API DECLARE_GETTYPE(RenderCoreProvider)
 protected:
 	//绘制线段
 	MPF_API virtual void DrawLine(uint x1, uint y1, uint x2, uint y2, color_t color) = 0;
@@ -62,7 +60,7 @@ protected:
 	//填充四边形
 	MPF_API virtual void FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
 		float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, const Brush& brush) = 0;
-
+protected:
 	NativeWindow& window;
 private:
 	void InitializeDPIScale();
@@ -70,8 +68,6 @@ private:
 private:
 	float dpiScaleX;
 	float dpiScaleY;
-
-	DECLARE_TYPE(RenderCoreProvider)
 };
 
 NS_ED

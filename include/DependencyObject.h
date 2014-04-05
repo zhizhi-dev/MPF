@@ -88,7 +88,10 @@ public:
 	template<typename THandler, typename TArgs>
 	void AddEventHandler(const RoutedEvent<THandler>& ent, std::function<void(TArgs&)> handler)
 	{
-		localEvents.emplace(ent.GetName(), handler);
+		localEvents.emplace(ent.GetName(), [=](RoutedEventArgs& args)
+		{
+			handler(*(TArgs*)(&args));
+		});
 	}
 
 	//Ìí¼ÓÊÂ¼şÕìÌıÆ÷

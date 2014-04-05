@@ -41,3 +41,8 @@ std::vector<std::pair<uint, uint>> DPIHelper::LogicalGeometryToDevicePoints(cons
 		return LogicalPointToDevicePoint(pt.X, pt.Y);
 	});
 }
+
+Point DPIHelper::DevicePointToLogicalPoint(uint x, uint y) const
+{
+	return{ x / dpiScaleX, y / dpiScaleY };
+}

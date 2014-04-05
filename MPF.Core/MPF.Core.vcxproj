@@ -90,11 +90,13 @@
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ContentElement.cpp" />
     <ClCompile Include="ControlTemplate.cpp" />
+    <ClCompile Include="DependencyObject.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
     <ClCompile Include="DPIHelper.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="MouseEventArgs.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="TextBlock.cpp" />
     <ClCompile Include="UIElement.cpp" />
@@ -110,6 +112,7 @@
     <ClInclude Include="..\include\DependencyProperty.h" />
     <ClInclude Include="..\include\Enumerable.h" />
     <ClInclude Include="..\include\Event.h" />
+    <ClInclude Include="..\include\EventWrapper.h" />
     <ClInclude Include="..\include\input\InputEventHandlers.h" />
     <ClInclude Include="..\include\input\MouseButtons.h" />
     <ClInclude Include="..\include\input\MouseEventArgs.h" />
@@ -117,6 +120,8 @@
     <ClInclude Include="..\include\Object.h" />
     <ClInclude Include="..\include\Process.h" />
     <ClInclude Include="..\include\RAII.h" />
+    <ClInclude Include="..\include\RoutedEvent.h" />
+    <ClInclude Include="..\include\RoutedEventArgs.h" />
     <ClInclude Include="..\include\String.h" />
     <ClInclude Include="..\include\HashAlgorithms.h" />
     <ClInclude Include="..\include\Thread.h" />

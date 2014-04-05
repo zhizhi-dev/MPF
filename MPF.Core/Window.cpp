@@ -2,10 +2,12 @@
 #include "../include/ui/Window.h"
 #include "../include/visual/Font.h"
 #include "NativeWindow.h"
+#include <sstream>
 
 using namespace MPF;
 using namespace MPF::UI;
 using namespace MPF::Visual;
+using namespace MPF::Input;
 
 DEFINE_TYPE(Window, MPF::UI::Window)
 DEFINE_UI_VALUES(Window)
@@ -32,6 +34,7 @@ void Window::Initialize(RenderCoreProviders provider)
 		nativeWindow->SetWidth(Width);
 		nativeWindow->SetHeight(Height);
 		renderer = nativeWindow->CreateRenderCoreProvider(provider);
+		AddEventHandlers();
 	}
 
 	ContentElement::Initialize();
@@ -71,4 +74,24 @@ void Window::DoFrame()
 	renderRef.EndDraw();
 
 	renderRef.Present();
+}
+
+void Window::UpdateRelativeOffset() mnoexcept
+{
+	relativeOffset.second = Point();
+	relativeOffset.first = false;
+}
+
+void Window::AddEventHandlers()
+{
+	auto window = nativeWindow.get();
+
+	window->MouseClick += [=](const MouseEventArgs& e)
+	{
+		auto pos = e.GetPosition(*this);
+		std::wstringstream ss;
+		ss << L"Left: " << pos.X << std::endl << L"Top: " << pos.Y;
+		MessageBox((HWND)window->GetNativeHandle(), ss.str().c_str(), 
+			L"LeftMouseButton Up!", MB_OK | MB_ICONINFORMATION);
+	};
 }

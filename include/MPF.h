@@ -14,6 +14,8 @@
 #include "Application.h"
 #include "Thread.h"
 #include "DependencyProperty.h"
+#include "RoutedEvent.h"
+#include "EventWrapper.h"
 #include "DependencyObject.h"
 
 //Visual
@@ -35,6 +37,11 @@
 #include "visual/ImageBrush.h"
 #include "visual/AlphaBlendBrush.h"
 #include "visual/RenderCoreProvider.h"
+
+//Input
+#include "input/MouseButtons.h"
+#include "input/MouseEventArgs.h"
+#include "input/InputEventHandlers.h"
 
 //UI
 #include "ui/Visibility.h"

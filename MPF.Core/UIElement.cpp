@@ -5,6 +5,7 @@
 using namespace MPF;
 using namespace MPF::UI;
 using namespace MPF::Visual;
+using namespace MPF::Input;
 
 DEFINE_TYPE(UIElement, MPF::UI::UIElement)
 DEFINE_UI_VALUES(UIElement)
@@ -16,9 +17,11 @@ DependencyProperty<Visibility> UIElement::VisibilityProperty(L"Visibility", Visi
 DependencyProperty<Thickness> UIElement::MarginProperty(L"Margin");
 DependencyProperty<Thickness> UIElement::PaddingProperty(L"Padding");
 
+RoutedEvent<MouseEventHandler> UIElement::MouseLeftButtonUpEvent(L"MouseLeftButtonUp", RoutedEventMode::Bubble);
+																	  		 
 UIElement::UIElement()
 {
-
+	InitializeEventHandlers();
 }
 
 UIElement::~UIElement()
@@ -181,4 +184,19 @@ std::vector<UIElement*> UIElement::HitTest(MPF::Visual::Point point) mnoexcept
 
 	HitTest(point, elements);
 	return elements;
+}
+
+MPF::Visual::Quad UIElement::GetRenderBound() const mnoexcept
+{
+	return renderBound.second;
+}
+
+void UIElement::InitializeEventHandlers()
+{
+	DEFINE_COMMON_ROUTEDEVENT(MouseLeftButtonUp, MouseEventArgs);
+	DEFINE_ROUTED_EVENTWRAPPER(MouseLeftButtonUp, UIElement);
+}
+
+void UIElement::OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args)
+{
 }

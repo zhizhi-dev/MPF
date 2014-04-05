@@ -78,13 +78,24 @@ public:
 		return *this;
 	}
 
-	Point operator+(const Point& point) mnoexcept
+	Point operator+(const Point& point) const mnoexcept
 	{
 		Point pt(*this);
 		pt.x += point.x;
 		pt.y += point.y;
 		pt.u += point.u;
 		pt.v += point.v;
+
+		return pt;
+	}
+
+	Point operator-(const Point& point) const mnoexcept
+	{
+		Point pt(*this);
+		pt.x -= point.x;
+		pt.y -= point.y;
+		pt.u -= point.u;
+		pt.v -= point.v;
 
 		return pt;
 	}

@@ -222,6 +222,15 @@
     <ClInclude Include="..\include\visual\DPIHelper.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\RoutedEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\EventWrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RoutedEventArgs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -351,6 +360,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DPIHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseEventArgs.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DependencyObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -76,13 +76,7 @@ public:
 	}
 
 	template<typename T>
-	const std::remove_reference_t<std::remove_cv_t<T>>& get() const
-	{
-		return reinterpret_cast<holder<T>*>(value.get())->value;
-	}
-
-	template<typename T>
-	std::remove_reference_t<std::remove_cv_t<T>>& get()
+	std::remove_reference_t<std::remove_cv_t<T>>& get() const
 	{
 		return reinterpret_cast<holder<std::remove_reference_t<std::remove_cv_t<T>>>*>(value.get())->value;
 	}
@@ -117,13 +111,7 @@ public:
 	}
 
 	template<typename T>
-	operator const T&() const
-	{
-		return get<T>();
-	}
-
-	template<typename T>
-	operator T&()
+	operator T&() const
 	{
 		return get<T>();
 	}

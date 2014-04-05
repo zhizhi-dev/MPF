@@ -6,6 +6,10 @@
 #include "RenderArgs.h"
 #include "../visual/Thickness.h"
 #include "../visual/Size.h"
+#include "../RoutedEvent.h"
+#include "../RoutedEventArgs.h"
+#include "../EventWrapper.h"
+#include "../input/InputEventHandlers.h"
 
 NS_MPF
 NS_UI
@@ -54,10 +58,14 @@ public:
 	//获取或设置留白
 	mproperty(MPF::Visual::Thickness, Padding);
 
+	//鼠标左键释放时触发事件
+	EventWrapper<UIElement, MPF::Input::MouseEventHandler, MPF::Input::MouseEventArgs> MouseLeftButtonUp;
+
 	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 
 	MPF_API MPF::Visual::Size MeasureSize() mnoexcept;
+	MPF_API MPF::Visual::Quad GetRenderBound() const mnoexcept;
 	///<summary>点击测试</summary>
 	///<return>测试成功的UI元素，并按逻辑树上从顶端到底端排列</return>
 	MPF_API std::vector<UIElement*> HitTest(MPF::Visual::Point point) mnoexcept;
@@ -77,9 +85,12 @@ public:
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> MarginProperty;
 	//留白
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> PaddingProperty;
+	//鼠标左键释放时触发事件
+	MPF_API static RoutedEvent<MPF::Input::MouseEventHandler> MouseLeftButtonUpEvent;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
+	MPF_API virtual void OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args);
 protected:
 	//更新相对父节点的偏移
 	MPF_API virtual void UpdateRelativeOffset() mnoexcept;
@@ -98,6 +109,8 @@ protected:
 	std::pair<bool, MPF::Visual::Point> relativeOffset = { true, MPF::Visual::Point() };
 	//大小
 	std::pair<bool, MPF::Visual::Size> size = { true, MPF::Visual::Size() };
+private:
+	void InitializeEventHandlers();
 private:
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(UIElement)

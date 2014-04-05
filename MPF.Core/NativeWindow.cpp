@@ -2,6 +2,8 @@
 #include "NativeWindow.h"
 #include "../include/Application.h"
 #include "GDI/GDIRenderCoreProvider.h"
+#include "../include/visual/DPIHelper.h"
+#include <windowsx.h>
 
 using namespace MPF;
 using namespace MPF::Visual;
@@ -186,9 +188,12 @@ LRESULT NativeWindow::OnPaint() const
 
 LRESULT NativeWindow::OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const
 {
+	auto position = DPIHelper::Current.DevicePointToLogicalPoint(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	MouseEventArgs e(std::move(position));
+
 	MouseClick([&](MouseEventHandler handler)
 	{
-		handler();
+		handler(e);
 	});
 	return 0;
 }

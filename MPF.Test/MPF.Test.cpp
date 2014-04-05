@@ -7,6 +7,7 @@
 using namespace MPF;
 using namespace MPF::Visual;
 using namespace MPF::UI;
+using namespace MPF::Input;
 
 void _stdcall MPFMain()
 {
@@ -55,7 +56,9 @@ void _stdcall MPFMain()
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();
-	auto hit = win.HitTest(Point());
+	
+	auto e = MouseEventArgs(Point());
+	win.RaiseEvent(UIElement::MouseLeftButtonUpEvent, e);
 
 	app.Run();
 }

@@ -104,12 +104,6 @@ public:
 		});
 	}
 
-	//引发事件
-	template<typename THandler, typename TArgs>
-	void RaiseEvent(const RoutedEvent<THandler>& ent, TArgs& args)
-	{
-		OnRaiseEvent(ent, args);
-	}
 protected:
 	template<typename T>
 	void SetPropertyChangedHandler(const DependencyProperty<T>& property, std::function<void()> handler)
@@ -150,11 +144,11 @@ protected:
 		return val;
 	}
 	MPF_API void OnValueChange(const String& name) const;
-	MPF_API virtual void OnRaiseEvent(const IRoutedEvent& ent, RoutedEventArgs& args);
 protected:
 	virtual any& FindParentCommonValue(const String& name) const;
 	virtual void InvokeParentCommonEventHandlers(const IRoutedEvent& ent, RoutedEventArgs& args) const;
 	virtual void AddCommonEventHandlers(const String& name, RoutedEventHandler&& handler) const;
+	static void DoEvent(DependencyObject& obj, const IRoutedEvent& ent, RoutedEventArgs& args);
 private:
 	//属性
 	std::unordered_map<String, any> localValues;

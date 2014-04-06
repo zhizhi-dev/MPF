@@ -57,13 +57,11 @@ void _stdcall MPFMain()
 	win.Show();
 	win.DoFrame();
 
-	win.MouseLeftButtonUp += [](MouseEventArgs& e)
+	win.MouseLeftButtonUp += [&](MouseEventArgs& e)
 	{
 		std::wcout << L"Window MouseLeftButton Up" << std::endl;
+		auto hit = win.HitTest(e.GetPosition());
 	};
-	
-	auto e = MouseEventArgs(Point());
-	win.RaiseEvent(UIElement::MouseLeftButtonUpEvent, e);
 
 	app.Run();
 }

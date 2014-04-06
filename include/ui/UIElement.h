@@ -58,6 +58,8 @@ public:
 	//获取或设置留白
 	mproperty(MPF::Visual::Thickness, Padding);
 
+	MPF_API UIElement* GetParent() const mnoexcept{ return parent; }
+
 	//鼠标左键释放时触发事件
 	EventWrapper<UIElement, MPF::Input::MouseEventHandler, MPF::Input::MouseEventArgs> MouseLeftButtonUp;
 
@@ -70,6 +72,13 @@ public:
 	///<return>测试成功的UI元素，并按逻辑树上从顶端到底端排列</return>
 	MPF_API std::vector<UIElement*> HitTest(MPF::Visual::Point point) mnoexcept;
 	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
+
+	//引发事件
+	template<typename THandler, typename TArgs>
+	static void RaiseEvent(const RoutedEvent<THandler>& ent, TArgs& args)
+	{
+		RaiseEventInternal(ent, args);
+	}
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(UIElement)
@@ -101,6 +110,7 @@ protected:
 	MPF_API virtual void UpdateSize() mnoexcept;
 	//自动计算大小
 	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
+
 	DECLARE_UI_FUNCS
 protected:
 	//渲染区域
@@ -109,9 +119,13 @@ protected:
 	std::pair<bool, MPF::Visual::Point> relativeOffset = { true, MPF::Visual::Point() };
 	//大小
 	std::pair<bool, MPF::Visual::Size> size = { true, MPF::Visual::Size() };
+protected:
+	MPF_API static void RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& args);
+	MPF_API static void SetParent(UIElement& element, UIElement* parent) mnoexcept;
 private:
 	void InitializeEventHandlers();
 private:
+	UIElement* parent = nullptr;
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(UIElement)
 };

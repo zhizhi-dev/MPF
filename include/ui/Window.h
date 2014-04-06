@@ -47,7 +47,7 @@ protected:
 	MPF_API virtual void UpdateRelativeOffset() mnoexcept;
 	DECLARE_UI_FUNCS
 private:
-	void AddEventHandlers();
+	void InitializeNativeWindowEventHandlers();
 private:
 	std::unique_ptr<MPF::Visual::NativeWindow> nativeWindow;
 	std::unique_ptr<MPF::Visual::RenderCoreProvider> renderer;

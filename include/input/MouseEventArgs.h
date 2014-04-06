@@ -5,17 +5,15 @@
 #include "../RoutedEventArgs.h"
 
 NS_MPF
-NS_UI
-class UIElement;
-NS_ED
 NS_INPUT
 
 //鼠标事件
 class MouseEventArgs : public RoutedEventArgs
 {
 public:
-	MouseEventArgs(MPF::Visual::Point&& position)
-		:position(std::move(position))
+	MouseEventArgs(MPF::UI::UIElement* source, MPF::UI::UIElement* destination,
+		const MPF::Visual::Point& position)
+		:RoutedEventArgs(source, destination), position(position)
 	{
 
 	}

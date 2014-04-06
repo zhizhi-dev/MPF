@@ -34,7 +34,7 @@ void Window::Initialize(RenderCoreProviders provider)
 		nativeWindow->SetWidth(Width);
 		nativeWindow->SetHeight(Height);
 		renderer = nativeWindow->CreateRenderCoreProvider(provider);
-		AddEventHandlers();
+		InitializeNativeWindowEventHandlers();
 	}
 
 	ContentElement::Initialize();
@@ -82,16 +82,17 @@ void Window::UpdateRelativeOffset() mnoexcept
 	relativeOffset.first = false;
 }
 
-void Window::AddEventHandlers()
+void Window::InitializeNativeWindowEventHandlers()
 {
 	auto window = nativeWindow.get();
 
-	window->MouseClick += [=](const MouseEventArgs& e)
+	auto mouseEventHandler = [=](NativeMouseEventArgs& e)
 	{
-		auto pos = e.GetPosition(*this);
-		std::wstringstream ss;
-		ss << L"Left: " << pos.X << std::endl << L"Top: " << pos.Y;
-		MessageBox((HWND)window->GetNativeHandle(), ss.str().c_str(), 
-			L"LeftMouseButton Up!", MB_OK | MB_ICONINFORMATION);
+		auto hit = HitTest(e.Position);
+		massert(hit.size());
+		MouseEventArgs args(hit.back(), hit.front(), e.Position);
+		RaiseEvent(MouseLeftButtonUpEvent, args);
 	};
+
+	window->MouseLeftButtonUp += mouseEventHandler;
 }

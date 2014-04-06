@@ -60,6 +60,7 @@ void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& a
 void Panel::AddChild(UIElement& elem)
 {
 	children.emplace_back(&elem);
+	SetParent(elem, this);
 }
 
 void Panel::AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems)
@@ -86,4 +87,16 @@ bool Panel::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements)
 		return true;
 	}
 	return false;
+}
+
+MPF::Visual::Size Panel::AutoMeasureSize() mnoexcept
+{
+	//根据内容计算大小
+	Size size = UIElement::AutoMeasureSize();
+	for (auto child : children)
+	{
+		massert(child);
+		
+	}
+	return{ 800, 600 };
 }

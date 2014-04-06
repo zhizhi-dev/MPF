@@ -189,9 +189,9 @@ LRESULT NativeWindow::OnPaint() const
 LRESULT NativeWindow::OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const
 {
 	auto position = DPIHelper::Current.DevicePointToLogicalPoint(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-	MouseEventArgs e(std::move(position));
+	NativeMouseEventArgs e(position);
 
-	MouseClick([&](MouseEventHandler handler)
+	MouseLeftButtonUp([&](NativeMouseEventHandler handler)
 	{
 		handler(e);
 	});

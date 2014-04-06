@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../include/ui/UIElement.h"
 #include "../include/Enumerable.h"
+#include <stack>
 
 using namespace MPF;
 using namespace MPF::UI;
@@ -18,7 +19,7 @@ DependencyProperty<Thickness> UIElement::MarginProperty(L"Margin");
 DependencyProperty<Thickness> UIElement::PaddingProperty(L"Padding");
 
 RoutedEvent<MouseEventHandler> UIElement::MouseLeftButtonUpEvent(L"MouseLeftButtonUp", RoutedEventMode::Bubble);
-																	  		 
+
 UIElement::UIElement()
 {
 	InitializeEventHandlers();
@@ -199,4 +200,43 @@ void UIElement::InitializeEventHandlers()
 
 void UIElement::OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args)
 {
+}
+
+void UIElement::SetParent(UIElement& element, UIElement* parent) mnoexcept
+{
+	element.parent = parent;
+}
+
+void UIElement::RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& args)
+{
+	massert(args.GetDestination() && args.GetSource());
+	//自顶向下
+	if (ent.GetMode() == RoutedEventMode::Tunnel)
+	{
+		//建立传递栈
+		std::stack<UIElement*> uiList;
+		auto end = args.GetDestination();
+		while (true)
+		{
+			uiList.emplace(end);
+			if (end == args.GetSource()) break;
+			end = end->parent;
+		}
+		//开始引发事件
+		while (!args.Handled && !uiList.empty())
+		{
+			auto elem = uiList.top();
+			DoEvent(*elem, ent, args);
+			uiList.pop();
+		}
+	}
+	//自底向上
+	if (ent.GetMode() == RoutedEventMode::Bubble)
+	{
+		for (UIElement* elem = args.GetSource(); !args.Handled; elem = elem->parent)
+		{
+			DoEvent(*elem, ent, args);
+			if (elem == args.GetDestination()) break;
+		}
+	}
 }

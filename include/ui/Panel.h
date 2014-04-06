@@ -31,6 +31,8 @@ protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 	MPF_API virtual MPF::Visual::Point MakeChildOffset(UIElement& elem);
+	//自动计算大小
+	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
 protected:
 	std::vector<UIElement*> children;
 

@@ -1,63 +1,63 @@
-#pragma once
+ï»¿#pragma once
 #include "../Type.h"
 
 NS_MPF
 NS_VSL
 
-//µã
+//ç‚¹
 class Point : public Object
 {
 public:
-	//´´½¨ Point µÄĞÂÊµÀı
+	//åˆ›å»º Point çš„æ–°å®ä¾‹
 	Point(float x = 0.f, float y = 0.f, float u = 0.f, float v = 0.f)
 		:x(x), y(y), u(u), v(v)
 	{
 
 	}
 
-	//»ñÈ¡ X ×ø±ê
+	//è·å– X åæ ‡
 	float GetX() const mnoexcept
 	{
 		return x;
 	}
 
-	//»ñÈ¡ Y ×ø±ê
+	//è·å– Y åæ ‡
 	float GetY() const mnoexcept
 	{
 		return y;
 	}
 
-	//ÉèÖÃ X ×ø±ê
+	//è®¾ç½® X åæ ‡
 	void SetX(float x) mnoexcept
 	{
 		this->x = x;
 	}
 
-	//ÉèÖÃ Y ×ø±ê
+	//è®¾ç½® Y åæ ‡
 	void SetY(float y) mnoexcept
 	{
 		this->y = y;
 	}
 
-	//»ñÈ¡ U ×ø±ê
+	//è·å– U åæ ‡
 	float GetU() const mnoexcept
 	{
 		return u;
 	}
 
-	//»ñÈ¡ V ×ø±ê
+	//è·å– V åæ ‡
 	float GetV() const mnoexcept
 	{
 		return v;
 	}
 
-	//ÉèÖÃ U ×ø±ê
+	//è®¾ç½® U åæ ‡
 	void SetU(float u) mnoexcept
 	{
 		this->u = u;
 	}
 
-	//ÉèÖÃ V ×ø±ê
+	//è®¾ç½® V åæ ‡
 	void SetV(float v) mnoexcept
 	{
 		this->v = v;
@@ -100,7 +100,7 @@ public:
 		return pt;
 	}
 
-	//»ñÈ¡ÀàĞÍ
+	//è·å–ç±»å‹
 	DECLARE_GETTYPE(Point)
 private:
 	float x;

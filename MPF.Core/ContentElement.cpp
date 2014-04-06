@@ -30,6 +30,10 @@ UIElement* ContentElement::GetContent() const
 void ContentElement::SetContent(UIElement* value)
 {
 	SetValue(ContentProperty, value);
+	if (value)
+	{
+		SetParent(*value, this);
+	}
 }
 
 void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
@@ -114,6 +118,7 @@ bool ContentElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& 
 		{
 			content->HitTest(point, elements);
 		}
+		return true;
 	}
 	return false;
 }

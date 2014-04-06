@@ -32,13 +32,14 @@ void DependencyObject::AddCommonEventHandlers(const String& name, RoutedEventHan
 {
 }
 
-void DependencyObject::OnRaiseEvent(const IRoutedEvent& ent, RoutedEventArgs& args)
+void DependencyObject::DoEvent(DependencyObject& obj, const IRoutedEvent& ent, RoutedEventArgs& args)
 {
-	auto it = localEvents.find(ent.GetName());
-	if (it != localEvents.end())
+	if (args.Handled)return;
+	auto it = obj.localEvents.find(ent.GetName());
+	if (it != obj.localEvents.end())
 	{
 		auto handler = (RoutedEventHandler&)it->second;
 		handler(args);
 	}
-	InvokeParentCommonEventHandlers(ent, args);
+	obj.InvokeParentCommonEventHandlers(ent, args);
 }

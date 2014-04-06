@@ -231,6 +231,9 @@
     <ClInclude Include="..\include\RoutedEventArgs.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="NativeEvents.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

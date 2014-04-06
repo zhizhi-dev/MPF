@@ -13,8 +13,6 @@ DEFINE_TYPE(Window, MPF::UI::Window)
 DEFINE_UI_VALUES(Window)
 DEFINE_UI_FUNCS(Window, ContentElement)
 
-DependencyProperty<MPF::String> Window::TitleProperty(L"Title", String::GetEmpty());
-
 Window::Window()
 {
 }

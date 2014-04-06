@@ -134,6 +134,7 @@
     <ClInclude Include="..\include\ui\ControlTemplate.h" />
     <ClInclude Include="..\include\ui\Panel.h" />
     <ClInclude Include="..\include\ui\RenderArgs.h" />
+    <ClInclude Include="..\include\ui\TemplateBinding.h" />
     <ClInclude Include="..\include\ui\TextBlock.h" />
     <ClInclude Include="..\include\ui\TextBox.h" />
     <ClInclude Include="..\include\ui\UIElement.h" />

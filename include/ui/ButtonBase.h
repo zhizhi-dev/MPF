@@ -14,6 +14,7 @@ public:
 	//获取类型
 	MPF_API DECLARE_GETTYPE(ButtonBase);
 	MPF_API DECLARE_GETINSTANTTYPE(ButtonBase);
+	DECLARE_PUB_UI_FUNCS;
 protected:
 
 	DECLARE_UI_FUNCS

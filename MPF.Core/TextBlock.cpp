@@ -8,13 +8,7 @@ using namespace MPF::Visual;
 using namespace MPF::UI;
 
 DEFINE_TYPE(TextBlock, MPF::UI::TextBlock)
-DEFINE_UI_VALUES(TextBlock)
 DEFINE_UI_FUNCS(TextBlock, UIElement)
-
-static SolidColorBrush defaultForegroundBrush(0xFF000000);
-DependencyProperty<MPF::String> TextBlock::TextProperty(L"Text", String::GetEmpty());
-DependencyProperty<MPF::Visual::Font> TextBlock::FontProperty(L"Font", MPF::Visual::Font(L"Microsoft YaHei", 15.f));
-DependencyProperty<const MPF::Visual::Brush*> TextBlock::ForegroundProperty(L"Foreground", &defaultForegroundBrush);
 
 TextBlock::TextBlock()
 {

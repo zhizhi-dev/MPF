@@ -29,6 +29,7 @@ public:
 	//获取类型
 	DECLARE_GETTYPE(Border);
 	DECLARE_GETINSTANTTYPE(Border);
+	DECLARE_PUB_UI_FUNCS;
 public:
 	//边框画刷
 	MPF_API static DependencyProperty<const MPF::Visual::Brush*> BorderBrushProperty;

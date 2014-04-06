@@ -10,6 +10,7 @@
 #include "../RoutedEventArgs.h"
 #include "../EventWrapper.h"
 #include "../input/InputEventHandlers.h"
+#include "ControlTemplate.h"
 
 NS_MPF
 NS_UI
@@ -58,6 +59,13 @@ public:
 	//获取或设置留白
 	mproperty(MPF::Visual::Thickness, Padding);
 
+	//获取模板
+	MPF_API ControlTemplate* GetTemplate() const;
+	//设置模板
+	MPF_API void SetTemplate(ControlTemplate* value);
+	//获取或设置模板
+	mproperty(ControlTemplate*, Template);
+
 	MPF_API UIElement* GetParent() const mnoexcept{ return parent; }
 
 	//鼠标左键释放时触发事件
@@ -81,8 +89,9 @@ public:
 	}
 
 	//获取类型
-	MPF_API DECLARE_GETTYPE(UIElement)
-	MPF_API DECLARE_GETINSTANTTYPE(UIElement)
+	MPF_API DECLARE_GETTYPE(UIElement);
+	MPF_API DECLARE_GETINSTANTTYPE(UIElement);
+	DECLARE_PUB_UI_FUNCS;
 public:
 	//宽度
 	MPF_API static DependencyProperty<float> WidthProperty;
@@ -94,6 +103,8 @@ public:
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> MarginProperty;
 	//留白
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> PaddingProperty;
+	//模板
+	MPF_API static DependencyProperty<ControlTemplate*> TemplateProperty;
 	//鼠标左键释放时触发事件
 	MPF_API static RoutedEvent<MPF::Input::MouseEventHandler> MouseLeftButtonUpEvent;
 protected:

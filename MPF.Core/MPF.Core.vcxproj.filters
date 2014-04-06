@@ -234,6 +234,9 @@
     <ClInclude Include="NativeEvents.h">
       <Filter>头文件\Input</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ui\TemplateBinding.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

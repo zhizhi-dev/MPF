@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../include/ui/ControlTemplate.h"
+#include "../include/ui/UIElement.h"
 
 using namespace MPF;
 using namespace MPF::Visual;

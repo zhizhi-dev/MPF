@@ -26,6 +26,7 @@ public:
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Panel);
 	MPF_API DECLARE_GETINSTANTTYPE(Panel);
+	DECLARE_PUB_UI_FUNCS;
 public:
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);

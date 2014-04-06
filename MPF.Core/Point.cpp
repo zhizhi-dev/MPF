@@ -3,5 +3,3 @@
 
 using namespace MPF;
 using namespace MPF::Visual;
-
-DEFINE_TYPE(Point, MPF::Visual::Point)

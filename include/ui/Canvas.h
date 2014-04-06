@@ -27,6 +27,7 @@ public:
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Canvas);
 	MPF_API DECLARE_GETINSTANTTYPE(Canvas);
+	DECLARE_PUB_UI_FUNCS;
 public:
 	//横坐标
 	MPF_API static DependencyProperty<float> LeftProperty;

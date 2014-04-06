@@ -5,7 +5,7 @@ NS_MPF
 NS_VSL
 
 //点
-class Point : public Object
+class Point
 {
 public:
 	//创建 Point 的新实例
@@ -99,16 +99,11 @@ public:
 
 		return pt;
 	}
-
-	//获取类型
-	DECLARE_GETTYPE(Point)
 private:
 	float x;
 	float y;
 	float u;
 	float v;
-
-	DECLARE_TYPE(Point)
 };
 
 NS_ED

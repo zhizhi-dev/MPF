@@ -44,6 +44,7 @@ public:
 	//获取类型
 	MPF_API DECLARE_GETTYPE(TextBlock);
 	MPF_API DECLARE_GETINSTANTTYPE(TextBlock);
+	DECLARE_PUB_UI_FUNCS;
 public:
 	//文字
 	MPF_API static DependencyProperty<MPF::String> TextProperty;

@@ -174,6 +174,24 @@ private:
 	virtual any& FindParentCommonValue(const String& name) const; \
 	virtual void InvokeParentCommonEventHandlers(const IRoutedEvent& ent, RoutedEventArgs& args) const; \
 	virtual void AddCommonEventHandlers(const String& name, RoutedEventHandler&& handler) const;
+#define DECLARE_PUB_UI_FUNCS \
+	template<typename T>	\
+	static void SetCommonStyleValue(const DependencyProperty<T>& property, const T& value)	\
+	{																				\
+		auto& name = property.GetName();											\
+		auto it = commonStyleValues.find(name);										\
+		if (it != commonStyleValues.end())											\
+		{																			\
+			if ((const T&)(it->second) != value)										\
+			{																		\
+				it->second = value;													\
+			}																		\
+		}																			\
+		else																		\
+		{																			\
+			commonStyleValues.emplace(name, std::move(value));						\
+		}																			\
+	}
 
 #define DEFINE_UI_FUNCS(CLASS, BASE) \
 	any& CLASS::FindParentCommonValue(const String& name) const \

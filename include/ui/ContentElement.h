@@ -29,8 +29,9 @@ public:
 	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
 
 	//获取类型
-	MPF_API DECLARE_GETTYPE(ContentElement)
-	MPF_API DECLARE_GETINSTANTTYPE(ContentElement)
+	MPF_API DECLARE_GETTYPE(ContentElement);
+	MPF_API DECLARE_GETINSTANTTYPE(ContentElement);
+	DECLARE_PUB_UI_FUNCS;
 public:
 	//内容
 	MPF_API static DependencyProperty<UIElement*> ContentProperty;

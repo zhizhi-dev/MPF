@@ -9,16 +9,7 @@ using namespace MPF::Visual;
 using namespace MPF::Input;
 
 DEFINE_TYPE(UIElement, MPF::UI::UIElement)
-DEFINE_UI_VALUES(UIElement)
 DEFINE_UI_FUNCS(UIElement, DependencyObject)
-
-DependencyProperty<float> UIElement::WidthProperty(L"Width", NAN);
-DependencyProperty<float> UIElement::HeightProperty(L"Height", NAN);
-DependencyProperty<Visibility> UIElement::VisibilityProperty(L"Visibility", Visibility::Visible);
-DependencyProperty<Thickness> UIElement::MarginProperty(L"Margin");
-DependencyProperty<Thickness> UIElement::PaddingProperty(L"Padding");
-
-RoutedEvent<MouseEventHandler> UIElement::MouseLeftButtonUpEvent(L"MouseLeftButtonUp", RoutedEventMode::Bubble);
 
 UIElement::UIElement()
 {
@@ -89,18 +80,37 @@ void UIElement::Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& a
 {
 	if (Visibility == Visibility::Visible)
 	{
-		RenderCore(renderer, std::move(args));
+		auto templ = Template;
+		if (templ)
+		{
+			templ->Template.Render(renderer, std::move(args));
+		}
+		else
+		{
+			RenderCore(renderer, std::move(args));
+		}
 	}
 }
 
 void UIElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
 {
-
 }
 
 void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
 {
-	UpdateCore(renderer, std::move(args));
+	auto templ = Template;
+	if (templ)
+	{
+		auto& templContent = templ->Template;
+		templContent.Update(renderer, std::move(args));
+		relativeOffset = templContent.relativeOffset;
+		size = templContent.size;
+		renderBound = templContent.renderBound;
+	}
+	else
+	{
+		UpdateCore(renderer, std::move(args));
+	}
 }
 
 void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
@@ -239,4 +249,14 @@ void UIElement::RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& arg
 			if (elem == args.GetDestination()) break;
 		}
 	}
+}
+
+ControlTemplate* UIElement::GetTemplate() const
+{
+	return GetValue(TemplateProperty);
+}
+
+void UIElement::SetTemplate(ControlTemplate* value)
+{
+	SetValue(TemplateProperty, value);
 }

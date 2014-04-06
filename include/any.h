@@ -61,6 +61,13 @@ public:
 	}
 
 	template<typename T>
+	any(T* value)
+		: value(std::make_unique<holder<std::remove_reference_t<T>*>>(value))
+	{
+
+	}
+
+	template<typename T>
 	any(const T& value)
 		: value(std::make_unique<holder<std::remove_reference_t<std::remove_cv_t<T>>>>(value))
 	{

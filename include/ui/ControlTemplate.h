@@ -1,8 +1,10 @@
 #pragma once
-#include "UIElement.h"
+#include "../Type.h"
 
 NS_MPF
 NS_UI
+
+class UIElement;
 
 //¿Ø¼þÄ£°å
 class ControlTemplate : public Object

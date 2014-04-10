@@ -1,5 +1,7 @@
 #pragma once
 #include "../Type.h"
+#include "../Binding.h"
+#include "TemplateBinding.h"
 
 NS_MPF
 NS_UI
@@ -20,11 +22,19 @@ public:
 	//获取或设置模板
 	mproperty(UIElement&, Template);
 
+	//设置模板绑定
+	template<typename T>
+	void SetTemplateBinding(UIElement& element, DependencyProperty<T>& property)
+	{
+
+	}
+
 	//获取类型
 	MPF_API DECLARE_GETTYPE(ControlTemplate);
 	MPF_API DECLARE_GETINSTANTTYPE(ControlTemplate);
 private:
 	UIElement* element;
+	
 	DECLARE_TYPE(ControlTemplate);
 };
 

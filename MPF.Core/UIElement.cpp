@@ -18,7 +18,6 @@ UIElement::UIElement()
 
 UIElement::~UIElement()
 {
-
 }
 
 void UIElement::Initialize()

@@ -1,4 +1,4 @@
-// MPF.Test.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+ï»¿// MPF.Test.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ void _stdcall MPFMain()
 	auto& app = Application::GetCurrent();
 	app.UncaughtException += [&](bool& isHandled)
 	{
-		std::wcout << L"·¢ÉúÒì³££¡" << std::endl;
+		std::wcout << L"å‘ç”Ÿå¼‚å¸¸ï¼" << std::endl;
 
 		system("Pause");
 	};
@@ -29,7 +29,7 @@ void _stdcall MPFMain()
 	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF0000);
 	//TextBlock::ForegroundProperty.SetValue(&linearBrush);
 
-	TextBlock textBlock1(L"µÛÇò¤Èchu¤Ï±¾µ±¤Ë¤Ğ¤«¤Ç¤¹¡£");
+	TextBlock textBlock1(L"å¸çƒã¨chuã¯æœ¬å½“ã«ã°ã‹ã§ã™ã€‚");
 	Canvas::SetPosition(textBlock1, { 50.f, 50.f });
 
 	TextBlock textBlock2(L"The quick fox jumps");

@@ -4,6 +4,7 @@
 #include "DependencyProperty.h"
 #include "RoutedEvent.h"
 #include "RoutedEventArgs.h"
+#include "Binding.h"
 
 NS_MPF
 
@@ -163,12 +164,14 @@ private:
 #define DECLARE_UI_VALUES \
 	static std::unordered_map<String, any> commonAnimationValues; \
 	static std::unordered_map<String, any> commonStyleValues;	  \
-	static std::unordered_multimap<String, RoutedEventHandler> commonStyleEvents;
+	static std::unordered_multimap<String, RoutedEventHandler> commonStyleEvents;\
+	static std::unordered_map<String, std::unique_ptr<Binding>> commonStyleBindings;
 
 #define DEFINE_UI_VALUES(CLASS) \
 	std::unordered_map<String, any> CLASS::commonAnimationValues; \
 	std::unordered_map<String, any> CLASS::commonStyleValues;	  \
-	std::unordered_multimap<String, RoutedEventHandler> CLASS::commonStyleEvents;
+	std::unordered_multimap<String, RoutedEventHandler> CLASS::commonStyleEvents;\
+	std::unordered_map<String, std::unique_ptr<Binding>> CLASS::commonStyleBindings;
 
 #define DECLARE_UI_FUNCS \
 	virtual any& FindParentCommonValue(const String& name) const; \
@@ -191,6 +194,23 @@ private:
 		{																			\
 			commonStyleValues.emplace(name, std::move(value));						\
 		}																			\
+	}																				\
+	template<typename T>	\
+	static void SetCommonStyleBinding(const DependencyProperty<T>& property, std::unique_ptr<Binding>&& binding) \
+	{																				\
+		auto& name = property.GetName();											\
+		auto it = commonStyleBindings.find(name);									\
+		if (it != commonStyleBindings.end())										\
+		{																			\
+			if (it->second.get() != binding.get())									\
+			{																		\
+				it->second = binding;												\
+			}																		\
+		}																			\
+		else																		\
+		{																			\
+			commonStyleBindings.emplace(name, std::move(binding));					\
+		}																			\
 	}
 
 #define DEFINE_UI_FUNCS(CLASS, BASE) \
@@ -205,6 +225,11 @@ private:
 		if (it != CLASS::commonStyleValues.end())				\
 		{														\
 			return it->second;									\
+		}														\
+		auto it2 = CLASS::commonStyleBindings.find(name);		\
+		if (it2 != CLASS::commonStyleBindings.end())			\
+		{														\
+			return it2->second->GetValue();						\
 		}														\
 		return BASE::FindParentCommonValue(name);				\
 	}															\

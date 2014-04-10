@@ -25,7 +25,7 @@ DependencyProperty<MPF::Visual::Thickness> Border::BorderThicknessProperty(L"Bor
 DependencyProperty<MPF::String> Window::TitleProperty(L"Title", String::GetEmpty());
 RoutedEvent<MouseEventHandler> UIElement::MouseLeftButtonUpEvent(L"MouseLeftButtonUp", RoutedEventMode::Bubble);
 
-static SolidColorBrush defaultForegroundBrush(0xFF000000);
+SolidColorBrush defaultForegroundBrush(0xFF000000);
 DependencyProperty<MPF::String> TextBlock::TextProperty(L"Text", String::GetEmpty());
 DependencyProperty<MPF::Visual::Font> TextBlock::FontProperty(L"Font", MPF::Visual::Font(L"Microsoft YaHei", 15.f));
 DependencyProperty<const MPF::Visual::Brush*> TextBlock::ForegroundProperty(L"Foreground", &defaultForegroundBrush);

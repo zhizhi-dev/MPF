@@ -237,6 +237,12 @@
     <ClInclude Include="..\include\ui\TemplateBinding.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Binding.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\Template.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -192,7 +192,24 @@ private:
 		}																			\
 		else																		\
 		{																			\
-			commonStyleValues.emplace(name, std::move(value));						\
+			commonStyleValues.emplace(name, value);									\
+		}																			\
+	}																				\
+	template<typename T>	\
+	static void SetCommonStyleValue(const DependencyProperty<T>& property, T&& value)	\
+	{																				\
+		auto& name = property.GetName();											\
+		auto it = commonStyleValues.find(name);										\
+		if (it != commonStyleValues.end())											\
+		{																			\
+			if ((const T&)(it->second) != value)										\
+			{																		\
+				it->second = value;													\
+			}																		\
+		}																			\
+		else																		\
+		{																			\
+			commonStyleValues.emplace(name, std::forward<T>(value));				\
 		}																			\
 	}																				\
 	template<typename T>	\

@@ -79,10 +79,9 @@ void UIElement::Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& a
 {
 	if (Visibility == Visibility::Visible)
 	{
-		auto templ = Template;
-		if (templ)
+		if (templateRoot)
 		{
-			templ->Template.Render(renderer, std::move(args));
+			templateRoot->Render(renderer, std::move(args));
 		}
 		else
 		{
@@ -100,11 +99,12 @@ void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& a
 	auto templ = Template;
 	if (templ)
 	{
-		auto& templContent = templ->Template;
-		templContent.Update(renderer, std::move(args));
-		relativeOffset = templContent.relativeOffset;
-		size = templContent.size;
-		renderBound = templContent.renderBound;
+		if (!templateInst) templateInst = templ(this);
+		if (!templateRoot) templateRoot = templateInst->GetRoot();
+		templateRoot->Update(renderer, std::move(args));
+		relativeOffset = templateRoot->relativeOffset;
+		size = templateRoot->size;
+		renderBound = templateRoot->renderBound;
 	}
 	else
 	{
@@ -250,12 +250,12 @@ void UIElement::RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& arg
 	}
 }
 
-ControlTemplate* UIElement::GetTemplate() const
+ControlTemplate UIElement::GetTemplate() const
 {
 	return GetValue(TemplateProperty);
 }
 
-void UIElement::SetTemplate(ControlTemplate* value)
+void UIElement::SetTemplate(ControlTemplate&& value)
 {
-	SetValue(TemplateProperty, value);
+	SetValue(TemplateProperty, std::move(value));
 }

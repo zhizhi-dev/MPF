@@ -234,9 +234,6 @@
     <ClInclude Include="NativeEvents.h">
       <Filter>头文件\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\ui\TemplateBinding.h">
-      <Filter>头文件\UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Binding.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -360,9 +357,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="any.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ControlTemplate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">

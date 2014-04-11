@@ -19,7 +19,7 @@ DependencyProperty<float> UIElement::HeightProperty(L"Height", NAN);
 DependencyProperty<Visibility> UIElement::VisibilityProperty(L"Visibility", Visibility::Visible);
 DependencyProperty<Thickness> UIElement::MarginProperty(L"Margin");
 DependencyProperty<Thickness> UIElement::PaddingProperty(L"Padding");
-DependencyProperty<ControlTemplate*> UIElement::TemplateProperty(L"Template");
+DependencyProperty<ControlTemplate> UIElement::TemplateProperty(L"Template");
 DependencyProperty<const MPF::Visual::Brush*> Border::BorderBrushProperty(L"BorderBrush");
 DependencyProperty<MPF::Visual::Thickness> Border::BorderThicknessProperty(L"BorderThickness");
 DependencyProperty<MPF::String> Window::TitleProperty(L"Title", String::GetEmpty());
@@ -30,24 +30,41 @@ DependencyProperty<MPF::String> TextBlock::TextProperty(L"Text", String::GetEmpt
 DependencyProperty<MPF::Visual::Font> TextBlock::FontProperty(L"Font", MPF::Visual::Font(L"Microsoft YaHei", 15.f));
 DependencyProperty<const MPF::Visual::Brush*> TextBlock::ForegroundProperty(L"Foreground", &defaultForegroundBrush);
 
-struct ButtonInitializer
+class DefautlButtonTemplateInstace : public TemplateInstance
 {
-	ButtonInitializer()
-		:borderBrush(0xFFACACAC), backBrush(0xFFECECEC), templ(border)
+public:
+	DefautlButtonTemplateInstace(UIElement* parent)
+		:borderBrush(0xFFACACAC), backBrush(0xFFECECEC)
 	{
-		text.Text = L"Œ“ «∞¥≈•";
+		Button& button = reinterpret_cast<Button&>(*parent);
+
+		textBlock.Text = button.Text;
+
 		border.BorderThickness = 1;
 		border.BorderBrush = &borderBrush;
 		border.Background = &backBrush;
-		border.Content = &text;
 		border.Padding = 5.f;
-
-		Button::SetCommonStyleValue(UIElement::TemplateProperty, &templ);
+		border.Content = &textBlock;
 	}
 
+	virtual UIElement* GetRoot()
+	{
+		return &border;
+	}
+private:
 	Border border;
-	TextBlock text;
+	TextBlock textBlock;
 	SolidColorBrush borderBrush;
 	SolidColorBrush backBrush;
-	ControlTemplate templ;
-} buttonInit;
+};
+
+struct TemplatesInitializer
+{
+	TemplatesInitializer()
+	{
+		Button::SetCommonStyleValue<ControlTemplate>(UIElement::TemplateProperty, [](UIElement* parent)
+		{
+			return std::make_unique<DefautlButtonTemplateInstace>(parent);
+		});
+	}
+} templatesnitializer;

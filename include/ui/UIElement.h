@@ -60,11 +60,11 @@ public:
 	mproperty(MPF::Visual::Thickness, Padding);
 
 	//获取模板
-	MPF_API ControlTemplate* GetTemplate() const;
+	MPF_API ControlTemplate GetTemplate() const;
 	//设置模板
-	MPF_API void SetTemplate(ControlTemplate* value);
+	MPF_API void SetTemplate(ControlTemplate&& value);
 	//获取或设置模板
-	mproperty(ControlTemplate*, Template);
+	mproperty(ControlTemplate, Template);
 
 	MPF_API UIElement* GetParent() const mnoexcept{ return parent; }
 
@@ -104,7 +104,7 @@ public:
 	//留白
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> PaddingProperty;
 	//模板
-	MPF_API static DependencyProperty<ControlTemplate*> TemplateProperty;
+	MPF_API static DependencyProperty<ControlTemplate> TemplateProperty;
 	//鼠标左键释放时触发事件
 	MPF_API static RoutedEvent<MPF::Input::MouseEventHandler> MouseLeftButtonUpEvent;
 protected:
@@ -137,6 +137,8 @@ private:
 	void InitializeEventHandlers();
 private:
 	UIElement* parent = nullptr;
+	std::unique_ptr<TemplateInstance> templateInst;
+	UIElement* templateRoot = nullptr;
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(UIElement)
 };

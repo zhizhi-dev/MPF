@@ -46,7 +46,7 @@ void _stdcall MPFMain()
 
 	Button button1;
 	button1.BorderBrush = &linearBrush;
-	button1.Text = L"The quick fox jumps";
+	button1.Text = L"我是按钮";
 	button1.Padding = 10.f;
 	button1.BorderThickness = 1.f;
 	Canvas::SetPosition(button1, { 50.f, 150.f });

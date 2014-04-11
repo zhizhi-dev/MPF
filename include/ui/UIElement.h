@@ -21,9 +21,6 @@ public:
 	MPF_API UIElement();
 	MPF_API virtual ~UIElement();
 
-	//加载
-	MPF_API virtual void Initialize();
-
 	//获取宽度
 	MPF_API float GetWidth() const;
 	//设置宽度

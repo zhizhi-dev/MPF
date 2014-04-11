@@ -23,7 +23,6 @@ void _stdcall MPFMain()
 	win.Title = L"Hello MPF Window.";
 	win.Width = 800;
 	win.Height = 600;
-	win.Initialize();
 
 	//TextBlock::FontProperty.SetValue(Font(L"Microsoft YaHei", 40.f));
 	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF0000);

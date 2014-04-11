@@ -20,11 +20,6 @@ UIElement::~UIElement()
 {
 }
 
-void UIElement::Initialize()
-{
-
-}
-
 float UIElement::GetWidth() const
 {
 	return GetValue(WidthProperty);

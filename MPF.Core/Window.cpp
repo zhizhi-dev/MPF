@@ -13,29 +13,25 @@ DEFINE_TYPE(Window, MPF::UI::Window)
 DEFINE_UI_VALUES(Window)
 DEFINE_UI_FUNCS(Window, ContentElement)
 
-Window::Window()
+Window::Window(MPF::Visual::RenderCoreProviders provider)
+:provider(provider)
 {
 }
 
 Window::~Window()
 {
-	
+
 }
 
-void Window::Initialize(RenderCoreProviders provider)
+void Window::CreateNativeWindow()
 {
-	if (nativeWindow == nullptr)
-	{
-		nativeWindow = std::make_unique<NativeWindow>();
-		nativeWindow->Create();
-		nativeWindow->SetTitle(Title);
-		nativeWindow->SetWidth(Width);
-		nativeWindow->SetHeight(Height);
-		renderer = nativeWindow->CreateRenderCoreProvider(provider);
-		InitializeNativeWindowEventHandlers();
-	}
-
-	ContentElement::Initialize();
+	nativeWindow = std::make_unique<NativeWindow>();
+	nativeWindow->Create();
+	nativeWindow->SetTitle(Title);
+	nativeWindow->SetWidth(Width);
+	nativeWindow->SetHeight(Height);
+	renderer = nativeWindow->CreateRenderCoreProvider(provider);
+	InitializeNativeWindowEventHandlers();
 }
 
 const MPF::String& Window::GetTitle() const
@@ -55,14 +51,14 @@ void Window::SetTitle(MPF::String&& value)
 
 void Window::Show()
 {
-	if (nativeWindow)
-	{
-		nativeWindow->Show();
-	}
+	if (!nativeWindow) CreateNativeWindow();
+	massert(nativeWindow);
+	nativeWindow->Show();
 }
 
 void Window::DoFrame()
 {
+	massert(renderer);
 	auto& renderRef = *renderer;
 
 	Update(renderRef, UpdateArgs{});

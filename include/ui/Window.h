@@ -14,12 +14,9 @@ class Window : public ContentElement
 {
 public:
 	//创建 Brush 的新实例
-	MPF_API Window();
-	MPF_API virtual ~Window();
-
-	//加载
-	MPF_API virtual void Initialize(MPF::Visual::RenderCoreProviders provider = 
+	MPF_API Window(MPF::Visual::RenderCoreProviders provider =
 		MPF::Visual::RenderCoreProviders::GDI);
+	MPF_API virtual ~Window();
 
 	//获取标题
 	MPF_API const MPF::String& GetTitle() const;
@@ -49,9 +46,11 @@ protected:
 	DECLARE_UI_FUNCS
 private:
 	void InitializeNativeWindowEventHandlers();
+	void CreateNativeWindow();
 private:
 	std::unique_ptr<MPF::Visual::NativeWindow> nativeWindow;
 	std::unique_ptr<MPF::Visual::RenderCoreProvider> renderer;
+	MPF::Visual::RenderCoreProviders provider;
 	DECLARE_UI_VALUES
 	DECLARE_TYPE(Window)
 };

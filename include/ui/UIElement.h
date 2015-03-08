@@ -63,7 +63,7 @@ public:
 	//获取或设置模板
 	mproperty(ControlTemplate, Template);
 
-	MPF_API UIElement* GetParent() const mnoexcept{ return parent; }
+	MPF_API UIElement* GetParent() const noexcept{ return parent; }
 
 	//鼠标左键释放时触发事件
 	EventWrapper<UIElement, MPF::Input::MouseEventHandler, MPF::Input::MouseEventArgs> MouseLeftButtonUp;
@@ -71,12 +71,12 @@ public:
 	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 
-	MPF_API MPF::Visual::Size MeasureSize() mnoexcept;
-	MPF_API MPF::Visual::Quad GetRenderBound() const mnoexcept;
+	MPF_API MPF::Visual::Size MeasureSize() noexcept;
+	MPF_API MPF::Visual::Quad GetRenderBound() const noexcept;
 	///<summary>点击测试</summary>
 	///<return>测试成功的UI元素，并按逻辑树上从顶端到底端排列</return>
-	MPF_API std::vector<UIElement*> HitTest(MPF::Visual::Point point) mnoexcept;
-	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
+	MPF_API std::vector<UIElement*> HitTest(MPF::Visual::Point point) noexcept;
+	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) noexcept;
 
 	//引发事件
 	template<typename THandler, typename TArgs>
@@ -110,14 +110,14 @@ protected:
 	MPF_API virtual void OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args);
 protected:
 	//更新相对父节点的偏移
-	MPF_API virtual void UpdateRelativeOffset() mnoexcept;
+	MPF_API virtual void UpdateRelativeOffset() noexcept;
 	///<summary>更新渲染区域</summary>
 	///<param name="parentOffset">父节点的绝对偏移</param>
-	MPF_API virtual void UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept;
+	MPF_API virtual void UpdateRenderBound(MPF::Visual::Point parentOffset) noexcept;
 	//更新大小
-	MPF_API virtual void UpdateSize() mnoexcept;
+	MPF_API virtual void UpdateSize() noexcept;
 	//自动计算大小
-	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
+	MPF_API virtual MPF::Visual::Size AutoMeasureSize() noexcept;
 
 	DECLARE_UI_FUNCS
 protected:
@@ -129,7 +129,7 @@ protected:
 	std::pair<bool, MPF::Visual::Size> size = { true, MPF::Visual::Size() };
 protected:
 	MPF_API static void RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& args);
-	MPF_API static void SetParent(UIElement& element, UIElement* parent) mnoexcept;
+	MPF_API static void SetParent(UIElement& element, UIElement* parent) noexcept;
 private:
 	void InitializeEventHandlers();
 private:

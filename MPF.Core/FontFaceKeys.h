@@ -8,9 +8,9 @@ NS_VSL
 struct FontFaceKey
 {
 	MPF::String FileName;
-	uint FaceIndex;
+	uint32_t FaceIndex;
 
-	bool operator==(const FontFaceKey& key) const mnoexcept
+	bool operator==(const FontFaceKey& key) const noexcept
 	{
 		return FileName == key.FileName && FaceIndex == key.FaceIndex;
 	}
@@ -19,10 +19,10 @@ struct FontFaceKey
 struct FontFaceCacheKey
 {
 	wchar_t Char;
-	uint XInPixels;
-	uint YInPixels;
+	uint32_t XInPixels;
+	uint32_t YInPixels;
 
-	bool operator==(const FontFaceCacheKey& key) const mnoexcept
+	bool operator==(const FontFaceCacheKey& key) const noexcept
 	{
 		return Char == key.Char && XInPixels == key.XInPixels && YInPixels == key.YInPixels;
 	}
@@ -31,9 +31,9 @@ struct FontFaceCacheKey
 struct FontGlyph
 {
 	std::shared_ptr<BitmapData<byte>> Glyph;
-	uint Left;
-	uint Top;
-	std::pair<uint, uint> Advance;
+	uint32_t Left;
+	uint32_t Top;
+	std::pair<uint32_t, uint32_t> Advance;
 };
 
 NS_ED

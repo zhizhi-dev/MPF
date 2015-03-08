@@ -6,13 +6,13 @@ using namespace MPF;
 
 DEFINE_TYPE(Application, MPF::Application)
 //µ±Ç° Application
-Application currentApp;
+Application Application::currentApp;
 
-Application::Application()
+Application::Application() noexcept
 {
 }
 
-Application& Application::GetCurrent() mnoexcept
+Application& Application::GetCurrent() noexcept
 {
 	return currentApp;
 }
@@ -66,21 +66,20 @@ void Application::Run() const
 	}
 }
 
-void CreateApplication()
+void Application::CreateApplication(MPFMainHandler handler)
 {
+	currentApp.Run(handler);
 }
 
 int _stdcall MPFStartup(MPFMainHandler handler)
 {
-	CreateApplication();
-	currentApp.Run(handler);
+	Application::CreateApplication(handler);
 	return 0;
 }
 
 int _stdcall MPFConsoleStartup(MPFMainHandler handler)
 {
 	std::locale::global(std::locale(""));
-	CreateApplication();
-	currentApp.Run(handler);
+	Application::CreateApplication(handler);
 	return 0;
 }

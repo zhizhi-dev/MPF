@@ -24,7 +24,7 @@ Thread::~Thread()
 void Thread::Start(void* param)
 {
 	startParam = std::make_shared<ThreadStartParameter>(this, param);
-
+	
 	handle = CreateThread(nullptr, 0, Thread::Invoke, startParam.get(), 0, &threadId);
 	massert(handle != nullptr);
 }

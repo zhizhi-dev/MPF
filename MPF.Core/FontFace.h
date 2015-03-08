@@ -21,13 +21,13 @@ public:
 	FontFace(const FontFace& fontFace) = delete;
 
 	//绘制单个字符并返回字符的像素大小
-	std::pair<uint, uint> DrawChar(BitmapData<byte>& bitmap, uint left, uint top, wchar_t chr, float size);
+	std::pair<uint32_t, uint32_t> DrawChar(BitmapData<byte>& bitmap, uint32_t left, uint32_t top, wchar_t chr, float size);
 
 	//计算文本要占用的像素大小
-	std::pair<uint, uint> MeasureText(const MPF::String& text, float size);
+	std::pair<uint32_t, uint32_t> MeasureText(const MPF::String& text, float size);
 
-	FT_Face GetFace() const mnoexcept;
-	operator FT_Face() const mnoexcept;
+	FT_Face GetFace() const noexcept;
+	operator FT_Face() const noexcept;
 private:
 	const FontGlyph& GetGlyphCache(const FontFaceCacheKey& key);
 	const FontGlyph& GetGlyphCache(wchar_t chr, float size);

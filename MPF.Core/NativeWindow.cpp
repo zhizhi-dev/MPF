@@ -45,7 +45,7 @@ void NativeWindow::CreateWindowClass()
 	massert(isSucceed);
 }
 
-LRESULT CALLBACK NativeWindow::WindowProcWrapper(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK NativeWindow::WindowProcWrapper(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	auto window = (NativeWindow*)GetProp(hWnd, MPFWindowHandlePropName);
 
@@ -64,7 +64,7 @@ LRESULT CALLBACK NativeWindow::WindowProcWrapper(HWND hWnd, UINT uMsg, WPARAM wP
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -106,7 +106,7 @@ void NativeWindow::SetTitle(const String& title)
 	SetWindowText(hWnd, title.GetDataPointer());
 }
 
-uint NativeWindow::GetWidth() const
+uint32_t NativeWindow::GetWidth() const
 {
 	RECT rect;
 	GetWindowRect(hWnd, &rect);
@@ -114,14 +114,14 @@ uint NativeWindow::GetWidth() const
 	return rect.right - rect.left;
 }
 
-void NativeWindow::SetWidth(uint width)
+void NativeWindow::SetWidth(uint32_t width)
 {
 	RECT rect;
 	GetWindowRect(hWnd, &rect);
 	SetWindowPos(hWnd, nullptr, rect.left, rect.top, width, rect.bottom - rect.top, NULL);
 }
 
-uint NativeWindow::GetHeight() const
+uint32_t NativeWindow::GetHeight() const
 {
 	RECT rect;
 	GetWindowRect(hWnd, &rect);
@@ -129,7 +129,7 @@ uint NativeWindow::GetHeight() const
 	return rect.bottom - rect.top;
 }
 
-void NativeWindow::SetHeight(uint height)
+void NativeWindow::SetHeight(uint32_t height)
 {
 	RECT rect;
 	GetWindowRect(hWnd, &rect);
@@ -156,7 +156,7 @@ std::unique_ptr<RenderCoreProvider> NativeWindow::CreateRenderCoreProvider(Rende
 	return render;
 }
 
-uint NativeWindow::GetClientWidth() const
+uint32_t NativeWindow::GetClientWidth() const
 {
 	RECT rect;
 
@@ -164,7 +164,7 @@ uint NativeWindow::GetClientWidth() const
 	return rect.right - rect.left;
 }
 
-uint NativeWindow::GetClientHeight() const
+uint32_t NativeWindow::GetClientHeight() const
 {
 	RECT rect;
 

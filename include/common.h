@@ -10,10 +10,8 @@
 #define NS_UI namespace UI {
 #define NS_INPUT namespace Input {
 
-#ifdef _MSC_VER
-#define mnoexcept throw()
-#else
-#define mnoexcept noexcept
+#if _MSC_VER < 1900
+#define noexcept throw()
 #endif
 
 #define mrestrict __restrict

@@ -51,7 +51,7 @@ void _stdcall MPFMain()
 	Canvas::SetPosition(button1, { 50.f, 150.f });
 
 	Canvas canvas;
-	canvas.AddChildren({ textBlock1, border1, button1 });
+	canvas.AddChildren(textBlock1, border1, button1);
 	win.Content = &canvas;
 	win.Show();
 	win.DoFrame();
@@ -59,7 +59,7 @@ void _stdcall MPFMain()
 	button1.MouseLeftButtonUp += [&](MouseEventArgs& e)
 	{
 		std::wcout << L"Button1 MouseLeftButton Up" << std::endl;
-		auto hit = win.HitTest(e.GetPosition());
+		MessageBox(L"Hello MPF", L"Button1 MouseLeftButton Up", MessageBoxIcons::Information);
 	};
 
 	app.Run();

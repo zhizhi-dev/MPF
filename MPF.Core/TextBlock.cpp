@@ -108,7 +108,7 @@ void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 	}
 }
 
-MPF::Visual::Size TextBlock::AutoMeasureSize() mnoexcept
+MPF::Visual::Size TextBlock::AutoMeasureSize() noexcept
 {
 	auto size = UIElement::AutoMeasureSize();
 

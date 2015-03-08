@@ -6,3 +6,5 @@
 #else
 #define MPF_API __declspec(dllimport)
 #endif
+
+#define MPF_CALL _stdcall

@@ -42,7 +42,7 @@ public:
 	MPF_API static DependencyProperty<MPF::String> TitleProperty;
 protected:
 	//更新相对父节点的偏移
-	MPF_API virtual void UpdateRelativeOffset() mnoexcept;
+	MPF_API virtual void UpdateRelativeOffset() noexcept;
 	DECLARE_UI_FUNCS
 private:
 	void InitializeNativeWindowEventHandlers();

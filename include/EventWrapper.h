@@ -9,7 +9,7 @@ template<typename TObject, typename THandler, typename TArgs>
 class EventWrapper
 {
 public:
-	EventWrapper() mnoexcept{}
+	EventWrapper() noexcept{}
 
 	//添加侦听器
 	void operator += (THandler handler)

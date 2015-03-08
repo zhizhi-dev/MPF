@@ -63,16 +63,7 @@ void Panel::AddChild(UIElement& elem)
 	SetParent(elem, this);
 }
 
-void Panel::AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems)
-{
-	children.reserve(children.size() + elems.size());
-	for (auto elem : elems)
-	{
-		AddChild(elem);
-	}
-}
-
-bool Panel::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept
+bool Panel::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) noexcept
 {
 	if (UIElement::HitTest(point, elements))
 	{
@@ -89,7 +80,7 @@ bool Panel::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements)
 	return false;
 }
 
-MPF::Visual::Size Panel::AutoMeasureSize() mnoexcept
+MPF::Visual::Size Panel::AutoMeasureSize() noexcept
 {
 	//根据内容计算大小
 	Size size = UIElement::AutoMeasureSize();

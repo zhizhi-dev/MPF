@@ -27,7 +27,7 @@ void Triangle::Transform(std::function<void(Point&)> func)
 	func(pointC);
 }
 
-bool Triangle::Contains(const Point& point) const mnoexcept
+bool Triangle::Contains(const Point& point) const noexcept
 {
 	if ((point.X == pointA.X && point.Y == pointA.Y) ||
 	(point.X == pointB.X && point.Y == pointB.Y) ||

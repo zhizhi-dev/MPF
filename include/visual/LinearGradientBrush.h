@@ -9,19 +9,19 @@ class LinearGradientBrush : public Brush
 {
 public:
 	//创建 LinearGradientBrush 的新实例
-	MPF_API LinearGradientBrush(color_t startColor, color_t endColor) mnoexcept;
+	MPF_API LinearGradientBrush(color_t startColor, color_t endColor) noexcept;
 
 	//采样
 	MPF_API virtual color_t TakeSample(float u, float v) const;
 
 	//获取颜色
-	MPF_API color_t GetStartColor() const mnoexcept;
+	MPF_API color_t GetStartColor() const noexcept;
 	//设置颜色
-	MPF_API void SetStartColor(color_t color) mnoexcept;
+	MPF_API void SetStartColor(color_t color) noexcept;
 	//获取颜色
-	MPF_API color_t GetEndColor() const mnoexcept;
+	MPF_API color_t GetEndColor() const noexcept;
 	//设置颜色
-	MPF_API void SetEndColor(color_t color) mnoexcept;
+	MPF_API void SetEndColor(color_t color) noexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(LinearGradientBrush)

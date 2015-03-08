@@ -16,7 +16,7 @@ class IRoutedEvent
 {
 public:
 	virtual const String& GetName() const = 0;
-	virtual RoutedEventMode GetMode() const mnoexcept = 0;
+	virtual RoutedEventMode GetMode() const noexcept = 0;
 };
 
 //路由事件
@@ -45,7 +45,7 @@ public:
 	}
 
 	//获取事件模式
-	virtual RoutedEventMode GetMode() const mnoexcept
+	virtual RoutedEventMode GetMode() const noexcept
 	{
 		return mode;
 	}

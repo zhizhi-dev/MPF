@@ -14,7 +14,7 @@ public:
 	virtual ~DeviceContext();
 
 	//获取 HDC
-	HDC GetNativeHandle() const mnoexcept;
+	HDC GetNativeHandle() const noexcept;
 
 	//设置颜色
 

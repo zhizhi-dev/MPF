@@ -42,7 +42,7 @@ std::shared_ptr<FontManager> FontManager::GetCurrent()
 }
 
 String FontManager::GetFileNameFromFamilyName(
-	const MPF::String& faceName, uint& faceIndex)
+	const MPF::String& faceName, uint32_t& faceIndex)
 {
 	static const LPWSTR fontRegistryPath = L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
 	HKEY hKey;
@@ -143,7 +143,7 @@ std::shared_ptr<FontFace> FontManager::LookupFontFace(const FontFaceKey& key)
 }
 
 std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& fileName,
-	uint faceIndex)
+	uint32_t faceIndex)
 {
 	FontFaceKey key{ fileName, faceIndex };
 	auto face = LookupFontFace(key);
@@ -154,7 +154,7 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& fileName,
 	return LoadFontFromFileName(std::move(key));
 }
 
-std::shared_ptr<FontFace> FontManager::GetFontFace(MPF::String&& fileName, uint faceIndex)
+std::shared_ptr<FontFace> FontManager::GetFontFace(MPF::String&& fileName, uint32_t faceIndex)
 {
 	FontFaceKey key{ std::move(fileName), faceIndex };
 	auto face = LookupFontFace(key);
@@ -167,7 +167,7 @@ std::shared_ptr<FontFace> FontManager::GetFontFace(MPF::String&& fileName, uint 
 
 std::shared_ptr<FontFace> FontManager::GetFontFace(const MPF::String& familyName)
 {
-	uint faceIndex = 0;
+	uint32_t faceIndex = 0;
 	auto fileName = GetFileNameFromFamilyName(familyName, faceIndex);
 
 	return GetFontFace(fileName, faceIndex);
@@ -180,7 +180,7 @@ void FontManager::SetFontFaceSize(FT_Face face, float size) const
 	SetFontFaceSize(face, pair.first, pair.second);
 }
 
-void FontManager::SetFontFaceSize(FT_Face face, uint xInPixels, uint yInPixels) const
+void FontManager::SetFontFaceSize(FT_Face face, uint32_t xInPixels, uint32_t yInPixels) const
 {
 	massert(face != nullptr);
 

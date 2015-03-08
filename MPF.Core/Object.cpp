@@ -5,13 +5,3 @@
 using namespace MPF;
 
 DEFINE_TYPE(Object, MPF::Object)
-
-Object::Object()
-{
-
-}
-
-uint Object::GetHashCode() const mnoexcept
-{
-	return (uint)this;
-}

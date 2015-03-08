@@ -9,22 +9,22 @@ using namespace MPF;
 DEFINE_TYPE(String, MPF::String)
 String String::empty;
 
-String::String() mnoexcept
+constexpr String::String() noexcept
 {
 }
 
-String::String(const wchar_t chars[], uint length) mnoexcept
+String::String(const wchar_t chars[], uint32_t length) noexcept
 : chars(chars), length(length)
 {
 	massert(chars);
 }
 
-uint String::GetLength() const mnoexcept
+uint32_t String::GetLength() const noexcept
 {
 	return length;
 }
 
-const wchar_t* String::GetDataPointer() const mnoexcept
+const wchar_t* String::GetDataPointer() const noexcept
 {
 	//chars²»ÄÜÎªnullptr
 	massert(chars != nullptr);
@@ -32,7 +32,7 @@ const wchar_t* String::GetDataPointer() const mnoexcept
 	return chars;
 }
 
-uint String::GetHashCode() const mnoexcept
+uint32_t String::GetHashCode() const noexcept
 {
 	massert(chars);
 	if (hashCode)
@@ -64,12 +64,12 @@ String::String(const wchar_t* chars, bool isOwner)
 	}
 }
 
-String::~String()
+String::~String() noexcept
 {
 	Dispose();
 }
 
-void String::Dispose()
+void String::Dispose() noexcept
 {
 	if (isOwner && chars)
 	{
@@ -79,7 +79,7 @@ void String::Dispose()
 	chars = nullptr;
 }
 
-bool String::operator == (const String& str) const mnoexcept
+bool String::operator == (const String& str) const noexcept
 {
 	massert(chars);
 	massert(str.chars);
@@ -89,7 +89,7 @@ bool String::operator == (const String& str) const mnoexcept
 	return std::wcscmp(chars, str.chars) == 0;
 }
 
-bool String::operator != (const String& str) const mnoexcept
+bool String::operator != (const String& str) const noexcept
 {
 	return !(*this == str);
 }
@@ -123,7 +123,7 @@ String::String(const String& str)
 	}
 }
 
-String::String(String&& str) mnoexcept
+String::String(String&& str) noexcept
 	:chars(str.chars), isOwner(str.isOwner), length(str.length), hashCode(str.hashCode)
 {
 	massert(chars);
@@ -151,7 +151,7 @@ const String& String::operator = (const String& str)
 	return *this;
 }
 
-const String& String::operator = (String&& str) mnoexcept
+const String& String::operator = (String&& str) noexcept
 {
 	Dispose();
 	chars = str.chars;
@@ -167,7 +167,7 @@ const String& String::operator = (String&& str) mnoexcept
 	return *this;
 }
 
-bool String::IsEmpty() const mnoexcept
+bool String::IsEmpty() const noexcept
 {
 	return length == 0;
 }

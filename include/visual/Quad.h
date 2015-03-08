@@ -21,32 +21,32 @@ public:
 	//获取顶点数据
 	MPF_API virtual std::vector<Point> GetPoints() const;
 
-	const Point& GetPointA() const mnoexcept{ return pointA; }
-	Point& GetPointA() mnoexcept{ return pointA; }
-	void SetPointA(const Point& point) mnoexcept{ pointA = point; }
+	const Point& GetPointA() const noexcept{ return pointA; }
+	Point& GetPointA() noexcept{ return pointA; }
+	void SetPointA(const Point& point) noexcept{ pointA = point; }
 	mproperty(Point&, PointA);
 
-	const Point& GetPointB() const mnoexcept{ return pointB; }
-	Point& GetPointB() mnoexcept{ return pointB; }
-	void SetPointB(const Point& point) mnoexcept{ pointB = point; }
+	const Point& GetPointB() const noexcept{ return pointB; }
+	Point& GetPointB() noexcept{ return pointB; }
+	void SetPointB(const Point& point) noexcept{ pointB = point; }
 	mproperty(Point&, PointB);
 
-	const Point& GetPointC() const mnoexcept{ return pointC; }
-	Point& GetPointC() mnoexcept{ return pointC; }
-	void SetPointC(const Point& point) mnoexcept{ pointC = point; }
+	const Point& GetPointC() const noexcept{ return pointC; }
+	Point& GetPointC() noexcept{ return pointC; }
+	void SetPointC(const Point& point) noexcept{ pointC = point; }
 	mproperty(Point&, PointC);
 
-	const Point& GetPointD() const mnoexcept{ return pointD; }
-	Point& GetPointD() mnoexcept{ return pointD; }
-	void SetPointD(const Point& point) mnoexcept{ pointD = point; }
+	const Point& GetPointD() const noexcept{ return pointD; }
+	Point& GetPointD() noexcept{ return pointD; }
+	void SetPointD(const Point& point) noexcept{ pointD = point; }
 	mproperty(Point&, PointD);
 
 	MPF_API virtual void Transform(std::function<void(Point&)> func);
-	MPF_API void Translate(const Point& point) mnoexcept;
-	MPF_API const Quad& operator-=(const Thickness& thick) mnoexcept;
-	MPF_API Quad operator-(const Thickness& thick) const mnoexcept;
-	MPF_API Quad operator+(const Thickness& thick) const mnoexcept;
-	MPF_API bool Contains(const Point& point) const mnoexcept;
+	MPF_API void Translate(const Point& point) noexcept;
+	MPF_API const Quad& operator-=(const Thickness& thick) noexcept;
+	MPF_API Quad operator-(const Thickness& thick) const noexcept;
+	MPF_API Quad operator+(const Thickness& thick) const noexcept;
+	MPF_API bool Contains(const Point& point) const noexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Quad);

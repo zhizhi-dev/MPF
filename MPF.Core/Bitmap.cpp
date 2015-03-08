@@ -14,7 +14,7 @@ Bitmap::Bitmap()
 
 }
 
-std::unique_ptr<Bitmap> Bitmap::CreateDIBSection(HDC hDC, uint width, uint height)
+std::unique_ptr<Bitmap> Bitmap::CreateDIBSection(HDC hDC, uint32_t width, uint32_t height)
 {
 	width &= ~(4 - 1);
 	height &= ~(4 - 1);
@@ -40,7 +40,7 @@ std::unique_ptr<Bitmap> Bitmap::CreateDIBSection(HDC hDC, uint width, uint heigh
 	return bitmap;
 }
 
-byte* Bitmap::GetDataPointer() const mnoexcept
+byte* Bitmap::GetDataPointer() const noexcept
 {
 	return data;
 }
@@ -55,7 +55,7 @@ Bitmap::~Bitmap()
 	data = nullptr;
 }
 
-HBITMAP Bitmap::GetNativeHandle() const mnoexcept
+HBITMAP Bitmap::GetNativeHandle() const noexcept
 {
 	return hBitmap;
 }

@@ -19,7 +19,7 @@ std::vector<Point> Line::GetPoints() const
 	return data;
 }
 
-float Line::GetX(float y) const mnoexcept
+float Line::GetX(float y) const noexcept
 {
 	const auto x1 = startPoint.GetX(), y1 = startPoint.GetY(),
 	x2 = endPoint.GetX(), y2 = endPoint.GetY();
@@ -29,7 +29,7 @@ float Line::GetX(float y) const mnoexcept
 	return (y - y1) * dx / dy + x1;
 }
 
-std::pair<bool, float> Line::GetXInSegment(float y) const mnoexcept
+std::pair<bool, float> Line::GetXInSegment(float y) const noexcept
 {
 	auto minMax = std::minmax(startPoint.Y, endPoint.Y);
 	if (y >= minMax.first&&y <= minMax.second)
@@ -39,7 +39,7 @@ std::pair<bool, float> Line::GetXInSegment(float y) const mnoexcept
 	return{ false, 0.f };
 }
 
-std::pair<float, float> Line::GetUV(uint y) const mnoexcept
+std::pair<float, float> Line::GetUV(uint32_t y) const noexcept
 {
 	const int x1 = startPoint.GetX(), y1 = startPoint.GetY(),
 	x2 = endPoint.GetX(), y2 = endPoint.GetY();

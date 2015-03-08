@@ -15,11 +15,11 @@ public:
 
 	}
 
-	MPF::UI::UIElement* GetSource() const mnoexcept{ return source; }
-	MPF::UI::UIElement* GetDestination() const mnoexcept{ return destination; }
+	MPF::UI::UIElement* GetSource() const noexcept{ return source; }
+	MPF::UI::UIElement* GetDestination() const noexcept{ return destination; }
 
-	bool GetHandled() const mnoexcept{ return handled; }
-	void SetHandled(bool handled) mnoexcept{ this->handled = handled; }
+	bool GetHandled() const noexcept{ return handled; }
+	void SetHandled(bool handled) noexcept{ this->handled = handled; }
 	mproperty(bool, Handled);
 private:
 	MPF::UI::UIElement* source;

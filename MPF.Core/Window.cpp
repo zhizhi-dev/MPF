@@ -70,7 +70,7 @@ void Window::DoFrame()
 	renderRef.Present();
 }
 
-void Window::UpdateRelativeOffset() mnoexcept
+void Window::UpdateRelativeOffset() noexcept
 {
 	relativeOffset.second = Point();
 	relativeOffset.first = false;

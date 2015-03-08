@@ -29,20 +29,20 @@ public:
 	void SetTitle(const String& title);
 
 	//获取宽度
-	uint GetWidth() const;
+	uint32_t GetWidth() const;
 	//设置宽度
-	void SetWidth(uint width);
+	void SetWidth(uint32_t width);
 
 	//获取高度
-	uint GetHeight() const;
+	uint32_t GetHeight() const;
 	//设置高度
-	void SetHeight(uint height);
+	void SetHeight(uint32_t height);
 
 	//获取客户区宽度
-	uint GetClientWidth() const;
+	uint32_t GetClientWidth() const;
 
 	//获取客户区高度
-	uint GetClientHeight() const;
+	uint32_t GetClientHeight() const;
 
 	//获取本机标识符
 	handle_t GetNativeHandle() const;
@@ -56,12 +56,12 @@ public:
 	Event<MPF::Input::NativeMouseEventHandler> MouseLeftButtonUp;
 private:
 	//窗口过程
-	LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT CALLBACK WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT OnPaint() const;
 	LRESULT OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const;
 private:
 	static void CreateWindowClass();
-	static LRESULT CALLBACK WindowProcWrapper(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK WindowProcWrapper(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 private:
 	HWND hWnd = nullptr;
 };

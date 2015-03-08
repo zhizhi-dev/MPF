@@ -31,7 +31,7 @@ void GDIRenderCoreProvider::InitializeGDI()
 	backBuffer = DeviceContext::CreateCompatible(frontBuffer->GetNativeHandle());
 }
 
-void GDIRenderCoreProvider::DrawLine(uint x1, uint y1, uint x2, uint y2, color_t color)
+void GDIRenderCoreProvider::DrawLine(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, color_t color)
 {
 	auto data = backBufferSurface->GetDataPointer();
 	
@@ -39,7 +39,7 @@ void GDIRenderCoreProvider::DrawLine(uint x1, uint y1, uint x2, uint y2, color_t
 	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, backBufferSurface->GetWidth(), x1, y1, x2, y2, color);
 }
 
-void GDIRenderCoreProvider::DrawLine(uint x1, uint y1, uint x2, uint y2,
+void GDIRenderCoreProvider::DrawLine(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2,
 	float u1, float v1, float u2, float v2, const Brush& brush)
 {
 	auto data = backBufferSurface->GetDataPointer();
@@ -49,7 +49,7 @@ void GDIRenderCoreProvider::DrawLine(uint x1, uint y1, uint x2, uint y2,
 		x1, y1, x2, y2, u1, v1, u2, v2, brush);
 }
 
-void GDIRenderCoreProvider::DrawTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, color_t color)
+void GDIRenderCoreProvider::DrawTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, color_t color)
 {
 	auto data = backBufferSurface->GetDataPointer();
 	auto stride = backBufferSurface->GetWidth();
@@ -59,7 +59,7 @@ void GDIRenderCoreProvider::DrawTriangle(uint x1, uint y1, uint x2, uint y2, uin
 	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, stride, x1, y1, x3, y3, color);
 }
 
-void GDIRenderCoreProvider::DrawTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3,
+void GDIRenderCoreProvider::DrawTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3,
 	float u1, float v1, float u2, float v2, float u3, float v3, const Brush& brush)
 {
 	auto data = backBufferSurface->GetDataPointer();
@@ -70,7 +70,7 @@ void GDIRenderCoreProvider::DrawTriangle(uint x1, uint y1, uint x2, uint y2, uin
 	GraphicAlgorithms::DrawLine_WuXiaolin((color_t*)data, stride, x1, y1, x3, y3, u1, v1, u3, v3, brush);
 }
 
-void GDIRenderCoreProvider::FillTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, color_t color)
+void GDIRenderCoreProvider::FillTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, color_t color)
 {
 	auto data = backBufferSurface->GetDataPointer();
 	auto stride = backBufferSurface->GetWidth();
@@ -78,7 +78,7 @@ void GDIRenderCoreProvider::FillTriangle(uint x1, uint y1, uint x2, uint y2, uin
 	GraphicAlgorithms::FillTriangle_Solid((color_t*)data, stride, x1, y1, x2, y2, x3, y3, color);
 }
 
-void GDIRenderCoreProvider::FillTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3,
+void GDIRenderCoreProvider::FillTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3,
 	float u1, float v1, float u2, float v2, float u3, float v3, const Brush& brush)
 {
 	auto data = backBufferSurface->GetDataPointer();
@@ -114,7 +114,7 @@ void GDIRenderCoreProvider::EndDraw()
 	SelectObject(backBuffer->GetNativeHandle(), nullptr);
 }
 
-void GDIRenderCoreProvider::FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
+void GDIRenderCoreProvider::FillQuad(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, uint32_t x4, uint32_t y4,
 	float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, const Brush& brush)
 {
 	auto data = backBufferSurface->GetDataPointer();
@@ -124,7 +124,7 @@ void GDIRenderCoreProvider::FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3
 		u1, v1, u2, v2, u3, v3, u4, v4, brush);
 }
 
-void GDIRenderCoreProvider::DrawQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
+void GDIRenderCoreProvider::DrawQuad(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, uint32_t x4, uint32_t y4,
 	float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, const Brush& brush)
 {
 	auto data = backBufferSurface->GetDataPointer();

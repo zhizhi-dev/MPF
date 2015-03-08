@@ -13,13 +13,13 @@ Font::Font(const MPF::String& faceName, float size)
 	face = FontManager::GetCurrent()->GetFontFace(faceName);
 }
 
-Font::Font(MPF::String&& fileName, uint faceIndex, float size)
+Font::Font(MPF::String&& fileName, uint32_t faceIndex, float size)
 : size(size)
 {
 	face = FontManager::GetCurrent()->GetFontFace(std::move(fileName), faceIndex);
 }
 
-Font::Font(const MPF::String& fileName, uint faceIndex, float size)
+Font::Font(const MPF::String& fileName, uint32_t faceIndex, float size)
 : size(size)
 {
 	face = FontManager::GetCurrent()->GetFontFace(fileName, faceIndex);
@@ -31,7 +31,7 @@ Font::Font(const Font& font)
 	face = font.face;
 }
 
-Font::Font(Font&& font) mnoexcept
+Font::Font(Font&& font) noexcept
 : size(font.size)
 {
 	face = std::move(font.face);
@@ -45,7 +45,7 @@ const Font& Font::operator = (const Font& font)
 	return *this;
 }
 
-const Font& Font::operator = (Font&& font) mnoexcept
+const Font& Font::operator = (Font&& font) noexcept
 {
 	size = font.size;
 	face = std::move(font.face);
@@ -53,12 +53,12 @@ const Font& Font::operator = (Font&& font) mnoexcept
 	return *this;
 }
 
-std::pair<uint, uint> Font::DrawChar(BitmapData<byte>& bitmap, uint left, uint top, wchar_t chr)
+std::pair<uint32_t, uint32_t> Font::DrawChar(BitmapData<byte>& bitmap, uint32_t left, uint32_t top, wchar_t chr)
 {
 	return face->DrawChar(bitmap, left, top, chr, size);
 }
 
-void Font::DrawText(BitmapData<byte>& bitmap, uint left, uint top, const MPF::String& text)
+void Font::DrawText(BitmapData<byte>& bitmap, uint32_t left, uint32_t top, const MPF::String& text)
 {
 	auto curLeft(left);
 	auto curTop(top);
@@ -70,12 +70,12 @@ void Font::DrawText(BitmapData<byte>& bitmap, uint left, uint top, const MPF::St
 	}
 }
 
-std::pair<uint, uint> Font::MeasureText(const MPF::String& text)
+std::pair<uint32_t, uint32_t> Font::MeasureText(const MPF::String& text)
 {
 	return face->MeasureText(text, size);
 }
 
-bool Font::operator != (const Font& font)const mnoexcept
+bool Font::operator != (const Font& font)const noexcept
 {
 	return face.get() == font.face.get() &&
 	size == font.size;

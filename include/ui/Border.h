@@ -39,7 +39,7 @@ protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
 	MPF_API virtual MPF::Visual::Point MakeContentOffset(UIElement& elem);
 	//自动计算大小
-	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
+	MPF_API virtual MPF::Visual::Size AutoMeasureSize() noexcept;
 
 	DECLARE_UI_FUNCS
 private:

@@ -39,7 +39,7 @@ void Quad::Transform(std::function<void(Point&)> func)
 	func(pointD);
 }
 
-void Quad::Translate(const Point& point) mnoexcept
+void Quad::Translate(const Point& point) noexcept
 {
 	pointA += point;
 	pointB += point;
@@ -47,7 +47,7 @@ void Quad::Translate(const Point& point) mnoexcept
 	pointD += point;
 }
 
-const Quad& Quad::operator -= (const Thickness& thick) mnoexcept
+const Quad& Quad::operator -= (const Thickness& thick) noexcept
 {
 	pointA.X += thick.Left; pointA.Y += thick.Top;
 	pointB.X -= thick.Right; pointB.Y += thick.Top;
@@ -57,7 +57,7 @@ const Quad& Quad::operator -= (const Thickness& thick) mnoexcept
 	return *this;
 }
 
-Quad Quad::operator - (const Thickness& thick) const mnoexcept
+Quad Quad::operator - (const Thickness& thick) const noexcept
 {
 	Quad quad = *this;
 
@@ -68,7 +68,7 @@ Quad Quad::operator - (const Thickness& thick) const mnoexcept
 	return quad;
 }
 
-Quad Quad::operator + (const Thickness& thick) const mnoexcept
+Quad Quad::operator + (const Thickness& thick) const noexcept
 {
 	Quad quad = *this;
 
@@ -79,7 +79,7 @@ Quad Quad::operator + (const Thickness& thick) const mnoexcept
 	return quad;
 }
 
-bool Quad::Contains(const Point& point) const mnoexcept
+bool Quad::Contains(const Point& point) const noexcept
 {
 	std::array<Triangle, 2> tris =
 	{

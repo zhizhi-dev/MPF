@@ -19,7 +19,7 @@ public:
 //¿Ø¼þÄ£°å
 using ControlTemplate = std::function<std::unique_ptr<TemplateInstance>(UIElement*)>;
 
-static bool operator!=(const ControlTemplate& left, const ControlTemplate& right) mnoexcept
+static bool operator!=(const ControlTemplate& left, const ControlTemplate& right) noexcept
 {
 	return false;
 }

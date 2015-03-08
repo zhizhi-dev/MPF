@@ -16,7 +16,7 @@ public:
 
 	MPF_API virtual void Transform(std::function<void(Point&)> func);
 	//判断三角形是否包含点（包括边界）
-	MPF_API bool Contains(const Point& point) const mnoexcept;
+	MPF_API bool Contains(const Point& point) const noexcept;
 
 	//获取类型
 	DECLARE_GETTYPE(Triangle)

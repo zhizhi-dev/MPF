@@ -10,12 +10,12 @@ struct Size
 	float Width;
 	float Height;
 
-	Size operator+(const Size& size) const mnoexcept
+	Size operator+(const Size& size) const noexcept
 	{
 		return{ Width + size.Width, Height + size.Height };
 	}
 
-	const Size& operator+=(const Size& size) mnoexcept
+	const Size& operator+=(const Size& size) noexcept
 	{
 		Width += size.Width;
 		Height += size.Height;

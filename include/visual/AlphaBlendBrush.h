@@ -11,22 +11,22 @@ class AlphaBlendBrush : public Brush
 public:
 	//创建 AlphaBlendBrush 的新实例
 	MPF_API AlphaBlendBrush(const BitmapData<byte>& alpha, 
-		const Brush& secondBrush) mnoexcept;
+		const Brush& secondBrush) noexcept;
 
 	//采样
 	MPF_API virtual color_t TakeSample(float u, float v) const;
 
 	//获取 Alpha 数据
-	MPF_API const BitmapData<byte>& GetAlpha() const mnoexcept;
+	MPF_API const BitmapData<byte>& GetAlpha() const noexcept;
 	//设置 Alpha 数据
-	MPF_API void SetAlpha(const BitmapData<byte>& value) mnoexcept;
+	MPF_API void SetAlpha(const BitmapData<byte>& value) noexcept;
 	//获取或设置 Alpha 数据
 	mproperty(const BitmapData<byte>&, Alpha);
 
 	//获取第二 Brush
-	MPF_API const Brush& GetSecondBrush() const mnoexcept;
+	MPF_API const Brush& GetSecondBrush() const noexcept;
 	//设置第二 Brush
-	MPF_API void SetSecondBrush(const Brush& value) mnoexcept;
+	MPF_API void SetSecondBrush(const Brush& value) noexcept;
 	//获取或设置第二 Brush
 	mproperty(const Brush&, SecondBrush)
 

@@ -23,17 +23,17 @@ FontFace::~FontFace()
 	}
 }
 
-FT_Face FontFace::GetFace() const mnoexcept
+FT_Face FontFace::GetFace() const noexcept
 {
 	return face;
 }
 
-FontFace::operator FT_Face() const mnoexcept
+FontFace::operator FT_Face() const noexcept
 {
 	return GetFace();
 }
 
-std::pair<uint, uint> FontFace::DrawChar(BitmapData<byte>& bitmap, uint left, uint top, wchar_t chr, float size)
+std::pair<uint32_t, uint32_t> FontFace::DrawChar(BitmapData<byte>& bitmap, uint32_t left, uint32_t top, wchar_t chr, float size)
 {
 	auto& glyph = GetGlyphCache(chr, size);
 
@@ -78,19 +78,19 @@ const FontGlyph& FontFace::LoadGlyphCache(const FontFaceCacheKey& key)
 	auto top(ascender - face->glyph->bitmap_top);
 	auto height(face->glyph->bitmap.rows);
 	auto width(face->glyph->bitmap.width);
-	std::pair<uint, uint> advance = { face->glyph->advance.x >> 6, face->glyph->advance.y };
+	auto advance = std::make_pair((uint32_t)face->glyph->advance.x >> 6, (uint32_t)face->glyph->advance.y);
 
 	auto& srcBitmap(face->glyph->bitmap);
 	auto bitmap = std::make_shared<BitmapData<byte>>(width, height);
 	bitmap->CopyFrom(BitmapData<byte>(srcBitmap.buffer, srcBitmap.width,
 		srcBitmap.rows, srcBitmap.pitch), 0, 0);
 
-	return cache.emplace(key, FontGlyph{ bitmap, left, top, advance }).first->second;
+	return cache.emplace(key, FontGlyph{ bitmap, (uint32_t)left, (uint32_t)top, advance }).first->second;
 }
 
-std::pair<uint, uint> FontFace::MeasureText(const MPF::String& text, float size)
+std::pair<uint32_t, uint32_t> FontFace::MeasureText(const MPF::String& text, float size)
 {
-	uint realSize(size * 64);
+	uint32_t realSize(size * 64);
 	auto length(text.GetLength());
 	auto pair(std::make_pair(0u, 0u));
 	auto sizeInPixels(DPIHelper::Current.LogicalPointToDevicePoint(size, size));

@@ -24,13 +24,13 @@ struct Thickness
 		:Left(h), Top(v), Right(h), Bottom(v)
 	{}
 
-	bool operator==(const Thickness& right) const mnoexcept
+	bool operator==(const Thickness& right) const noexcept
 	{
 		return Left == right.Left&&Top == right.Top&&
 		Right == right.Right&&Bottom == right.Bottom;
 	}
 
-	bool operator!=(const Thickness& right) const mnoexcept
+	bool operator!=(const Thickness& right) const noexcept
 	{
 		return !(*this == right);
 	}

@@ -17,11 +17,24 @@ public:
 	MPF_API std::vector<UIElement*>& GetChildren();
 	//添加子元素
 	MPF_API void AddChild(UIElement& elem);
+
 	//添加子元素
-	MPF_API void AddChildren(std::initializer_list<std::reference_wrapper<UIElement>> elems);
+	template<typename TElem, typename ...TElems>
+	void AddChildren(TElem& elem, TElems&... others)
+	{
+		AddChild(elem);
+		AddChildren(others...);
+	}
+
+	//添加子元素
+	template<typename TElem>
+	void AddChildren(TElem& elem)
+	{
+		AddChild(elem);
+	}
 
 	using UIElement::HitTest;
-	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept;
+	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) noexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Panel);
@@ -33,7 +46,7 @@ protected:
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
 	MPF_API virtual MPF::Visual::Point MakeChildOffset(UIElement& elem);
 	//自动计算大小
-	MPF_API virtual MPF::Visual::Size AutoMeasureSize() mnoexcept;
+	MPF_API virtual MPF::Visual::Size AutoMeasureSize() noexcept;
 protected:
 	std::vector<UIElement*> children;
 

@@ -9,18 +9,18 @@ class ImageBrush : public Brush
 {
 public:
 	//创建 ImageBrush 的新实例
-	MPF_API ImageBrush() mnoexcept;
+	MPF_API ImageBrush() noexcept;
 
 	//创建 ImageBrush 的新实例
-	MPF_API ImageBrush(color_t color) mnoexcept;
+	MPF_API ImageBrush(color_t color) noexcept;
 
 	//采样
 	MPF_API virtual color_t TakeSample(float u, float v) const;
 
 	//获取颜色
-	MPF_API color_t GetColor() const mnoexcept;
+	MPF_API color_t GetColor() const noexcept;
 	//设置颜色
-	MPF_API void SetColor(color_t color) mnoexcept;
+	MPF_API void SetColor(color_t color) noexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(ImageBrush)

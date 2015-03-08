@@ -1,17 +1,14 @@
 #pragma once
 #include "common.h"
+#include <inttypes.h>
 
 NS_MPF
 
 typedef unsigned char byte;
-typedef unsigned short ushort;
-typedef unsigned int uint;
-typedef unsigned __int64 ulong;
 typedef void* handle_t;
 
 typedef unsigned long dword_t;
-
-typedef dword_t color_t;
+typedef uint32_t color_t;
 
 union argb_color
 {
@@ -32,7 +29,7 @@ union argb_color
 
 	}
 
-	operator color_t() const mnoexcept
+	operator color_t() const noexcept
 	{
 		return col;
 	}

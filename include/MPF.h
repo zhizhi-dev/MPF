@@ -55,5 +55,6 @@
 #include "ui/Canvas.h"
 #include "ui/ButtonBase.h"
 #include "ui/Button.h"
+#include "ui/MessageBox.h"
 
 void _stdcall MPFMain();

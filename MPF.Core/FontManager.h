@@ -12,12 +12,12 @@ class FontManager
 public:
 	~FontManager();
 
-	std::shared_ptr<FontFace> GetFontFace(const MPF::String& fileName, uint faceIndex);
-	std::shared_ptr<FontFace> GetFontFace(MPF::String&& fileName, uint faceIndex);
+	std::shared_ptr<FontFace> GetFontFace(const MPF::String& fileName, uint32_t faceIndex);
+	std::shared_ptr<FontFace> GetFontFace(MPF::String&& fileName, uint32_t faceIndex);
 	std::shared_ptr<FontFace> GetFontFace(const MPF::String& familyName);
 
 	void SetFontFaceSize(FT_Face face, float size) const;
-	void SetFontFaceSize(FT_Face face, uint xInPixels, uint yInPixels) const;
+	void SetFontFaceSize(FT_Face face, uint32_t xInPixels, uint32_t yInPixels) const;
 
 	///<summary>获取当前字体管理器</summary>
 	static std::shared_ptr<FontManager> GetCurrent();
@@ -27,7 +27,7 @@ private:
 	std::shared_ptr<FontFace> LoadFontFromFileName(FontFaceKey&& key);
 
 	static String GetFileNameFromFamilyName(const MPF::String& familyName,
-		uint& faceIndex);
+		uint32_t& faceIndex);
 	std::shared_ptr<FontFace> LookupFontFace(const FontFaceKey& key);
 protected:
 	FontManager();

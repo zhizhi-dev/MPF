@@ -55,7 +55,7 @@ public:
 		}
 	}
 
-	any(any&& _any) mnoexcept
+	any(any&& _any) noexcept
 	{
 		value = std::move(_any.value);
 	}
@@ -140,7 +140,7 @@ public:
 		return *this;
 	}
 
-	const any& operator= (any&& _any) mnoexcept
+	const any& operator= (any&& _any) noexcept
 	{
 		value = std::move(_any.value);
 		return *this;
@@ -153,7 +153,7 @@ public:
 		return *this;
 	}
 
-	bool isEmpty() const mnoexcept
+	bool isEmpty() const noexcept
 	{
 		return value == nullptr;
 	}

@@ -12,13 +12,8 @@ typedef void(_stdcall*MPFMainHandler)();
 class Application : Object
 {
 public:
-	//创建 Application 的新实例
-	MPF_API Application();
 	Application(const Application& app) = delete;
 	const Application& operator=(const Application& app) = delete;
-
-	//运行
-	MPF_API void Run(MPFMainHandler handler) const;
 
 	//开始运行
 	MPF_API void Run() const;
@@ -30,18 +25,27 @@ public:
 	MPF_API String GetCommandLines() const;
 
 	//获取当前 Application
-	MPF_API static Application& GetCurrent() mnoexcept;
+	MPF_API static Application& GetCurrent() noexcept;
 
 	//未捕获异常
 	Event<UncaughtExceptionEventHandler> UncaughtException;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Application)
+
+
+	static void CreateApplication(MPFMainHandler handler);
 protected:
 	MPF_API void OnUncaughtException(bool& isHandled) const;
 private:
+	//创建 Application 的新实例
+	Application() noexcept;
+	//运行
+	MPF_API void Run(MPFMainHandler handler) const;
 private:
 	DECLARE_TYPE(Application)
+
+	static Application currentApp;
 };
 
 NS_ED

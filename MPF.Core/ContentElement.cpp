@@ -88,7 +88,7 @@ void ContentElement::SetBackground(const MPF::Visual::Brush* value)
 	SetValue(BackgroundProperty, value);
 }
 
-MPF::Visual::Size ContentElement::AutoMeasureSize() mnoexcept
+MPF::Visual::Size ContentElement::AutoMeasureSize() noexcept
 {
 	//根据内容计算大小
 	auto content = Content;
@@ -107,7 +107,7 @@ MPF::Visual::Size ContentElement::AutoMeasureSize() mnoexcept
 	}
 }
 
-bool ContentElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept
+bool ContentElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) noexcept
 {
 	auto hitted = UIElement::HitTest(point, elements);
 

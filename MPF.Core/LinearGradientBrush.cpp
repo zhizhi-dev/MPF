@@ -6,28 +6,28 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(LinearGradientBrush, MPF::Visual::LinearGradientBrush)
 
-LinearGradientBrush::LinearGradientBrush(color_t startColor, color_t endColor) mnoexcept
+LinearGradientBrush::LinearGradientBrush(color_t startColor, color_t endColor) noexcept
 :startColor(startColor), endColor(endColor)
 {
 
 }
 
-color_t LinearGradientBrush::GetStartColor() const mnoexcept
+color_t LinearGradientBrush::GetStartColor() const noexcept
 {
 	return startColor;
 }
 
-void LinearGradientBrush::SetStartColor(color_t color) mnoexcept
+void LinearGradientBrush::SetStartColor(color_t color) noexcept
 {
 	this->startColor = color;
 }
 
-color_t LinearGradientBrush::GetEndColor() const mnoexcept
+color_t LinearGradientBrush::GetEndColor() const noexcept
 {
 	return endColor;
 }
 
-void LinearGradientBrush::SetEndColor(color_t color) mnoexcept
+void LinearGradientBrush::SetEndColor(color_t color) noexcept
 {
 	this->endColor = color;
 }

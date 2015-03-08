@@ -19,13 +19,13 @@ public:
 	}
 
 	//获取相对窗口的坐标
-	MPF::Visual::Point GetPosition() const mnoexcept
+	MPF::Visual::Point GetPosition() const noexcept
 	{
 		return position;
 	}
 
 	//获取相对UI元素的坐标
-	MPF_API MPF::Visual::Point GetPosition(const MPF::UI::UIElement& element) const mnoexcept;
+	MPF_API MPF::Visual::Point GetPosition(const MPF::UI::UIElement& element) const noexcept;
 private:
 	//相对窗口的坐标
 	MPF::Visual::Point position;

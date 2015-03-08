@@ -6,23 +6,23 @@ using namespace MPF::Visual;
 
 DEFINE_TYPE(SolidColorBrush, MPF::Visual::SolidColorBrush)
 
-SolidColorBrush::SolidColorBrush() mnoexcept
+SolidColorBrush::SolidColorBrush() noexcept
 {
 
 }
 
-SolidColorBrush::SolidColorBrush(color_t color) mnoexcept
+SolidColorBrush::SolidColorBrush(color_t color) noexcept
 :color(color)
 {
 
 }
 
-color_t SolidColorBrush::GetColor() const mnoexcept
+color_t SolidColorBrush::GetColor() const noexcept
 {
 	return color;
 }
 
-void SolidColorBrush::SetColor(color_t color) mnoexcept
+void SolidColorBrush::SetColor(color_t color) noexcept
 {
 	this->color = color;
 }

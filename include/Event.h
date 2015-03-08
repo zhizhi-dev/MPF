@@ -10,7 +10,7 @@ class Event
 {
 public:
 	//创建 Event 的新实例
-	Event() mnoexcept
+	Event() noexcept
 	{
 
 	}

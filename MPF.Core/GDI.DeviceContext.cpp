@@ -31,7 +31,7 @@ std::unique_ptr<DeviceContext> DeviceContext::FromWindowClient(HWND hWnd)
 	return dc;
 }
 
-HDC DeviceContext::GetNativeHandle() const mnoexcept
+HDC DeviceContext::GetNativeHandle() const noexcept
 {
 	return hDC;
 }

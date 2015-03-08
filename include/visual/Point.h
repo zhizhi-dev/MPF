@@ -16,49 +16,49 @@ public:
 	}
 
 	//获取 X 坐标
-	float GetX() const mnoexcept
+	float GetX() const noexcept
 	{
 		return x;
 	}
 
 	//获取 Y 坐标
-	float GetY() const mnoexcept
+	float GetY() const noexcept
 	{
 		return y;
 	}
 
 	//设置 X 坐标
-	void SetX(float x) mnoexcept
+	void SetX(float x) noexcept
 	{
 		this->x = x;
 	}
 
 	//设置 Y 坐标
-	void SetY(float y) mnoexcept
+	void SetY(float y) noexcept
 	{
 		this->y = y;
 	}
 
 	//获取 U 坐标
-	float GetU() const mnoexcept
+	float GetU() const noexcept
 	{
 		return u;
 	}
 
 	//获取 V 坐标
-	float GetV() const mnoexcept
+	float GetV() const noexcept
 	{
 		return v;
 	}
 
 	//设置 U 坐标
-	void SetU(float u) mnoexcept
+	void SetU(float u) noexcept
 	{
 		this->u = u;
 	}
 
 	//设置 V 坐标
-	void SetV(float v) mnoexcept
+	void SetV(float v) noexcept
 	{
 		this->v = v;
 	}
@@ -68,7 +68,7 @@ public:
 	mproperty(float, U);
 	mproperty(float, V);
 
-	const Point& operator+=(const Point& point) mnoexcept
+	const Point& operator+=(const Point& point) noexcept
 	{
 		x += point.x;
 		y += point.y;
@@ -78,7 +78,7 @@ public:
 		return *this;
 	}
 
-	Point operator+(const Point& point) const mnoexcept
+	Point operator+(const Point& point) const noexcept
 	{
 		Point pt(*this);
 		pt.x += point.x;
@@ -89,7 +89,7 @@ public:
 		return pt;
 	}
 
-	Point operator-(const Point& point) const mnoexcept
+	Point operator-(const Point& point) const noexcept
 	{
 		Point pt(*this);
 		pt.x -= point.x;

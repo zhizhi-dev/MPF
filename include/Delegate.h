@@ -8,7 +8,7 @@ class Delegate : public Object
 {
 public:
 	//创建 Delegate 的新实例
-	MPF_API Delegate() mnoexcept;
+	MPF_API Delegate() noexcept;
 
 	//获取类型
 	MPF_API DECLARE_GETTYPE(Delegate)

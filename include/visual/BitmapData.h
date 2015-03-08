@@ -10,14 +10,14 @@ class BitmapData
 {
 public:
 	//创建 BitmapData 的新实例
-	BitmapData(TColor* data, uint width, uint height, uint pitch)
+	BitmapData(TColor* data, uint32_t width, uint32_t height, uint32_t pitch)
 		:data(data), width(width), height(height), pitch(pitch), owner(false)
 	{
 
 	}
 
 	//创建 BitmapData 的新实例
-	BitmapData(uint width, uint height, uint pitch)
+	BitmapData(uint32_t width, uint32_t height, uint32_t pitch)
 		:data(nullptr), width(width), height(height), pitch(pitch), owner(true)
 	{
 		auto size = pitch * height;
@@ -26,7 +26,7 @@ public:
 	}
 
 	//创建 BitmapData 的新实例
-	BitmapData(uint width, uint height)
+	BitmapData(uint32_t width, uint32_t height)
 		:data(nullptr), width(width), height(height), pitch(width), owner(true)
 	{
 		auto size = pitch * height;
@@ -45,7 +45,7 @@ public:
 		}
 	}
 
-	BitmapData(BitmapData&& bitmap) mnoexcept
+	BitmapData(BitmapData&& bitmap) noexcept
 		:data(bitmap.data), width(bitmap.width), height(bitmap.height), pitch(bitmap.width), owner(bitmap.owner)
 	{
 		bitmap.data = nullptr;
@@ -75,7 +75,7 @@ public:
 		return *this;
 	}
 
-	const BitmapData<TColor>& operator=(BitmapData<TColor>&& bitmap) mnoexcept
+	const BitmapData<TColor>& operator=(BitmapData<TColor>&& bitmap) noexcept
 	{
 		Dispose();
 		data = bitmap.data;
@@ -88,8 +88,8 @@ public:
 		return *this;
 	}
 
-	void CopyFrom(const BitmapData<byte>& source, uint srcLeft = 0, uint srcTop = 0, 
-		uint destLeft = 0, uint destTop = 0)
+	void CopyFrom(const BitmapData<byte>& source, uint32_t srcLeft = 0, uint32_t srcTop = 0, 
+		uint32_t destLeft = 0, uint32_t destTop = 0)
 	{
 		massert(destLeft <= width);
 		massert(destTop <= height);
@@ -110,15 +110,15 @@ public:
 	}
 
 	//获取数据
-	TColor* GetDataPointer() const mnoexcept{ return data; }
+	TColor* GetDataPointer() const noexcept{ return data; }
 	//获取宽度（像素）
-	uint GetWidth() const mnoexcept{ return width; }
+	uint32_t GetWidth() const noexcept{ return width; }
 	//获取高度（像素）
-	uint GetHeight() const mnoexcept{ return height; }
+	uint32_t GetHeight() const noexcept{ return height; }
 	//获取Pitch（像素）
-	uint GetPitch() const mnoexcept{ return pitch; }
+	uint32_t GetPitch() const noexcept{ return pitch; }
 private:
-	void Dispose() mnoexcept
+	void Dispose() noexcept
 	{
 		if (owner && data)
 		{
@@ -130,9 +130,9 @@ private:
 private:
 	bool owner;
 	TColor* data;
-	uint width;
-	uint height;
-	uint pitch;
+	uint32_t width;
+	uint32_t height;
+	uint32_t pitch;
 };
 
 NS_ED

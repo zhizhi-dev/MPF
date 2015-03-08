@@ -26,26 +26,26 @@ public:
 	DECLARE_GETTYPE(GDIRenderCoreProvider)
 protected:
 	//绘制线段
-	virtual void DrawLine(uint x1, uint y1, uint x2, uint y2, color_t color);
+	virtual void DrawLine(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, color_t color);
 	//绘制线段
-	virtual void DrawLine(uint x1, uint y1, uint x2, uint y2,
+	virtual void DrawLine(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2,
 		float u1, float v1, float u2, float v2, const MPF::Visual::Brush& brush);
 	//绘制三角形
-	virtual void DrawTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, color_t color);
+	virtual void DrawTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, color_t color);
 	//绘制三角形
-	virtual void DrawTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3,
+	virtual void DrawTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3,
 		float u1, float v1, float u2, float v2, float u3, float v3, const MPF::Visual::Brush& brush);
 	//填充三角形
-	virtual void FillTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, color_t color);
+	virtual void FillTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, color_t color);
 	//填充三角形
-	virtual void FillTriangle(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3,
+	virtual void FillTriangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3,
 		float u1, float v1, float u2, float v2, float u3, float v3, const MPF::Visual::Brush& brush);
 	//绘制四边形
-	virtual void DrawQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
+	virtual void DrawQuad(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, uint32_t x4, uint32_t y4,
 		float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4,
 		const MPF::Visual::Brush& brush);
 	//填充四边形
-	virtual void FillQuad(uint x1, uint y1, uint x2, uint y2, uint x3, uint y3, uint x4, uint y4,
+	virtual void FillQuad(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, uint32_t x4, uint32_t y4,
 		float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, 
 		const MPF::Visual::Brush& brush);
 private:

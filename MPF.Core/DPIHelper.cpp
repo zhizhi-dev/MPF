@@ -20,20 +20,20 @@ void DPIHelper::InitializeDPIScale()
 	dpiScaleY = GetDeviceCaps(hdc, LOGPIXELSY) / 96.0f;
 }
 
-std::pair<uint, uint> DPIHelper::LogicalPointToDevicePoint(float x, float y) const
+std::pair<uint32_t, uint32_t> DPIHelper::LogicalPointToDevicePoint(float x, float y) const
 {
-	uint ix = (uint)std::ceilf(x * dpiScaleX);
-	uint iy = (uint)std::ceilf(y * dpiScaleY);
+	uint32_t ix = (uint32_t)std::ceilf(x * dpiScaleX);
+	uint32_t iy = (uint32_t)std::ceilf(y * dpiScaleY);
 
 	return std::make_pair(ix, iy);
 }
 
-std::pair<uint, uint> DPIHelper::LogicalPointToDevicePoint(const Point& point) const
+std::pair<uint32_t, uint32_t> DPIHelper::LogicalPointToDevicePoint(const Point& point) const
 {
 	return LogicalPointToDevicePoint(point.X, point.Y);
 }
 
-std::vector<std::pair<uint, uint>> DPIHelper::LogicalGeometryToDevicePoints(const Geometry& geometry) const
+std::vector<std::pair<uint32_t, uint32_t>> DPIHelper::LogicalGeometryToDevicePoints(const Geometry& geometry) const
 {
 	auto points = geometry.GetPoints();
 	return Enumerable::ToVector(points, [&](const Point& pt)
@@ -42,7 +42,7 @@ std::vector<std::pair<uint, uint>> DPIHelper::LogicalGeometryToDevicePoints(cons
 	});
 }
 
-Point DPIHelper::DevicePointToLogicalPoint(uint x, uint y) const
+Point DPIHelper::DevicePointToLogicalPoint(uint32_t x, uint32_t y) const
 {
 	return{ x / dpiScaleX, y / dpiScaleY };
 }

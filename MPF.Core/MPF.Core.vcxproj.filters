@@ -25,6 +25,18 @@
     <Filter Include="头文件\Input">
       <UniqueIdentifier>{c8d6e7c8-160a-456d-85e0-fca487b94065}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\GDI">
+      <UniqueIdentifier>{43a367a9-6621-4192-8726-45d4e1718b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UI">
+      <UniqueIdentifier>{57288f9d-62a7-4ac2-b51d-673084df4a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Visual">
+      <UniqueIdentifier>{956c1cf7-6c0e-4f46-a520-d0e2a77a2a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Input">
+      <UniqueIdentifier>{fe9f7891-e893-412f-bc5a-2b7803a7cb0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -54,9 +66,6 @@
     <ClInclude Include="..\include\String.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Array.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MPF.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -64,9 +73,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Event.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Delegate.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Process.h">
@@ -240,6 +246,18 @@
     <ClInclude Include="..\include\ui\Template.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ui\MessageBox.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui\VisualState.h">
+      <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\ImageBrush.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Image.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -266,113 +284,116 @@
     <ClCompile Include="Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Delegate.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Thread.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="NativeWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderCoreProvider.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GDIRenderCoreProvider.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GDI.DeviceContext.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Brush.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SolidColorBrush.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="BitmapData.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Bitmap.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicAlgorithms.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="LinearGradientBrush.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DependencyProperty.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="UIElement.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ContentElement.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FontFace.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="TextBlock.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="AlphaBlendBrush.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Quad.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Border.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="any.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonBase.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DPIHelper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseEventArgs.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DependencyObject.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GDI.DeviceContext.cpp">
+      <Filter>源文件\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIRenderCoreProvider.cpp">
+      <Filter>源文件\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Border.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonBase.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentElement.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageBox.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBlock.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Brush.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaBlendBrush.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapData.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="FontFace.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="DPIHelper.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearGradientBrush.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicAlgorithms.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidColorBrush.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeWindow.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderCoreProvider.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="VisualState.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>源文件\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseEventArgs.cpp">
+      <Filter>源文件\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

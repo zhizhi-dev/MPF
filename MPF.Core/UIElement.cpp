@@ -119,7 +119,7 @@ void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs
 		UpdateRenderBound(args.ParentOffset);
 }
 
-void UIElement::UpdateRelativeOffset() mnoexcept
+void UIElement::UpdateRelativeOffset() noexcept
 {
 	auto margin = Margin;
 	auto& offset = relativeOffset.second;
@@ -128,7 +128,7 @@ void UIElement::UpdateRelativeOffset() mnoexcept
 	relativeOffset.first = false;
 }
 
-void UIElement::UpdateSize() mnoexcept
+void UIElement::UpdateSize() noexcept
 {
 	auto& size = this->size.second;
 	auto width = Width;
@@ -148,7 +148,7 @@ void UIElement::UpdateSize() mnoexcept
 	this->size.first = false;
 }
 
-void UIElement::UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept
+void UIElement::UpdateRenderBound(MPF::Visual::Point parentOffset) noexcept
 {
 	auto offset = relativeOffset.second + parentOffset;
 	auto size = this->size.second;
@@ -158,7 +158,7 @@ void UIElement::UpdateRenderBound(MPF::Visual::Point parentOffset) mnoexcept
 	renderBound.first = false;
 }
 
-bool UIElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) mnoexcept
+bool UIElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) noexcept
 {
 	if (renderBound.second.Contains(point))
 	{
@@ -168,13 +168,13 @@ bool UIElement::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& eleme
 	return false;
 }
 
-MPF::Visual::Size UIElement::MeasureSize() mnoexcept
+MPF::Visual::Size UIElement::MeasureSize() noexcept
 {
 	if (size.first)UpdateSize();
 	return size.second;
 }
 
-MPF::Visual::Size UIElement::AutoMeasureSize() mnoexcept
+MPF::Visual::Size UIElement::AutoMeasureSize() noexcept
 {
 	auto padding = Padding;
 	auto width = padding.Left + padding.Right;
@@ -183,7 +183,7 @@ MPF::Visual::Size UIElement::AutoMeasureSize() mnoexcept
 	return{ width, height };
 }
 
-std::vector<UIElement*> UIElement::HitTest(MPF::Visual::Point point) mnoexcept
+std::vector<UIElement*> UIElement::HitTest(MPF::Visual::Point point) noexcept
 {
 	std::vector<UIElement*> elements;
 
@@ -191,7 +191,7 @@ std::vector<UIElement*> UIElement::HitTest(MPF::Visual::Point point) mnoexcept
 	return elements;
 }
 
-MPF::Visual::Quad UIElement::GetRenderBound() const mnoexcept
+MPF::Visual::Quad UIElement::GetRenderBound() const noexcept
 {
 	return renderBound.second;
 }
@@ -206,7 +206,7 @@ void UIElement::OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args)
 {
 }
 
-void UIElement::SetParent(UIElement& element, UIElement* parent) mnoexcept
+void UIElement::SetParent(UIElement& element, UIElement* parent) noexcept
 {
 	element.parent = parent;
 }

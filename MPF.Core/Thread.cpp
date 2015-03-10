@@ -1,11 +1,12 @@
 #include "stdafx.h"
-#include "../include/Thread.h"
+#include "../include/threading/Thread.h"
 #include "../include/raii.h"
 #include <iostream>
 
 using namespace MPF;
+using namespace MPF::Threading;
 
-DEFINE_TYPE(Thread, MPF::Thread)
+DEFINE_TYPE(Thread, MPF::Threading::Thread)
 
 Thread::Thread(std::function<void(void*)> startup)
 :startup(startup)

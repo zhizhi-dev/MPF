@@ -43,6 +43,7 @@ public:
 protected:
 	//更新相对父节点的偏移
 	MPF_API virtual void UpdateRelativeOffset() noexcept;
+	MPF_API virtual void UpdateRenderBound(MPF::Visual::Point parentOffset) noexcept;
 	DECLARE_UI_FUNCS
 private:
 	void InitializeNativeWindowEventHandlers();

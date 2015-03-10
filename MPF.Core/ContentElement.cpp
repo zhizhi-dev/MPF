@@ -31,12 +31,10 @@ void ContentElement::SetContent(UIElement* value)
 {
 	SetValue(ContentProperty, value);
 	if (value)
-	{
 		SetParent(*value, this);
-	}
 }
 
-void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args)
 {
 	auto background = Background;
 	if (background)
@@ -47,28 +45,28 @@ void ContentElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, Rende
 	auto content = Content;
 	if (content)
 	{
-		content->Render(renderer, RenderArgs{ args.ElapsedTime });
+		content->Render(renderer, args);
 
-		UIElement::RenderCore(renderer, std::move(args));
+		UIElement::RenderCore(renderer, args);
 	}
 	else
 	{
-		TextBlock::RenderCore(renderer, std::move(args));
+		TextBlock::RenderCore(renderer, args);
 	}
 }
 
-void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
+void ContentElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args)
 {
 	auto content = Content;
 	if (content)
 	{
-		UIElement::UpdateCore(renderer, std::move(args));
+		UIElement::UpdateCore(renderer, args);
 		auto offset = args.ParentOffset + MakeContentOffset(*content) + relativeOffset.second;
-		content->Update(renderer, { offset, args.ElapsedTime });
+		content->Update(renderer, UpdateArgs{ offset, args.ElapsedTime });
 	}
 	else
 	{
-		TextBlock::UpdateCore(renderer, std::move(args));
+		TextBlock::UpdateCore(renderer, args);
 	}
 }
 

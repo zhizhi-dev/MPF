@@ -14,6 +14,9 @@
 
 // TODO:  在此处引用程序需要的其他头文件
 #include "../include/MPF.h"
+#include "../include/io/FileStream.h"
+#include "../include/media/ImageSource.h"
+#include "../include/io/BinaryReader.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "../Debug/MPF.Core.lib")

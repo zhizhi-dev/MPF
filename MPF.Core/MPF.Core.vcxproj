@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.props" Condition="Exists('..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -38,7 +39,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <NuGetPackageImportStamp>d78e5d83</NuGetPackageImportStamp>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -96,12 +99,20 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="IO\BinaryReader.cpp" />
+    <ClCompile Include="IO\FileStream.cpp" />
+    <ClCompile Include="Media\BitmapDecoder.cpp" />
+    <ClCompile Include="Media\ImageDecoder.cpp" />
+    <ClCompile Include="Media\ImageSource.cpp" />
     <ClCompile Include="MessageBox.cpp" />
     <ClCompile Include="MouseEventArgs.cpp" />
     <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="platform.cpp" />
     <ClCompile Include="TextBlock.cpp" />
+    <ClCompile Include="Threading\ThreadPool.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="VisualState.cpp" />
+    <ClCompile Include="Visual\ImageBrush.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClInclude Include="..\include\any.h" />
     <ClInclude Include="..\include\Application.h" />
@@ -116,15 +127,23 @@
     <ClInclude Include="..\include\input\InputEventHandlers.h" />
     <ClInclude Include="..\include\input\MouseButtons.h" />
     <ClInclude Include="..\include\input\MouseEventArgs.h" />
+    <ClInclude Include="..\include\io\BinaryReader.h" />
+    <ClInclude Include="..\include\io\FileStream.h" />
+    <ClInclude Include="..\include\io\Stream.h" />
+    <ClInclude Include="..\include\media\BitmapDecoder.h" />
+    <ClInclude Include="..\include\media\ImageDecoder.h" />
+    <ClInclude Include="..\include\media\ImageSource.h" />
     <ClInclude Include="..\include\MPF.h" />
     <ClInclude Include="..\include\Object.h" />
+    <ClInclude Include="..\include\platform.h" />
     <ClInclude Include="..\include\Process.h" />
     <ClInclude Include="..\include\RAII.h" />
     <ClInclude Include="..\include\RoutedEvent.h" />
     <ClInclude Include="..\include\RoutedEventArgs.h" />
     <ClInclude Include="..\include\String.h" />
     <ClInclude Include="..\include\HashAlgorithms.h" />
-    <ClInclude Include="..\include\Thread.h" />
+    <ClInclude Include="..\include\threading\Thread.h" />
+    <ClInclude Include="..\include\threading\ThreadPool.h" />
     <ClInclude Include="..\include\Type.h" />
     <ClInclude Include="..\include\ui\Border.h" />
     <ClInclude Include="..\include\ui\Button.h" />
@@ -149,7 +168,6 @@
     <ClInclude Include="..\include\visual\Font.h" />
     <ClInclude Include="..\include\visual\Geometry.h" />
     <ClInclude Include="..\include\visual\GraphicAlgorithms.h" />
-    <ClInclude Include="..\include\visual\Image.h" />
     <ClInclude Include="..\include\visual\ImageBrush.h" />
     <ClInclude Include="..\include\visual\Line.h" />
     <ClInclude Include="..\include\visual\LinearGradientBrush.h" />
@@ -173,7 +191,6 @@
     <ClInclude Include="NativeWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="LinearGradientBrush.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Triangle.cpp" />
@@ -211,7 +228,18 @@
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.targets" Condition="Exists('..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.props'))" />
+    <Error Condition="!Exists('..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cpprestsdk.2.4.0.1\build\native\cpprestsdk.targets'))" />
+  </Target>
 </Project>

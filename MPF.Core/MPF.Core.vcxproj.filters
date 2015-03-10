@@ -37,6 +37,24 @@
     <Filter Include="源文件\Input">
       <UniqueIdentifier>{fe9f7891-e893-412f-bc5a-2b7803a7cb0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Media">
+      <UniqueIdentifier>{9037da59-6b8d-48b7-913d-aa7700e5476a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Media">
+      <UniqueIdentifier>{a90d6229-6dd6-4005-bea9-fbf052655bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\IO">
+      <UniqueIdentifier>{082e5fbb-c618-4f62-87e7-c45a24e0f21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\IO">
+      <UniqueIdentifier>{9abec569-ccf6-4bc6-9bde-de332d4853d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Threading">
+      <UniqueIdentifier>{5f462e13-bf6b-4009-bdc7-d0d5900935ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Threading">
+      <UniqueIdentifier>{90dac046-8e05-4502-a7f9-451d1908a322}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -76,9 +94,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Process.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Thread.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\visual\RenderCoreProvider.h">
@@ -255,8 +270,32 @@
     <ClInclude Include="..\include\visual\ImageBrush.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\visual\Image.h">
-      <Filter>头文件\Visual</Filter>
+    <ClInclude Include="..\include\media\ImageSource.h">
+      <Filter>头文件\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\io\Stream.h">
+      <Filter>头文件\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\io\FileStream.h">
+      <Filter>头文件\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\platform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\threading\Thread.h">
+      <Filter>头文件\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\threading\ThreadPool.h">
+      <Filter>头文件\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\media\ImageDecoder.h">
+      <Filter>头文件\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\media\BitmapDecoder.h">
+      <Filter>头文件\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\io\BinaryReader.h">
+      <Filter>头文件\IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,9 +321,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Thread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DependencyProperty.cpp">
@@ -386,14 +422,41 @@
     <ClCompile Include="VisualState.cpp">
       <Filter>源文件\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>源文件\Visual</Filter>
-    </ClCompile>
     <ClCompile Include="Bitmap.cpp">
       <Filter>源文件\GDI</Filter>
     </ClCompile>
     <ClCompile Include="MouseEventArgs.cpp">
       <Filter>源文件\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Media\ImageSource.cpp">
+      <Filter>源文件\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\FileStream.cpp">
+      <Filter>源文件\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="platform.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>源文件\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Threading\ThreadPool.cpp">
+      <Filter>源文件\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Media\ImageDecoder.cpp">
+      <Filter>源文件\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Media\BitmapDecoder.cpp">
+      <Filter>源文件\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\BinaryReader.cpp">
+      <Filter>源文件\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Visual\ImageBrush.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

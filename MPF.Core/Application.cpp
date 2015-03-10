@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../include/Application.h"
+#include "../include/platform.h"
 #include <iostream>
 
 using namespace MPF;

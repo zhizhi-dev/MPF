@@ -53,8 +53,8 @@ public:
 	//前景画刷
 	MPF_API static DependencyProperty<const MPF::Visual::Brush*> ForegroundProperty;
 protected:
-	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
-	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args);
+	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args);
 	//自动计算大小
 	MPF_API virtual MPF::Visual::Size AutoMeasureSize() noexcept;
 

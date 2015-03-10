@@ -16,7 +16,7 @@ Panel::Panel()
 
 Panel::~Panel()
 {
-	GetChildren().clear();
+
 }
 
 const std::vector<UIElement*>& Panel::GetChildren() const
@@ -29,15 +29,15 @@ std::vector<UIElement*>& Panel::GetChildren()
 	return children;
 }
 
-void Panel::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+void Panel::RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args)
 {
 	for (auto child : children)
 	{
 		massert(child != nullptr);
-		child->Render(renderer, RenderArgs{ args.ElapsedTime });
+		child->Render(renderer, args);
 	}
 
-	UIElement::RenderCore(renderer, std::move(args));
+	UIElement::RenderCore(renderer, args);
 }
 
 MPF::Visual::Point Panel::MakeChildOffset(UIElement& elem)
@@ -45,15 +45,15 @@ MPF::Visual::Point Panel::MakeChildOffset(UIElement& elem)
 	return Point();
 }
 
-void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
+void Panel::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args)
 {
-	UIElement::UpdateCore(renderer, std::move(args));
+	UIElement::UpdateCore(renderer, args);
 
 	for (auto child : children)
 	{
 		massert(child != nullptr);
 		auto offset = args.ParentOffset + MakeChildOffset(*child) + relativeOffset.second;
-		child->Update(renderer, UpdateArgs{ offset });
+		child->Update(renderer, UpdateArgs{ offset, args.ElapsedTime });
 	}
 }
 
@@ -71,11 +71,8 @@ bool Panel::HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements)
 		{
 			massert(child);
 			if (child->HitTest(point, elements))
-			{
-				break;
-			}
+				return true;
 		}
-		return true;
 	}
 	return false;
 }

@@ -8,15 +8,15 @@ using namespace MPF;
 using namespace MPF::Visual;
 using namespace MPF::UI;
 using namespace MPF::Input;
+using namespace MPF::IO;
+using namespace MPF::Media;
 
 void _stdcall MPFMain()
 {
 	auto& app = Application::GetCurrent();
 	app.UncaughtException += [&](bool& isHandled)
 	{
-		std::wcout << L"发生异常！" << std::endl;
-
-		system("Pause");
+		MessageBox(L"Hello MPF", L"发生异常！", MessageBoxIcons::Error);
 	};
 
 	Window win;
@@ -24,9 +24,10 @@ void _stdcall MPFMain()
 	win.Width = 800;
 	win.Height = 600;
 
-	//TextBlock::FontProperty.SetValue(Font(L"Microsoft YaHei", 40.f));
 	LinearGradientBrush linearBrush(0xFF00FF00, 0xFFFF0000);
-	//TextBlock::ForegroundProperty.SetValue(&linearBrush);
+	ImageSource imageSource(L"untitled.bmp");
+	ImageBrush imageBrush(imageSource);
+	win.Background = &imageBrush;
 
 	TextBlock textBlock1(L"帝球とchuは本当にばかです。");
 	Canvas::SetPosition(textBlock1, { 50.f, 50.f });
@@ -39,7 +40,6 @@ void _stdcall MPFMain()
 	border1.BorderBrush = &linearBrush;
 	border1.Content = &textBlock2;
 	border1.Padding = 10.f;
-	//border1.Background = &linearBrush;
 	border1.BorderThickness = 1.f;
 	Canvas::SetPosition(border1, { 50.f, 80.f });
 
@@ -48,6 +48,7 @@ void _stdcall MPFMain()
 	button1.Text = L"我是按钮";
 	button1.Padding = 10.f;
 	button1.BorderThickness = 1.f;
+	button1.Background = &imageBrush;
 	Canvas::SetPosition(button1, { 50.f, 150.f });
 
 	Canvas canvas;

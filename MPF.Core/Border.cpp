@@ -49,9 +49,9 @@ MPF::Visual::Size Border::AutoMeasureSize() noexcept
 	return size;
 }
 
-void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+void Border::RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args)
 {
-	ContentElement::RenderCore(renderer, std::move(args));
+	ContentElement::RenderCore(renderer, args);
 	auto borderBrush = BorderBrush;
 	if (borderBrush)
 	{

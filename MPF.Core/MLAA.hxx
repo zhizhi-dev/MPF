@@ -29,7 +29,7 @@ _INLINE int maxcolor(unsigned int c1) {
   int r1 = (c1 >> 16) & 0xff;
   int g1 = (c1 >> 8)  & 0xff;
   int b1 = c1 & 0xff;
-  return max(r1, max(g1, b1));
+  return std::max(r1, std::max(g1, b1));
 }
 
 _INLINE int sumColor(unsigned int c1) {  

@@ -1,9 +1,10 @@
 #pragma once
-#include "Type.h"
-#include "String.h"
-#include "Event.h"
+#include "../Type.h"
+#include "../String.h"
+#include "../Event.h"
 
 NS_MPF
+NS_THREADING
 
 class Thread;
 
@@ -60,4 +61,5 @@ private:
 	DECLARE_TYPE(Thread)
 };
 
+NS_ED
 NS_ED

@@ -9,6 +9,9 @@
 #define NS_GDI namespace GDI {
 #define NS_UI namespace UI {
 #define NS_INPUT namespace Input {
+#define NS_MEDIA namespace Media {
+#define NS_IO namespace IO {
+#define NS_THREADING namespace Threading{
 
 #if _MSC_VER < 1900
 #define noexcept throw()
@@ -26,6 +29,7 @@
 #include <iterator>
 #include <unordered_map>
 #include <cassert>
+#include <map>
 
 #ifdef NDEBUG
 #define massert(expr) ((void)0)
@@ -35,6 +39,7 @@
 #define mmassert(expr, message) (void)( (!!(expr)) || (_wassert(_CRT_WIDE(message), _CRT_WIDE(__FILE__), __LINE__), 0) )
 #endif
 #define mproperty(T, name) __declspec(property(get = Get##name, put = Set##name)) T name;
+#define mgproperty(T, name) __declspec(property(get = Get##name)) T name;
 
 namespace std
 {
@@ -44,3 +49,5 @@ namespace std
 		return ptr1.lock() == ptr2.lock();
 	}
 }
+
+#define THROW_IF_NOT(expr, message) if(!(expr)) throw std::exception(message);

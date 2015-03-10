@@ -61,10 +61,10 @@ void TextBlock::AddPropertyHandlers()
 	});
 }
 
-void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
+void TextBlock::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args)
 {
 	EnsureTextGlyphs();
-	UIElement::UpdateCore(renderer, std::move(args));
+	UIElement::UpdateCore(renderer, args);
 }
 
 void TextBlock::EnsureTextGlyphs()
@@ -95,7 +95,7 @@ void TextBlock::SetFont(const MPF::Visual::Font& value)
 	SetValue(FontProperty, value);
 }
 
-void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args)
 {
 	auto foreground = Foreground;
 	if (foreground)
@@ -104,7 +104,7 @@ void TextBlock::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs
 		AlphaBlendBrush blendBrush(*textGlyphs, *foreground);
 
 		renderer.FillQuad(textQuad, blendBrush);
-		UIElement::RenderCore(renderer, std::move(args));
+		UIElement::RenderCore(renderer, args);
 	}
 }
 

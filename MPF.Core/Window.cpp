@@ -90,3 +90,12 @@ void Window::InitializeNativeWindowEventHandlers()
 
 	window->MouseLeftButtonUp += mouseEventHandler;
 }
+
+void Window::UpdateRenderBound(MPF::Visual::Point parentOffset) noexcept
+{
+	auto offset = relativeOffset.second + parentOffset;
+	
+	renderBound.second = Quad(Point(offset.X, offset.Y), Point(offset.X + renderer->GetBackBufferWidth(),
+		offset.Y + renderer->GetBackBufferHeight(), 1.f, 1.f));
+	renderBound.first = false;
+}

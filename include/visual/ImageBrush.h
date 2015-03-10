@@ -1,5 +1,12 @@
+//
+// MPF
+// 图像画刷
+//
+// (c) SunnyCase 
+// 创建日期 2014-03-23
 #pragma once
 #include "Brush.h"
+#include "../media/ImageSource.h"
 
 NS_MPF
 NS_VSL
@@ -8,26 +15,21 @@ NS_VSL
 class ImageBrush : public Brush
 {
 public:
-	//创建 ImageBrush 的新实例
-	MPF_API ImageBrush() noexcept;
+	// 创建 ImageBrush 的新实例
+	MPF_API ImageBrush(std::shared_ptr<Media::ImageSource> source);
+	// 创建 ImageBrush 的新实例
+	MPF_API ImageBrush(Media::ImageSource& source);
+	MPF_API virtual ~ImageBrush();
 
-	//创建 ImageBrush 的新实例
-	MPF_API ImageBrush(color_t color) noexcept;
-
-	//采样
+	// 采样
 	MPF_API virtual color_t TakeSample(float u, float v) const;
 
-	//获取颜色
-	MPF_API color_t GetColor() const noexcept;
-	//设置颜色
-	MPF_API void SetColor(color_t color) noexcept;
-
-	//获取类型
-	MPF_API DECLARE_GETTYPE(ImageBrush)
-	MPF_API DECLARE_GETINSTANTTYPE(ImageBrush)
+	// 获取类型
+	MPF_API DECLARE_GETTYPE(ImageBrush);
+	MPF_API DECLARE_GETINSTANTTYPE(ImageBrush);
 private:
-	//颜色（默认黑色）
-	color_t color = 0xFF000000;
+	std::shared_ptr<Media::ImageSource> sourceHolder;
+	Media::ImageSource* source;
 
 	DECLARE_TYPE(ImageBrush)
 };

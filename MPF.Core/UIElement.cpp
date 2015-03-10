@@ -70,44 +70,40 @@ void UIElement::SetPadding(const Thickness& value)
 	SetValue(PaddingProperty, value);
 }
 
-void UIElement::Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+void UIElement::Render(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args)
 {
 	if (Visibility == Visibility::Visible)
 	{
 		if (templateRoot)
-		{
-			templateRoot->Render(renderer, std::move(args));
-		}
+			templateRoot->Render(renderer, args);
 		else
-		{
-			RenderCore(renderer, std::move(args));
-		}
+			RenderCore(renderer, args);
 	}
 }
 
-void UIElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args)
+void UIElement::RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args)
 {
 }
 
-void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
+void UIElement::Update(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args)
 {
 	auto templ = Template;
 	if (templ)
 	{
 		if (!templateInst) templateInst = templ(this);
 		if (!templateRoot) templateRoot = templateInst->GetRoot();
-		templateRoot->Update(renderer, std::move(args));
+		templateRoot->Update(renderer, args);
 		relativeOffset = templateRoot->relativeOffset;
 		size = templateRoot->size;
 		renderBound = templateRoot->renderBound;
 	}
 	else
 	{
-		UpdateCore(renderer, std::move(args));
+		UpdateCore(renderer, args);
 	}
 }
 
-void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args)
+void UIElement::UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args)
 {
 	if (relativeOffset.first)
 		UpdateRelativeOffset();

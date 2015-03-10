@@ -22,6 +22,9 @@ public:
 	//呈现
 	virtual void Present();
 
+	virtual size_t GetBackBufferWidth() const noexcept { return backBufferSurface->GetWidth(); }
+	virtual size_t GetBackBufferHeight() const noexcept { return backBufferSurface->GetHeight(); }
+
 	//获取类型
 	DECLARE_GETTYPE(GDIRenderCoreProvider)
 protected:

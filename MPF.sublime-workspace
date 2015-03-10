@@ -1,0 +1,484 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"bu",
+				"bufferHeight"
+			],
+			[
+				"hW",
+				"hWnd"
+			],
+			[
+				"buf",
+				"bufferHeight"
+			],
+			[
+				"gd",
+				"GDIDeviceContext"
+			],
+			[
+				"hw",
+				"hWnd"
+			],
+			[
+				"hWnd",
+				"hWnd_t"
+			],
+			[
+				"hD",
+				"hDC"
+			],
+			[
+				"HW",
+				"HWND"
+			],
+			[
+				"MPF",
+				"MPF_API"
+			],
+			[
+				"UIE",
+				"UIElement"
+			],
+			[
+				"Reg",
+				"RegisterNativeWindowClass"
+			],
+			[
+				"Re",
+				"Register"
+			],
+			[
+				"GetG",
+				"GetGlobalValueDerived"
+			],
+			[
+				"Te",
+				"TextProperty"
+			],
+			[
+				"UI",
+				"UIElement"
+			],
+			[
+				"de",
+				"delete"
+			],
+			[
+				"Ref",
+				"ReferCount"
+			],
+			[
+				"ref",
+				"refer"
+			],
+			[
+				"Visi",
+				"VisibilityProperty"
+			],
+			[
+				"uie",
+				"UIElementCtor"
+			],
+			[
+				"ui",
+				"UIElement"
+			],
+			[
+				"pr",
+				"property"
+			],
+			[
+				"get",
+				"GetGlobalValue"
+			],
+			[
+				"Obj",
+				"ObjectRef"
+			],
+			[
+				"Ob",
+				"ObjectRef"
+			],
+			[
+				"Co",
+				"CoreWindow"
+			],
+			[
+				"T",
+				"TSender"
+			],
+			[
+				"Pr",
+				"Property"
+			],
+			[
+				"P",
+				"Property"
+			],
+			[
+				"I",
+				"include"
+			],
+			[
+				"li",
+				"listener"
+			],
+			[
+				"do",
+				"dword_t"
+			],
+			[
+				"O",
+				"ObservableCollection"
+			],
+			[
+				"_",
+				"_MPF_COL_NS"
+			],
+			[
+				"for",
+				"foreach	auto Condition"
+			],
+			[
+				"pri",
+				"private"
+			],
+			[
+				"refer",
+				"referCount"
+			],
+			[
+				"Refer",
+				"ReferCount"
+			],
+			[
+				"MPF_DLL",
+				"MPF_DLL_API"
+			],
+			[
+				"if",
+				"ifdef"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: remove package",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 63.0,
+		"history":
+		[
+			"the:make",
+			"the:",
+			"the:make",
+			"cls",
+			"the:make",
+			"cd build",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/晖/Downloads/BZQ_BP.m",
+		"/C/Users/晖/Downloads/T.m",
+		"/D/Work/OS/Virtual/bootloader/tsldr.asm",
+		"/D/Work/OS/Virtual/bootloader/bootloader.asm",
+		"/D/Work/Projects/Music/TomatoPlayer/TomatoPlayer.MediaEngine/TomatoPlayer.MediaEngine.Shared/TomatoPlayer.MediaEngine.Shared.vcxitems",
+		"/D/Work/OS/Virtual/bootloader/bootloader.bin",
+		"/C/Users/晖/Desktop/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver.～.cue",
+		"/D/Media/Music/CDs/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver.～/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver.～.cue",
+		"/D/Media/Music/CDs/1/1.cue",
+		"/D/Media/Music/CDs/1/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver.～.cue",
+		"/C/Users/晖/SkyDrive/图片/DSC07494.JPG",
+		"/D/Media/Music/CDs/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver.～.cue",
+		"/D/Media/Music/CDs/[EAC] [130116] ゆるゆり♪♪ vol.5 (初回限定仕様)  すぺしゃるなさうんどCD その5「七森中♪うたがっせんの感動をもう１度！」 (ape+cue)/CDImage.cue",
+		"/D/Media/Music/CDs/ココア（佐倉綾音） - Daydream café　～ご注文はココアですか？ver/1.cue",
+		"/C/Users/晖/Desktop/hosts",
+		"/D/Work/Projects/Music/TomatoPlayer/TomatoPlayer.MediaEngine/TomatoPlayer.MediaEngine.Shared/TomatoPlayer.MediaEngine.Shared.vcxitems.filters",
+		"/D/Work/Projects/System/CadetManager/CadetManager/bin/Debug/CadetManager.exe.config",
+		"/D/Work/Game/TenshiMao/TenshiCommon/TenshiCommon.csproj",
+		"/D/Software/Development/SDKs/APE412/3rd Party/TMonkey (Delphi)/Monkey/Monkey.pas",
+		"/D/Software/Development/SDKs/APE412/3rd Party/TMonkey (Delphi)/Monkey/Main.pas",
+		"/E/TDDOWNLOAD/[DHR-Raws][Yuruyuri Live Event 4][Natsu_da!Matsuri_da!!!Zenin_Syuugou_Gorakubu_Nacyu_Matsuri][BDrip]/7506388556405936F04855A8B3817D66F6087C69.torrent",
+		"/D/Work/Projects/MoeAtHome/Web/MoeAtHome/.git/info/exclude",
+		"/D/Work/Projects/MoeAtHome/Web/MoeAtHome/MoeAtHome/MoeAtHome.csproj",
+		"/D/Work/Projects/MoeAtHome/Web/MoeAtHome/MoeAtHome.sln",
+		"/D/Work/Projects/MoeAtHome/Web/MoeAtHome/.gitignore",
+		"/D/Work/Projects/Repository/ImagesetEditor/.git/config",
+		"/D/Work/Projects/Common/MPF/Debug/MPF.Test.exe",
+		"/D/Work/Projects/MoeAtHome/Tenshi.MoeAtHome/bin/Debug/Configs/searchHistory.json",
+		"/D/Work/Projects/MoeAtHome/Tenshi.TenshiMao/Tenshi.TenshiMao.WinServer/bin/Debug/Data/wordsNet.json",
+		"/D/Media/Music/CDs/[120118]TVアニメ『パパのいうことを聞きなさい』EDテーマ「Coloring」／堀江由衣[TAK+BK]/TAK/Coloring.cue",
+		"/D/Work/Projects/MoeAtHome/Cloud/Tenshi.MoeAtHome/packages/repositories.config",
+		"/D/Work/Projects/MoeAtHome/Web/Tenshi.MoeAtHome/Tenshi.MoeAtHome/Tenshi.MoeAtHome.csproj",
+		"/C/Users/晖/Downloads/MoeAtHome.azurewebsites.net.PublishSettings",
+		"/D/Work/Projects/MoeAtHome/Web/Tenshi.MoeAtHome/Tenshi.MoeAtHome.vssscc",
+		"/D/Work/Projects/MoeAtHome/Web/Tenshi.MoeAtHome/Tenshi.MoeAtHome.v12.suo",
+		"/D/Work/Projects/MoeAtHome/Web/Tenshi.MoeAtHome/Tenshi.MoeAtHome.sln",
+		"/D/Work/Projects/MoeAtHome/Tenshi.MoeAtHome/bin/Debug/41788151_m.jpg",
+		"/D/Work/Projects/MoeAtHome/Tenshi.MoeAtHome/bin/Debug/temp.png",
+		"/D/Work/Projects/Common/MPF/MPF.UI/CoreWindow.cpp",
+		"/D/Work/Projects/Common/MPF/include/ui/CoreWindow.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Graphics/Surface.cpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/Pixel.hpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/GraphicAlgorithm.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Graphics/GDIDeviceContext.cpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/gdi/GDISurface.hpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/gdi/GDIDeviceContext.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Graphics/DeviceContext.cpp",
+		"/D/Media/Music/CDs/ゆるゆり_YURUYURI♪ 1st.Series Best Album ゆるゆりずむ♪ (3tak)/DISC-01.cue",
+		"/C/Users/晖/Documents/Tencent Files/584376461/FileRecv/chap03/Code/frmMain.frm",
+		"/D/Game/Online/EVE/launcher/default-settings.yaml",
+		"/D/Work/Projects/Common/MPF/include/graphics/DeviceContext.hpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/Surface.hpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/Point.hpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/Rectangle.hpp",
+		"/D/Work/Projects/Common/MPF/include/graphics/Graphics.hpp",
+		"/D/Work/Projects/Common/MPF/include/Refer.hpp",
+		"/D/Work/Projects/Common/MPF/include/platform.hpp",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/wingdi.h",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/vfw.h",
+		"/D/Software/Development/Windows CE Tools/wce500/Device Emulator/Include/Armv4i/vfwmsgs.h",
+		"/D/Software/Development/Windows CE Tools/wce500/Device Emulator/Include/Armv4i/wingdi.h",
+		"/D/Software/Development/Windows CE Tools/wce500/Device Emulator/Include/Armv4i/ddraw.h",
+		"/D/Work/Sources/cegcc-build/w32api/lib/directx/ddraw.def",
+		"/D/Software/Development/Windows CE Tools/wce500/Device Emulator/Lib/ARMV4I/ddraw.lib",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/dshow.h",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/direct.h",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/windef.h",
+		"/D/Work/Projects/Common/MPF/include/ui/TextBlock.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.UI/TextBlock.cpp",
+		"/D/Work/Projects/Common/MPF/CMakeLists.txt",
+		"/D/Work/Projects/Common/MPF/Tests/CoreWindowTest.cpp",
+		"/D/Work/Projects/Common/MPF/MPF.Core/Application.cpp",
+		"/D/Work/Projects/Common/MPF/include/Application.hpp",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/wchar.h",
+		"/D/Work/Projects/Common/MoePresentationFramework/MPF.Controls/Window.cpp",
+		"/D/Work/Projects/Common/MoePresentationFramework/include/controls/Window.h",
+		"/D/Work/Projects/Common/MoePresentationFramework/MPF/Application.cpp",
+		"/D/Work/Projects/Common/MoePresentationFramework/MPF.Runtime/Main.cpp",
+		"/D/Work/Projects/Common/MPF/MPF.UI/UIElement.cpp",
+		"/D/Work/Projects/Common/MPF/Tests/UIElementTest.cpp",
+		"/D/Work/Projects/Common/MPF/Tests/ReferTest.cpp",
+		"/D/Work/Projects/Common/MPF/Tests/MessageBoxTest.cpp",
+		"/D/Work/Projects/Common/MPF/include/DependencyObject.hpp",
+		"/D/Work/Projects/Common/MPF/include/mpf.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Runtime/Startup.cpp",
+		"/D/Work/Projects/Common/MPF/include/ui/UIElement.hpp",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/winuser.h",
+		"/D/Work/Projects/Common/MPF/MPF.Core/String.cpp",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/assert.h",
+		"/D/Work/Projects/Common/MPF/include/String.hpp",
+		"/D/Work/Projects/Common/MPF/include/ui/ui.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.UI/MessageBox.cpp",
+		"/D/Work/Projects/Common/MPF/include/ValueType.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Core/Object.cpp",
+		"/D/Work/Projects/Common/MPF/include/DependencyProperty.hpp",
+		"/D/Work/Projects/Common/MPF/include/Object.hpp",
+		"/D/Work/Projects/Common/MPF/include/property.hpp",
+		"/D/Work/Projects/Common/MPF/include/Property.hpp",
+		"/D/Work/Projects/Common/MPF/include/ui/MessageBox.hpp",
+		"/D/Work/Projects/Common/MPF/include/object.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Core/ObservableCollection.cpp",
+		"/D/Work/Projects/Common/MPF/include/collections/ObservableCollection.hpp",
+		"/D/Work/Projects/Common/MPF/include/collections/Collections.hpp",
+		"/D/Work/Projects/Common/MPF/include/Type.hpp",
+		"/D/Work/Projects/Common/MPF/include/ReferCount.hpp",
+		"/D/Work/Projects/Common/MPF/include/EventHandler.hpp",
+		"/D/Work/Projects/Common/MPF/include/Event.hpp",
+		"/D/Work/Projects/Common/MPF/include/mpfcore.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Core/CollectionChangedEventArgs.cpp",
+		"/D/Work/Projects/Common/MPF/include/IInvokable.hpp",
+		"/D/Work/Projects/Common/MPF/MPF.Core/Type.cpp",
+		"/D/Work/Projects/Common/MPF/MPF.Core/ReferCount.cpp",
+		"/D/Software/Development/mingw32ce/arm-mingw32ce/include/c++/4.6.3/atomic",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/Platform/WindowsCE.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/Compiler/GNU.cmake",
+		"/D/Work/Projects/Common/MPF/build/CMakeFiles/Makefile.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/Compiler/GNU-CXX.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/Compiler/GNU-C.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/CMakeSystemSpecificInformation.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/CMakeGenericSystem.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/CMakeCInformation.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/CMakeCXXInformation.cmake",
+		"/D/Work/Projects/Common/MPF/build/CMakeCache.txt",
+		"/D/Work/Projects/Common/MPF/build/CMakeFiles/2.8.12.1/CMakeCCompiler.cmake",
+		"/D/Work/Projects/Common/MPF/build/CMakeFiles/2.8.12.1/CMakeCXXCompiler.cmake",
+		"/D/Work/Projects/Common/MPF/build/CMakeFiles/2.8.12.1/CMakeSystem.cmake",
+		"/D/Software/Development/cmake/share/cmake-2.8/Modules/Platform/Windows.cmake"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"203.208.46.200",
+			"mono6",
+			"if(window)\n	{\n		return window->WndProc(message, wParam, lParam);\n	}",
+			"// String::~String()\n// {\n// 	if (!shared)\n// 	{\n// 		delete[] str;\n// 		str = nullptr;\n// 	}\n// }",
+			"String::~String()\n{\n	if (!shared)\n	{\n		delete[] str;\n		str = nullptr;\n	}\n}",
+			"pic"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"74.125.20.31"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "MPF.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"platform",
+				"include\\platform.hpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 197.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

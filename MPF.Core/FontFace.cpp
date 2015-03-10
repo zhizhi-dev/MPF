@@ -99,7 +99,7 @@ std::pair<uint32_t, uint32_t> FontFace::MeasureText(const MPF::String& text, flo
 	{
 		auto& glyph = GetGlyphCache(FontFaceCacheKey{ text[i], sizeInPixels.first, sizeInPixels.second });
 		pair.first += glyph.Advance.first;
-		pair.second = max(pair.second, glyph.Glyph->GetHeight() + glyph.Top);
+		pair.second = std::max(pair.second, glyph.Glyph->GetHeight() + glyph.Top);
 	}
 
 	return pair;

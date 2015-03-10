@@ -110,7 +110,6 @@ void GDIRenderCoreProvider::EndDraw()
 {
 	auto data = backBufferSurface->GetDataPointer();
 
-	//GraphicAlgorithms::MLAA((color_t*)data, backBufferSurface->GetWidth(), backBufferSurface->GetHeight());
 	SelectObject(backBuffer->GetNativeHandle(), nullptr);
 }
 

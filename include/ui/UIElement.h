@@ -68,8 +68,8 @@ public:
 	//鼠标左键释放时触发事件
 	EventWrapper<UIElement, MPF::Input::MouseEventHandler, MPF::Input::MouseEventArgs> MouseLeftButtonUp;
 
-	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
+	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args);
+	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args);
 
 	MPF_API MPF::Visual::Size MeasureSize() noexcept;
 	MPF_API MPF::Visual::Quad GetRenderBound() const noexcept;
@@ -105,8 +105,8 @@ public:
 	//鼠标左键释放时触发事件
 	MPF_API static RoutedEvent<MPF::Input::MouseEventHandler> MouseLeftButtonUpEvent;
 protected:
-	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, RenderArgs&& args);
-	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, UpdateArgs&& args);
+	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args);
+	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args);
 	MPF_API virtual void OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args);
 protected:
 	//更新相对父节点的偏移

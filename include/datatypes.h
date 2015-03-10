@@ -23,6 +23,12 @@ union argb_color
 
 	}
 
+	argb_color(byte blue, byte green, byte red, byte alpha)
+		:blue(blue), green(green), red(red), alpha(alpha)
+	{
+
+	}
+
 	argb_color(color_t color)
 		:col(color)
 	{

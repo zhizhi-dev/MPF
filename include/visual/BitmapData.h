@@ -93,8 +93,8 @@ public:
 	{
 		massert(destLeft <= width);
 		massert(destTop <= height);
-		size_t maxX = min(width - destLeft, source.width - srcLeft);
-		size_t maxY = min(height - destTop, source.height - srcTop);
+		size_t maxX = std::min(width - destLeft, source.width - srcLeft);
+		size_t maxY = std::min(height - destTop, source.height - srcTop);
 		size_t srcPitch(source.pitch);
 		auto ptr = data + destTop * pitch + destLeft;
 		auto srcPtr = source.data + srcTop * srcPitch + srcLeft;

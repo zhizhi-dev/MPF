@@ -51,16 +51,15 @@ LRESULT CALLBACK NativeWindow::WindowProcWrapper(HWND hWnd, uint32_t uMsg, WPARA
 
 	if (uMsg == WM_NCCREATE)
 	{
-		//获取 this
+		// 获取 this
 		auto createParam = (LPCREATESTRUCT)lParam;
 		window = (NativeWindow*)createParam->lpCreateParams;
 		SetProp(hWnd, MPFWindowHandlePropName, window);
 	}
 
 	if (window)
-	{
 		return window->WindowProc(hWnd, uMsg, wParam, lParam);
-	}
+
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
@@ -72,6 +71,8 @@ LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wPara
 		return OnPaint();
 	case WM_LBUTTONUP:
 		return OnMouseLeftButtonUp(wParam, lParam);
+	case WM_LBUTTONDOWN:
+		return OnMouseLeftButtonDown(wParam, lParam);
 	default:
 		break;
 	}
@@ -192,6 +193,18 @@ LRESULT NativeWindow::OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const
 	NativeMouseEventArgs e(position);
 
 	MouseLeftButtonUp([&](NativeMouseEventHandler handler)
+	{
+		handler(e);
+	});
+	return 0;
+}
+
+LRESULT NativeWindow::OnMouseLeftButtonDown(WPARAM wParam, LPARAM lParam) const
+{
+	auto position = DPIHelper::Current.DevicePointToLogicalPoint(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	NativeMouseEventArgs e(position);
+
+	MouseLeftButtonDown([&](NativeMouseEventHandler handler)
 	{
 		handler(e);
 	});

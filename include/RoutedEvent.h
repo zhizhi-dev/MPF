@@ -44,6 +44,8 @@ public:
 		return name;
 	}
 
+	mgproperty(const String&, Name);
+
 	//获取事件模式
 	virtual RoutedEventMode GetMode() const noexcept
 	{

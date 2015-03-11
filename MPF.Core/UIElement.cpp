@@ -1,6 +1,13 @@
+//
+// MPF
+// UI 元素
+//
+// (c) SunnyCase 
+// 创建日期 2014-03-25
 #include "stdafx.h"
 #include "../include/ui/UIElement.h"
 #include "../include/Enumerable.h"
+#include "../include/visual/VisualStateManager.h"
 #include <stack>
 
 using namespace MPF;
@@ -196,10 +203,17 @@ void UIElement::InitializeEventHandlers()
 {
 	DEFINE_COMMON_ROUTEDEVENT(MouseLeftButtonUp, MouseEventArgs);
 	DEFINE_ROUTED_EVENTWRAPPER(MouseLeftButtonUp, UIElement);
+	DEFINE_COMMON_ROUTEDEVENT(MouseLeftButtonDown, MouseEventArgs);
+	DEFINE_ROUTED_EVENTWRAPPER(MouseLeftButtonDown, UIElement);
 }
 
 void UIElement::OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args)
 {
+}
+
+void UIElement::OnMouseLeftButtonDown(MPF::Input::MouseEventArgs& args)
+{
+	VisualStateManager::GoToState(*this, VisualStateGroup::CommonStates, L"MouseDown");
 }
 
 void UIElement::SetParent(UIElement& element, UIElement* parent) noexcept
@@ -226,7 +240,7 @@ void UIElement::RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& arg
 		while (!args.Handled && !uiList.empty())
 		{
 			auto elem = uiList.top();
-			DoEvent(*elem, ent, args);
+			RaiseEvent(*elem, ent, args);
 			uiList.pop();
 		}
 	}
@@ -235,7 +249,7 @@ void UIElement::RaiseEventInternal(const IRoutedEvent& ent, RoutedEventArgs& arg
 	{
 		for (UIElement* elem = args.GetSource(); !args.Handled; elem = elem->parent)
 		{
-			DoEvent(*elem, ent, args);
+			RaiseEvent(*elem, ent, args);
 			if (elem == args.GetDestination()) break;
 		}
 	}
@@ -249,4 +263,13 @@ ControlTemplate UIElement::GetTemplate() const
 void UIElement::SetTemplate(ControlTemplate&& value)
 {
 	SetValue(TemplateProperty, std::move(value));
+}
+
+const any& UIElement::GetValueCore(const String& name, const std::unordered_map<String, any>& values) const
+{
+	// 检测视图状态值
+	auto& visualStateValue = VisualStateManager::GetStateValue(name, *this);
+	if (!visualStateValue.isEmpty())
+		return visualStateValue;
+	return DependencyObject::GetValueCore(name, values);
 }

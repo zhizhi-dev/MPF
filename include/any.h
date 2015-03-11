@@ -61,13 +61,6 @@ public:
 	}
 
 	template<typename T>
-	any(T* value)
-		: value(std::make_unique<holder<std::remove_reference_t<T>*>>(value))
-	{
-
-	}
-
-	template<typename T>
 	any(const T& value)
 		: value(std::make_unique<holder<std::remove_reference_t<std::remove_cv_t<T>>>>(value))
 	{
@@ -77,7 +70,7 @@ public:
 	template<typename T>
 	any(T&& value)
 		: value(std::make_unique<holder<std::remove_reference_t<std::remove_cv_t<T>>>>(
-		std::forward<std::remove_cv_t<T>>(value)))
+		std::forward<T>(value)))
 	{
 
 	}
@@ -124,10 +117,9 @@ public:
 	}
 
 	template<typename T>
-	const T& operator= (const T& value)
+	auto operator= (const T& value)
 	{
 		set(value);
-
 		return value;
 	}
 
@@ -143,13 +135,6 @@ public:
 	const any& operator= (any&& _any) noexcept
 	{
 		value = std::move(_any.value);
-		return *this;
-	}
-
-	template<typename T>
-	const T& operator= (T&& value)
-	{
-		set(std::forward<T>(value));
 		return *this;
 	}
 

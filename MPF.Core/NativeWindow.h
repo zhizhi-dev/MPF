@@ -50,15 +50,18 @@ public:
 	//创建 RenderCoreProvider
 	std::unique_ptr<RenderCoreProvider> CreateRenderCoreProvider(RenderCoreProviders provider);
 
-	//绘制事件
+	// 绘制事件
 	Event<PaintEventHandler> Paint;
-	//鼠标左键释放点击事件
+	// 鼠标左键释放点击事件
 	Event<MPF::Input::NativeMouseEventHandler> MouseLeftButtonUp;
+	// 鼠标左键按下点击事件
+	Event<MPF::Input::NativeMouseEventHandler> MouseLeftButtonDown;
 private:
 	//窗口过程
 	LRESULT CALLBACK WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT OnPaint() const;
 	LRESULT OnMouseLeftButtonUp(WPARAM wParam, LPARAM lParam) const;
+	LRESULT OnMouseLeftButtonDown(WPARAM wParam, LPARAM lParam) const;
 private:
 	static void CreateWindowClass();
 	static LRESULT CALLBACK WindowProcWrapper(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);

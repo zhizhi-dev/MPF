@@ -16,7 +16,7 @@ public:
 	virtual UIElement* GetRoot() = 0;
 };
 
-//控件模板
+// 控件模板
 using ControlTemplate = std::function<std::unique_ptr<TemplateInstance>(UIElement*)>;
 
 static bool operator!=(const ControlTemplate& left, const ControlTemplate& right) noexcept

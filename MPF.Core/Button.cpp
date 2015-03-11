@@ -19,6 +19,11 @@ Button::~Button()
 
 }
 
+const MPF::Visual::Brush* Button::GetBorderBrush() const
+{
+	return GetValue(Border::BorderBrushProperty);
+}
+
 void Button::SetBorderBrush(const MPF::Visual::Brush* value)
 {
 	SetValue(Border::BorderBrushProperty, value);

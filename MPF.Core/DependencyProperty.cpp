@@ -6,6 +6,7 @@
 #include "../include/ui/ControlTemplate.h"
 #include "../include/ui/Window.h"
 #include "../include/input/InputEventHandlers.h"
+#include "../include/visual/VisualStateManager.h"
 
 using namespace MPF;
 using namespace MPF::Visual;
@@ -24,25 +25,29 @@ DependencyProperty<const MPF::Visual::Brush*> Border::BorderBrushProperty(L"Bord
 DependencyProperty<MPF::Visual::Thickness> Border::BorderThicknessProperty(L"BorderThickness");
 DependencyProperty<MPF::String> Window::TitleProperty(L"Title", String::GetEmpty());
 RoutedEvent<MouseEventHandler> UIElement::MouseLeftButtonUpEvent(L"MouseLeftButtonUp", RoutedEventMode::Bubble);
+RoutedEvent<MouseEventHandler> UIElement::MouseLeftButtonDownEvent(L"MouseLeftButtonDown", RoutedEventMode::Bubble);
 
 SolidColorBrush defaultForegroundBrush(0xFF000000);
 DependencyProperty<MPF::String> TextBlock::TextProperty(L"Text", String::GetEmpty());
 DependencyProperty<MPF::Visual::Font> TextBlock::FontProperty(L"Font", MPF::Visual::Font(L"Microsoft YaHei", 15.f));
 DependencyProperty<const MPF::Visual::Brush*> TextBlock::ForegroundProperty(L"Foreground", &defaultForegroundBrush);
 
+const String VisualStateGroup::CommonStates(L"CommonStates");
+DependencyProperty<VisualStateGroupCollection> VisualStateManager::VisualStateGroupsProperty(L"VisualStateGroups");
+DependencyProperty<std::unordered_map<String, VisualStateStatus>> VisualStateManager::VisualStateStatusProperty(L"VisualStateStatus");
+
 class DefautlButtonTemplateInstace : public TemplateInstance
 {
 public:
 	DefautlButtonTemplateInstace(UIElement* parent)
-		:borderBrush(0xFFACACAC), backBrush(0xFFECECEC)
 	{
 		Button& button = reinterpret_cast<Button&>(*parent);
 
 		textBlock.Text = button.Text;
 
 		border.BorderThickness = 1;
-		border.BorderBrush = &borderBrush;
-		border.Background = &backBrush;
+		border.BorderBrush = button.BorderBrush;
+		border.Background = button.Background;
 		border.Padding = 5.f;
 		border.Content = &textBlock;
 	}
@@ -54,17 +59,36 @@ public:
 private:
 	Border border;
 	TextBlock textBlock;
-	SolidColorBrush borderBrush;
-	SolidColorBrush backBrush;
 };
 
 struct TemplatesInitializer
 {
+	SolidColorBrush borderBrush;
+	SolidColorBrush backBrush;
+	SolidColorBrush highlightBackBrush;
+	any highlightBackBrushHolder;
+
 	TemplatesInitializer()
+		:borderBrush(0xFFACACAC), backBrush(0xFFECECEC), highlightBackBrush(0xFFFFFFFF),
+		highlightBackBrushHolder(&highlightBackBrush)
 	{
-		Button::SetCommonStyleValue<ControlTemplate>(UIElement::TemplateProperty, [](UIElement* parent)
+		Button::SetDefaultValue<const Brush*>(Border::BorderBrushProperty, &borderBrush);
+		Button::SetDefaultValue<const Brush*>(ContentElement::BackgroundProperty, &backBrush);
+		Button::SetDefaultValue<ControlTemplate>(UIElement::TemplateProperty, [](UIElement* parent)
 		{
 			return std::make_unique<DefautlButtonTemplateInstace>(parent);
+		});
+		Button::SetDefaultValue<VisualStateGroupCollection>(VisualStateManager::VisualStateGroupsProperty,
+		{
+			VisualStateGroup(VisualStateGroup::CommonStates,
+			{
+				VisualState(L"MouseDown", [&](const UIElement& element, const String& propertyName) ->const any&
+				{
+					if (propertyName == Button::BackgroundProperty.Name)
+						return highlightBackBrushHolder;
+					return any::empty;
+				})
+			})
 		});
 	}
 } templatesnitializer;

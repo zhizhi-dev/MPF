@@ -80,7 +80,7 @@ void Window::InitializeNativeWindowEventHandlers()
 {
 	auto window = nativeWindow.get();
 
-	auto mouseEventHandler = [=](NativeMouseEventArgs& e)
+	window->MouseLeftButtonUp += [=](NativeMouseEventArgs& e)
 	{
 		auto hit = HitTest(e.Position);
 		massert(hit.size());
@@ -88,13 +88,19 @@ void Window::InitializeNativeWindowEventHandlers()
 		RaiseEvent(MouseLeftButtonUpEvent, args);
 	};
 
-	window->MouseLeftButtonUp += mouseEventHandler;
+	window->MouseLeftButtonDown += [=](NativeMouseEventArgs& e)
+	{
+		auto hit = HitTest(e.Position);
+		massert(hit.size());
+		MouseEventArgs args(hit.back(), hit.front(), e.Position);
+		RaiseEvent(MouseLeftButtonDownEvent, args);
+	};
 }
 
 void Window::UpdateRenderBound(MPF::Visual::Point parentOffset) noexcept
 {
 	auto offset = relativeOffset.second + parentOffset;
-	
+
 	renderBound.second = Quad(Point(offset.X, offset.Y), Point(offset.X + renderer->GetBackBufferWidth(),
 		offset.Y + renderer->GetBackBufferHeight(), 1.f, 1.f));
 	renderBound.first = false;

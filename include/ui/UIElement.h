@@ -1,3 +1,9 @@
+//
+// MPF
+// UI 元素
+//
+// (c) SunnyCase 
+// 创建日期 2014-03-25
 #pragma once
 #include "../Type.h"
 #include "../DependencyObject.h"
@@ -65,8 +71,10 @@ public:
 
 	MPF_API UIElement* GetParent() const noexcept{ return parent; }
 
-	//鼠标左键释放时触发事件
+	// 鼠标左键释放时触发事件
 	EventWrapper<UIElement, MPF::Input::MouseEventHandler, MPF::Input::MouseEventArgs> MouseLeftButtonUp;
+	// 鼠标左键按下时触发事件
+	EventWrapper<UIElement, MPF::Input::MouseEventHandler, MPF::Input::MouseEventArgs> MouseLeftButtonDown;
 
 	MPF_API void Render(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args);
 	MPF_API void Update(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args);
@@ -78,6 +86,7 @@ public:
 	MPF_API std::vector<UIElement*> HitTest(MPF::Visual::Point point) noexcept;
 	MPF_API virtual bool HitTest(MPF::Visual::Point point, std::vector<UIElement*>& elements) noexcept;
 
+	using DependencyObject::RaiseEvent;
 	//引发事件
 	template<typename THandler, typename TArgs>
 	static void RaiseEvent(const RoutedEvent<THandler>& ent, TArgs& args)
@@ -102,12 +111,15 @@ public:
 	MPF_API static DependencyProperty<MPF::Visual::Thickness> PaddingProperty;
 	//模板
 	MPF_API static DependencyProperty<ControlTemplate> TemplateProperty;
-	//鼠标左键释放时触发事件
+	// 鼠标左键释放时触发事件
 	MPF_API static RoutedEvent<MPF::Input::MouseEventHandler> MouseLeftButtonUpEvent;
+	// 鼠标左键按下时触发事件
+	MPF_API static RoutedEvent<MPF::Input::MouseEventHandler> MouseLeftButtonDownEvent;
 protected:
 	MPF_API virtual void RenderCore(MPF::Visual::RenderCoreProvider& renderer, const RenderArgs& args);
 	MPF_API virtual void UpdateCore(MPF::Visual::RenderCoreProvider& renderer, const UpdateArgs& args);
 	MPF_API virtual void OnMouseLeftButtonUp(MPF::Input::MouseEventArgs& args);
+	MPF_API virtual void OnMouseLeftButtonDown(MPF::Input::MouseEventArgs& args);
 protected:
 	//更新相对父节点的偏移
 	MPF_API virtual void UpdateRelativeOffset() noexcept;
@@ -118,6 +130,8 @@ protected:
 	MPF_API virtual void UpdateSize() noexcept;
 	//自动计算大小
 	MPF_API virtual MPF::Visual::Size AutoMeasureSize() noexcept;
+
+	virtual const any& GetValueCore(const String& name, const std::unordered_map<String, any>& values) const;
 
 	DECLARE_UI_FUNCS
 protected:

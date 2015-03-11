@@ -44,18 +44,15 @@ void _stdcall MPFMain()
 	Canvas::SetPosition(border1, { 50.f, 80.f });
 
 	Button button1;
-	button1.BorderBrush = &linearBrush;
 	button1.Text = L"我是按钮";
 	button1.Padding = 10.f;
 	button1.BorderThickness = 1.f;
-	button1.Background = &imageBrush;
 	Canvas::SetPosition(button1, { 50.f, 150.f });
 
 	Canvas canvas;
 	canvas.AddChildren(textBlock1, border1, button1);
 	win.Content = &canvas;
 	win.Show();
-	win.DoFrame();
 
 	button1.MouseLeftButtonUp += [&](MouseEventArgs& e)
 	{
@@ -63,5 +60,8 @@ void _stdcall MPFMain()
 		MessageBox(L"Hello MPF", L"Button1 MouseLeftButton Up", MessageBoxIcons::Information);
 	};
 
-	app.Run();
+	app.Run([&]
+	{
+		win.DoFrame();
+	});
 }

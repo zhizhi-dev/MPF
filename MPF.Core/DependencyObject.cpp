@@ -5,41 +5,56 @@ using namespace MPF;
 
 DependencyObject::~DependencyObject()
 {
-	localValues.clear();
-	animationValues.clear();
-	styleValues.clear();
 }
 
-void DependencyObject::OnValueChange(const String& name) const
+MPF_API void DependencyObject::OnValueChanged(const String& name) const
 {
 	auto it(observers.find(name));
 	if (it != observers.end())
-	{
 		it->second();
-	}
 }
 
-any& DependencyObject::FindParentCommonValue(const String& name) const
+const any& DependencyObject::GetBaseDefaultValue(const String& name) const
 {
 	return any::empty;
 }
 
-void DependencyObject::InvokeParentCommonEventHandlers(const IRoutedEvent& ent, RoutedEventArgs& args) const
+void DependencyObject::InvokeBaseDefaultEventHandler(const IRoutedEvent& ent, RoutedEventArgs& args) const
 {
 }
 
-void DependencyObject::AddCommonEventHandlers(const String& name, RoutedEventHandler&& handler) const
+void DependencyObject::AddDefaultEventHandlerCore(const String& name, RoutedEventHandler&& handler) const
 {
 }
 
-void DependencyObject::DoEvent(DependencyObject& obj, const IRoutedEvent& ent, RoutedEventArgs& args)
+void DependencyObject::RaiseEvent(DependencyObject& obj, const IRoutedEvent& ent, RoutedEventArgs& args)
 {
-	if (args.Handled)return;
-	auto it = obj.localEvents.find(ent.GetName());
-	if (it != obj.localEvents.end())
+	if (!args.Handled)
 	{
-		auto handler = (RoutedEventHandler&)it->second;
-		handler(args);
+		auto range = obj.localEvents.equal_range(ent.GetName());
+		if (range.first != range.second)
+		{
+			for (auto it = range.first; it != range.second; ++it)
+				if (!args.Handled)
+					it->second(args);
+		}
+		else
+			obj.InvokeBaseDefaultEventHandler(ent, args);
 	}
-	obj.InvokeParentCommonEventHandlers(ent, args);
+}
+
+MPF_API const any& DependencyObject::GetLocalValue(const String& name) const
+{
+	auto it = localValues.find(name);
+	if (it != localValues.end())
+		return it->second;
+	return any::empty;
+}
+
+const any& DependencyObject::GetValueCore(const String& name, const std::unordered_map<String, any>& values) const
+{
+	auto it = values.find(name);
+	if (it != values.end())
+		return it->second;
+	return any::empty;
 }

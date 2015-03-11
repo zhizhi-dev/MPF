@@ -1,3 +1,9 @@
+ï»¿//
+// MPF
+// ä¾èµ–å¯¹è±¡
+//
+// (c) SunnyCase 
+// åˆ›å»ºæ—¥æœŸ 2014-03-25
 #pragma once
 #include "Type.h"
 #include "any.h"
@@ -8,84 +14,70 @@
 
 NS_MPF
 
-//¾ßÓĞÒÀÀµÊôĞÔµÄ¶ÔÏó
+// ä¾èµ–å¯¹è±¡
 class DependencyObject
 {
 public:
-	//´´½¨ DependencyObject µÄĞÂÊµÀı
-	DependencyObject(){}
+	//åˆ›å»º DependencyObject çš„æ–°å®ä¾‹
+	DependencyObject() {}
 	virtual ~DependencyObject();
 
-	//»ñÈ¡µ±Ç°Öµ
+	// è·å–å½“å‰å€¼
 	template<typename T>
 	T& GetValue(DependencyProperty<T>& property) const
 	{
-		auto& name = property.GetName();
-		//¼ì²â¶¯»­Öµ
-		auto it = animationValues.find(name);
-		if (it != animationValues.end())
-		{
-			return it->second;
-		}
-		//¼ì²â±¾µØÖµ
-		it = localValues.find(name);
-		if (it != localValues.end())
-		{
-			return it->second;
-		}
-		//¼ì²âÑùÊ½Öµ
-		it = styleValues.find(name);
-		if (it != styleValues.end())
-		{
-			return it->second;
-		}
-		//¼ì²âÍ¨ÓÃÖµ
-		return GetCommonValue(property);
+		auto& name = property.Name;
+		// æ£€æµ‹æœ¬åœ°å€¼
+		auto& localValue = GetValueCore(name, localValues);
+		if (!localValue.isEmpty())
+			return (T&)localValue;
+		// æ£€æµ‹é»˜è®¤å€¼
+		auto& defaultValue = GetBaseDefaultValue(name);
+		if(!defaultValue.isEmpty())
+			return (T&)defaultValue;
+		// ä¾èµ–å±æ€§é»˜è®¤å€¼
+		return property.Value;
 	}
 
-	//ÉèÖÃ±¾µØÖµ
+	// è®¾ç½®æœ¬åœ°å€¼
 	template<typename T>
 	void SetValue(const DependencyProperty<T>& property, T&& value)
 	{
 		auto& name = property.GetName();
-		//¼ì²â±¾µØÖµ
+		// æ£€æµ‹æœ¬åœ°å€¼
 		auto it = localValues.find(name);
 		if (it != localValues.end())
 		{
-			if ((const T&)(it->second) != value)
+			//if ((const T&)(it->second) != value)
 			{
 				it->second = value;
-				OnValueChange(name);
+				OnValueChanged(name);
 			}
 		}
 		else
-		{
-			localValues.emplace(name, std::move(value));
-		}
+			localValues.emplace(name, std::forward<T>(value));
 	}
 
-	//ÉèÖÃ±¾µØÖµ
+	// è®¾ç½®æœ¬åœ°å€¼
 	template<typename T>
 	void SetValue(const DependencyProperty<T>& property, const T& value)
 	{
 		auto& name = property.GetName();
-		//¼ì²â±¾µØÖµ
+		// æ£€æµ‹æœ¬åœ°å€¼
 		auto it = localValues.find(name);
 		if (it != localValues.end())
 		{
 			if ((const T&)(it->second) != value)
 			{
 				it->second = value;
-				OnValueChange(name);
+				OnValueChanged(name);
 			}
 		}
 		else
-		{
 			localValues.emplace(name, value);
-		}
 	}
 
-	//Ìí¼ÓÊÂ¼şÕìÌıÆ÷
+	// æ·»åŠ æœ¬åœ°äº‹ä»¶ä¾¦å¬å™¨
 	template<typename THandler, typename TArgs>
 	void AddEventHandler(const RoutedEvent<THandler>& ent, std::function<void(TArgs&)> handler)
 	{
@@ -95,122 +87,105 @@ public:
 		});
 	}
 
-	//Ìí¼ÓÊÂ¼şÕìÌıÆ÷
+	// æ·»åŠ é»˜è®¤äº‹ä»¶ä¾¦å¬å™¨
 	template<typename THandler, typename TArgs>
-	void AddStyleEventHandler(const RoutedEvent<THandler>& ent, std::function<void(TArgs&)> handler)
+	void AddDefaultEventHandler(const RoutedEvent<THandler>& ent, std::function<void(TArgs&)> handler)
 	{
-		AddCommonEventHandlers(ent.GetName(), [=](RoutedEventArgs& args)
+		AddDefaultEventHandlerCore(ent.Name, [=](RoutedEventArgs& args)
 		{
 			handler(*(TArgs*)(&args));
 		});
 	}
-
 protected:
 	template<typename T>
 	void SetPropertyChangedHandler(const DependencyProperty<T>& property, std::function<void()> handler)
 	{
-		auto& name = property.GetName();
-		auto it(observers.find(name));
-
-		if (it != observers.end())
-		{
-			it->second = handler;
-		}
-		else
-		{
-			observers.emplace(name, handler);
-		}
+		observers[property.Name] = handler;
 	}
 
 	template<typename T>
 	void ClearPropertyChangedHandler(const DependencyProperty<T>& property)
 	{
 		auto& name = property.GetName();
-		auto it(observers.find(name));
+		auto it = observers.find(name);
 
 		if (it != observers.end())
-		{
 			observers.erase(it);
-		}
 	}
 
-	template<typename T>
-	T& GetCommonValue(DependencyProperty<T>& property) const
-	{
-		auto& val = FindParentCommonValue(property.GetName());
-		if (val.isEmpty())
-		{
-			return property.GetValue();
-		}
-		return val;
-	}
-	MPF_API void OnValueChange(const String& name) const;
+	MPF_API void OnValueChanged(const String& name) const;
+	MPF_API const any& GetLocalValue(const String& name) const;
 protected:
-	virtual any& FindParentCommonValue(const String& name) const;
-	virtual void InvokeParentCommonEventHandlers(const IRoutedEvent& ent, RoutedEventArgs& args) const;
-	virtual void AddCommonEventHandlers(const String& name, RoutedEventHandler&& handler) const;
-	static void DoEvent(DependencyObject& obj, const IRoutedEvent& ent, RoutedEventArgs& args);
+	virtual const any& GetValueCore(const String& name, const std::unordered_map<String, any>& values) const;
+	// è·å–åŸºç±»é»˜è®¤å€¼
+	virtual const any& GetBaseDefaultValue(const String& name) const;
+	// è°ƒç”¨åŸºç±»é»˜è®¤äº‹ä»¶å¤„ç†å™¨
+	virtual void InvokeBaseDefaultEventHandler(const IRoutedEvent& ent, RoutedEventArgs& args) const;
+	// æ·»åŠ é»˜è®¤äº‹ä»¶å¤„ç†å™¨
+	virtual void AddDefaultEventHandlerCore(const String& name, RoutedEventHandler&& handler) const;
+	// è§¦å‘äº‹ä»¶
+	static void RaiseEvent(DependencyObject& obj, const IRoutedEvent& ent, RoutedEventArgs& args);
 private:
-	//ÊôĞÔ
+	// å±æ€§
 	std::unordered_map<String, any> localValues;
-	std::unordered_map<String, any> animationValues;
-	std::unordered_map<String, any> styleValues;
 	std::unordered_map<String, std::function<void()>> observers;
-	//ÊÂ¼ş
+	// äº‹ä»¶
 	std::unordered_multimap<String, RoutedEventHandler> localEvents;
-	std::unordered_multimap<String, RoutedEventHandler> styleEvents;
 };
 
 #define DECLARE_UI_VALUES \
-	static std::unordered_map<String, any> commonAnimationValues; \
-	static std::unordered_map<String, any> commonStyleValues;	  \
-	static std::unordered_multimap<String, RoutedEventHandler> commonStyleEvents;\
+	static std::unordered_map<String, any> defaultValues;	  \
+	static std::unordered_multimap<String, RoutedEventHandler> defaultEvents;\
 	static std::unordered_map<String, std::unique_ptr<Binding>> commonStyleBindings;
 
 #define DEFINE_UI_VALUES(CLASS) \
-	std::unordered_map<String, any> CLASS::commonAnimationValues; \
-	std::unordered_map<String, any> CLASS::commonStyleValues;	  \
-	std::unordered_multimap<String, RoutedEventHandler> CLASS::commonStyleEvents;\
+	std::unordered_map<String, any> CLASS::defaultValues; \
+	std::unordered_multimap<String, RoutedEventHandler> CLASS::defaultEvents;\
 	std::unordered_map<String, std::unique_ptr<Binding>> CLASS::commonStyleBindings;
 
 #define DECLARE_UI_FUNCS \
-	virtual any& FindParentCommonValue(const String& name) const; \
-	virtual void InvokeParentCommonEventHandlers(const IRoutedEvent& ent, RoutedEventArgs& args) const; \
-	virtual void AddCommonEventHandlers(const String& name, RoutedEventHandler&& handler) const;
+	virtual const any& GetBaseDefaultValue(const String& name) const; \
+	virtual void InvokeBaseDefaultEventHandler(const IRoutedEvent& ent, RoutedEventArgs& args) const; \
+	virtual void AddDefaultEventHandlerCore(const String& name, RoutedEventHandler&& handler) const;
+
+#define DEFINE_UI_FUNCS(CLASS, BASE) \
+	const any& CLASS::GetBaseDefaultValue(const String& name) const \
+	{																\
+		auto it = CLASS::defaultValues.find(name); 					\
+		if (it != CLASS::defaultValues.end()) 						\
+			return it->second;										\
+		return BASE::GetBaseDefaultValue(name);						\
+	}																\
+	void CLASS::InvokeBaseDefaultEventHandler(const IRoutedEvent& ent, RoutedEventArgs& args) const \
+	{																							\
+		if(!args.Handled)																		\
+		{																						\
+			auto range = defaultEvents.equal_range(ent.GetName());								\
+			if (range.first != range.second)													\
+			{																					\
+				for (auto it = range.first; it != range.second; ++it)							\
+					if (!args.Handled)															\
+						it->second(args);														\
+			}																					\
+			else																				\
+				BASE::InvokeBaseDefaultEventHandler(ent, args);									\
+		}																						\
+	}																					  		\
+	void CLASS::AddDefaultEventHandlerCore(const String& name, RoutedEventHandler&& handler) const	\
+	{																			 				\
+		CLASS::defaultEvents.emplace(name, handler); 							  				\
+	}
+
 #define DECLARE_PUB_UI_FUNCS \
 	template<typename T>	\
-	static void SetCommonStyleValue(const DependencyProperty<T>& property, const T& value)	\
+	static void SetDefaultValue(const DependencyProperty<T>& property, const T& value)	\
 	{																				\
-		auto& name = property.GetName();											\
-		auto it = commonStyleValues.find(name);										\
-		if (it != commonStyleValues.end())											\
-		{																			\
-			if ((const T&)(it->second) != value)										\
-			{																		\
-				it->second = value;													\
-			}																		\
-		}																			\
-		else																		\
-		{																			\
-			commonStyleValues.emplace(name, value);									\
-		}																			\
+		defaultValues[property.Name] = value;										\
 	}																				\
 	template<typename T>	\
-	static void SetCommonStyleValue(const DependencyProperty<T>& property, T&& value)	\
+	static void SetDefaultValue(const DependencyProperty<T>& property, T&& value)	\
 	{																				\
-		auto& name = property.GetName();											\
-		auto it = commonStyleValues.find(name);										\
-		if (it != commonStyleValues.end())											\
-		{																			\
-			if ((const T&)(it->second) != value)										\
-			{																		\
-				it->second = value;													\
-			}																		\
-		}																			\
-		else																		\
-		{																			\
-			commonStyleValues.emplace(name, std::forward<T>(value));				\
-		}																			\
+		defaultValues[property.Name] = std::forward<T>(value);						\
 	}																				\
 	template<typename T>	\
 	static void SetCommonStyleBinding(const DependencyProperty<T>& property, std::unique_ptr<Binding>&& binding) \
@@ -230,42 +205,7 @@ private:
 		}																			\
 	}
 
-#define DEFINE_UI_FUNCS(CLASS, BASE) \
-	any& CLASS::FindParentCommonValue(const String& name) const \
-	{															\
-		auto it = CLASS::commonAnimationValues.find(name); 		\
-		if (it != CLASS::commonAnimationValues.end()) 			\
-		{														\
-			return it->second;									\
-		}														\
-		it = CLASS::commonStyleValues.find(name);				\
-		if (it != CLASS::commonStyleValues.end())				\
-		{														\
-			return it->second;									\
-		}														\
-		auto it2 = CLASS::commonStyleBindings.find(name);		\
-		if (it2 != CLASS::commonStyleBindings.end())			\
-		{														\
-			return it2->second->GetValue();						\
-		}														\
-		return BASE::FindParentCommonValue(name);				\
-	}															\
-	void CLASS::InvokeParentCommonEventHandlers(const IRoutedEvent& ent, RoutedEventArgs& args) const \
-	{																							 \
-		auto it = CLASS::commonStyleEvents.find(ent.GetName()); 								 \
-		if (it != CLASS::commonStyleEvents.end()) 										  		 \
-		{																				  		 \
-			RoutedEventHandler& handler = it->second;				      						 \
-			handler(args);																  		 \
-		}						   														  		 \
-		BASE::InvokeParentCommonEventHandlers(ent, args);								  		 \
-	}																					  		 \
-	void CLASS::AddCommonEventHandlers(const String& name, RoutedEventHandler&& handler) const	 \
-	{																			 				 \
-		CLASS::commonStyleEvents.emplace(name, handler); 							  			 \
-	}
-
 #define DEFINE_COMMON_ROUTEDEVENT(name, TArgs) \
-	AddStyleEventHandler<std::function<void(TArgs&)>, TArgs>(name##Event, [&](TArgs& args){On##name(args);});
+	AddDefaultEventHandler<typename std::function<void(TArgs&)>, TArgs>(name##Event, [&](TArgs& args){On##name(args);});
 
 NS_ED

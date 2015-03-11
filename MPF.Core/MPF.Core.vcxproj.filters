@@ -297,6 +297,12 @@
     <ClInclude Include="..\include\io\BinaryReader.h">
       <Filter>头文件\IO</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\visual\VisualStateManager.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\VisualState.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -453,6 +459,9 @@
       <Filter>源文件\IO</Filter>
     </ClCompile>
     <ClCompile Include="Visual\ImageBrush.cpp">
+      <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Visual\VisualStateManager.cpp">
       <Filter>源文件\Visual</Filter>
     </ClCompile>
   </ItemGroup>

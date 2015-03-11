@@ -113,6 +113,7 @@
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="VisualState.cpp" />
     <ClCompile Include="Visual\ImageBrush.cpp" />
+    <ClCompile Include="Visual\VisualStateManager.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClInclude Include="..\include\any.h" />
     <ClInclude Include="..\include\Application.h" />
@@ -180,6 +181,8 @@
     <ClInclude Include="..\include\visual\SolidColorBrush.h" />
     <ClInclude Include="..\include\Visual\Thickness.h" />
     <ClInclude Include="..\include\visual\Triangle.h" />
+    <ClInclude Include="..\include\visual\VisualState.h" />
+    <ClInclude Include="..\include\visual\VisualStateManager.h" />
     <ClInclude Include="FontFace.h" />
     <ClInclude Include="FontFaceKeys.h" />
     <ClInclude Include="FontManager.h" />

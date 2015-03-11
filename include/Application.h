@@ -16,7 +16,7 @@ public:
 	const Application& operator=(const Application& app) = delete;
 
 	//开始运行
-	MPF_API void Run() const;
+	MPF_API void Run(std::function<void()> frameFunc = nullptr) const;
 
 	//获取应用程序的本机标识符
 	MPF_API handle_t GetNativeHandle() const;
@@ -41,7 +41,7 @@ private:
 	//创建 Application 的新实例
 	Application() noexcept;
 	//运行
-	MPF_API void Run(MPFMainHandler handler) const;
+	MPF_API void Startup(MPFMainHandler handler) const;
 private:
 	DECLARE_TYPE(Application)
 

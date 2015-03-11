@@ -31,7 +31,7 @@ void Application::OnUncaughtException(bool& isHandled) const
 	});
 }
 
-void Application::Run(MPFMainHandler handler) const
+void Application::Startup(MPFMainHandler handler) const
 {
 	massert(handler != nullptr);
 
@@ -56,20 +56,31 @@ String Application::GetCommandLines() const
 	return GetCommandLine();
 }
 
-void Application::Run() const
+void Application::Run(std::function<void()> frameFunc) const
 {
 	MSG msg;
 
-	while (GetMessage(&msg, nullptr, NULL, NULL))
+	while (true)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+				break;
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			if (frameFunc)
+				frameFunc();
+		}
+		Sleep(10);
 	}
 }
 
 void Application::CreateApplication(MPFMainHandler handler)
 {
-	currentApp.Run(handler);
+	currentApp.Startup(handler);
 }
 
 int _stdcall MPFStartup(MPFMainHandler handler)

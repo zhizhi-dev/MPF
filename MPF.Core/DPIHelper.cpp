@@ -33,9 +33,8 @@ std::pair<uint32_t, uint32_t> DPIHelper::LogicalPointToDevicePoint(const Point& 
 	return LogicalPointToDevicePoint(point.X, point.Y);
 }
 
-std::vector<std::pair<uint32_t, uint32_t>> DPIHelper::LogicalGeometryToDevicePoints(const Geometry& geometry) const
+std::vector<std::pair<uint32_t, uint32_t>> DPIHelper::LogicalGeometryToDevicePoints(const std::vector<Point>& points) const
 {
-	auto points = geometry.GetPoints();
 	return Enumerable::ToVector(points, [&](const Point& pt)
 	{
 		return LogicalPointToDevicePoint(pt.X, pt.Y);

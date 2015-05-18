@@ -55,6 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MPFCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -85,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Binding.h" />
+    <ClInclude Include="..\include\diagnostic\Stopwatch.h" />
     <ClInclude Include="..\include\EventHandlers.h" />
     <ClCompile Include="AlphaBlendBrush.cpp" />
     <ClCompile Include="any.cpp" />
@@ -95,6 +97,7 @@
     <ClCompile Include="ContentElement.cpp" />
     <ClCompile Include="DependencyObject.cpp" />
     <ClCompile Include="DependencyProperty.cpp" />
+    <ClCompile Include="Diagnostic\Stopwatch.cpp" />
     <ClCompile Include="DPIHelper.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontFace.cpp" />
@@ -172,7 +175,7 @@
     <ClInclude Include="..\include\visual\ImageBrush.h" />
     <ClInclude Include="..\include\visual\Line.h" />
     <ClInclude Include="..\include\visual\LinearGradientBrush.h" />
-    <ClInclude Include="..\include\visual\Matrix.h" />
+    <ClInclude Include="..\include\visual\Matrix2D.h" />
     <ClInclude Include="..\include\visual\Point.h" />
     <ClInclude Include="..\include\visual\Quad.h" />
     <ClInclude Include="..\include\visual\RenderCoreProvider.h" />
@@ -181,6 +184,7 @@
     <ClInclude Include="..\include\visual\SolidColorBrush.h" />
     <ClInclude Include="..\include\Visual\Thickness.h" />
     <ClInclude Include="..\include\visual\Triangle.h" />
+    <ClInclude Include="..\include\visual\Vector2D.h" />
     <ClInclude Include="..\include\visual\VisualState.h" />
     <ClInclude Include="..\include\visual\VisualStateManager.h" />
     <ClInclude Include="FontFace.h" />

@@ -55,6 +55,12 @@
     <Filter Include="源文件\Threading">
       <UniqueIdentifier>{90dac046-8e05-4502-a7f9-451d1908a322}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Diagnostic">
+      <UniqueIdentifier>{216ac1cb-a2d7-46c7-af59-cf482b90568e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Diagnostic">
+      <UniqueIdentifier>{de5ee172-9cf8-4a73-bcae-6a25562bcc11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -219,9 +225,6 @@
     <ClInclude Include="..\include\ui\ControlTemplate.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\visual\Matrix.h">
-      <Filter>头文件\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\HashAlgorithms.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -301,6 +304,15 @@
       <Filter>头文件\Visual</Filter>
     </ClInclude>
     <ClInclude Include="..\include\visual\VisualState.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\diagnostic\Stopwatch.h">
+      <Filter>头文件\Diagnostic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Matrix2D.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Vector2D.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
   </ItemGroup>
@@ -463,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="Visual\VisualStateManager.cpp">
       <Filter>源文件\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\Stopwatch.cpp">
+      <Filter>源文件\Diagnostic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

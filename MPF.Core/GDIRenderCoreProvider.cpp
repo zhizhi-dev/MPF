@@ -31,6 +31,11 @@ void GDIRenderCoreProvider::InitializeGDI()
 	backBuffer = DeviceContext::CreateCompatible(frontBuffer->GetNativeHandle());
 }
 
+void GDIRenderCoreProvider::Clear(color_t color)
+{
+	backBufferSurface->Clear(color);
+}
+
 void GDIRenderCoreProvider::DrawLine(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, color_t color)
 {
 	auto data = backBufferSurface->GetDataPointer();

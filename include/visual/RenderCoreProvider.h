@@ -4,6 +4,7 @@
 #include "Triangle.h"
 #include "Brush.h"
 #include "Quad.h"
+#include "Matrix2D.h"
 
 NS_MPF
 NS_VSL
@@ -23,6 +24,7 @@ public:
 	//Ω· ¯ªÊ÷∆
 	MPF_API virtual void EndDraw() = 0;
 
+	MPF_API virtual void Clear(color_t color) = 0;
 	MPF_API void DrawLine(const Line& line, color_t color);
 	MPF_API void DrawLine(const Line& line, const Brush& brush);
 
@@ -33,6 +35,7 @@ public:
 	MPF_API void FillTriangle(const Triangle& triangle, const Brush& brush);
 
 	MPF_API void DrawQuad(const Quad& quad, const Brush& brush);
+	MPF_API void DrawQuad(const Quad& quad, const Brush& brush, const Matrix2D<>& transform);
 	MPF_API void FillQuad(const Quad& quad, const Brush& brush);
 
 	MPF_API virtual size_t GetBackBufferWidth() const noexcept = 0;

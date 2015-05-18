@@ -1,21 +1,35 @@
 #include "stdafx.h"
 #include "../include/Application.h"
 #include "../include/platform.h"
+#include "../include/diagnostic/Stopwatch.h"
 #include <iostream>
 
 using namespace MPF;
 
 DEFINE_TYPE(Application, MPF::Application)
 //当前 Application
-Application Application::currentApp;
-
-Application::Application() noexcept
+namespace
 {
+	Application* currentApp = nullptr;
 }
 
-Application& Application::GetCurrent() noexcept
+Application::Application()
 {
-	return currentApp;
+	if (currentApp)
+		THROW_IF_NOT(!currentApp, "An application has already been instanced.");
+	currentApp = this;
+}
+
+Application::~Application()
+{
+
+}
+
+Application& Application::GetCurrent()
+{
+	if (currentApp)
+		THROW_IF_NOT(currentApp, "None application has been instanced.");
+	return *currentApp;
 }
 
 handle_t Application::GetNativeHandle() const
@@ -31,67 +45,70 @@ void Application::OnUncaughtException(bool& isHandled) const
 	});
 }
 
-void Application::Startup(MPFMainHandler handler) const
-{
-	massert(handler != nullptr);
-
-	try
-	{
-		handler();
-	}
-	catch (...)
-	{
-		bool handled = false;
-		OnUncaughtException(handled);
-		//异常未处理
-		if (!handled)
-		{
-			throw;
-		}
-	}
-}
-
 String Application::GetCommandLines() const
 {
-	return GetCommandLine();
+	return String(GetCommandLine());
 }
 
-void Application::Run(std::function<void()> frameFunc) const
+bool Application::DoFrame()
 {
 	MSG msg;
+	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+	{
+		if (msg.message == WM_QUIT)
+			return true;
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	OnFrame();
+	return false;
+}
 
+void Application::Run()
+{
+	Stopwatch watch;
+
+	// 理想状况 60 帧每秒
+	const DWORD desiredDelta = 1000 / 30;
+	// 上一次每帧用时
+	DWORD lastDelta = desiredDelta;
 	while (true)
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		try
 		{
-			if (msg.message == WM_QUIT)
-				break;
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			watch.Restart();
+			if (DoFrame()) break;
+			// 本帧用时
+			lastDelta = static_cast<DWORD>(watch.Stop() * 1000);
+			// Sleep 剩余时间
+			if (lastDelta < desiredDelta)
+				Sleep(desiredDelta - lastDelta);
 		}
-		else
+		catch (...)
 		{
-			if (frameFunc)
-				frameFunc();
+			bool handled = false;
+			OnUncaughtException(handled);
+			// 异常未处理
+			if (!handled)
+				throw;
 		}
-		Sleep(10);
 	}
 }
 
-void Application::CreateApplication(MPFMainHandler handler)
+void Application::OnFrame()
 {
-	currentApp.Startup(handler);
+
 }
 
 int _stdcall MPFStartup(MPFMainHandler handler)
 {
-	Application::CreateApplication(handler);
+	handler();
 	return 0;
 }
 
 int _stdcall MPFConsoleStartup(MPFMainHandler handler)
 {
 	std::locale::global(std::locale(""));
-	Application::CreateApplication(handler);
+	handler();
 	return 0;
 }

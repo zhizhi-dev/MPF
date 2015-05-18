@@ -18,7 +18,7 @@ public:
 	//Ìí¼ÓÕìÌıÆ÷
 	void operator += (TDelegate handler)
 	{
-		handlers.emplace_back(handler);
+		handlers.emplace_back(std::move(handler));
 	}
 
 	//É¾³ıÕìÌıÆ÷
@@ -36,7 +36,7 @@ private:
 	//¼¤»îÕìÌıÆ÷
 	void Invoke(std::function<void(TDelegate)> func) const
 	{
-		for (auto& handler : handlers)
+		for (auto&& handler : handlers)
 		{
 			func(handler);
 		}

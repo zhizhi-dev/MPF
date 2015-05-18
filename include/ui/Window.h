@@ -27,6 +27,9 @@ public:
 	//获取或设置标题
 	mproperty(MPF::String, Title);
 
+	// 获取绘制提供程序
+	MPF_API MPF::Visual::RenderCoreProvider& GetRenderCoreProvider() const noexcept;
+
 	//显示
 	MPF_API void Show();
 

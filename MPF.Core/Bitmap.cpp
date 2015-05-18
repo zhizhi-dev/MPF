@@ -73,3 +73,16 @@ void Bitmap::AlphaBlend(argb_color color)
 		ptr += width;
 	}
 }
+
+void Bitmap::Clear(argb_color color)
+{
+	auto ptr = (argb_color*)data;
+	for (size_t y = 0; y < height; y++)
+	{
+		for (size_t x = 0; x < width; x++)
+		{
+			ptr[x] = color;
+		}
+		ptr += width;
+	}
+}

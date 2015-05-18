@@ -10,16 +10,25 @@ DEFINE_TYPE(String, MPF::String)
 String String::empty;
 
 constexpr String::String() noexcept
+	:needDelete(false)
 {
 }
 
-String::String(const wchar_t chars[], uint32_t length) noexcept
-: chars(chars), length(length)
+String::String(const wchar_t chars[], size_t length)
+	: chars(nullptr), length(length), needDelete(true)
 {
 	massert(chars);
+	auto str = new wchar_t[length + 1];
+	wcscpy_s(str, length + 1, chars);
+	this->chars = str;
 }
 
-uint32_t String::GetLength() const noexcept
+String::String(const wchar_t* chars)
+	: String(chars, std::wcslen(chars))
+{
+}
+
+size_t String::GetLength() const noexcept
 {
 	return length;
 }
@@ -45,25 +54,6 @@ uint32_t String::GetHashCode() const noexcept
 	return 0;
 }
 
-String::String(const wchar_t* chars, bool isOwner)
-:isOwner(isOwner), length(std::wcslen(chars))
-{
-	//¸´ÖÆ×Ö·û´®
-	if (isOwner)
-	{
-		this->chars = chars;
-	}
-	else
-	{
-		massert(chars);
-		auto str = new wchar_t[length + 1];
-		wcscpy_s(str, length + 1, chars);
-
-		this->chars = str;
-		this->isOwner = true;
-	}
-}
-
 String::~String() noexcept
 {
 	Dispose();
@@ -71,12 +61,11 @@ String::~String() noexcept
 
 void String::Dispose() noexcept
 {
-	if (isOwner && chars)
-	{
+	if (needDelete && chars)
 		delete[] chars;
-	}
-	isOwner = false;
+	needDelete = false;
 	chars = nullptr;
+	length = 0;
 }
 
 bool String::operator == (const String& str) const noexcept
@@ -112,10 +101,10 @@ wchar_t String::operator[](size_t index) const
 }
 
 String::String(const String& str)
-	:chars(str.chars), isOwner(str.isOwner), length(str.length), hashCode(str.hashCode)
+	:chars(str.chars), needDelete(str.needDelete), length(str.length), hashCode(str.hashCode)
 {
 	massert(chars);
-	if (isOwner)
+	if (needDelete)
 	{
 		auto newChars = new wchar_t[length + 1];
 		wcscpy_s(newChars, length + 1, str.chars);
@@ -124,12 +113,12 @@ String::String(const String& str)
 }
 
 String::String(String&& str) noexcept
-	:chars(str.chars), isOwner(str.isOwner), length(str.length), hashCode(str.hashCode)
+	:chars(str.chars), needDelete(str.needDelete), length(str.length), hashCode(str.hashCode)
 {
 	massert(chars);
 	str.chars = nullptr;
 	str.length = 0;
-	str.isOwner = false;
+	str.needDelete = false;
 	str.hashCode = 0;
 }
 
@@ -138,11 +127,11 @@ const String& String::operator = (const String& str)
 	Dispose();
 	chars = str.chars;
 	length = str.length;
-	isOwner = str.isOwner;
+	needDelete = str.needDelete;
 	hashCode = str.hashCode;
 
 	massert(chars);
-	if (isOwner && chars)
+	if (needDelete)
 	{
 		auto newChars = new wchar_t[length + 1];
 		wcscpy_s(newChars, length + 1, str.chars);
@@ -156,12 +145,12 @@ const String& String::operator = (String&& str) noexcept
 	Dispose();
 	chars = str.chars;
 	length = str.length;
-	isOwner = str.isOwner;
+	needDelete = str.needDelete;
 	hashCode = str.hashCode;
 	massert(chars);
 	str.chars = nullptr;
 	str.length = 0;
-	str.isOwner = false;
+	str.needDelete = false;
 	str.hashCode = 0;
 
 	return *this;

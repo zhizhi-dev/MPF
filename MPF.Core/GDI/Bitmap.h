@@ -29,6 +29,7 @@ public:
 	static std::unique_ptr<Bitmap> CreateDIBSection(HDC hDC, uint32_t width, uint32_t height);
 
 	void AlphaBlend(argb_color color);
+	void Clear(argb_color color);
 
 	//获取类型
 	DECLARE_GETTYPE(Bitmap)

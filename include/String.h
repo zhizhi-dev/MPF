@@ -11,27 +11,25 @@ public:
 	//创建空的 String
 	MPF_API constexpr String() noexcept;
 	//释放资源
-	MPF_API virtual ~String() noexcept;
-
-	//从字符指针创建 String
-	MPF_API String(const wchar_t* chars, bool isOwner = false);
+	MPF_API virtual ~String();
 
 	//从字面量和长度创建 String
-	MPF_API String(const wchar_t chars[], uint32_t length) noexcept;
+	MPF_API String(const wchar_t chars[], size_t length);
+	MPF_API explicit String(const wchar_t* chars);
 
 	MPF_API String(const String& str);
 	MPF_API String(String&& str) noexcept;
 
 	//从字面量创建 String
-	template<uint32_t N>
+	template<size_t N>
 	constexpr String(const wchar_t(&chars)[N]) noexcept
-		:chars(chars), length(N)
+		:chars(chars), length(N - 1), needDelete(false)
 	{
-
+		static_assert(N >= 1, "string literal must have 1 char at least.");
 	}
 
 	//获取长度
-	MPF_API uint32_t GetLength() const noexcept;
+	MPF_API size_t GetLength() const noexcept;
 	
 	//获取数组指针
 	MPF_API const wchar_t* GetDataPointer() const noexcept;
@@ -63,8 +61,8 @@ private:
 
 	DECLARE_TYPE(String)
 	const wchar_t* chars = L"";
-	bool isOwner = false;
-	uint32_t length = 0;
+	bool needDelete;
+	size_t length = 0;
 	mutable uint32_t hashCode = 0;
 };
 

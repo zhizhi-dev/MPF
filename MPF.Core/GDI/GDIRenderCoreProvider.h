@@ -22,6 +22,8 @@ public:
 	//³ÊÏÖ
 	virtual void Present();
 
+	virtual void Clear(color_t color) override;
+
 	virtual size_t GetBackBufferWidth() const noexcept { return backBufferSurface->GetWidth(); }
 	virtual size_t GetBackBufferHeight() const noexcept { return backBufferSurface->GetHeight(); }
 

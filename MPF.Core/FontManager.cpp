@@ -51,13 +51,13 @@ String FontManager::GetFileNameFromFamilyName(
 	// Open Windows font registry key
 	result = RegOpenKeyEx(HKEY_LOCAL_MACHINE, fontRegistryPath, 0, KEY_READ, &hKey);
 	if (result != ERROR_SUCCESS) {
-		return nullptr;
+		return String();
 	}
 
 	DWORD maxValueNameSize, maxValueDataSize;
 	result = RegQueryInfoKey(hKey, 0, 0, 0, 0, 0, 0, 0, &maxValueNameSize, &maxValueDataSize, 0, 0);
 	if (result != ERROR_SUCCESS) {
-		return nullptr;
+		return String();
 	}
 
 	DWORD valueIndex = 0;
@@ -102,7 +102,7 @@ String FontManager::GetFileNameFromFamilyName(
 		std::wstringstream ss;
 		ss << winDir << L"\\Fonts\\" << fileName;
 		auto str = ss.str();
-		return str.c_str();
+		return String(str.c_str(), str.length());
 	}
 
 	return String::GetEmpty();

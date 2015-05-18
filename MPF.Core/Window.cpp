@@ -49,6 +49,11 @@ void Window::SetTitle(MPF::String&& value)
 	SetValue(TitleProperty, std::move(value));
 }
 
+RenderCoreProvider& Window::GetRenderCoreProvider() const noexcept
+{
+	return *renderer;
+}
+
 void Window::Show()
 {
 	if (!nativeWindow) CreateNativeWindow();
@@ -83,17 +88,21 @@ void Window::InitializeNativeWindowEventHandlers()
 	window->MouseLeftButtonUp += [=](NativeMouseEventArgs& e)
 	{
 		auto hit = HitTest(e.Position);
-		massert(hit.size());
-		MouseEventArgs args(hit.back(), hit.front(), e.Position);
-		RaiseEvent(MouseLeftButtonUpEvent, args);
+		if (hit.size())
+		{
+			MouseEventArgs args(hit.back(), hit.front(), e.Position);
+			RaiseEvent(MouseLeftButtonUpEvent, args);
+		}
 	};
 
 	window->MouseLeftButtonDown += [=](NativeMouseEventArgs& e)
 	{
 		auto hit = HitTest(e.Position);
-		massert(hit.size());
-		MouseEventArgs args(hit.back(), hit.front(), e.Position);
-		RaiseEvent(MouseLeftButtonDownEvent, args);
+		if (hit.size())
+		{
+			MouseEventArgs args(hit.back(), hit.front(), e.Position);
+			RaiseEvent(MouseLeftButtonUpEvent, args);
+		}
 	};
 }
 

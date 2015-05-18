@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Type.h"
+#include "Matrix2D.h"
 
 NS_MPF
 NS_VSL
@@ -98,6 +99,13 @@ public:
 		pt.v -= point.v;
 
 		return pt;
+	}
+
+	void Transform(const Matrix2D<>& transform) noexcept
+	{
+		auto value = Vector2D<>(x, y) * transform;
+		x = value.x;
+		y = value.y;
 	}
 private:
 	float x;

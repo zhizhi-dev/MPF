@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "core.h"
 
 NS_MPF
@@ -7,8 +7,8 @@ NS_INTERN
 namespace Hash
 {
 	///<summary>BKDR Hash Function</summary>
-	///<description>±¾Ëã·¨ÓÉÓÚÔÚBrian KernighanÓëDennis RitchieµÄ¡¶The C Programming Language¡·Ò»Êé±»Õ¹Ê¾¶øµÃ
-	/// Ãû£¬ÊÇÒ»ÖÖ¼òµ¥¿ì½İµÄhashËã·¨£¬Ò²ÊÇJavaÄ¿Ç°²ÉÓÃµÄ×Ö·û´®µÄHashËã·¨£¨ÀÛ³ËÒò×ÓÎª31£©¡£</description>
+	///<description>æœ¬ç®—æ³•ç”±äºåœ¨Brian Kernighanä¸Dennis Ritchieçš„ã€ŠThe C Programming Languageã€‹ä¸€ä¹¦è¢«å±•ç¤ºè€Œå¾—
+	/// åï¼Œæ˜¯ä¸€ç§ç®€å•å¿«æ·çš„hashç®—æ³•ï¼Œä¹Ÿæ˜¯Javaç›®å‰é‡‡ç”¨çš„å­—ç¬¦ä¸²çš„Hashç®—æ³•ï¼ˆç´¯ä¹˜å› å­ä¸º31ï¼‰ã€‚</description>
 	template<class T>
 	size_t BKDRHash(const T *str)
 	{

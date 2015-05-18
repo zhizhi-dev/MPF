@@ -73,6 +73,9 @@ LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wPara
 		return OnMouseLeftButtonUp(wParam, lParam);
 	case WM_LBUTTONDOWN:
 		return OnMouseLeftButtonDown(wParam, lParam);
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
 	default:
 		break;
 	}
@@ -82,7 +85,8 @@ LRESULT CALLBACK NativeWindow::WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wPara
 void NativeWindow::Create()
 {
 	hWnd = CreateWindowEx(0, MPFWindowClassName, String::GetEmpty().GetDataPointer(),
-		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
+		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
+		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
 		nullptr, nullptr, (HINSTANCE)Application::GetCurrent().GetNativeHandle(), this);
 
 	massert(hWnd != nullptr);

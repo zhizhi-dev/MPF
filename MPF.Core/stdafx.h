@@ -17,6 +17,7 @@
 // TODO:  在此处引用程序需要的其他头文件
 #include <stack>
 #include "../include/core.h"
+#include "../include/platform.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "freetype-2.5.3/objs/win32/freetype253MT_D.lib")

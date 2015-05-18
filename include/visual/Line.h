@@ -1,5 +1,6 @@
 #pragma once
 #include "Geometry.h"
+#include "Matrix2D.h"
 
 NS_MPF
 NS_VSL
@@ -9,7 +10,7 @@ class Line : public Geometry
 {
 public:
 	//创建一条直线
-	MPF_API explicit Line(const Point& startPoint, const Point& endPoint);
+	MPF_API Line(const Point& startPoint, const Point& endPoint);
 
 	//获取顶点数据
 	MPF_API virtual std::vector<Point> GetPoints() const;
@@ -37,6 +38,16 @@ private:
 
 	DECLARE_TYPE(Line)
 };
+
+inline Line operator*(const Line& left, const Matrix2D<>& right) noexcept
+{
+	return{ left.GetStartPoint() * right, left.GetEndPoint() * right };
+}
+
+inline Line operator*(const Matrix2D<>& left, const Line& right) noexcept
+{
+	return{ right.GetStartPoint() * left, right.GetEndPoint() * left };
+}
 
 NS_ED
 NS_ED

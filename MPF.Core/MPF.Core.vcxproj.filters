@@ -315,6 +315,21 @@
     <ClInclude Include="..\include\visual\Vector2D.h">
       <Filter>头文件\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\visual\Vector3D.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Matrix3D.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Projector3D.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Point3D.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\visual\Line3D.h">
+      <Filter>头文件\Visual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

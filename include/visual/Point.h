@@ -114,5 +114,19 @@ private:
 	float v;
 };
 
+inline Point operator*(const Point& left, const Matrix2D<>& right) noexcept
+{
+	Point newPoint = left;
+	newPoint.Transform(right);
+	return newPoint;
+}
+
+inline Point operator*(const Matrix2D<>& left, const Point& right) noexcept
+{
+	Point newPoint = right;
+	newPoint.Transform(left);
+	return newPoint;
+}
+
 NS_ED
 NS_ED

@@ -89,6 +89,14 @@ struct alignas(sizeof(T) * 4) Matrix2D
 				0,	  0,   1 };
 	}
 
+	///<summary>创建相对X轴的反射矩阵</summary>
+	static constexpr Matrix2D MakeFlipX()
+	{
+		return{ 1, 0,  0,
+				0, -1, 0,
+				0, 0,  1 };
+	}
+
 	union
 	{
 		T arr[3][3];

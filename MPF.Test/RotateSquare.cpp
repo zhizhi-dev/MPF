@@ -66,8 +66,8 @@ private:
 	float rotate = 0.f;	// 旋转角度
 };
 
-void _stdcall MPFMain()
-{
-	RotateSquareApp app;
-	app.Run();
-}
+//void _stdcall MPFMain()
+//{
+//	RotateSquareApp app;
+//	app.Run();
+//}
